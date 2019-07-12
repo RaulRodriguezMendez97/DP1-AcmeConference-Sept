@@ -6,6 +6,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -15,22 +16,32 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class CreditCard extends DomainEntity {
 
-	private String	holderName;
+	private String	holdName;
 	private String	brandName;
 	private int		number;
 	private int		expirationMonth;
 	private int		expirationYear;
 	private int		CW;
-	private Actor	actor;
+	private Author	author;
 
 
+	@ManyToOne(optional = false)
+	@NotNull
+	@Valid
+	public Author getAuthor() {
+		return this.author;
+	}
+
+	public void setAuthor(final Author author) {
+		this.author = author;
+	}
 	@NotBlank
 	@NotNull
-	public String getHolderName() {
-		return this.holderName;
+	public String getHoldName() {
+		return this.holdName;
 	}
-	public void setHolderName(final String holderName) {
-		this.holderName = holderName;
+	public void setHoldName(final String holdName) {
+		this.holdName = holdName;
 	}
 
 	@NotBlank
@@ -74,13 +85,4 @@ public class CreditCard extends DomainEntity {
 		this.CW = cW;
 	}
 
-	@NotNull
-	@ManyToOne(optional = false)
-	public Actor getActor() {
-		return this.actor;
-	}
-
-	public void setActor(final Actor actor) {
-		this.actor = actor;
-	}
 }

@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -12,33 +14,40 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Section extends DomainEntity {
 
-	private int		number;
-	private String	title;
-	private String	pieceOftext;
+	private String		title;
+	private String		summary;
+	private Tutorial	tutorial;
 
 
-	//Getters
-	public int getNumber() {
-		return this.number;
+	@ManyToOne(optional = false)
+	@Valid
+	@NotNull
+	public Tutorial getTutorial() {
+		return this.tutorial;
 	}
+
+	public void setTutorial(final Tutorial tutorial) {
+		this.tutorial = tutorial;
+	}
+
+	@NotBlank
+	@NotNull
+	public String getSummary() {
+		return this.summary;
+	}
+
+	public void setSummary(final String summary) {
+		this.summary = summary;
+	}
+
 	@NotBlank
 	@NotNull
 	public String getTitle() {
 		return this.title;
 	}
 
-	public String getPieceOfText() {
-		return this.pieceOftext;
-	}
-
-	//Setters
-	public void setNumber(final Integer num) {
-		this.number = num;
-	}
 	public void setTitle(final String tit) {
 		this.title = tit;
 	}
-	public void setPieceOfText(final String piece) {
-		this.pieceOftext = piece;
-	}
+
 }

@@ -13,21 +13,42 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class CustomizableSystem extends DomainEntity {
 
-	private String	name;
+	private String	nameSystem;
 	private String	banner;
 	private String	messageWelcomePage;
-	private String	VATPercentage;
 	private String	telephoneCode;
+	private String	spanishMessageWelcomePage;
+	private String	brandNameCredictCard;
 
 
 	@NotBlank
 	@NotNull
-	public String getName() {
-		return this.name;
+	public String getNameSystem() {
+		return this.nameSystem;
 	}
 
-	public void setName(final String name) {
-		this.name = name;
+	public void setNameSystem(final String nameSystem) {
+		this.nameSystem = nameSystem;
+	}
+
+	@NotBlank
+	@NotNull
+	public String getSpanishMessageWelcomePage() {
+		return this.spanishMessageWelcomePage;
+	}
+
+	public void setSpanishMessageWelcomePage(final String spanishMessageWelcomePage) {
+		this.spanishMessageWelcomePage = spanishMessageWelcomePage;
+	}
+
+	@NotBlank
+	@NotNull
+	public String getBrandNameCredictCard() {
+		return this.brandNameCredictCard;
+	}
+
+	public void setBrandNameCredictCard(final String brandNameCredictCard) {
+		this.brandNameCredictCard = brandNameCredictCard;
 	}
 
 	@NotBlank
@@ -49,16 +70,6 @@ public class CustomizableSystem extends DomainEntity {
 
 	public void setMessageWelcomePage(final String messageWelcomePage) {
 		this.messageWelcomePage = messageWelcomePage;
-	}
-
-	@NotBlank
-	@NotNull
-	public String getVATPercentage() {
-		return this.VATPercentage;
-	}
-
-	public void setVATPercentage(final String vATPercentage) {
-		this.VATPercentage = vATPercentage;
 	}
 
 	@NotBlank
