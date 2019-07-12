@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Other domain beans come here -->	
+	<bean id="parentCategory" class="domain.Category">
+		<property name="name" value="CATEGORY" />
+		<property name="parent" ref="parentCategory" />
+		<property name="soon">
+			<list>
+				<ref bean="soonCategory1" />
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="soonCategory1" class="domain.Category">
+		<property name="name" value="Lamp Repairs" />
+		<property name="parent" ref="parentCategory" />
+		<property name="soon">
+			<null />
+		</property>
+
+	</bean>
+
+	<bean id="soonCategory2" class="domain.Category">
+		<property name="name" value="Moving" />
+		<property name="parent" ref="parentCategory" />
+		<property name="soon">
+			<null />
+		</property>
+	</bean>
+
+	<bean id="soonCategory3" class="domain.Category">
+		<property name="name" value="Painting" />
+		<property name="parent" ref="parentCategory" />
+		<property name="soon">
+			<list>
+				<ref bean="soonCategory2" />
+			</list>
+		</property>
+	</bean>
+	<bean id="soonCategory4" class="domain.Category">
+		<property name="name" value="Pest control" />
+		<property name="parent" ref="soonCategory3" />
+		<property name="soon">
+			<null />
+		</property>
+
+	</bean>
+
+	<bean id="soonCategory5" class="domain.Category">
+		<property name="name" value="Lamps" />
+		<property name="parent" ref="soonCategory1" />
+		<property name="soon">
+			<null />
+		</property>
+
+	</bean>
+
+	<bean id="soonCategory6" class="domain.Category">
+		<property name="name" value="Paint" />
+		<property name="parent" ref="soonCategory3" />
+		<property name="soon">
+			<list>
+				<ref bean="soonCategory7" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="soonCategory7" class="domain.Category">
+		<property name="name" value="Brush" />
+		<property name="parent" ref="soonCategory6" />
+		<property name="soon">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="creditCardType1" class="domain.CreditCardType">
+		<property name="brandName" value="VISA"></property>
+	</bean>
+
+	<bean id="creditCardType2" class="domain.CreditCardType">
+		<property name="brandName" value="MASTER"></property>
+	</bean>
+
+	<bean id="creditCardType3" class="domain.CreditCardType">
+		<property name="brandName" value="DINNERS"></property>
+	</bean>
+
+	<bean id="creditCardType4" class="domain.CreditCardType">
+		<property name="brandName" value="AMEX"></property>
+	</bean>
+	<bean id="spamWord1" class="domain.SpamWord">
+		<property name="name" value="sex"></property>
+	</bean>
+
+	<bean id="spamWord2" class="domain.SpamWord">
+		<property name="name" value="viagra"></property>
+	</bean>
+
+	<bean id="spamWord3" class="domain.SpamWord">
+		<property name="name" value="cialis"></property>
+	</bean>
+
+	<bean id="spamWord4" class="domain.SpamWord">
+		<property name="name" value="sexo"></property>
+	</bean>
+	<!-- CustomizableFinder -->
+
+	<bean id="customizableFinder1" class="domain.CustomizableFinder">
+
+		<property name="resultNumber" value="30" />
+		<property name="timeCache" value="20" />
+
+
+	</bean>
+	<bean id="customizableSystem1" class="domain.CustomizableSystem">
+
+		<property name="name" value="Ejemplo" />
+		<property name="banner" value="https://www.banner.es" />
+		<property name="messageWelcomePage" value="Mensaje  de bienvenido" />
+		<property name="VATPercentage" value="50" />
+		<property name="telephoneCode" value="jhhdgiuuskhhgwdkhg" />
+
+
+	</bean>
+	
+	<!-- Word -->
+	<bean id="word1" class="domain.Word">
+		<property name="name" value="good" />
+		<property name="value" value="0" />
+	</bean>
+
+	<bean id="word2" class="domain.Word">
+		<property name="name" value="fantastic" />
+		<property name="value" value="0" />
+	</bean>
+
+	<bean id="word3" class="domain.Word">
+		<property name="name" value="excellent" />
+		<property name="value" value="0" />
+	</bean>
+
+	<bean id="word4" class="domain.Word">
+		<property name="name" value="bueno" />
+		<property name="value" value="0" />
+	</bean>
+
+	<bean id="word5" class="domain.Word">
+		<property name="name" value="excelente" />
+		<property name="value" value="0" />
+	</bean>
+
+	<bean id="word6" class="domain.Word">
+		<property name="name" value="not" />
+		<property name="value" value="1" />
+	</bean>
+
+	<bean id="word7" class="domain.Word">
+		<property name="name" value="bad" />
+		<property name="value" value="1" />
+	</bean>
+
+	<bean id="word8" class="domain.Word">
+		<property name="name" value="horrible" />
+		<property name="value" value="1" />
+	</bean>
+
+	<bean id="word9" class="domain.Word">
+		<property name="name" value="no" />
+		<property name="value" value="1" />
+	</bean>
+	<bean id="messageBox1" class="domain.MessageBox">
+		<property name="name" value="Spam box" />
+		<property name="messages">
+			<list>
+			<null></null>
+			</list>
+		</property>
+		<property name="actor" ref="administrator1" />
+	</bean>
+
+	<bean id="messageBox2" class="domain.MessageBox">
+		<property name="name" value="Trash box" />
+		<property name="messages">
+			<list>
+				<null></null>
+			</list>
+		</property>
+		<property name="actor" ref="administrator1" />
+	</bean>
+
+	<bean id="messageBox3" class="domain.MessageBox">
+		<property name="name" value="In box" />
+		<property name="messages">
+			<list>
+				<null></null>
+			</list>
+		</property>
+		<property name="actor" ref="administrator1" />
+	</bean>
+
+	<bean id="messageBox4" class="domain.MessageBox">
+		<property name="name" value="Out box" />
+		<property name="messages">
+			<list>
+					<null></null>
+			</list>
+		</property>
+		<property name="actor" ref="administrator1" />
+	</bean>
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Cristian" />
+		<property name="surname" value="Lorca" />
+		<property name="middleName" value="" />
+		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg" />
+		<property name="email" value="cristian@hotmail.com" />
+		<property name="phone" value="+34 620510520" />
+		<property name="address" value="SEVILLA" />
+		<property name="numberSocialProfiles" value="3" />
+		<property name="isBanned" value="0" />
+		<property name="categories">
+			<list>
+				<ref bean="soonCategory2" />
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+</beans>

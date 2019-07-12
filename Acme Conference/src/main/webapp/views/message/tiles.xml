@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+ <tiles-definitions>
+ <definition name="messages/list" extends="master.page">
+  <put-attribute name="title" value="Profile: Action 1" /> 
+  <put-attribute name="body" value="/views/message/list.jsp" /> 
+  </definition>
+
+  <definition name="mensaje/show" extends="master.page">
+  <put-attribute name="title" value="Perfil: Action 1" /> 
+  <put-attribute name="body" value="/views/message/more-details.jsp" /> 
+  </definition>
+
+ <definition name="mensaje/send" extends="master.page">
+  <put-attribute name="title" value="Profile: Action 1" /> 
+  <put-attribute name="body" value="/views/message/send-message.jsp" /> 
+  </definition>
+  </tiles-definitions>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+	
+	<definition name="fixUpTask/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de tarea de reparación" />
+		<put-attribute name="body" value="/views/fixUpTask/list.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/create" extends="master.page">	
+		<put-attribute name="title" value="Crear tarea de reparación" />
+		<put-attribute name="body" value="/views/fixUpTask/create.jsp" />
+	</definition>
+
+	<definition name="fixUpTask/show" extends="master.page">	
+		<put-attribute name="title" value="Mostrando esta tarea" />
+		<put-attribute name="body" value="/views/fixUpTask/show.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/customerData" extends="master.page">	
+		<put-attribute name="title" value="Mostrando los datos del cliente" />
+		<put-attribute name="body" value="/views/fixUpTask/customerData.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/customerDataProfile" extends="master.page">	
+		<put-attribute name="title" value="Mostrando datos cliente "/>
+		<put-attribute name="body" value="/views/fixUpTask/customerDataProfile.jsp" />
+	</definition>
+	
+	<definition name="fixUpTask/edit" extends="master.page">	
+		<put-attribute name="title" value="Mostrando tarea" />
+		<put-attribute name="body" value="/views/fixUpTask/edit.jsp" />
+	</definition>
+	
+</tiles-definitions>

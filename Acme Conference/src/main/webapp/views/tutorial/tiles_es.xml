@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="tutorial/tutorials" extends="master.page">	
+		<put-attribute name="title" value="Trabajador: Acción 1" />
+		<put-attribute name="body" value="/views/tutorial/see-tutorial.jsp" />
+	</definition>
+	
+	<definition name="tutorial/editTutorial" extends="master.page">	
+		<put-attribute name="title" value="Trabajador: Acción 1" />
+		<put-attribute name="body" value="/views/tutorial/editTutorial.jsp" />
+	</definition>
+	
+	<definition name="tutorial/showTutorial" extends="master.page">	
+		<put-attribute name="title" value="Tutorial" />
+		<put-attribute name="body" value="/views/tutorial/showTutorial.jsp" />
+	</definition>
+	
+	<definition name="tutorial/AllTutorials" extends="master.page">	
+		<put-attribute name="title" value="All Tutorial" />
+		<put-attribute name="body" value="/views/tutorial/AllTutorials.jsp" />
+	</definition>
+	
+	<definition name="tutorial/showTutorialHW" extends="master.page">	
+		<put-attribute name="title" value="Trabajador Práctico" />
+		<put-attribute name="body" value="/views/tutorial/showTutorialHW.jsp" />
+	</definition>
+	
+	<definition name="tutorial/showTutorialPictureHW" extends="master.page">	
+		<put-attribute name="title" value="Imagenes tutorial" />
+		<put-attribute name="body" value="/views/tutorial/showTutorialPictureHW.jsp" />
+	</definition>
+	
+	<definition name="tutorial/showTutorialSectionHW" extends="master.page">	
+		<put-attribute name="title" value="Secciones tutorial" />
+		<put-attribute name="body" value="/views/tutorial/showTutorialSectionHW.jsp" />
+	</definition>
+	
+	<definition name="tutorial/showTutorialSponsorshipHW" extends="master.page">	
+		<put-attribute name="title" value="Patrocinios tutorial" />
+		<put-attribute name="body" value="/views/tutorial/showTutorialSponsorshipHW.jsp" />
+	</definition>
+	
+	
+
+	
+	
+	
+</tiles-definitions>
