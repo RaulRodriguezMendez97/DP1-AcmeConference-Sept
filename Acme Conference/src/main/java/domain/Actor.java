@@ -3,33 +3,48 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
+import security.UserAccount;
+
 @Entity
 @Access(AccessType.PROPERTY)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Actor extends DomainEntity {
 
-	private String	name;
-	private String	middleName;
-	private String	surname;
-	private String	photo;
-	private String	email;
-	private String	phone;
-	private String	address;
+	private String		name;
+	private String		middleName;
+	private String		surname;
+	private String		photo;
+	private String		email;
+	private String		phone;
+	private String		address;
+	private UserAccount	userAccount;
 
-
-	//private UserAccount	userAccount;
 
 	//Getters and Setters
+
+	@Valid
+	@NotNull
+	@OneToOne(cascade = CascadeType.ALL)
+	public UserAccount getUserAccount() {
+		return this.userAccount;
+	}
+
+	public void setUserAccount(final UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
 
 	@NotBlank
 	@NotNull

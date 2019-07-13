@@ -10,18 +10,16 @@ import javax.validation.constraints.Min;
 @Access(AccessType.PROPERTY)
 public class Presentation extends Activity {
 
-	private int	version;
+	private int	vers;
 
 
-	@Override
 	@Min(0)
-	public int getVersion() {
-		return this.version;
+	public int getVers() {
+		return this.vers;
 	}
 
-	@Override
-	public void setVersion(final int version) {
-		this.version = version;
+	public void setVers(final int vers) {
+		this.vers = vers;
 	}
 
 }

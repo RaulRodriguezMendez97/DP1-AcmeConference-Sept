@@ -18,8 +18,9 @@ public class CustomizableSystem extends DomainEntity {
 	private String	messageWelcomePage;
 	private String	telephoneCode;
 	private String	spanishMessageWelcomePage;
-	private String	brandNameCredictCard;
 
+
+	//private String	brandNameCredictCard;
 
 	@NotBlank
 	@NotNull
@@ -41,15 +42,18 @@ public class CustomizableSystem extends DomainEntity {
 		this.spanishMessageWelcomePage = spanishMessageWelcomePage;
 	}
 
-	@NotBlank
-	@NotNull
-	public String getBrandNameCredictCard() {
-		return this.brandNameCredictCard;
-	}
-
-	public void setBrandNameCredictCard(final String brandNameCredictCard) {
-		this.brandNameCredictCard = brandNameCredictCard;
-	}
+	/*
+	 * @NotBlank
+	 * 
+	 * @NotNull
+	 * public String getBrandNameCredictCard() {
+	 * return this.brandNameCredictCard;
+	 * }
+	 * 
+	 * public void setBrandNameCredictCard(final String brandNameCredictCard) {
+	 * this.brandNameCredictCard = brandNameCredictCard;
+	 * }
+	 */
 
 	@NotBlank
 	@NotNull
