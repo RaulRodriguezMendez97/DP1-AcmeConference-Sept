@@ -8,8 +8,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -27,7 +29,19 @@ public class Activity extends DomainEntity {
 	private String				room;
 	private String				summary;
 	private Collection<String>	attachments;
+	private Conference			conference;
 
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Conference getConference() {
+		return this.conference;
+	}
+
+	public void setConference(final Conference conference) {
+		this.conference = conference;
+	}
 
 	@NotNull
 	@NotBlank

@@ -1,32 +1,31 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Finder extends DomainEntity {
 
-	private String					keyWord;
-	private Collection<Conference>	conferences;
+	private String	keyWord;
 
 
-	@ManyToMany
-	@Valid
-	public Collection<Conference> getConferences() {
-		return this.conferences;
-	}
+	//private Collection<Conference>	conferences;
 
-	public void setConferences(final Collection<Conference> conferences) {
-		this.conferences = conferences;
-	}
-
+	/*
+	 * @ManyToMany
+	 * 
+	 * @Valid
+	 * public Collection<Conference> getConferences() {
+	 * return this.conferences;
+	 * }
+	 * 
+	 * public void setConferences(final Collection<Conference> conferences) {
+	 * this.conferences = conferences;
+	 * }
+	 */
 	public String getKeyWord() {
 		return this.keyWord;
 	}

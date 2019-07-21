@@ -1,12 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
@@ -15,14 +17,23 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class Report extends DomainEntity {
 
-	private int			originalityScore;
-	private int			qualityScore;
-	private int			eadabilityScore;
-	private int			decision;
-	private int			numbersCommets;
-	private Reviwer		reviwer;
-	private Submission	submission;
+	private int					originalityScore;
+	private int					qualityScore;
+	private int					eadabilityScore;
+	private int					decision;
+	private Collection<String>	comments;
+	private Reviwer				reviwer;
+	private Submission			submission;
 
+
+	@ElementCollection
+	public Collection<String> getComments() {
+		return this.comments;
+	}
+
+	public void setComments(final Collection<String> comments) {
+		this.comments = comments;
+	}
 
 	@ManyToOne(optional = false)
 	@NotNull
@@ -80,15 +91,6 @@ public class Report extends DomainEntity {
 
 	public void setDecision(final int decision) {
 		this.decision = decision;
-	}
-
-	@Min(0)
-	public int getNumbersCommets() {
-		return this.numbersCommets;
-	}
-
-	public void setNumbersCommets(final int numbersCommets) {
-		this.numbersCommets = numbersCommets;
 	}
 
 }
