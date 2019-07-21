@@ -5,6 +5,9 @@ Propiedades paper de la clase submission
 En la entidad Paper, preguntar el atributo "title", si es un titulo o más titulos.
 En la entidad Paper, preguntar que es el atributo "documento en sí".
 
+REQUISITO 5
+Numero de comentarios
+
 REQUISITO 6
 Preguntar propiedad de presentation.
 
