@@ -155,9 +155,6 @@
 	
 
 
-
-	<!-- ProfilesSocialNetwork -->
-
 	<!-- MessageBox -->
 	<!-- Topic -->
 	<bean id="topic1" class="domain.Topic">

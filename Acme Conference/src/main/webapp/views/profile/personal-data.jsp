@@ -16,10 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="profile.action.2"/></p>
-
 <security:authorize access="isAuthenticated()">
-
 <img src="${actor.photo}">  <br/>
 <br/>
 <b><spring:message code="profile.action.2.name" /> </b> ${actor.name} <br/>
@@ -28,7 +25,6 @@
 <b><spring:message code="profile.action.2.email" /></b> ${actor.email} <br/>
 <b><spring:message code="profile.action.2.phone" /></b> ${actor.phone} <br/>
 <b><spring:message code="profile.action.2.address" /></b> ${actor.address} <br/>
-<b><spring:message code="profile.action.2.numberSocial" /></b> ${actor.numberSocialProfiles} <a href="profileSocial/actor/list.do"><spring:message code="profile.list" /></a>
 
 <br/>
 <input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"

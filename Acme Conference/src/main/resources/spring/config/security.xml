@@ -42,6 +42,8 @@
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/register.do" access="permitAll" />  
+		
+		<security:intercept-url access="isAuthenticated()" pattern="/profile/personal-datas.do"/>
 	
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
