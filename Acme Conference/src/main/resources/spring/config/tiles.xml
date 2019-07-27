@@ -25,6 +25,7 @@
 		
 		
 		<value>/views/profile/tiles.xml</value>
+		<value>/views/conference/tiles.xml</value>
 		
 	
 

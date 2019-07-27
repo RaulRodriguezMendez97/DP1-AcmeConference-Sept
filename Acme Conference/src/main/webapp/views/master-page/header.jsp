@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Acme Conference Co., Inc." width="500px" height="300px" /></a>
+	<a href="#"><img src="${urlBanner }" alt="Acme Conference Co., Inc." width="500px" height="200px" /></a>
 </div>
 
 <div>
@@ -111,7 +111,8 @@
 					<li><a href="handy-worker/create.do"><spring:message code="master.page.handy.register" /></a></li>
 					<li><a href="customer/create.do"><spring:message code="master.page.customer.register" /></a></li>
 				</ul>
-			</li>			<li><a href="tutorial/AllTutorials.do"><spring:message code="master.page.tutorials" /></a></li>
+			</li>			
+			<li><a href="conference/allConference.do"><spring:message code="master.page.conference" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
