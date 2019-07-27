@@ -25,10 +25,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="administrator/create.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="referee/administrator/create.do"><spring:message code="master.page.administrator.referee" /></a></li>
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
-					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
-					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.administrator.warranty" /></a></li>						
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
@@ -37,69 +34,19 @@
 					<li><a href="credit-card-type/administrator/list.do"><spring:message code="master.page.administrator.creditCardType" /></a></li>						
 				</ul>
 			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.administrator.spam" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="spam-word/administrator/list.do"><spring:message code="master.page.administrator.spamWord" /></a></li>
-					<li><a href="word/administrator/list.do"><spring:message code="master.page.administrator.word" /></a></li>						
-											
-				</ul>
-			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.administrator.suspicious" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="suspiciousActor/administrator/list.do"><spring:message code="master.page.administrator.suspicious" /></a></li>	
-				</ul>
-			</li>	
+			<li><a href=""><spring:message code="master.page.administrator.conferences" /></a></li>	
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
-			<li><a href="complaint/customer/list.do"><spring:message code="master.page.customer.complaints" /></a></li>
-			<li><a href="fix-up-task/customer/list.do"><spring:message	code="master.page.customer.fixUpTask" /></a>
-			<li><a href="endorsement/customer/list.do"><spring:message	code="master.page.customer.endorsement" /></a>
-			<li><a href="application/handyWorker,customer/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
-			<li><a href="creditCard/customer,sponsor/list.do"><spring:message code="master.page.customer.creditCard"/></a></li>
+		<security:authorize access="hasRole('AUTHOR')">
+			<li><a href=""><spring:message code="master.page.author.submissions" /></a></li>
+			<li><a href=""><spring:message	code="master.page.author.registrations" /></a>
 		</security:authorize>
 		
-			<security:authorize access="hasRole('REFEREE')">
-			<li><a class="fNiv"><spring:message	code="master.page.referee" /></a>
+		<security:authorize access="hasRole('REVIWER')">
 				
 					<li class="arrow"></li>
 					<li><a href="complaint/referee/list.do"><spring:message code="master.page.referee.complaint" /></a></li>
 				
-		</security:authorize>
-		
-		
-		<security:authorize access="hasRole('HANDYWORKER')">
-			<li><a class="fNiv"><spring:message	code="master.page.handyWorker" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="finder/handy-worker/show.do"><spring:message code="master.page.handyworker.show" /></a></li>
-					<li><a href="tutorial/handyWorker/tutorials.do"><spring:message code="master.page.handyworker.tutorial" /></a></li>
-					<li><a href="fixUptask/handyWorker/list.do"><spring:message code="master.page.handyworker.fixUptask" /></a></li>
-				</ul>
-			</li>
-			<li><a href="endorsement/handy-worker/list.do"><spring:message	code="master.page.customer.endorsement" /></a>
-			<li><a href="curricula/handyWorker/curriculas.do"><spring:message	code="master.page.handyWorker.curricula" /></a>
-			<li><a href="fix-up-task/handy-worker/list.do"><spring:message	code="master.page.handyworker.fixUpTask" /></a>
-			<li><a href="application/handyWorker,customer/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
-		</security:authorize>
-		
-		<security:authorize access="hasRole('SPONSOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.sponsor" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="sponsorship/sponsor/list.do"><spring:message code="master.page.sponsor.sponsorships" /></a></li>
-				</ul>
-			</li>
-			<li><a href="creditCard/customer,sponsor/list.do"><spring:message code="master.page.customer.creditCard"/></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
@@ -107,9 +54,8 @@
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="sponsor/create.do"><spring:message code="master.page.sponsor.register" /></a></li>
-					<li><a href="handy-worker/create.do"><spring:message code="master.page.handy.register" /></a></li>
-					<li><a href="customer/create.do"><spring:message code="master.page.customer.register" /></a></li>
+					<li><a href="author/create.do"><spring:message code="master.page.author.register" /></a></li>
+					<li><a href="reviwer/create.do"><spring:message code="master.page.reviwer.register" /></a></li>
 				</ul>
 			</li>			
 			<li><a href="conference/allConference.do"><spring:message code="master.page.conference" /></a></li>

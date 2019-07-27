@@ -10,8 +10,7 @@ import domain.Conference;
 public interface ConferenceRepository extends JpaRepository<Conference, Integer> {
 
 	/*
-	 * @Query("select c from Conference c where c.startDate = CURRENT_DATE")
+	 * @Query(value = "select c from Conference c where c.startDate < CURRENT_DATE", nativeQuery = true)
 	 * public Collection<Conference> getAllConferenceForthComing();
 	 */
-
 }

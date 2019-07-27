@@ -560,7 +560,7 @@
 		<property name="submissionDeadline" value="10/10/2019 11:30" />
 		<property name="notificacionDeadline" value="15/10/2019 11:30" />
 		<property name="cameraDeadline" value="10/11/2019 11:30" />
-		<property name="startDate" value="27/07/2019 11:30" />
+		<property name="startDate" value="27/06/2019 11:30" />
 		<property name="endDate" value="23/12/2019 11:30" />
 		<property name="summary" value="summary conference 5" />
 		<property name="fee" value="2.0" />
