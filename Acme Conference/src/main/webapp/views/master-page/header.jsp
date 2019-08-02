@@ -26,6 +26,7 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/create.do"><spring:message code="master.page.administrator.action.1" /></a></li>
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+					<li><a href="topic/administrator/list.do"><spring:message code="master.page.administrator.topics" /></a></li>	
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>

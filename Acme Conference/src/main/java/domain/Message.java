@@ -24,6 +24,7 @@ public class Message extends DomainEntity {
 	private String	subject;
 	private String	body;
 	private String	topic;
+	private String	emailReceiver;
 
 	private Actor	sender;
 	private Actor	receiver;
@@ -89,4 +90,13 @@ public class Message extends DomainEntity {
 	public void setReceiver(final Actor receiver) {
 		this.receiver = receiver;
 	}
+
+	public String getEmailReceiver() {
+		return this.emailReceiver;
+	}
+
+	public void setEmailReceiver(final String emailReceiver) {
+		this.emailReceiver = emailReceiver;
+	}
+
 }

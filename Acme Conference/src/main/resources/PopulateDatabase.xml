@@ -150,9 +150,9 @@
 		</property>
 	</bean>
 
-	
 
-	
+
+
 
 
 	<!-- MessageBox -->
@@ -177,7 +177,7 @@
 		<property name="name" value="OTHER" />
 		<property name="spanishName" value="OTROS" />
 	</bean>
-	
+
 	<!-- Credit card type -->
 	<bean id="creditCardType1" class="domain.CreditCardType">
 		<property name="brandName" value="VISA"></property>
@@ -194,7 +194,7 @@
 	<bean id="creditCardType4" class="domain.CreditCardType">
 		<property name="brandName" value="AMEX"></property>
 	</bean>
-	
+
 	<!-- credit card -->
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holdName" value="nombre1"></property>
@@ -261,7 +261,7 @@
 		<property name="email" value="jose@hotmail.com" />
 		<property name="userAccount" ref="userAccount3" />
 	</bean>
-	
+
 	<!-- Author -->
 	<bean id="author1" class="domain.Author">
 		<property name="name" value="Maria" />
@@ -296,7 +296,7 @@
 		<property name="email" value="antonio@hotmail.com" />
 		<property name="userAccount" ref="userAccount7" />
 	</bean>
-	
+
 	<!-- Reviwer -->
 	<bean id="reviwer1" class="domain.Reviwer">
 		<property name="name" value="Antonio" />
@@ -342,7 +342,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 
 	<!-- Picture -->
 	<bean id="picture1" class="domain.Picture">
@@ -392,7 +392,7 @@
 		<property name="summary" value="summary seccion 6"></property>
 		<property name="tutorial" ref="tutorial3"></property>
 	</bean>
-	
+
 	<!-- Tutorial -->
 	<bean id="tutorial1" class="domain.Tutorial">
 		<property name="title" value="Titulo del primer tutorial"></property>
@@ -411,7 +411,7 @@
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen del segundo tutorial"></property>
 		<property name="conference" ref="conference2"></property>
-		
+
 	</bean>
 	<bean id="tutorial3" class="domain.Tutorial">
 		<property name="title" value="Titulo del tercer tutorial"></property>
@@ -422,7 +422,7 @@
 		<property name="summary" value="resumen del tercer tutorial"></property>
 		<property name="conference" ref="conference3"></property>
 	</bean>
-	
+
 	<!-- Panel -->
 	<bean id="panel1" class="domain.Panel">
 		<property name="title" value="Titulo del primer panel"></property>
@@ -451,7 +451,7 @@
 		<property name="summary" value="resumen del tercer panel"></property>
 		<property name="conference" ref="conference3"></property>
 	</bean>
-	
+
 	<!-- Presentation -->
 	<bean id="presentation1" class="domain.Presentation">
 		<property name="title" value="Titulo de la primera presentacion"></property>
@@ -488,15 +488,17 @@
 	<bean id="customizableSystem1" class="domain.CustomizableSystem">
 		<property name="nameSystem" value="Acme Conference" />
 		<property name="banner" value="https://i.ibb.co/GVpZCtM/acme-conference.png" />
-		<property name="messageWelcomePage" value="Welcome to Acme Conference! Your scientific event manager." />
+		<property name="messageWelcomePage"
+			value="Welcome to Acme Conference! Your scientific event manager." />
 		<property name="telephoneCode" value="+34" />
-		<property name="spanishMessageWelcomePage" value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos." />
+		<property name="spanishMessageWelcomePage"
+			value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos." />
 	</bean>
-	
+
 	<!-- Conference -->
 	<bean id="conference1" class="domain.Conference">
 		<property name="title" value="title conference 1" />
-		<property name="acronym" value="acronym conference 1"/>
+		<property name="acronym" value="acronym conference 1" />
 		<property name="venue" value="venue conference 1" />
 		<property name="submissionDeadline" value="03/01/2020 11:30" />
 		<property name="notificacionDeadline" value="03/02/2020 11:30" />
@@ -510,7 +512,7 @@
 	</bean>
 	<bean id="conference2" class="domain.Conference">
 		<property name="title" value="title conference 2" />
-		<property name="acronym" value="acronym conference 2"/>
+		<property name="acronym" value="acronym conference 2" />
 		<property name="venue" value="venue conference 2" />
 		<property name="submissionDeadline" value="05/01/2020 11:30" />
 		<property name="notificacionDeadline" value="05/02/2020 11:30" />
@@ -524,7 +526,7 @@
 	</bean>
 	<bean id="conference3" class="domain.Conference">
 		<property name="title" value="title conference 3" />
-		<property name="acronym" value="acronym conference 3"/>
+		<property name="acronym" value="acronym conference 3" />
 		<property name="venue" value="venue conference 3" />
 		<property name="submissionDeadline" value="08/01/2020 11:30" />
 		<property name="notificacionDeadline" value="08/02/2020 11:30" />
@@ -538,7 +540,7 @@
 	</bean>
 	<bean id="conference4" class="domain.Conference">
 		<property name="title" value="title conference 4" />
-		<property name="acronym" value="acronym conference 4"/>
+		<property name="acronym" value="acronym conference 4" />
 		<property name="venue" value="venue conference 4" />
 		<property name="submissionDeadline" value="08/10/2019 11:30" />
 		<property name="notificacionDeadline" value="13/10/2019 11:30" />
@@ -552,7 +554,7 @@
 	</bean>
 	<bean id="conference5" class="domain.Conference">
 		<property name="title" value="title conference 5" />
-		<property name="acronym" value="acronym conference 5"/>
+		<property name="acronym" value="acronym conference 5" />
 		<property name="venue" value="venue conference 5" />
 		<property name="submissionDeadline" value="10/10/2019 11:30" />
 		<property name="notificacionDeadline" value="15/10/2019 11:30" />
@@ -564,7 +566,7 @@
 		<property name="finalMode" value="1" />
 		<property name="admin" ref="administrator2" />
 	</bean>
-	
+
 	<!-- Submission -->
 	<bean id="submission1" class="domain.Submission">
 		<property name="ticker" value="ASD-123S" />
@@ -629,7 +631,7 @@
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference4" />
 	</bean>
-	
+
 	<!-- Report -->
 	<bean id="report1" class="domain.Report">
 		<property name="originalityScore" value="2" />
@@ -638,7 +640,7 @@
 		<property name="decision" value="0" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer1" />
@@ -651,7 +653,7 @@
 		<property name="decision" value="0" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer1" />
@@ -664,7 +666,7 @@
 		<property name="decision" value="1" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer2" />
@@ -677,7 +679,7 @@
 		<property name="decision" value="1" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer3" />
@@ -690,7 +692,7 @@
 		<property name="decision" value="1" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer3" />
@@ -703,7 +705,7 @@
 		<property name="decision" value="0" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer3" />
@@ -716,7 +718,7 @@
 		<property name="decision" value="0" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer3" />
@@ -729,7 +731,7 @@
 		<property name="decision" value="1" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer4" />
@@ -742,7 +744,7 @@
 		<property name="decision" value="0" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer4" />
@@ -755,7 +757,7 @@
 		<property name="decision" value="2" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer4" />
@@ -768,7 +770,7 @@
 		<property name="decision" value="1" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer4" />
@@ -781,15 +783,15 @@
 		<property name="decision" value="0" />
 		<property name="comments">
 			<list>
-			
+
 			</list>
 		</property>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission8" />
 	</bean>
-	
-	
-	
-	
-	
+
+
+
+
+
 </beans>
