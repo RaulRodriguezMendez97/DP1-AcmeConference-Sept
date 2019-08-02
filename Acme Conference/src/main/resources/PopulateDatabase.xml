@@ -151,11 +151,96 @@
 	</bean>
 
 
-
-
-
-
 	<!-- MessageBox -->
+	
+	<bean id="messageBox1" class="domain.MessageBox">
+		<property name="actor" ref="administrator1" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox2" class="domain.MessageBox">
+		<property name="actor" ref="administrator2" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox3" class="domain.MessageBox">
+		<property name="actor" ref="administrator3" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox4" class="domain.MessageBox">
+		<property name="actor" ref="author1" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox5" class="domain.MessageBox">
+		<property name="actor" ref="author2" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox6" class="domain.MessageBox">
+		<property name="actor" ref="author3" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox7" class="domain.MessageBox">
+		<property name="actor" ref="author4" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox8" class="domain.MessageBox">
+		<property name="actor" ref="reviwer1" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox9" class="domain.MessageBox">
+		<property name="actor" ref="reviwer2" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox10" class="domain.MessageBox">
+		<property name="actor" ref="reviwer3" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="messageBox11" class="domain.MessageBox">
+		<property name="actor" ref="reviwer4" />
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Topic -->
 	<bean id="topic1" class="domain.Topic">
 		<property name="name" value="REGISTRATION" />

@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import security.UserAccount;
 import services.TopicService;
 import domain.Topic;
 
@@ -74,8 +72,6 @@ public class TopicAdministratorController extends AbstractController {
 	public ModelAndView show(@RequestParam final Integer idTopic) {
 		ModelAndView result;
 		try {
-			final UserAccount user = LoginService.getPrincipal();
-			Assert.notNull(user.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 			final Topic topic = this.topicService.findOne(idTopic);
 			Assert.notNull(topic);
 			this.topicService.delete(topic);
