@@ -150,6 +150,37 @@
 		</property>
 	</bean>
 
+	<!-- Message -->
+	
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="06/08/2019 11:30" />
+		<property name="subject" value="Cabecera" />
+		<property name="body" value="Cuerpo" />
+		<property name="topic" ref="topic1" />
+		<property name="emailReceiver" value="cristian@hotmail.com" />
+		<property name="sender" ref="administrator1" />
+		<property name="receiver" ref="author1" />
+	</bean>
+	
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="06/08/2019 11:30" />
+		<property name="subject" value="Cabecera" />
+		<property name="body" value="Cuerpo" />
+		<property name="topic" ref="topic3" />
+		<property name="emailReceiver" value="cristian@hotmail.com" />
+		<property name="sender" ref="administrator1" />
+		<property name="receiver" ref="administrator2" />
+	</bean>
+	
+	<bean id="message3" class="domain.Message">
+		<property name="moment" value="06/08/2019 11:30" />
+		<property name="subject" value="Cabecera" />
+		<property name="body" value="Cuerpo" />
+		<property name="topic" ref="topic1" />
+		<property name="emailReceiver" value="pedro@hotmail.com" />
+		<property name="sender" ref="author1" />
+		<property name="receiver" ref="reviwer1" />
+	</bean>
 
 	<!-- MessageBox -->
 	
@@ -157,6 +188,8 @@
 		<property name="actor" ref="administrator1" />
 		<property name="messages">
 			<list>
+				<ref bean="message1" />
+				<ref bean="message2" />
 			</list>
 		</property>
 	</bean>
@@ -165,6 +198,7 @@
 		<property name="actor" ref="administrator2" />
 		<property name="messages">
 			<list>
+				<ref bean="message2" />
 			</list>
 		</property>
 	</bean>
@@ -181,6 +215,9 @@
 		<property name="actor" ref="author1" />
 		<property name="messages">
 			<list>
+				<ref bean="message1" />
+				<ref bean="message3" />
+				
 			</list>
 		</property>
 	</bean>
@@ -213,6 +250,7 @@
 		<property name="actor" ref="reviwer1" />
 		<property name="messages">
 			<list>
+				<ref bean="message3" />
 			</list>
 		</property>
 	</bean>

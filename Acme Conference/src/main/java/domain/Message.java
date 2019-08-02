@@ -23,7 +23,7 @@ public class Message extends DomainEntity {
 	private Date	moment;
 	private String	subject;
 	private String	body;
-	private String	topic;
+	private Topic	topic;
 	private String	emailReceiver;
 
 	private Actor	sender;
@@ -31,12 +31,13 @@ public class Message extends DomainEntity {
 
 
 	@NotNull
-	@NotBlank
-	public String getTopic() {
+	@Valid
+	@ManyToOne(optional = false)
+	public Topic getTopic() {
 		return this.topic;
 	}
 
-	public void setTopic(final String topic) {
+	public void setTopic(final Topic topic) {
 		this.topic = topic;
 	}
 
