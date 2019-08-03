@@ -57,4 +57,7 @@
 		</jstl:if>
 
 	</display:table>
+	
+	<input type="button" name="send" value="<spring:message code="message.send" />"
+			onclick="javascript: relativeRedir('message/actor/send.do');" />
 </security:authorize>
