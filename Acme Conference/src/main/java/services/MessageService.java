@@ -16,6 +16,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Message;
+import domain.MessageBox;
 import domain.Topic;
 
 @Service
@@ -30,6 +31,9 @@ public class MessageService {
 
 	@Autowired
 	ActorService				actorService;
+
+	@Autowired
+	private MessageBoxService	messageBoxService;
 
 
 	public Message create() {
@@ -61,6 +65,8 @@ public class MessageService {
 		return saved;
 	}
 
+	//Métodos auxiliares
+
 	public Message reconstruct(final Message message, final BindingResult binding) {
 		Message res;
 		res = message;
@@ -72,7 +78,30 @@ public class MessageService {
 		message.setMoment(new Date());
 		message.setReceiver(receiver);
 
+		if (message.getEmailReceiver() == "")
+			binding.rejectValue("emailReceiver", "NoEmail");
+		else if (receiver == null)
+			binding.rejectValue("emailReceiver", "NotFound");
+
 		this.validator.validate(res, binding);
 		return res;
+	}
+
+	public void sendMessage(final Message message) {
+
+		final Actor sender = message.getSender();
+		final MessageBox messageBoxSender = this.messageBoxService.getMessageBoxByActor(sender.getId());
+
+		final Actor receiver = message.getReceiver();
+		final MessageBox messageBoxReceiver = this.messageBoxService.getMessageBoxByActor(receiver.getId());
+
+		final Collection<Message> messageSender = messageBoxSender.getMessages();
+		messageSender.add(message);
+		this.messageBoxService.save(messageBoxSender);
+
+		final Collection<Message> messageReceiver = messageBoxReceiver.getMessages();
+		messageReceiver.add(message);
+		this.messageBoxService.save(messageBoxReceiver);
+
 	}
 }

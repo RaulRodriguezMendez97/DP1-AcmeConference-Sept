@@ -20,21 +20,25 @@
 
 <security:authorize access="isAuthenticated()">
 
-	<form:form action="message/actor/send.do" modelAttribute="mensaje">
+	<form:form action="message/actor/send.do" modelAttribute="message">
+	
+		<jstl:if test="${not empty exception}">
+			<p style="color:red"> <spring:message code="mensaje.error" /> </p>
+		</jstl:if>
 	
 		<form:hidden path="id"/>
 		<form:hidden path="version"/>
 		
-		<acme:textbox code="message.emailReceiver" path="emailReceiver"/>
-		<acme:textbox code="message.subject" path="subject"/>
-		<acme:textarea code="message.body" path="body"/>
-		<acme:select items="${topics }" itemLabel="name" code="message.topic" path="topic"/>
+		<acme:textbox code="mensaje.emailReceiver" path="emailReceiver"/>
+		<acme:textbox code="mensaje.subject" path="subject"/>
+		<acme:textarea code="mensaje.body" path="body"/>
+		<acme:select items="${topics }" itemLabel="name" code="mensaje.topic" path="topic"/>
 		
 		<br/>
 		<input type="submit" name="save" 
-		value="<spring:message code="message.save" />" />
+		value="<spring:message code="mensaje.save" />" />
 
-		<input type="button" name="cancel" value="<spring:message code="message.cancel" />"
+		<input type="button" name="cancel" value="<spring:message code="mensaje.cancel" />"
 				onclick="javascript: relativeRedir('message/actor/list.do');" />
 	</form:form>	
 	

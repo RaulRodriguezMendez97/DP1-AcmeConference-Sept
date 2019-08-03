@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,8 +61,34 @@ public class MessageActorController extends AbstractController {
 		final Collection<Topic> topics = this.topicService.findAll();
 
 		result = new ModelAndView("mensaje/edit");
-		result.addObject("mensaje", mensaje);
+		result.addObject("message", mensaje);
 		result.addObject("topics", topics);
+		return result;
+	}
+
+	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(final Message mensaje, final BindingResult binding) {
+
+		ModelAndView result;
+		try {
+			final Message m = this.messageService.reconstruct(mensaje, binding);
+			if (!binding.hasErrors()) {
+				final Message saved = this.messageService.save(m);
+				this.messageService.sendMessage(saved);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("mensaje/edit");
+				final Collection<Topic> topics = this.topicService.findAll();
+				result.addObject("message", mensaje);
+				result.addObject("topics", topics);
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("mensaje/edit");
+			final Collection<Topic> topics = this.topicService.findAll();
+			result.addObject("message", mensaje);
+			result.addObject("topics", topics);
+			result.addObject("exception", e);
+		}
 		return result;
 	}
 }

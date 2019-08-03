@@ -24,40 +24,40 @@
 
 		<jstl:choose>
 			<jstl:when test="${lang eq 'en'}">
-				<display:column property="moment" titleKey="message.moment" format="{0,date,yy/MM/dd hh:mm}"  />
+				<display:column property="moment" titleKey="mensaje.moment" format="{0,date,yy/MM/dd hh:mm}"  />
 			</jstl:when>
 		
 			<jstl:otherwise>
-				<display:column property="moment" titleKey="message.moment" format="{0,date,dd-MM-yy hh:mm}"  />
+				<display:column property="moment" titleKey="mensaje.moment" format="{0,date,dd-MM-yy hh:mm}"  />
 			</jstl:otherwise>
 		</jstl:choose>
 
-		<display:column  titleKey="message.sender" >
+		<display:column  titleKey="mensaje.sender" >
 	      <jstl:out value="${row.sender.email}"></jstl:out>
         </display:column>
         
-        <display:column  titleKey="message.receiver" >
+        <display:column  titleKey="mensaje.receiver" >
 	      <jstl:out value="${row.receiver.email}"></jstl:out>
         </display:column>
 
-		<display:column  titleKey="message.subject" >
+		<display:column  titleKey="mensaje.subject" >
 	      <jstl:out value="${row.subject}"></jstl:out>
         </display:column>
         
 		<jstl:if test="${lang eq 'en' }">
-			<display:column  titleKey="message.topic" >
+			<display:column  titleKey="mensaje.topic" >
 	     	 <jstl:out value="${row.topic.name}"></jstl:out>
       	  </display:column>
 		</jstl:if>
 	
 		<jstl:if test="${lang eq 'es' }">
-			<display:column  titleKey="message.topic" >
+			<display:column  titleKey="mensaje.topic" >
 	    	  <jstl:out value="${row.topic.spanishName}"></jstl:out>
        	 </display:column>
 		</jstl:if>
 
 	</display:table>
 	
-	<input type="button" name="send" value="<spring:message code="message.send" />"
+	<input type="button" name="send" value="<spring:message code="mensaje.send" />"
 			onclick="javascript: relativeRedir('message/actor/send.do');" />
 </security:authorize>
