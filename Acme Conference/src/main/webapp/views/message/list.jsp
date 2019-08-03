@@ -19,15 +19,42 @@
 
 <security:authorize access="isAuthenticated()">
 
-<display:table pagesize="5" name="messages" id="row"
-requestURI="${Uri }" >
-<display:column property="moment" titleKey ="message.moment"  format="{0,date,dd/MM/yyyy}"  />
-<display:column property="subject" titleKey="message.subject"  />
-<display:column property="tag" titleKey="message.tag"  />
-<display:column property="emailReceiver" titleKey="message.emailReceiver"  />
-<display:column> <a href="message/actor/show.do?messageId=${row.id}"><spring:message code="message.show" /></a> </display:column>
-<display:column> <a href="message/actor/delete.do?idMessage=${row.id}"><spring:message code="message.delete" /></a> </display:column>
+	<display:table pagesize="5" name="mensajes" id="row"
+	requestURI="message/actor/list.do" >
 
-</display:table>
- <a href="messageBox/actor/list.do"><spring:message code="message.send.cancel" /></a>
+		<jstl:choose>
+			<jstl:when test="${lang eq 'en'}">
+				<display:column property="moment" titleKey="message.moment" format="{0,date,yy/MM/dd hh:mm}"  />
+			</jstl:when>
+		
+			<jstl:otherwise>
+				<display:column property="moment" titleKey="message.moment" format="{0,date,dd-MM-yy hh:mm}"  />
+			</jstl:otherwise>
+		</jstl:choose>
+
+		<display:column  titleKey="message.sender" >
+	      <jstl:out value="${row.sender.email}"></jstl:out>
+        </display:column>
+        
+        <display:column  titleKey="message.receiver" >
+	      <jstl:out value="${row.receiver.email}"></jstl:out>
+        </display:column>
+
+		<display:column  titleKey="message.subject" >
+	      <jstl:out value="${row.subject}"></jstl:out>
+        </display:column>
+        
+		<jstl:if test="${lang eq 'en' }">
+			<display:column  titleKey="message.topic" >
+	     	 <jstl:out value="${row.topic.name}"></jstl:out>
+      	  </display:column>
+		</jstl:if>
+	
+		<jstl:if test="${lang eq 'es' }">
+			<display:column  titleKey="message.topic" >
+	    	  <jstl:out value="${row.topic.spanishName}"></jstl:out>
+       	 </display:column>
+		</jstl:if>
+
+	</display:table>
 </security:authorize>

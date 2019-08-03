@@ -28,6 +28,7 @@
 		<value>/views/conference/tiles.xml</value>
 		
 		<value>/views/topic/tiles.xml</value>
+		<value>/views/message/tiles.xml</value>
 
 		
 		

@@ -27,6 +27,7 @@
 		<value>/views/profile/messages</value>
 		<value>/views/conference/messages</value>
 		<value>/views/topic/messages</value>
+		<value>/views/message/messages</value>
 		
 		
 		
