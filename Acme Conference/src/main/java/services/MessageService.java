@@ -41,7 +41,7 @@ public class MessageService {
 	public Message create() {
 		final Message message = new Message();
 
-		message.setMoment(this.fechaSumada(-1));
+		message.setMoment(new Date());
 		message.setSubject("");
 		message.setBody("");
 		message.setTopic(new Topic());
@@ -89,7 +89,7 @@ public class MessageService {
 		final Actor sender = this.actorService.getActorByUserAccount(user.getId());
 		final Actor receiver = this.actorService.getActorByEmail(message.getEmailReceiver());
 		message.setSender(sender);
-		message.setMoment(new Date());
+		message.setMoment(this.fechaSumada());
 		message.setReceiver(receiver);
 
 		if (message.getEmailReceiver() == "")
@@ -119,10 +119,10 @@ public class MessageService {
 
 	}
 
-	public Date fechaSumada(final Integer integer) {
+	public Date fechaSumada() {
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date()); //tuFechaBase es un Date;
-		calendar.add(Calendar.MINUTE, integer); //minutosASumar es int.
+		calendar.add(Calendar.MINUTE, -2); //minutosASumar es int.
 		//lo que más quieras sumar
 		final Date fechaSalida = calendar.getTime(); //Y ya tienes la fecha sumada.
 		return fechaSalida;

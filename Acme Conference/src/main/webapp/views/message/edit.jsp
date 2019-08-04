@@ -19,7 +19,6 @@
 
 
 <security:authorize access="isAuthenticated()">
-
 	<form:form action="message/actor/send.do" modelAttribute="message">
 	
 		<jstl:if test="${not empty exception}">
