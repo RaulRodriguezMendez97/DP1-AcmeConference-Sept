@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
@@ -39,7 +41,7 @@ public class MessageService {
 	public Message create() {
 		final Message message = new Message();
 
-		message.setMoment(new Date());
+		message.setMoment(this.fechaSumada(-1));
 		message.setSubject("");
 		message.setBody("");
 		message.setTopic(new Topic());
@@ -63,6 +65,18 @@ public class MessageService {
 		final Message saved = this.messageRepository.save(message);
 
 		return saved;
+	}
+
+	public void delete(final Message message) {
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
+
+		Assert.isTrue(message.getSender() == a || message.getReceiver() == a);
+
+		final Collection<Message> mensajes = messageBox.getMessages();
+		mensajes.remove(message);
+		this.messageBoxService.save(messageBox);
 	}
 
 	//Métodos auxiliares
@@ -103,5 +117,14 @@ public class MessageService {
 		messageReceiver.add(message);
 		this.messageBoxService.save(messageBoxReceiver);
 
+	}
+
+	public Date fechaSumada(final Integer integer) {
+		final Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date()); //tuFechaBase es un Date;
+		calendar.add(Calendar.MINUTE, integer); //minutosASumar es int.
+		//lo que más quieras sumar
+		final Date fechaSalida = calendar.getTime(); //Y ya tienes la fecha sumada.
+		return fechaSalida;
 	}
 }

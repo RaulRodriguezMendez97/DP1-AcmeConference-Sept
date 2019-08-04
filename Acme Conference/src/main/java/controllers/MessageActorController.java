@@ -6,9 +6,11 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
@@ -90,5 +92,46 @@ public class MessageActorController extends AbstractController {
 			result.addObject("exception", e);
 		}
 		return result;
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final Integer idMessage) {
+		ModelAndView result;
+		try {
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+			final Message mensaje = this.messageService.findOne(idMessage);
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+			Assert.isTrue(mensaje.getSender() == a || mensaje.getReceiver() == a);
+
+			result = new ModelAndView("mensaje/show");
+			result.addObject("mensaje", mensaje);
+			result.addObject("lang", lang);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do");
+		}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final Integer idMessage) {
+		ModelAndView result;
+		try {
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+			final Message mensaje = this.messageService.findOne(idMessage);
+
+			Assert.isTrue(mensaje.getSender() == a || mensaje.getReceiver() == a);
+			this.messageService.delete(mensaje);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do");
+		}
+		return result;
+
 	}
 }

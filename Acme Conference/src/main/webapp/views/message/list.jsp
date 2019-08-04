@@ -22,6 +22,12 @@
 	<display:table pagesize="5" name="mensajes" id="row"
 	requestURI="message/actor/list.do" >
 
+
+		
+		<display:column>
+			<a href="message/actor/show.do?idMessage=${row.id}"><spring:message code="mensaje.moreDetails" /></a>
+		</display:column>
+
 		<jstl:choose>
 			<jstl:when test="${lang eq 'en'}">
 				<display:column property="moment" titleKey="mensaje.moment" format="{0,date,yy/MM/dd hh:mm}"  />
@@ -55,6 +61,10 @@
 	    	  <jstl:out value="${row.topic.spanishName}"></jstl:out>
        	 </display:column>
 		</jstl:if>
+
+		<display:column>
+			<a href="message/actor/delete.do?idMessage=${row.id}"><spring:message code="mensaje.delete" /></a>
+		</display:column>
 
 	</display:table>
 	

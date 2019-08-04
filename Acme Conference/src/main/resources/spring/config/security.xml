@@ -55,6 +55,8 @@
 	 
 	 	<security:intercept-url pattern="/message/actor/list.do" access="isAuthenticated()" />
 	 	<security:intercept-url pattern="/message/actor/send.do" access="isAuthenticated()" />
+	 	<security:intercept-url pattern="/message/actor/show.do" access="isAuthenticated()" />
+	 	<security:intercept-url pattern="/message/actor/delete.do" access="isAuthenticated()" />
 	 
 		
 	
