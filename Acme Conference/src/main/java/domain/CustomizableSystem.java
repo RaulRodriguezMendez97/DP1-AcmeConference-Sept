@@ -1,8 +1,11 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -13,11 +16,12 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class CustomizableSystem extends DomainEntity {
 
-	private String	nameSystem;
-	private String	banner;
-	private String	messageWelcomePage;
-	private String	telephoneCode;
-	private String	spanishMessageWelcomePage;
+	private String				nameSystem;
+	private String				banner;
+	private String				messageWelcomePage;
+	private String				telephoneCode;
+	private String				spanishMessageWelcomePage;
+	private Collection<String>	brandNameCredictCard;
 
 
 	//private String	brandNameCredictCard;
@@ -84,6 +88,15 @@ public class CustomizableSystem extends DomainEntity {
 
 	public void setTelephoneCode(final String telephoneCode) {
 		this.telephoneCode = telephoneCode;
+	}
+
+	@ElementCollection
+	public Collection<String> getBrandNameCredictCard() {
+		return this.brandNameCredictCard;
+	}
+
+	public void setBrandNameCredictCard(final Collection<String> brandNameCredictCard) {
+		this.brandNameCredictCard = brandNameCredictCard;
 	}
 
 }

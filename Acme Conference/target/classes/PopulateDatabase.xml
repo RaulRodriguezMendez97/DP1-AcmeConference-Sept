@@ -616,6 +616,15 @@
 		<property name="telephoneCode" value="+34" />
 		<property name="spanishMessageWelcomePage"
 			value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos." />
+			<property name="brandNameCredictCard">
+			<list>
+				<value>VISA</value>
+				<value>MASTER</value>
+				<value>VINNERS</value>
+				<value>AMEX</value>
+
+			</list>
+			</property>
 	</bean>
 
 	<!-- Conference -->
