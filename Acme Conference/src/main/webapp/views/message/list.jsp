@@ -15,9 +15,22 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
 <security:authorize access="isAuthenticated()">
+
+
+	<form:form action="message/actor/search.do" modelAttribute="finder">
+
+		<acme:textbox code="mensaje.text" path="email"/>
+		<acme:select items="${topics }" itemLabel="name" code="mensaje.topic" path="topic"/>
+	
+		<input type="submit" name="search" value="<spring:message code="mensaje.search" />" />
+
+		<input type="button" name="cancel" value="<spring:message code="mensaje.cancel" />"
+			onclick="javascript: relativeRedir('message/actor/list.do');" />
+	</form:form>
 
 	<display:table pagesize="5" name="mensajes" id="row"
 	requestURI="message/actor/list.do" >

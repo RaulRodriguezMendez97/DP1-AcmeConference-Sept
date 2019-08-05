@@ -1,9 +1,11 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -126,5 +128,19 @@ public class MessageService {
 		//lo que más quieras sumar
 		final Date fechaSalida = calendar.getTime(); //Y ya tienes la fecha sumada.
 		return fechaSalida;
+	}
+
+	public Collection<Message> getMessagesByFinder(final String email, final String topic) {
+		final Collection<Message> res = new ArrayList<>();
+		final List<Message> mensajesQuery = (List<Message>) this.messageRepository.getMessagesByFinder(email, topic);
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
+
+		for (final Message m : mensajesQuery)
+			if (messageBox.getMessages().contains(m))
+				res.add(m);
+
+		return res;
 	}
 }

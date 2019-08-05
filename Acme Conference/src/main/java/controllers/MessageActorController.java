@@ -23,6 +23,7 @@ import domain.Actor;
 import domain.Message;
 import domain.MessageBox;
 import domain.Topic;
+import forms.MessageFinderForm;
 
 @Controller
 @RequestMapping("/message/actor")
@@ -45,12 +46,17 @@ public class MessageActorController extends AbstractController {
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 		final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
 		final Collection<Message> mensajes = messageBox.getMessages();
+		MessageFinderForm finder = new MessageFinderForm();
+		finder = finder.create();
 
 		final String lang = LocaleContextHolder.getLocale().getLanguage();
+		final Collection<Topic> topics = this.topicService.findAll();
 
 		result = new ModelAndView("mensajes/list");
 		result.addObject("mensajes", mensajes);
 		result.addObject("lang", lang);
+		result.addObject("finder", finder);
+		result.addObject("topics", topics);
 		return result;
 
 	}
@@ -134,4 +140,40 @@ public class MessageActorController extends AbstractController {
 		return result;
 
 	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST, params = "search")
+	public ModelAndView search(final MessageFinderForm finder, final BindingResult binding) {
+		ModelAndView result;
+		try {
+			final Collection<Message> mensajes;
+			Collection<Topic> topics;
+
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+			mensajes = this.messageService.getMessagesByFinder(finder.getEmail(), finder.getTopic().getName());
+			topics = this.topicService.findAll();
+
+			result = new ModelAndView("mensajes/list");
+			result.addObject("mensajes", mensajes);
+			result.addObject("finder", finder);
+			result.addObject("topics", topics);
+			result.addObject("lang", lang);
+		} catch (final NullPointerException e) {
+			final Collection<Message> mensajes;
+			Collection<Topic> topics;
+
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+			mensajes = this.messageService.getMessagesByFinder(finder.getEmail(), "");
+			topics = this.topicService.findAll();
+
+			result = new ModelAndView("mensajes/list");
+			result.addObject("mensajes", mensajes);
+			result.addObject("finder", finder);
+			result.addObject("topics", topics);
+			result.addObject("lang", lang);
+		}
+		return result;
+	}
+
 }
