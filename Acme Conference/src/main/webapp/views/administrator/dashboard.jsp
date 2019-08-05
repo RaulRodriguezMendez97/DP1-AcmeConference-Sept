@@ -15,59 +15,25 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
+<security:authorize access="hasRole('ADMIN')">
 
 <fieldset>
-<legend><spring:message code="administrator.FixUp" /></legend>
-<b><spring:message code="administrator.max" /></b>: ${fixUpMax }<br/>
-<b><spring:message code="administrator.min" /></b>: ${fixUpMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${fixUpAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpDesv }
+<legend><spring:message code="administrator.fee.conference" /></legend>
+<b><spring:message code="administrator.avg" /></b>: <jstl:out value="${getAvgFeesByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinFeesByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxFeesByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getDesvFeesByConference}"></fmt:formatNumber><br/>
 </fieldset>
 
 <fieldset>
-<legend><spring:message code="administrator.FixUpApp" /></legend>
-<b><spring:message code="administrator.max" /></b>: ${fixUpAppMax }<br/>
-<b><spring:message code="administrator.min" /></b>: ${fixUpAppMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${fixUpAppAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpAppDesv }
+<legend><spring:message code="administrator.submission.conference" /></legend>
+<b><spring:message code="administrator.avg" /></b>: <jstl:out value="${getAvgSubmissionsByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinSubmissionsByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxSubmissionsByConference}"></jstl:out><br/>
+
 </fieldset>
 
-<fieldset>
-<legend><spring:message code="administrator.FixUpPrice" /></legend>
-<b><spring:message code="administrator.max" /></b>: ${fixUpPriceMax }<br/>
-<b><spring:message code="administrator.min" /></b>: ${fixUpPriceMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${fixUpPriceAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpPriceDesv }<br/>
-</fieldset>
+</security:authorize>
 
-<fieldset>
-<legend><spring:message code="administrator.ApplicationPrice" /></legend>
-<b><spring:message code="administrator.max" /></b>: ${applicationPriceOfferedMax }<br/>
-<b><spring:message code="administrator.min" /></b>: ${applicationPriceOfferedMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${applicationPriceOfferedAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${applicationPriceOfferedDesv }<br/>
-</fieldset>
-
-<fieldset>
-<legend><spring:message code="administrator.Application" /></legend>
-<b><spring:message code="administrator.PendingApp" /></b>: ${ratioPendingApp }<br/>
-<b><spring:message code="administrator.AcceptedApp" /></b>: ${ratioAcceptedApp }<br/>
-<b><spring:message code="administrator.RejectedApp" /></b>: ${ratioRejectedApp }<br/>
-<b><spring:message code="administrator.PendingAppStatus" /></b>: ${rationPendingAppStatus }<br/>
-</fieldset>
-
-<fieldset>
-<legend><spring:message code="administrator.FixUpComplaint" /></legend>
-<b><spring:message code="administrator.max" /></b>: ${fixUpComplaintMax }<br/>
-<b><spring:message code="administrator.min" /></b>: ${fixUpComplaintMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${fixUpComplaintAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpComplaintDesv }<br/>
-</fieldset>
-
-<fieldset>
-<legend><spring:message code="administrator.Report" /></legend>
-<b><spring:message code="administrator.max" /></b>: ${reportNoteMax }<br/>
-<b><spring:message code="administrator.min" /></b>: ${reportNoteMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${reportNoteAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${reportNoteDesv }<br/>
-</fieldset>

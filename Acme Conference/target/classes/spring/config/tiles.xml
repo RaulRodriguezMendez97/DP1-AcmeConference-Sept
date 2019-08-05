@@ -29,7 +29,7 @@
 		
 		<value>/views/topic/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
-
+		<value>/views/administrator/tiles.xml</value>
 		
 		
 		

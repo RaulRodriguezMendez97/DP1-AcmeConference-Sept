@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -21,6 +22,16 @@ public class ConferenceService {
 
 	public Collection<Conference> findAll() {
 		return this.conferenceRepsitory.findAll();
+	}
+
+	//DASHBOARD
+
+	public List<Object[]> getAvgMinMaxDesvSubmissionsByConference() {
+		return this.conferenceRepsitory.getAvgMinMaxDesvSubmissionsByConference();
+	}
+
+	public List<Object[]> getAvgMinMaxDesvFeesByConference() {
+		return this.conferenceRepsitory.getAvgMinMaxDesvFeesByConference();
 	}
 
 }
