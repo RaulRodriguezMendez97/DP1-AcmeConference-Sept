@@ -17,21 +17,29 @@ import domain.Conference;
 public class ConferenceService {
 
 	@Autowired
-	private ConferenceRepository	conferenceRepsitory;
+	private ConferenceRepository	conferenceRepository;
 
 
 	public Collection<Conference> findAll() {
-		return this.conferenceRepsitory.findAll();
+		return this.conferenceRepository.findAll();
 	}
 
 	//DASHBOARD
 
 	public List<Object[]> getAvgMinMaxDesvSubmissionsByConference() {
-		return this.conferenceRepsitory.getAvgMinMaxDesvSubmissionsByConference();
+		return this.conferenceRepository.getAvgMinMaxDesvSubmissionsByConference();
+	}
+
+	public List<Object[]> getAvgMinMaxDesvRegistrationByConference() {
+		return this.conferenceRepository.getAvgMinMaxDesvRegistrationByConference();
 	}
 
 	public List<Object[]> getAvgMinMaxDesvFeesByConference() {
-		return this.conferenceRepsitory.getAvgMinMaxDesvFeesByConference();
+		return this.conferenceRepository.getAvgMinMaxDesvFeesByConference();
+	}
+
+	public List<Object[]> getAvgMinMaxDesvDaysByConference() {
+		return this.conferenceRepository.getAvgMinMaxDesvDaysByConference();
 	}
 
 }

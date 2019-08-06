@@ -20,6 +20,22 @@
 <security:authorize access="hasRole('ADMIN')">
 
 <fieldset>
+<legend><spring:message code="administrator.submission.conference" /></legend>
+<b><spring:message code="administrator.avg" /></b>: <jstl:out value="${getAvgSubmissionsByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinSubmissionsByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxSubmissionsByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getDesvSubmissionsByConference}"></fmt:formatNumber><br/>
+</fieldset>
+
+<fieldset>
+<legend><spring:message code="administrator.registration.conference" /></legend>
+<b><spring:message code="administrator.avg" /></b>: <jstl:out value="${getAvgRegistrationByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinRegistrationByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxRegistrationByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getDesvRegistrationByConference}"></fmt:formatNumber><br/>
+</fieldset>
+
+<fieldset>
 <legend><spring:message code="administrator.fee.conference" /></legend>
 <b><spring:message code="administrator.avg" /></b>: <jstl:out value="${getAvgFeesByConference}"></jstl:out><br/>
 <b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinFeesByConference}"></jstl:out><br/>
@@ -28,12 +44,13 @@
 </fieldset>
 
 <fieldset>
-<legend><spring:message code="administrator.submission.conference" /></legend>
-<b><spring:message code="administrator.avg" /></b>: <jstl:out value="${getAvgSubmissionsByConference}"></jstl:out><br/>
-<b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinSubmissionsByConference}"></jstl:out><br/>
-<b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxSubmissionsByConference}"></jstl:out><br/>
-
+<legend><spring:message code="administrator.days.conference" /></legend>
+<b><spring:message code="administrator.avg" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getAvgDaysByConference}"></fmt:formatNumber><br/>
+<b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinDaysByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxDaysByConference}"></jstl:out><br/>
+<b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getDesvDaysByConference}"></fmt:formatNumber><br/>
 </fieldset>
+
 
 </security:authorize>
 

@@ -10,6 +10,8 @@
 
 package controllers;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,13 @@ public class AdministratorController extends AbstractController {
 		final Double getAvgSubmissionsByConference = (Double) getAvgMinMaxDesvSubmissionsByConference.get(0)[0];
 		final Double getMinSubmissionsByConference = (Double) getAvgMinMaxDesvSubmissionsByConference.get(0)[1];
 		final Double getMaxSubmissionsByConference = (Double) getAvgMinMaxDesvSubmissionsByConference.get(0)[2];
+		final Double getDesvSubmissionsByConference = (Double) getAvgMinMaxDesvSubmissionsByConference.get(0)[3];
+
+		final List<Object[]> getAvgMinMaxDesvRegistrationByConference = this.conferenceService.getAvgMinMaxDesvRegistrationByConference();
+		final Double getAvgRegistrationByConference = (Double) getAvgMinMaxDesvRegistrationByConference.get(0)[0];
+		final Double getMinRegistrationByConference = (Double) getAvgMinMaxDesvRegistrationByConference.get(0)[1];
+		final Double getMaxRegistrationByConference = (Double) getAvgMinMaxDesvRegistrationByConference.get(0)[2];
+		final Double getDesvRegistrationByConference = (Double) getAvgMinMaxDesvRegistrationByConference.get(0)[3];
 
 		final List<Object[]> getAvgMinMaxDesvFeesByConference = this.conferenceService.getAvgMinMaxDesvFeesByConference();
 		final Double getAvgFeesByConference = (Double) getAvgMinMaxDesvFeesByConference.get(0)[0];
@@ -48,16 +57,33 @@ public class AdministratorController extends AbstractController {
 		final Double getMaxFeesByConference = (Double) getAvgMinMaxDesvFeesByConference.get(0)[2];
 		final Double getDesvFeesByConference = (Double) getAvgMinMaxDesvFeesByConference.get(0)[3];
 
+		final List<Object[]> getAvgMinMaxDesvDaysByConference = this.conferenceService.getAvgMinMaxDesvDaysByConference();
+		final BigDecimal getAvgDaysByConference = (BigDecimal) getAvgMinMaxDesvDaysByConference.get(0)[0];
+		final BigInteger getMinDaysByConference = (BigInteger) getAvgMinMaxDesvDaysByConference.get(0)[1];
+		final BigInteger getMaxDaysByConference = (BigInteger) getAvgMinMaxDesvDaysByConference.get(0)[2];
+		final Double getDesvDaysByConference = (Double) getAvgMinMaxDesvDaysByConference.get(0)[3];
+
 		result = new ModelAndView("administrator/dashboard");
+
+		result.addObject("getAvgSubmissionsByConference", getAvgSubmissionsByConference);
+		result.addObject("getMinSubmissionsByConference", getMinSubmissionsByConference);
+		result.addObject("getMaxSubmissionsByConference", getMaxSubmissionsByConference);
+		result.addObject("getDesvSubmissionsByConference", getDesvSubmissionsByConference);
+
+		result.addObject("getAvgRegistrationByConference", getAvgRegistrationByConference);
+		result.addObject("getMinRegistrationByConference", getMinRegistrationByConference);
+		result.addObject("getMaxRegistrationByConference", getMaxRegistrationByConference);
+		result.addObject("getDesvRegistrationByConference", getDesvRegistrationByConference);
 
 		result.addObject("getAvgFeesByConference", getAvgFeesByConference);
 		result.addObject("getMinFeesByConference", getMinFeesByConference);
 		result.addObject("getMaxFeesByConference", getMaxFeesByConference);
 		result.addObject("getDesvFeesByConference", getDesvFeesByConference);
 
-		result.addObject("getAvgSubmissionsByConference", getAvgSubmissionsByConference);
-		result.addObject("getMinSubmissionsByConference", getMinSubmissionsByConference);
-		result.addObject("getMaxSubmissionsByConference", getMaxSubmissionsByConference);
+		result.addObject("getAvgDaysByConference", getAvgDaysByConference);
+		result.addObject("getMinDaysByConference", getMinDaysByConference);
+		result.addObject("getMaxDaysByConference", getMaxDaysByConference);
+		result.addObject("getDesvDaysByConference", getDesvDaysByConference);
 
 		return result;
 	}
