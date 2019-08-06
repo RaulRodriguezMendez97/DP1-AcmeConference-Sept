@@ -31,7 +31,7 @@ public class CustomizableSystemService {
 		res.setMessageWelcomePage("");
 		res.setSpanishMessageWelcomePage("");
 		res.setTelephoneCode("");
-		res.setBrandNameCredictCard(new ArrayList<String>());
+		res.setBrandNameCreditCard(new ArrayList<String>());
 
 		return res;
 	}
@@ -71,4 +71,7 @@ public class CustomizableSystemService {
 		return this.customizableSystemRepository.getNameApp();
 	}
 
+	public Collection<String> getBrandNameCreditCard() {
+		return this.customizableSystemRepository.getCustomizableSystem().getBrandNameCreditCard();
+	}
 }

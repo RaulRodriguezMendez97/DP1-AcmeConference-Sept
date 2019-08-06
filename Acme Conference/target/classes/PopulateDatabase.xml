@@ -599,7 +599,7 @@
 		<property name="telephoneCode" value="+34" />
 		<property name="spanishMessageWelcomePage"
 			value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos." />
-			<property name="brandNameCredictCard">
+			<property name="brandNameCreditCard">
 			<list>
 				<value>VISA</value>
 				<value>MASTER</value>

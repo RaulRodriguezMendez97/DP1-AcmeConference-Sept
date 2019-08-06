@@ -32,7 +32,7 @@
 <acme:textarea code="customizable.messageEn" path="messageWelcomePage"/>
 <acme:textarea code="customizable.messageEs" path="spanishMessageWelcomePage"/>
 <acme:textbox code="customizable.code" path="telephoneCode"/>
-<acme:textarea code="customizable.brandNameCredictCard" path="brandNameCredictCard"/>
+<acme:textarea code="customizable.brandNameCredictCard" path="brandNameCreditCard"/>
 
 
 <br/>

@@ -22,7 +22,7 @@ public class CustomizableSystem extends DomainEntity {
 	private String				messageWelcomePage;
 	private String				telephoneCode;
 	private String				spanishMessageWelcomePage;
-	private Collection<String>	brandNameCredictCard;
+	private Collection<String>	brandNameCreditCard;
 
 
 	@NotBlank
@@ -95,12 +95,12 @@ public class CustomizableSystem extends DomainEntity {
 	}
 
 	@ElementCollection
-	public Collection<String> getBrandNameCredictCard() {
-		return this.brandNameCredictCard;
+	public Collection<String> getBrandNameCreditCard() {
+		return this.brandNameCreditCard;
 	}
 
-	public void setBrandNameCredictCard(final Collection<String> brandNameCredictCard) {
-		this.brandNameCredictCard = brandNameCredictCard;
+	public void setBrandNameCreditCard(final Collection<String> brandNameCreditCard) {
+		this.brandNameCreditCard = brandNameCreditCard;
 	}
 
 }

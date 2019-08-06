@@ -25,4 +25,7 @@ public interface CustomizableSystemRepository extends JpaRepository<Customizable
 	@Query("select c.nameSystem from CustomizableSystem c")
 	public String getNameApp();
 
+	@Query("select c from CustomizableSystem c")
+	public CustomizableSystem getCustomizableSystem();
+
 }
