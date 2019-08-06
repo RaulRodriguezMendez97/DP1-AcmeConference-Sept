@@ -300,24 +300,7 @@
 		<property name="name" value="OTHER" />
 		<property name="spanishName" value="OTROS" />
 	</bean>
-
-	<!-- Credit card type -->
-	<bean id="creditCardType1" class="domain.CreditCardType">
-		<property name="brandName" value="VISA"></property>
-	</bean>
-
-	<bean id="creditCardType2" class="domain.CreditCardType">
-		<property name="brandName" value="MASTER"></property>
-	</bean>
-
-	<bean id="creditCardType3" class="domain.CreditCardType">
-		<property name="brandName" value="DINNERS"></property>
-	</bean>
-
-	<bean id="creditCardType4" class="domain.CreditCardType">
-		<property name="brandName" value="AMEX"></property>
-	</bean>
-
+	
 	<!-- credit card -->
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holdName" value="nombre1"></property>
