@@ -10,11 +10,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -37,6 +39,7 @@ public class Conference extends DomainEntity {
 
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getTitle() {
 		return this.title;
 	}
@@ -47,6 +50,7 @@ public class Conference extends DomainEntity {
 
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getAcronym() {
 		return this.acronym;
 	}
@@ -57,6 +61,7 @@ public class Conference extends DomainEntity {
 
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getVenue() {
 		return this.venue;
 	}
@@ -65,6 +70,7 @@ public class Conference extends DomainEntity {
 		this.venue = venue;
 	}
 
+	@Future
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -76,6 +82,7 @@ public class Conference extends DomainEntity {
 		this.submissionDeadline = submissionDeadline;
 	}
 
+	@Future
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -87,6 +94,7 @@ public class Conference extends DomainEntity {
 		this.notificacionDeadline = notificacionDeadline;
 	}
 
+	@Future
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -98,6 +106,7 @@ public class Conference extends DomainEntity {
 		this.cameraDeadline = cameraDeadline;
 	}
 
+	@Future
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -109,6 +118,7 @@ public class Conference extends DomainEntity {
 		this.startDate = startDate;
 	}
 
+	@Future
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -122,6 +132,7 @@ public class Conference extends DomainEntity {
 
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getSummary() {
 		return this.summary;
 	}

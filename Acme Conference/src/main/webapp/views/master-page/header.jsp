@@ -30,13 +30,14 @@
 					<li><a href="topic/administrator/list.do"><spring:message code="master.page.administrator.topics" /></a></li>	
 				</ul>
 			</li>
+			<li><a href="conference/administrator/list.do"><spring:message code="master.page.conference" /></a></li>
+			
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="credit-card-type/administrator/list.do"><spring:message code="master.page.administrator.creditCardType" /></a></li>						
 				</ul>
 			</li>
-			<li><a href=""><spring:message code="master.page.administrator.conferences" /></a></li>	
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUTHOR')">

@@ -1,6 +1,7 @@
 
 package repositories;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,10 +13,14 @@ import domain.Conference;
 @Repository
 public interface ConferenceRepository extends JpaRepository<Conference, Integer> {
 
+	@Query("select c from Conference c where c.admin.id = ?1")
+	public Collection<Conference> getConferencesByAdmin(Integer idAdmin);
 	/*
 	 * @Query(value = "select c from Conference c where c.startDate < CURRENT_DATE", nativeQuery = true)
 	 * public Collection<Conference> getAllConferenceForthComing();
 	 */
+
+	//Dashboard
 
 	@Query("select avg(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)), min(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)), max(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)), sqrt(1.0*sum(1.0*(select count (s.conference) from Submission s where s.conference.id = c.id) * (select count(s.conference) from Submission s where s.conference.id = c.id)) / count(c) - avg(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)) * avg(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id))) from Conference c")
 	public List<Object[]> getAvgMinMaxDesvSubmissionsByConference();
