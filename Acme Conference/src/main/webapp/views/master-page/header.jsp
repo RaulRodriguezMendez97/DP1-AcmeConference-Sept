@@ -61,7 +61,7 @@
 					<li><a href="reviwer/create.do"><spring:message code="master.page.reviwer.register" /></a></li>
 				</ul>
 			</li>			
-			<li><a href="conference/allConference.do"><spring:message code="master.page.conference" /></a></li>
+			<li><a href="conference/list.do"><spring:message code="master.page.conference" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

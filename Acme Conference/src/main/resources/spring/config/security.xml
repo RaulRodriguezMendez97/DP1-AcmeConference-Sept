@@ -36,7 +36,10 @@
 
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
 		
-		<security:intercept-url pattern="/conference/allConference.do" access="permitAll" />
+		<security:intercept-url pattern="/conference/list.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/conference/show.do" access="isAnonymous()" />	
+		<security:intercept-url pattern="/conference/search.do" access="isAnonymous()" />	
+		
 		<security:intercept-url pattern="/author/create.do" access="permitAll" />
 		<security:intercept-url pattern="/reviwer/create.do" access="permitAll" />
 

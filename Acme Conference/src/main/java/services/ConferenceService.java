@@ -64,6 +64,26 @@ public class ConferenceService {
 		return this.conferenceRepository.getConferencesByAdmin(idAdmin);
 	}
 
+	public Collection<Conference> getConferencesInSaveMode() {
+		return this.conferenceRepository.getConferencesInSaveMode();
+	}
+
+	public Collection<Conference> getConferencesByFinder(final String keyWord) {
+		return this.conferenceRepository.getConferencesByFinder(keyWord);
+	}
+
+	public Collection<Conference> getActivesConferences() {
+		return this.conferenceRepository.getActivesConferences();
+	}
+
+	public Collection<Conference> getIncomingConferences() {
+		return this.conferenceRepository.getIncomingConferences();
+	}
+
+	public Collection<Conference> getPassConferences() {
+		return this.conferenceRepository.getPassConferences();
+	}
+
 	public Conference save(final Conference conference) {
 
 		if (conference.getId() != 0) {
