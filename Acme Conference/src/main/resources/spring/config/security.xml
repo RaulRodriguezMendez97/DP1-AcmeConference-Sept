@@ -60,6 +60,8 @@
 	 	<security:intercept-url pattern="/topic/administrator/create.do" access="hasRole('ADMIN')" /> 
 	 	<security:intercept-url pattern="/topic/administrator/delete.do" access="hasRole('ADMIN')" /> 
 	 
+	 	<security:intercept-url pattern="/submission/author/**" access="hasRole('AUTHOR')" /> 
+	 	
 	 	<security:intercept-url pattern="/message/actor/list.do" access="isAuthenticated()" />
 	 	<security:intercept-url pattern="/message/actor/send.do" access="isAuthenticated()" />
 	 	<security:intercept-url pattern="/message/actor/show.do" access="isAuthenticated()" />

@@ -29,7 +29,8 @@
 		<value>/views/topic/messages</value>
 		<value>/views/message/messages</value>
 		<value>/views/administrator/messages</value>
-		<value>/views/customizable/messages</value>		
+		<value>/views/customizable/messages</value>	
+		<value>/views/submission/messages</value>		
 		
 	</util:list>
 

@@ -31,6 +31,7 @@
 		<value>/views/message/tiles.xml</value>
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/customizable/tiles.xml</value>
+		<value>/views/submission/tiles.xml</value>
 		
 		
 		

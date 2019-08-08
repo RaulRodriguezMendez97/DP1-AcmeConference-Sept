@@ -41,7 +41,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUTHOR')">
-			<li><a href=""><spring:message code="master.page.author.submissions" /></a></li>
+			<li><a href="submission/author/list.do"><spring:message code="master.page.author.submissions" /></a></li>
 			<li><a href=""><spring:message	code="master.page.author.registrations" /></a>
 		</security:authorize>
 		
