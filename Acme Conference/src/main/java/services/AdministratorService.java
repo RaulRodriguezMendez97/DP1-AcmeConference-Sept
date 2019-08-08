@@ -12,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import forms.RegistrationFormAdmin;
 
 @Service
 @Transactional
@@ -27,6 +30,8 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 	@Autowired
 	private ActorService			actorService;
+	@Autowired
+	private Validator				validator;
 
 
 	public Administrator getAdministratorByUserAccount(final Integer userAccountId) {
@@ -109,4 +114,98 @@ public class AdministratorService {
 		return res;
 	}
 
+	public Administrator reconstruct(final RegistrationFormAdmin registrationForm, final BindingResult binding) {
+		Administrator res = new Administrator();
+
+		if (registrationForm.getId() == 0) {
+			res.setId(registrationForm.getUserAccount().getId());
+			res.setVersion(registrationForm.getVersion());
+			res.setAddress(registrationForm.getAddress());
+			res.setEmail(registrationForm.getEmail());
+
+			res.setName(registrationForm.getName());
+			res.setPhone(registrationForm.getPhone());
+			res.setPhoto(registrationForm.getPhoto());
+			res.setSurname(registrationForm.getSurname());
+
+			final Authority ad = new Authority();
+			final UserAccount user = new UserAccount();
+			user.setAuthorities(new HashSet<Authority>());
+			ad.setAuthority(Authority.ADMIN);
+			user.getAuthorities().add(ad);
+			res.setUserAccount(user);
+			user.setUsername(registrationForm.getUserAccount().getUsername());
+			user.setPassword(registrationForm.getUserAccount().getPassword());
+
+			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
+
+			if (res.getPhone().length() <= 5)
+				res.setPhone("");
+
+			if (registrationForm.getPatternPhone() == false) {
+				final String regexTelefono = "^\\+[0-9]{0,3}\\s\\([0-9]{0,3}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}|^\\+[0-9]\\ $|^$|^\\+$";
+				final Pattern patternTelefono = Pattern.compile(regexTelefono);
+				final Matcher matcherTelefono = patternTelefono.matcher(res.getPhone());
+				Assert.isTrue(matcherTelefono.find() == true, "BrotherhoodService.save -> Telefono no valido");
+			}
+
+			this.validator.validate(res, binding);
+
+		} else {
+
+			res = this.administratorRepository.findOne(registrationForm.getId());
+			final Administrator a = new Administrator();
+
+			if (registrationForm.getUserAccount().getPassword().equals("") && registrationForm.getPassword().equals(""))
+				a.setUserAccount(res.getUserAccount());
+			else {
+				final UserAccount user = registrationForm.getUserAccount();
+				final Md5PasswordEncoder encoder;
+				encoder = new Md5PasswordEncoder();
+				final String hash = encoder.encodePassword(registrationForm.getUserAccount().getPassword(), null);
+				user.setPassword(hash);
+				registrationForm.setUserAccount(user);
+
+				if (!registrationForm.getUserAccount().getPassword().equals(res.getUserAccount().getPassword())) {
+					final Md5PasswordEncoder encoder2;
+					encoder2 = new Md5PasswordEncoder();
+					final String hash2 = encoder2.encodePassword(registrationForm.getPassword(), null);
+					registrationForm.setPassword(hash2);
+
+					Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
+
+				}
+
+				a.setUserAccount(res.getUserAccount());
+				a.getUserAccount().setPassword(registrationForm.getUserAccount().getPassword());
+
+			}
+
+			a.setId(res.getId());
+			a.setVersion(res.getVersion());
+			a.setAddress(registrationForm.getAddress());
+			a.setEmail(registrationForm.getEmail());
+
+			a.setName(registrationForm.getName());
+			a.setPhone(registrationForm.getPhone());
+			a.setPhoto(registrationForm.getPhoto());
+
+			if (a.getPhone().length() <= 5)
+				a.setPhone("");
+
+			if (registrationForm.getPatternPhone() == false) {
+				final String regexTelefono = "^\\+[0-9]{0,3}\\s\\([0-9]{0,3}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}|^\\+[0-9]\\ $|^$|^\\+$";
+				final Pattern patternTelefono = Pattern.compile(regexTelefono);
+				final Matcher matcherTelefono = patternTelefono.matcher(a.getPhone());
+				Assert.isTrue(matcherTelefono.find() == true, "BrotherhoodService.save -> Telefono no valido");
+			}
+
+			a.getUserAccount().setUsername(registrationForm.getUserAccount().getUsername());
+
+			this.validator.validate(a, binding);
+			res = a;
+		}
+		return res;
+
+	}
 }
