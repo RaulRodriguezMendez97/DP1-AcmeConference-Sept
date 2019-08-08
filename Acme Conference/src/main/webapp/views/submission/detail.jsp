@@ -18,5 +18,57 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('AUTHOR')">
+<b><spring:message code="submission.ticker" /> : </b> <jstl:out value="${submission.ticker}"></jstl:out> <br/>
+<b><spring:message code="submission.moment" /> : </b> <jstl:out value="${submission.moment}"></jstl:out> <br/>
 
+<jstl:if test="${submission.status eq 0 }">
+	<b><spring:message code="submission.status" /> : </b><spring:message code="submission.status.0" /><br/>
+</jstl:if>
+<jstl:if test="${submission.status eq 1 }">
+	<b><spring:message code="submission.status" /> : </b><spring:message code="submission.status.1" /><br/>
+</jstl:if>
+<jstl:if test="${submission.status eq 2 }">
+	<b><spring:message code="submission.status" /> : </b><spring:message code="submission.status.2" /><br/>
+</jstl:if>
+
+<h3><spring:message code="submission.conference" /></h3>
+<b><spring:message code="submission.conference.title" /> : </b> <jstl:out value="${conference.title}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.acronym" /> : </b> <jstl:out value="${conference.acronym}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.venue" /> : </b> <jstl:out value="${conference.venue}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.submissionDeadline" /> : </b> <jstl:out value="${conference.submissionDeadline}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.notificacionDeadline" /> : </b> <jstl:out value="${conference.notificacionDeadline}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.cameraDeadline" /> : </b> <jstl:out value="${conference.cameraDeadline}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.startDate" /> : </b> <jstl:out value="${conference.startDate}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.endDate" /> : </b> <jstl:out value="${conference.endDate}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.summary" /> : </b> <jstl:out value="${conference.summary}"></jstl:out> <br/>
+<b><spring:message code="submission.conference.fee" /> : </b> <jstl:out value="${conference.fee}"></jstl:out> <br/>
+
+<jstl:if test="${conference.finalMode eq 0 }">
+	<b><spring:message code="submission.conference.finalMode" /> : </b><spring:message code="submission.conference.finalMode.0" /><br/>
+</jstl:if>
+<jstl:if test="${conference.finalMode eq 1 }">
+	<b><spring:message code="submission.conference.finalMode" /> : </b><spring:message code="submission.conference.finalMode.1" /><br/>
+</jstl:if>
+
+
+<h3><spring:message code="submission.reviwed" /></h3>
+<b><spring:message code="submission.reviwed.title" /> : </b> <jstl:out value="${reviwed.title}"></jstl:out> <br/>
+<b><spring:message code="submission.reviwed.summary" /> : </b> <jstl:out value="${reviwed.summary}"></jstl:out> <br/>
+<b><spring:message code="submission.reviwed.urlDocument" /> : </b> <jstl:out value="${reviwed.urlDocument}"></jstl:out> <br/>
+
+<h3><spring:message code="submission.camaraReady" /></h3>
+<jstl:if test="${empty vacio}">
+	<spring:message code="submission.camaraReady.null" /><br/>
+</jstl:if>
+<jstl:if test="${camaraReady ne null }">
+	<b><spring:message code="submission.camaraReady.title" /> : </b> <jstl:out value="${camaraReady.title}"></jstl:out> <br/>
+	<b><spring:message code="submission.camaraReady.summary" /> : </b> <jstl:out value="${camaraReady.summary}"></jstl:out> <br/>
+	<b><spring:message code="submission.camaraReady.urlDocument" /> : </b> <jstl:out value="${camaraReady.urlDocument}"></jstl:out> <br/>
+</jstl:if>
+
+
+
+
+<input type="button" name="cancel" value="<spring:message code="submission.cancel" />"
+			onclick="javascript: relativeRedir('submission/author/list.do');" />
 </security:authorize>
