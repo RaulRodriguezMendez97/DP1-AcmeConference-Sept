@@ -31,8 +31,19 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() > end_date AND final_mode = 1", nativeQuery = true)
 	public Collection<Conference> getPastConferences();
 
-	//Dashboard
+	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(submission_deadline, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
+	public Collection<Conference> getConferencesSubmissionLess5Days();
 
+	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(notificacion_deadline, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
+	public Collection<Conference> getConferencesNotificationLess5Days();
+
+	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(camera_deadline, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
+	public Collection<Conference> getConferencesCameraLess5Days();
+
+	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(start_date, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
+	public Collection<Conference> getConferencesStartLess5Days();
+
+	//Dashboard
 	@Query("select avg(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)), min(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)), max(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)), sqrt(1.0*sum(1.0*(select count (s.conference) from Submission s where s.conference.id = c.id) * (select count(s.conference) from Submission s where s.conference.id = c.id)) / count(c) - avg(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id)) * avg(1.0*(select count(s.conference) from Submission s where s.conference.id = c.id))) from Conference c")
 	public List<Object[]> getAvgMinMaxDesvSubmissionsByConference();
 
