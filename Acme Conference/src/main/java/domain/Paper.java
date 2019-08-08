@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -16,18 +15,8 @@ public class Paper extends DomainEntity {
 
 	private String	title;
 	private String	summary;
-	private int		type;
 	private String	urlDocument;
 
-
-	@Range(min = 0, max = 1)
-	public int getType() {
-		return this.type;
-	}
-
-	public void setType(final int type) {
-		this.type = type;
-	}
 
 	@URL
 	@NotNull

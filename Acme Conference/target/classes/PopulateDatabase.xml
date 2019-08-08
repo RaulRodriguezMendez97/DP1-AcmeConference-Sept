@@ -568,6 +568,7 @@
 		<property name="summary" value="resumen de la primera presentacion"></property>
 		<property name="vers" value="0"></property>
 		<property name="conference" ref="conference1"></property>
+		<property name="camaraReady" ref="camaraReady1"></property>
 	</bean>
 	<bean id="presentation2" class="domain.Presentation">
 		<property name="title" value="Titulo de la segunda presentacion"></property>
@@ -578,6 +579,7 @@
 		<property name="summary" value="resumen de la segunda presentacion"></property>
 		<property name="vers" value="0"></property>
 		<property name="conference" ref="conference2"></property>
+		<property name="camaraReady" ref="camaraReady2"></property>
 	</bean>
 	<bean id="presentation3" class="domain.Presentation">
 		<property name="title" value="Titulo de la tercera presentacion"></property>
@@ -588,6 +590,7 @@
 		<property name="summary" value="resumen de la tercera presentacion"></property>
 		<property name="vers" value="0"></property>
 		<property name="conference" ref="conference3"></property>
+		<property name="camaraReady" ref="camaraReady3"></property>
 	</bean>
 
 	<!-- CustomizableSystem -->
@@ -689,6 +692,9 @@
 		<property name="status" value="0" />
 		<property name="author" ref="author1" />
 		<property name="conference" ref="conference1" />
+		<property name="reviwed" ref="reviwed1" />
+		<property name="camaraReady" ref="camaraReady1" />
+		
 	</bean>
 	<bean id="submission2" class="domain.Submission">
 		<property name="ticker" value="ASF-1234" />
@@ -696,6 +702,8 @@
 		<property name="status" value="0" />
 		<property name="author" ref="author1" />
 		<property name="conference" ref="conference2" />
+		<property name="reviwed" ref="reviwed2" />
+		<property name="camaraReady" ref="camaraReady2" />
 	</bean>
 	<bean id="submission3" class="domain.Submission">
 		<property name="ticker" value="ASP-1235" />
@@ -703,6 +711,8 @@
 		<property name="status" value="1" />
 		<property name="author" ref="author1" />
 		<property name="conference" ref="conference3" />
+		<property name="reviwed" ref="reviwed3" />
+		<property name="camaraReady" ref="camaraReady3" />
 	</bean>
 	<bean id="submission4" class="domain.Submission">
 		<property name="ticker" value="PSP-1235" />
@@ -710,6 +720,8 @@
 		<property name="status" value="0" />
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference1" />
+		<property name="reviwed" ref="reviwed4" />
+		<property name="camaraReady" ref="camaraReady4" />
 	</bean>
 	<bean id="submission5" class="domain.Submission">
 		<property name="ticker" value="ESP-1235" />
@@ -717,6 +729,8 @@
 		<property name="status" value="1" />
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference2" />
+		<property name="reviwed" ref="reviwed5" />
+		<property name="camaraReady" ref="camaraReady5" />
 	</bean>
 	<bean id="submission6" class="domain.Submission">
 		<property name="ticker" value="ESU-1235" />
@@ -724,6 +738,7 @@
 		<property name="status" value="2" />
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference3" />
+		<property name="reviwed" ref="reviwed6" />
 	</bean>
 	<bean id="submission7" class="domain.Submission">
 		<property name="ticker" value="ELU-1235" />
@@ -731,6 +746,7 @@
 		<property name="status" value="2" />
 		<property name="author" ref="author3" />
 		<property name="conference" ref="conference4" />
+		<property name="reviwed" ref="reviwed7" />
 	</bean>
 	<bean id="submission8" class="domain.Submission">
 		<property name="ticker" value="EMU-1235" />
@@ -738,6 +754,7 @@
 		<property name="status" value="1" />
 		<property name="author" ref="author1" />
 		<property name="conference" ref="conference5" />
+		<property name="reviwed" ref="reviwed8" />
 	</bean>
 	<bean id="submission9" class="domain.Submission">
 		<property name="ticker" value="ENU-1235" />
@@ -745,6 +762,7 @@
 		<property name="status" value="2" />
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference4" />
+		<property name="reviwed" ref="reviwed9" />
 	</bean>
 
 	<!-- Report -->
@@ -903,6 +921,80 @@
 		</property>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission8" />
+	</bean>
+	
+	<!-- Reviwed -->
+	<bean id="reviwed1" class="domain.Reviwed">
+		<property name="title" value="title1" />
+		<property name="summary" value="summary1" />
+		<property name="urlDocument" value="http://urlDocument1.com" />
+	</bean>
+	<bean id="reviwed2" class="domain.Reviwed">
+		<property name="title" value="title2" />
+		<property name="summary" value="summary2" />
+		<property name="urlDocument" value="http://urlDocument2.com" />
+	</bean>
+	<bean id="reviwed3" class="domain.Reviwed">
+		<property name="title" value="title3" />
+		<property name="summary" value="summary3" />
+		<property name="urlDocument" value="http://urlDocument3.com" />
+	</bean>
+	<bean id="reviwed4" class="domain.Reviwed">
+		<property name="title" value="title4" />
+		<property name="summary" value="summary4" />
+		<property name="urlDocument" value="http://urlDocument4.com" />
+	</bean>
+	<bean id="reviwed5" class="domain.Reviwed">
+		<property name="title" value="title5" />
+		<property name="summary" value="summary5" />
+		<property name="urlDocument" value="http://urlDocument5.com" />
+	</bean>
+	<bean id="reviwed6" class="domain.Reviwed">
+		<property name="title" value="title6" />
+		<property name="summary" value="summary6" />
+		<property name="urlDocument" value="http://urlDocument6.com" />
+	</bean>
+	<bean id="reviwed7" class="domain.Reviwed">
+		<property name="title" value="title7" />
+		<property name="summary" value="summary7" />
+		<property name="urlDocument" value="http://urlDocument7.com" />
+	</bean>
+	<bean id="reviwed8" class="domain.Reviwed">
+		<property name="title" value="title8" />
+		<property name="summary" value="summary8" />
+		<property name="urlDocument" value="http://urlDocument8.com" />
+	</bean>
+	<bean id="reviwed9" class="domain.Reviwed">
+		<property name="title" value="title9" />
+		<property name="summary" value="summary9" />
+		<property name="urlDocument" value="http://urlDocument9.com" />
+	</bean>
+	
+	<!-- Camara ready -->
+	<bean id="camaraReady1" class="domain.CamaraReady">
+		<property name="title" value="titleCamaraReady1" />
+		<property name="summary" value="summaryCamaraReady1" />
+		<property name="urlDocument" value="http://urlDocumentCamaraReady1.com" />
+	</bean>
+	<bean id="camaraReady2" class="domain.CamaraReady">
+		<property name="title" value="titleCamaraReady2" />
+		<property name="summary" value="summaryCamaraReady2" />
+		<property name="urlDocument" value="http://urlDocumentCamaraReady2.com" />
+	</bean>
+	<bean id="camaraReady3" class="domain.CamaraReady">
+		<property name="title" value="titleCamaraReady3" />
+		<property name="summary" value="summaryCamaraReady3" />
+		<property name="urlDocument" value="http://urlDocumentCamaraReady3.com" />
+	</bean>
+	<bean id="camaraReady4" class="domain.CamaraReady">
+		<property name="title" value="titleCamaraReady4" />
+		<property name="summary" value="summaryCamaraReady4" />
+		<property name="urlDocument" value="http://urlDocumentCamaraReady4.com" />
+	</bean>
+	<bean id="camaraReady5" class="domain.CamaraReady">
+		<property name="title" value="titleCamaraReady5" />
+		<property name="summary" value="summaryCamaraReady5" />
+		<property name="urlDocument" value="http://urlDocumentCamaraReady5.com" />
 	</bean>
 
 
