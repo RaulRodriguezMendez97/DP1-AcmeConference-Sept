@@ -22,14 +22,14 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select c from Conference c where ((c.title like %?1% or c.venue like %?1% or c.summary like %?1%) and (c.finalMode = 1))")
 	public Collection<Conference> getConferencesByFinder(String keyWord);
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() BETWEEN start_date AND end_date AND finalMode = 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() BETWEEN start_date AND end_date AND final_mode = 1", nativeQuery = true)
 	public Collection<Conference> getActivesConferences();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() < start_date AND finalMode = 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() < start_date AND final_mode = 1", nativeQuery = true)
 	public Collection<Conference> getIncomingConferences();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() > end_date AND finalMode = 1", nativeQuery = true)
-	public Collection<Conference> getPassConferences();
+	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() > end_date AND final_mode = 1", nativeQuery = true)
+	public Collection<Conference> getPastConferences();
 
 	//Dashboard
 

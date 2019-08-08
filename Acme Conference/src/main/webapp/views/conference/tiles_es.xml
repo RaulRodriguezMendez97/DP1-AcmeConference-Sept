@@ -30,4 +30,9 @@
 		<put-attribute name="title" value="Ver conferencia" />
 		<put-attribute name="body" value="/views/conference/show.jsp" />
 	</definition>
+	
+	<definition name="conference/catalogue" extends="master.page">	
+		<put-attribute name="title" value="Catálogo de conferencias" />
+		<put-attribute name="body" value="/views/conference/catalogue.jsp" />
+	</definition>
 </tiles-definitions>

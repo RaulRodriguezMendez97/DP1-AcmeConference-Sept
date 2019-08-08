@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,18 +44,71 @@ public class ConferenceController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam final Integer idConference) {
+	@RequestMapping(value = "/incoming", method = RequestMethod.GET)
+	public ModelAndView incomingConferences() {
 		final ModelAndView result;
-		final Conference conference;
+		final Collection<Conference> conferences;
 
-		conference = this.conferenceService.findOne(idConference);
+		conferences = this.conferenceService.getIncomingConferences();
 		final String lang = LocaleContextHolder.getLocale().getLanguage();
 
-		result = new ModelAndView("conference/show");
+		result = new ModelAndView("conference/catalogue");
 
-		result.addObject("conference", conference);
+		result.addObject("conferences", conferences);
 		result.addObject("lang", lang);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/running", method = RequestMethod.GET)
+	public ModelAndView runningConferences() {
+		final ModelAndView result;
+		final Collection<Conference> conferences;
+
+		conferences = this.conferenceService.getActivesConferences();
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+		result = new ModelAndView("conference/catalogue");
+
+		result.addObject("conferences", conferences);
+		result.addObject("lang", lang);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/past", method = RequestMethod.GET)
+	public ModelAndView pastConferences() {
+		final ModelAndView result;
+		final Collection<Conference> conferences;
+
+		conferences = this.conferenceService.getPastConferences();
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+		result = new ModelAndView("conference/catalogue");
+
+		result.addObject("conferences", conferences);
+		result.addObject("lang", lang);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final Integer idConference) {
+		ModelAndView result;
+
+		try {
+			final Conference conference;
+
+			conference = this.conferenceService.findOne(idConference);
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+			Assert.notNull(conference);
+			result = new ModelAndView("conference/show");
+
+			result.addObject("conference", conference);
+			result.addObject("lang", lang);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
 
 		return result;
 	}

@@ -61,7 +61,15 @@
 					<li><a href="reviwer/create.do"><spring:message code="master.page.reviwer.register" /></a></li>
 				</ul>
 			</li>			
-			<li><a href="conference/list.do"><spring:message code="master.page.conference" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.conference" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="conference/list.do"><spring:message code="master.page.conference.all" /></a></li>
+					<li><a href="conference/incoming.do"><spring:message code="master.page.conference.incoming" /></a></li>
+					<li><a href="conference/running.do"><spring:message code="master.page.conference.running" /></a></li>
+					<li><a href="conference/past.do"><spring:message code="master.page.conference.past" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

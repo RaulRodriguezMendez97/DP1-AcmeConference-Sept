@@ -39,6 +39,10 @@
 		<security:intercept-url pattern="/conference/list.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/conference/show.do" access="isAnonymous()" />	
 		<security:intercept-url pattern="/conference/search.do" access="isAnonymous()" />	
+		<security:intercept-url pattern="/conference/incoming.do" access="isAnonymous()" />	
+		<security:intercept-url pattern="/conference/running.do" access="isAnonymous()" />	
+		<security:intercept-url pattern="/conference/past.do" access="isAnonymous()" />	
+		
 		
 		<security:intercept-url pattern="/author/create.do" access="permitAll" />
 		<security:intercept-url pattern="/reviwer/create.do" access="permitAll" />

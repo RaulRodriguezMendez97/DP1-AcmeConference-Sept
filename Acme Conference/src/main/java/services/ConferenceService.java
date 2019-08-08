@@ -80,8 +80,8 @@ public class ConferenceService {
 		return this.conferenceRepository.getIncomingConferences();
 	}
 
-	public Collection<Conference> getPassConferences() {
-		return this.conferenceRepository.getPassConferences();
+	public Collection<Conference> getPastConferences() {
+		return this.conferenceRepository.getPastConferences();
 	}
 
 	public Conference save(final Conference conference) {
@@ -111,6 +111,10 @@ public class ConferenceService {
 			conference.setAdmin(admin);
 
 			//BEFORE
+			if (conference.getSubmissionDeadline() != null)
+				if (conference.getSubmissionDeadline().before(new Date()))
+					binding.rejectValue("submissionDeadline", "FutureDate");
+
 			if (conference.getSubmissionDeadline() != null && conference.getNotificacionDeadline() != null)
 				if (!conference.getSubmissionDeadline().before(conference.getNotificacionDeadline()))
 					binding.rejectValue("notificacionDeadline", "NoDateNotification");
@@ -151,6 +155,10 @@ public class ConferenceService {
 			copy.setFinalMode(conference.getFinalMode());
 
 			//BEFORE
+			if (conference.getSubmissionDeadline() != null)
+				if (conference.getSubmissionDeadline().before(new Date()))
+					binding.rejectValue("submissionDeadline", "FutureDate");
+
 			if (conference.getSubmissionDeadline() != null && conference.getNotificacionDeadline() != null)
 				if (!conference.getSubmissionDeadline().before(conference.getNotificacionDeadline()))
 					binding.rejectValue("notificacionDeadline", "NoDateNotification");
