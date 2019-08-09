@@ -1,4 +1,4 @@
-<%--
+ <%--
  * header.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
@@ -31,6 +31,7 @@
 				</ul>
 			</li>
 			<li><a href="conference/administrator/list.do"><spring:message code="master.page.conference" /></a></li>
+			<li><a href="submission/administrator/list.do"><spring:message code="master.page.submission" /></a></li>
 			
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
 				<ul>

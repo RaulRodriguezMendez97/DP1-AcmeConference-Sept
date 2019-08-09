@@ -11,18 +11,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import security.UserAccount;
+import services.AuthorService;
 import services.CamaraReadyService;
 import services.ConferenceService;
 import services.ReviwedService;
 import services.SubmissionService;
-import domain.CamaraReady;
+import domain.Author;
 import domain.Conference;
 import domain.Reviwed;
 import domain.Submission;
 
 @Controller
 @RequestMapping("/submission/author")
-public class SubmissionAuthorController extends AbstractController {
+public class SubmissionAuthorAdministratorController extends AbstractController {
 
 	@Autowired
 	private SubmissionService	submissionService;
@@ -32,12 +35,16 @@ public class SubmissionAuthorController extends AbstractController {
 	private ReviwedService		reviwedService;
 	@Autowired
 	private CamaraReadyService	camaraReadyService;
+	@Autowired
+	private AuthorService		authorService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Submission> submissions = this.submissionService.findAll();
+		final UserAccount user = LoginService.getPrincipal();
+		final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAuthor(a.getId());
 
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
@@ -52,7 +59,7 @@ public class SubmissionAuthorController extends AbstractController {
 			final Submission submission = this.submissionService.findOne(submissionId);
 			final Conference conference = this.conferenceService.findOne(submission.getConference().getId());
 			final Reviwed reviwed = this.reviwedService.findOne(submission.getReviwed().getId());
-			final CamaraReady camaraReady = this.camaraReadyService.findOne(submission.getCamaraReady().getId());
+			//final CamaraReady camaraReady = this.camaraReadyService.findOne(submission.getCamaraReady().getId());
 			Assert.notNull(submission);
 			Assert.notNull(conference);
 			Assert.notNull(reviwed);
@@ -61,7 +68,7 @@ public class SubmissionAuthorController extends AbstractController {
 			result.addObject("submission", submission);
 			result.addObject("conference", conference);
 			result.addObject("reviwed", reviwed);
-			result.addObject("camaraReady", camaraReady);
+			//result.addObject("camaraReady", camaraReady);
 			//result.addObject("vacio", vacio);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../");
