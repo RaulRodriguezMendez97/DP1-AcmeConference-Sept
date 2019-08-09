@@ -55,13 +55,18 @@ public class ConferenceAdministratorController extends AbstractController {
 
 		try {
 			final Conference conference = this.conferenceService.findOne(idConference);
+			if (conference.getFinalMode() == 0) {
+				final UserAccount user = LoginService.getPrincipal();
+				final Actor a = this.actorService.getActorByUserAccount(user.getId());
+				Assert.isTrue(conference.getAdmin().equals(a));
+			}
 
 			final String lang = LocaleContextHolder.getLocale().getLanguage();
 			result = new ModelAndView("conference/show");
 			result.addObject("conference", conference);
 			result.addObject("lang", lang);
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:../../");
 		}
 		return result;
 	}
