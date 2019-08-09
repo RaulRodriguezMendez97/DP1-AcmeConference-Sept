@@ -30,8 +30,16 @@
 					<li><a href="topic/administrator/list.do"><spring:message code="master.page.administrator.topics" /></a></li>	
 				</ul>
 			</li>
-			<li><a href="conference/administrator/list.do"><spring:message code="master.page.conference" /></a></li>
-			
+			<li><a href="conference/administrator/list.do"><spring:message code="master.page.administrator.conferences" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.administrator.conference.list" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="conference/administrator/submission-last-5.do"><spring:message code="master.page.administrator.conference.submission.less.5" /></a></li>
+					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.notification.less.5" /></a></li>
+					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.camera.less.5" /></a></li>
+					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.start.less.5" /></a></li>
+				</ul>
+			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
 				<ul>
 					<li class="arrow"></li>

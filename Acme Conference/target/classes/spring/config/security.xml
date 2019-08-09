@@ -77,6 +77,10 @@
 		<security:intercept-url pattern="/conference/administrator/create.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/conference/administrator/edit.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/conference/administrator/show.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/conference/administrator/submission-last-5.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/conference/administrator/notification-less-5.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/conference/administrator/camera-ready-less-5.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/conference/administrator/start-less-5.do" access="hasRole('ADMIN')" /> 
 		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

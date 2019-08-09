@@ -56,6 +56,7 @@ public class ConferenceController extends AbstractController {
 
 		result.addObject("conferences", conferences);
 		result.addObject("lang", lang);
+		result.addObject("uri", "conference/incoming.do");
 
 		return result;
 	}
@@ -66,12 +67,14 @@ public class ConferenceController extends AbstractController {
 		final Collection<Conference> conferences;
 
 		conferences = this.conferenceService.getActivesConferences();
+
 		final String lang = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("conference/catalogue");
 
 		result.addObject("conferences", conferences);
 		result.addObject("lang", lang);
+		result.addObject("uri", "conference/running.do");
 
 		return result;
 	}
@@ -82,12 +85,14 @@ public class ConferenceController extends AbstractController {
 		final Collection<Conference> conferences;
 
 		conferences = this.conferenceService.getPastConferences();
+
 		final String lang = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("conference/catalogue");
 
 		result.addObject("conferences", conferences);
 		result.addObject("lang", lang);
+		result.addObject("uri", "conference/past.do");
 
 		return result;
 	}

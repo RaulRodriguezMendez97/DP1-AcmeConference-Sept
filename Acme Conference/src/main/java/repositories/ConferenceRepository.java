@@ -31,16 +31,16 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() > end_date AND final_mode = 1", nativeQuery = true)
 	public Collection<Conference> getPastConferences();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(submission_deadline, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
-	public Collection<Conference> getConferencesSubmissionLess5Days();
+	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(CURDATE(),submission_deadline) < 5 AND DATEDIFF(CURDATE(),submission_deadline)>=0) AND final_mode = 1", nativeQuery = true)
+	public Collection<Conference> getConferencesSubmissionLast5Days();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(notificacion_deadline, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(notificacion_deadline, CURDATE()) < 5 AND DATEDIFF(notificacion_deadline, CURDATE()) >=0) AND final_mode = 1", nativeQuery = true)
 	public Collection<Conference> getConferencesNotificationLess5Days();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(camera_deadline, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(camera_deadline, CURDATE()) < 5 AND DATEDIFF(camera_deadline, CURDATE()) >=0) AND final_mode = 1", nativeQuery = true)
 	public Collection<Conference> getConferencesCameraLess5Days();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where DATEDIFF(start_date, CURDATE()) < 5 AND final_mode = 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(start_date, CURDATE()) < 5 AND DATEDIFF(start_date, CURDATE()) >=0) AND final_mode = 1", nativeQuery = true)
 	public Collection<Conference> getConferencesStartLess5Days();
 
 	//Dashboard

@@ -20,7 +20,7 @@
 <security:authorize access="isAnonymous()">
 
 <display:table pagesize="5" name="conferences" id="row"
-requestURI="conference/list.do" >
+requestURI="${uri }" >
 
 	        
        	<display:column>
@@ -61,4 +61,51 @@ requestURI="conference/list.do" >
 
 </display:table>
 
+</security:authorize>
+
+
+<security:authorize access="hasRole('ADMIN')">
+
+<display:table pagesize="5" name="conferences" id="row"
+requestURI="${uri }" >
+
+	        
+       	<display:column>
+	  		 <a href="conference/administrator/show.do?idConference=${row.id}"><spring:message code="conference.show" /></a> 
+    	</display:column>
+
+	    <display:column  titleKey="conference.title" >
+	      <jstl:out value="${row.title}"></jstl:out>
+        </display:column>
+        
+       	<display:column  titleKey="conference.venue" >
+	      <jstl:out value="${row.venue}"></jstl:out>
+        </display:column>
+        
+        <jstl:choose>
+			<jstl:when test="${lang eq 'en'}">
+				<display:column property="startDate" titleKey="conference.startDate" format="{0,date,yy/MM/dd hh:mm}"  />
+			</jstl:when>
+		
+			<jstl:otherwise>
+				<display:column property="startDate" titleKey="conference.startDate" format="{0,date,dd-MM-yy hh:mm}"  />
+			</jstl:otherwise>
+		</jstl:choose>
+		
+		<jstl:choose>
+			<jstl:when test="${lang eq 'en'}">
+				<display:column property="endDate" titleKey="conference.endDate" format="{0,date,yy/MM/dd hh:mm}"  />
+			</jstl:when>
+		
+			<jstl:otherwise>
+				<display:column property="endDate" titleKey="conference.endDate" format="{0,date,dd-MM-yy hh:mm}"  />
+			</jstl:otherwise>
+		</jstl:choose>
+		
+		<display:column  titleKey="conference.fee" >
+	      <jstl:out value="${row.fee}"></jstl:out>
+        </display:column>
+    
+
+</display:table>
 </security:authorize>

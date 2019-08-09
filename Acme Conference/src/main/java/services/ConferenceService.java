@@ -84,6 +84,22 @@ public class ConferenceService {
 		return this.conferenceRepository.getPastConferences();
 	}
 
+	public Collection<Conference> getConferencesSubmissionLast5Days() {
+		return this.conferenceRepository.getConferencesSubmissionLast5Days();
+	}
+
+	public Collection<Conference> getConferencesNotificationLess5Days() {
+		return this.conferenceRepository.getConferencesNotificationLess5Days();
+	}
+
+	public Collection<Conference> getConferencesCameraLess5Days() {
+		return this.conferenceRepository.getConferencesCameraLess5Days();
+	}
+
+	public Collection<Conference> getConferencesStartLess5Days() {
+		return this.conferenceRepository.getConferencesStartLess5Days();
+	}
+
 	public Conference save(final Conference conference) {
 
 		if (conference.getId() != 0) {

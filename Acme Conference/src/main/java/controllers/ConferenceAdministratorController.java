@@ -55,9 +55,7 @@ public class ConferenceAdministratorController extends AbstractController {
 
 		try {
 			final Conference conference = this.conferenceService.findOne(idConference);
-			final UserAccount user = LoginService.getPrincipal();
-			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-			Assert.isTrue(conference.getAdmin() == a);
+
 			final String lang = LocaleContextHolder.getLocale().getLanguage();
 			result = new ModelAndView("conference/show");
 			result.addObject("conference", conference);
@@ -118,4 +116,67 @@ public class ConferenceAdministratorController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/submission-last-5", method = RequestMethod.GET)
+	public ModelAndView listConferencesSubmissionLast5Days() {
+		final ModelAndView result;
+
+		final Collection<Conference> conferences = this.conferenceService.getConferencesSubmissionLast5Days();
+
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+		result = new ModelAndView("conference/catalogue");
+		result.addObject("conferences", conferences);
+		result.addObject("lang", lang);
+		result.addObject("uri", "conference/administrator/submission-last-5.do");
+		return result;
+
+	}
+
+	@RequestMapping(value = "/notification-less-5", method = RequestMethod.GET)
+	public ModelAndView listConferencesNotificationLess5Days() {
+		final ModelAndView result;
+
+		final Collection<Conference> conferences = this.conferenceService.getConferencesNotificationLess5Days();
+
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+		result = new ModelAndView("conference/catalogue");
+		result.addObject("conferences", conferences);
+		result.addObject("lang", lang);
+		result.addObject("uri", "conference/administrator/notification-less-5.do");
+		return result;
+
+	}
+
+	@RequestMapping(value = "/camera-ready-less-5", method = RequestMethod.GET)
+	public ModelAndView listConferencesCameraReadyLess5Days() {
+		final ModelAndView result;
+
+		final Collection<Conference> conferences = this.conferenceService.getConferencesCameraLess5Days();
+
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+		result = new ModelAndView("conference/catalogue");
+		result.addObject("conferences", conferences);
+		result.addObject("lang", lang);
+		result.addObject("uri", "conference/administrator/camera-ready-less-5.do");
+		return result;
+
+	}
+
+	@RequestMapping(value = "/start-less-5", method = RequestMethod.GET)
+	public ModelAndView listConferencesStartLess5Days() {
+		final ModelAndView result;
+
+		final Collection<Conference> conferences = this.conferenceService.getConferencesStartLess5Days();
+
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+		result = new ModelAndView("conference/catalogue");
+		result.addObject("conferences", conferences);
+		result.addObject("lang", lang);
+		result.addObject("uri", "conference/administrator/start-less-5.do");
+		return result;
+
+	}
 }
