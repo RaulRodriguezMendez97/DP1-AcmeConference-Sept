@@ -1,4 +1,4 @@
-<%--
+ <%--
  * header.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
@@ -40,6 +40,10 @@
 					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.start.less.5" /></a></li>
 				</ul>
 			</li>
+
+			<li><a href="submission/administrator/list.do"><spring:message code="master.page.submission" /></a></li>
+			
+
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
 				<ul>
 					<li class="arrow"></li>

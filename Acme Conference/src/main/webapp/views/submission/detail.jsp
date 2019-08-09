@@ -57,13 +57,13 @@
 <b><spring:message code="submission.reviwed.urlDocument" /> : </b> <jstl:out value="${reviwed.urlDocument}"></jstl:out> <br/>
 
 <h3><spring:message code="submission.camaraReady" /></h3>
-<jstl:if test="${empty vacio}">
+<jstl:if test="${submission.camaraReady eq null}">
 	<spring:message code="submission.camaraReady.null" /><br/>
 </jstl:if>
-<jstl:if test="${camaraReady ne null }">
-	<b><spring:message code="submission.camaraReady.title" /> : </b> <jstl:out value="${camaraReady.title}"></jstl:out> <br/>
-	<b><spring:message code="submission.camaraReady.summary" /> : </b> <jstl:out value="${camaraReady.summary}"></jstl:out> <br/>
-	<b><spring:message code="submission.camaraReady.urlDocument" /> : </b> <jstl:out value="${camaraReady.urlDocument}"></jstl:out> <br/>
+<jstl:if test="${submission.camaraReady ne null }">
+	<b><spring:message code="submission.camaraReady.title" /> : </b> <jstl:out value="${submission.camaraReady.title}"></jstl:out> <br/>
+	<b><spring:message code="submission.camaraReady.summary" /> : </b> <jstl:out value="${submission.camaraReady.summary}"></jstl:out> <br/>
+	<b><spring:message code="submission.camaraReady.urlDocument" /> : </b> <jstl:out value="${submission.camaraReady.urlDocument}"></jstl:out> <br/>
 </jstl:if>
 
 
