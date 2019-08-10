@@ -28,7 +28,7 @@ public class SubmissionService {
 
 	public Submission create() {
 		final Submission submission = new Submission();
-		submission.setStatus(0);
+		submission.setStatus(0);//UNDER REVIEW
 		submission.setAuthor(new Author());
 		submission.setCamaraReady(new CamaraReady());
 		submission.setConference(new Conference());
