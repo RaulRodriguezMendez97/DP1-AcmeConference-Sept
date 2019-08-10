@@ -34,6 +34,8 @@
 		<bean class="converters.StringToAdministratorConverter" />
 		<bean class="converters.AdministratorToStringConverter" />
 		
+		<bean class="converters.StringToSubmissionConverter" />
+		<bean class="converters.SubmissionToStringConverter" />
 				
 				
 	</util:list>

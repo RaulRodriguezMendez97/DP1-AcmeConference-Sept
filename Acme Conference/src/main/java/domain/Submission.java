@@ -30,10 +30,10 @@ public class Submission extends DomainEntity {
 	private Date				moment;
 	private int					status;
 	private Author				author;
-	private Conference			conference;
-	private Collection<Reviwer>	reviwers;
-	private Reviwed				reviwed;
-	private CamaraReady			camaraReady;
+	private Conference			conference;	//1 Obligatoriamente
+	private Collection<Reviwer>	reviwers;		// Puede estar vacio
+	private Reviwed				reviwed;		//1 Obligatoriamente
+	private CamaraReady			camaraReady;	// 0 o 1
 
 
 	@Valid
