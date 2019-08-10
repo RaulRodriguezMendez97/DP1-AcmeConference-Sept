@@ -79,7 +79,5 @@
 
 
 
-
-<input type="button" name="cancel" value="<spring:message code="submission.cancel" />"
-			onclick="javascript: relativeRedir('submission/author/list.do');" />
+<acme:cancel url="submission/author/list.do" code="submission.cancel"/>
 </security:authorize>

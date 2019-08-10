@@ -59,7 +59,6 @@ public class SubmissionAuthorAdministratorController extends AbstractController 
 			final Submission submission = this.submissionService.findOne(submissionId);
 			final Conference conference = this.conferenceService.findOne(submission.getConference().getId());
 			final Reviwed reviwed = this.reviwedService.findOne(submission.getReviwed().getId());
-			//final CamaraReady camaraReady = this.camaraReadyService.findOne(submission.getCamaraReady().getId());
 			Assert.notNull(submission);
 			Assert.notNull(conference);
 			Assert.notNull(reviwed);
@@ -68,11 +67,27 @@ public class SubmissionAuthorAdministratorController extends AbstractController 
 			result.addObject("submission", submission);
 			result.addObject("conference", conference);
 			result.addObject("reviwed", reviwed);
-			//result.addObject("camaraReady", camaraReady);
-			//result.addObject("vacio", vacio);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../");
 		}
 		return result;
 	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView result;
+		final Submission submission;
+		final Collection<Conference> conferences;
+		//final UserAccount user = LoginService.getPrincipal();
+
+		conferences = this.conferenceService.findAll();
+		submission = this.submissionService.create();
+		Assert.notNull(submission);
+
+		result = new ModelAndView("submission/edit");
+		result.addObject("submission", submission);
+		result.addObject("conferences", conferences);
+		return result;
+	}
+
 }

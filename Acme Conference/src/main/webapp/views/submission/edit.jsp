@@ -18,15 +18,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('AUTHOR')">
-<display:table pagesize="5" name="submissions" id="row"
-requestURI="submission/author/list.do" >
-<display:column>
-	  		 <a href="submission/author/detail.do?submissionId=${row.id}"><spring:message code="submission.details" /></a> 
-    	</display:column>
-<display:column property="moment" titleKey="submission.moment"/>
-<display:column property="status" titleKey="submission.status"/>
-</display:table>
 
-<input type="button" name="create" value="<spring:message code="submission.create" />"
-			onclick="javascript: relativeRedir('submission/author/create.do');" /><br>
+
+<acme:cancel url="submission/author/list.do" code="submission.cancel"/>
 </security:authorize>
