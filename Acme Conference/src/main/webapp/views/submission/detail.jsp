@@ -66,6 +66,17 @@
 	<b><spring:message code="submission.camaraReady.urlDocument" /> : </b> <jstl:out value="${submission.camaraReady.urlDocument}"></jstl:out> <br/>
 </jstl:if>
 
+<h3><spring:message code="submission.reviwers" /></h3>
+<jstl:if test="${empty submission.reviwers}">
+	<spring:message code="submission.reviwers.null" /><br/>
+</jstl:if>
+
+<jstl:if test="${submission.reviwers ne null }">
+	<jstl:forEach var="reviwer" items="${submission.reviwers}">
+		<b><spring:message code="submission.reviwers.reviwer" /> : </b> <jstl:out value="${reviwer.name}, ${reviwer.email}"></jstl:out> <br/>
+	</jstl:forEach>
+</jstl:if>
+
 
 
 

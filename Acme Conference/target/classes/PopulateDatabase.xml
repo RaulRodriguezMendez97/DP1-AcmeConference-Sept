@@ -694,6 +694,13 @@
 		<property name="conference" ref="conference1" />
 		<property name="reviwed" ref="reviwed1" />
 		<property name="camaraReady" ref="camaraReady1" />
+		<property name="reviwers">
+			<list>
+				<ref bean="reviwer1" />
+				<ref bean="reviwer2" />
+			</list>
+		
+		</property>
 		
 	</bean>
 	<bean id="submission2" class="domain.Submission">
