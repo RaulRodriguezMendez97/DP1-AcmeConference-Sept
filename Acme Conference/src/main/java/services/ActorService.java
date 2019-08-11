@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,7 @@ import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Conference;
 
 @Service
 @Transactional
@@ -57,6 +59,10 @@ public class ActorService {
 
 	public List<String> getEmails() {
 		return this.actorRepository.getEmails();
+	}
+
+	public Collection<Actor> getAuthorWithSubmission(final Conference conference) {
+		return this.actorRepository.getAuthorWithSubmission(conference);
 	}
 
 }

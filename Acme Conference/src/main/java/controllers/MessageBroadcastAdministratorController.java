@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AuthorService;
 import services.ConferenceService;
 import services.MessageBoxService;
 import services.MessageService;
 import services.TopicService;
+import domain.Actor;
 import domain.Conference;
 import domain.Message;
 import domain.Topic;
@@ -40,6 +42,9 @@ public class MessageBroadcastAdministratorController extends AbstractController 
 	@Autowired
 	private ConferenceService	conferenceService;
 
+	@Autowired
+	private AuthorService		authorService;
+
 
 	@RequestMapping(value = "/send", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -61,20 +66,31 @@ public class MessageBroadcastAdministratorController extends AbstractController 
 	public ModelAndView edit(@ModelAttribute("mensaje") final MessageBroadcastForm mensaje, final BindingResult binding) {
 		ModelAndView result;
 
-		final Message m = this.messageService.reconstructBroadcast(mensaje, binding);
-		if (!binding.hasErrors()) {
-			this.messageService.save(m);
-			result = new ModelAndView("redirect:../../");
-		} else {
+		try {
+			final Message m = this.messageService.reconstructBroadcast(mensaje, binding);
+			if (!binding.hasErrors()) {
+				final Message saved = this.messageService.save(m);
+				final Collection<Actor> actors = this.actorService.getAuthorWithSubmission(mensaje.getConference());
+				this.messageService.sendBroadcast(actors, saved);
+				result = new ModelAndView("redirect:../../message/actor/list.do");
+			} else {
+				final Collection<Topic> topics = this.topicService.findAll();
+				final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
+				result = new ModelAndView("mensaje/edit-broadcast");
+				result.addObject("mensaje", mensaje);
+				result.addObject("topics", topics);
+				result.addObject("conferences", conferences);
+			}
+		} catch (final Exception e) {
 			final Collection<Topic> topics = this.topicService.findAll();
 			final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
 			result = new ModelAndView("mensaje/edit-broadcast");
 			result.addObject("mensaje", mensaje);
 			result.addObject("topics", topics);
 			result.addObject("conferences", conferences);
+			result.addObject("exception", e);
 		}
 
 		return result;
 	}
-
 }

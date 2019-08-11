@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,7 +17,6 @@ import repositories.AuthorRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Author;
-import domain.Conference;
 import domain.Paper;
 
 @Service
@@ -93,10 +91,6 @@ public class AuthorService {
 		}
 		res = this.authorRepository.save(a);
 		return res;
-	}
-
-	public Collection<Author> getAuthorWithSubmission(final Conference conference) {
-		return this.authorRepository.getAuthorWithSubmission(conference);
 	}
 
 }
