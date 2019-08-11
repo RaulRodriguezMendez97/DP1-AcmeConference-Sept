@@ -106,11 +106,12 @@ public class MessageActorController extends AbstractController {
 		try {
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+			final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
 
 			final Message mensaje = this.messageService.findOne(idMessage);
 			final String lang = LocaleContextHolder.getLocale().getLanguage();
 
-			Assert.isTrue(mensaje.getSender() == a || mensaje.getReceiver() == a);
+			Assert.isTrue(messageBox.getMessages().contains(mensaje));
 
 			result = new ModelAndView("mensaje/show");
 			result.addObject("mensaje", mensaje);
@@ -128,10 +129,11 @@ public class MessageActorController extends AbstractController {
 		try {
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+			final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
 
 			final Message mensaje = this.messageService.findOne(idMessage);
 
-			Assert.isTrue(mensaje.getSender() == a || mensaje.getReceiver() == a);
+			Assert.isTrue(messageBox.getMessages().contains(mensaje));
 			this.messageService.delete(mensaje);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Exception e) {

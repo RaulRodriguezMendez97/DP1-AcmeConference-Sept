@@ -22,6 +22,7 @@ import domain.Actor;
 import domain.Message;
 import domain.MessageBox;
 import domain.Topic;
+import forms.MessageBroadcastForm;
 
 @Service
 @Transactional
@@ -74,13 +75,12 @@ public class MessageService {
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 		final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
 
-		Assert.isTrue(message.getSender() == a || message.getReceiver() == a);
+		Assert.isTrue(messageBox.getMessages().contains(message));
 
 		final Collection<Message> mensajes = messageBox.getMessages();
 		mensajes.remove(message);
 		this.messageBoxService.save(messageBox);
 	}
-
 	//Métodos auxiliares
 
 	public Message reconstruct(final Message message, final BindingResult binding) {
@@ -143,4 +143,38 @@ public class MessageService {
 
 		return res;
 	}
+
+	//----BROADCAST----
+	//RECONSTRUCT BROADCAST
+	public Message reconstructBroadcast(final MessageBroadcastForm message, final BindingResult binding) {
+		final Message res = new Message();
+
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor sender = this.actorService.getActorByUserAccount(user.getId());
+
+		res.setSender(sender);
+		res.setMoment(this.fechaSumada());
+		res.setEmailReceiver("");
+		res.setReceiver(null);
+		res.setTopic(message.getTopic());
+		res.setBody(message.getBody());
+		res.setSubject(message.getSubject());
+
+		if (message.getConference() == null)
+			binding.rejectValue("conference", "NoConference");
+
+		this.validator.validate(res, binding);
+		return res;
+	}
+
+	//SEND BROADCAST
+	public void sendBroadcast(final Collection<Actor> actors, final Message message) {
+		for (final Actor a : actors) {
+			final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
+			messageBox.getMessages().add(message);
+			this.messageBoxService.save(messageBox);
+		}
+
+	}
+	//----BROADCAST----
 }

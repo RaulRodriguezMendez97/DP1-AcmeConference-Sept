@@ -27,7 +27,9 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/create.do"><spring:message code="master.page.administrator.action.1" /></a></li>
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
-					<li><a href="topic/administrator/list.do"><spring:message code="master.page.administrator.topics" /></a></li>	
+					<li><a href="topic/administrator/list.do"><spring:message code="master.page.administrator.topics" /></a></li>
+					<li><a href="message-broadcast/administrator/send.do"><spring:message code="master.page.administrator.broadcast" /></a></li>
+	
 				</ul>
 			</li>
 			<li><a href="conference/administrator/list.do"><spring:message code="master.page.administrator.conferences" /></a></li>
@@ -42,14 +44,6 @@
 			</li>
 
 			<li><a href="submission/administrator/list.do"><spring:message code="master.page.submission" /></a></li>
-			
-
-			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="credit-card-type/administrator/list.do"><spring:message code="master.page.administrator.creditCardType" /></a></li>						
-				</ul>
-			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUTHOR')">
