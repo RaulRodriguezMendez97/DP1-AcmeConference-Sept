@@ -24,6 +24,7 @@ import domain.Conference;
 import domain.Reviwed;
 import domain.Reviwer;
 import domain.Submission;
+import forms.SubmissionReviwedForm;
 
 @Controller
 @RequestMapping("/submission")
@@ -80,16 +81,15 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/author/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-		final Submission submission;
+		SubmissionReviwedForm submissionReviwedForm = new SubmissionReviwedForm();
 		final Collection<Conference> conferences;
-		//final UserAccount user = LoginService.getPrincipal();
 
 		conferences = this.conferenceService.findAll();
-		submission = this.submissionService.create();
-		Assert.notNull(submission);
+		submissionReviwedForm = submissionReviwedForm.create();
+		Assert.notNull(submissionReviwedForm);
 
 		result = new ModelAndView("submission/edit");
-		result.addObject("submission", submission);
+		result.addObject("submissionReviwedForm", submissionReviwedForm);
 		result.addObject("conferences", conferences);
 		return result;
 	}
