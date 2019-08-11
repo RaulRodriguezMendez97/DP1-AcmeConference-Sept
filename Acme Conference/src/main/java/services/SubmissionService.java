@@ -69,6 +69,10 @@ public class SubmissionService {
 		return this.submissionRepository.getSubmissionByAdministratorStatus2(adminId);
 	}
 
+	public Collection<Submission> getSubmissionByReviwer(final Integer reviwerId) {
+		return this.submissionRepository.getSubmissionByReviwers(reviwerId);
+	}
+
 	//RECONSTRUCT
 	/*
 	 * public Submission reconstruct(final Submission food, final BindingResult binding) {

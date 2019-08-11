@@ -31,3 +31,22 @@ requestURI="submission/author/list.do" >
 <input type="button" name="create" value="<spring:message code="submission.create" />"
 			onclick="javascript: relativeRedir('submission/author/create.do');" /><br>
 </security:authorize>
+
+
+
+
+<security:authorize access="hasRole('REVIWER')">
+<display:table pagesize="5" name="submissions" id="row"
+requestURI="submission/reviwer/list.do" >
+
+	<display:column property="moment" titleKey="submission.moment"/>
+	<display:column property="status" titleKey="submission.status"/>
+	<display:column property="conference.title" titleKey="submission.conference.table"/>
+
+	<display:column>
+		<a href="report/reviwer/list.do?submissionId=${row.id}"><spring:message code="submission.reviwer.report" /></a> 
+	</display:column>
+
+</display:table>
+
+</security:authorize>

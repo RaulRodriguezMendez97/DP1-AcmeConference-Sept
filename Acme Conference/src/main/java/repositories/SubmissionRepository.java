@@ -24,4 +24,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 	@Query("select s from Submission s where s.conference.admin=?1 and s.status=2")
 	public Collection<Submission> getSubmissionByAdministratorStatus2(Integer adminId);
 
+	@Query("select s from Submission s where ?1 member of s.reviwers")
+	public Collection<Submission> getSubmissionByReviwers(Integer reviwerId);
+
 }
