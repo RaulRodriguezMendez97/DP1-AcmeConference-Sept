@@ -22,4 +22,6 @@ requestURI="report/reviwer/list.do" >
 
 </display:table>
 <acme:cancel url="submission/reviwer/list.do" code="report.cancel"/>
+<input type="button" name="create" value="<spring:message code="report.create" />"
+			onclick="javascript: relativeRedir('report/reviwer/create.do?submissionId=${submissionId}');" /><br>
 </security:authorize>
