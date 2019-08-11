@@ -711,6 +711,13 @@
 		<property name="conference" ref="conference2" />
 		<property name="reviwed" ref="reviwed2" />
 		<property name="camaraReady" ref="camaraReady2" />
+		<property name="reviwers">
+			<list>
+				<ref bean="reviwer1" />
+
+			</list>
+		
+		</property>
 	</bean>
 	<bean id="submission3" class="domain.Submission">
 		<property name="ticker" value="ASP-1235" />

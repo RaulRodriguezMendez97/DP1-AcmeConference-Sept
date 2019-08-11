@@ -17,15 +17,17 @@ import services.AuthorService;
 import services.CamaraReadyService;
 import services.ConferenceService;
 import services.ReviwedService;
+import services.ReviwerService;
 import services.SubmissionService;
 import domain.Author;
 import domain.Conference;
 import domain.Reviwed;
+import domain.Reviwer;
 import domain.Submission;
 
 @Controller
-@RequestMapping("/submission/author")
-public class SubmissionAuthorAdministratorController extends AbstractController {
+@RequestMapping("/submission")
+public class SubmissionAuthorAdministratorReviwerController extends AbstractController {
 
 	@Autowired
 	private SubmissionService	submissionService;
@@ -37,10 +39,12 @@ public class SubmissionAuthorAdministratorController extends AbstractController 
 	private CamaraReadyService	camaraReadyService;
 	@Autowired
 	private AuthorService		authorService;
+	@Autowired
+	private ReviwerService		reviwerService;
 
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	@RequestMapping(value = "/author/list", method = RequestMethod.GET)
+	public ModelAndView listAuthor() {
 		final ModelAndView result;
 		final UserAccount user = LoginService.getPrincipal();
 		final Author a = this.authorService.getAuthorByUserAccount(user.getId());
@@ -51,7 +55,7 @@ public class SubmissionAuthorAdministratorController extends AbstractController 
 		return result;
 	}
 
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	@RequestMapping(value = "/author/detail", method = RequestMethod.GET)
 	public ModelAndView detail(@RequestParam final Integer submissionId) {
 		ModelAndView result;
 		//final Collection<String> vacio = new HashSet<>();
@@ -73,7 +77,7 @@ public class SubmissionAuthorAdministratorController extends AbstractController 
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/author/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
 		final Submission submission;
@@ -87,6 +91,18 @@ public class SubmissionAuthorAdministratorController extends AbstractController 
 		result = new ModelAndView("submission/edit");
 		result.addObject("submission", submission);
 		result.addObject("conferences", conferences);
+		return result;
+	}
+
+	@RequestMapping(value = "/reviwer/list", method = RequestMethod.GET)
+	public ModelAndView listReviwer() {
+		final ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final Reviwer r = this.reviwerService.getReviwerByUserAccount(user.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByReviwer(r.getId());
+
+		result = new ModelAndView("submission/list");
+		result.addObject("submissions", submissions);
 		return result;
 	}
 

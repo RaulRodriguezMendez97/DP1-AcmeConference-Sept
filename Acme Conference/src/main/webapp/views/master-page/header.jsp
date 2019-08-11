@@ -52,10 +52,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('REVIWER')">
-				
-					<li class="arrow"></li>
-					<li><a href="complaint/referee/list.do"><spring:message code="master.page.referee.complaint" /></a></li>
-				
+			<li><a href="submission/reviwer/list.do"><spring:message code="master.page.reviwer.submissions" /></a></li>		
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
