@@ -100,6 +100,9 @@ public class ConferenceService {
 		return this.conferenceRepository.getConferencesStartLess5Days();
 	}
 
+	public Collection<Conference> getConferencesSubmissionDeadlinePosteriorNow() {
+		return this.conferenceRepository.getConferencesSubmissionDeadLinePosteriorNow();
+	}
 	public Conference save(final Conference conference) {
 
 		if (conference.getId() != 0) {

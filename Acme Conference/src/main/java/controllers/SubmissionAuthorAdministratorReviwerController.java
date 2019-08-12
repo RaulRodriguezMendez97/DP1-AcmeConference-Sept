@@ -86,7 +86,8 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		SubmissionReviwedForm submissionReviwedForm = new SubmissionReviwedForm();
 		final Collection<Conference> conferences;
 
-		conferences = this.conferenceService.findAll();
+		//conferences = this.conferenceService.findAll();
+		conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 		submissionReviwedForm = submissionReviwedForm.create();
 		Assert.notNull(submissionReviwedForm);
 
@@ -114,14 +115,16 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 				result = new ModelAndView("redirect:list.do");
 			} else {
 				final Collection<Conference> conferences;
-				conferences = this.conferenceService.findAll();
+				//conferences = this.conferenceService.findAll();
+				conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 				result = new ModelAndView("submission/edit");
 				result.addObject("submissionReviwedForm", submissionReviwedForm);
 				result.addObject("conferences", conferences);
 			}
 		} catch (final Exception e) {
 			final Collection<Conference> conferences;
-			conferences = this.conferenceService.findAll();
+			//conferences = this.conferenceService.findAll();
+			conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 			result = new ModelAndView("submission/edit");
 			result.addObject("exception", e);
 			result.addObject("submissionReviwedForm", submissionReviwedForm);
