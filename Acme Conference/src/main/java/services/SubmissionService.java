@@ -9,15 +9,20 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.SubmissionRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Author;
 import domain.CamaraReady;
 import domain.Conference;
 import domain.Reviwed;
 import domain.Reviwer;
 import domain.Submission;
+import forms.SubmissionReviwedForm;
 
 @Service
 @Transactional
@@ -52,6 +57,13 @@ public class SubmissionService {
 		return this.submissionRepository.findAll();
 	}
 
+	public Submission save(final Submission submission) {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
+		final Submission submissionSave = this.submissionRepository.save(submission);
+		return submissionSave;
+	}
+
 	public Collection<Submission> getSubmissionByAuthor(final Integer authorId) {
 		return this.submissionRepository.getSubmissionByAuthor(authorId);
 	}
@@ -75,13 +87,48 @@ public class SubmissionService {
 
 	//RECONSTRUCT
 
-	//	public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
-	//		Submission res = new Submission();
-	//
-	//		if (submissionReviwedForm.getId() == 0) {
-	//			
-	//		}	
-	//	}
+	public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
+		final Submission res = new Submission();
+		final Reviwed reviwed = new Reviwed();
+
+		if (submissionReviwedForm.getId() == 0) {
+			final UserAccount user = LoginService.getPrincipal();
+			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+			//			res.setId(submissionReviwedForm.getId());
+			//			res.setVersion(submissionReviwedForm.getVersion());
+			res.setConference(submissionReviwedForm.getConference());
+			res.setMoment(new Date());
+			res.setAuthor(a);
+			res.setStatus(0);
+			res.setTicker(SubmissionService.generarTicker());
+			reviwed.setSummary(submissionReviwedForm.getSummary());
+			reviwed.setTitle(submissionReviwedForm.getTitle());
+			reviwed.setUrlDocument(submissionReviwedForm.getUrlDocument());
+			res.setReviwed(reviwed);
+			res.setCamaraReady(new CamaraReady());
+			res.setReviwers(new HashSet<Reviwer>());
+			//		} else {
+			//			res = this.submissionRepository.findOne(submissionReviwedForm.getId());
+			//			final Submission p = new Submission();
+			//			p.setId(res.getId());
+			//			p.setVersion(res.getVersion());
+			//			p.setMoment(res.getMoment());
+			//			p.setAuthor(res.getAuthor());
+			//			p.setConference(submissionReviwedForm.getConference());
+			//			p.setCamaraReady(res.getCamaraReady());
+			//			p.setReviwers(res.getReviwers());
+			//			p.setStatus(res.getStatus());
+			//			p.setTicker(res.getTicker());
+			//			reviwed.setSummary(submissionReviwedForm.getSummary());
+			//			reviwed.setTitle(submissionReviwedForm.getTitle());
+			//			reviwed.setUrlDocument(submissionReviwedForm.getUrlDocument());
+			//			p.setReviwed(reviwed);
+			//
+			//			this.validator.validate(p, binding);
+			//			res = p;
+		}
+		return res;
+	}
 
 	//TICKER
 	public static String generarTicker() {

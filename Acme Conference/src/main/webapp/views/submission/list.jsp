@@ -26,6 +26,9 @@ requestURI="submission/author/list.do" >
 <display:column property="moment" titleKey="submission.moment"/>
 <display:column property="status" titleKey="submission.status"/>
 <display:column property="conference.title" titleKey="submission.conference.table"/>
+<display:column property="reviwed.title" titleKey="submission.reviwed.table.title"/>
+<display:column property="reviwed.summary" titleKey="submission.reviwed.table.summary"/>
+<display:column property="reviwed.urlDocument" titleKey="submission.reviwed.table.urlDocument"/>
 </display:table>
 
 <input type="button" name="create" value="<spring:message code="submission.create" />"
