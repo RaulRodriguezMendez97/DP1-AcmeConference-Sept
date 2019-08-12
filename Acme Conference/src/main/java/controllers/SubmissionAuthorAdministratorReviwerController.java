@@ -2,8 +2,6 @@
 package controllers;
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +22,6 @@ import services.ReviwedService;
 import services.ReviwerService;
 import services.SubmissionService;
 import domain.Author;
-import domain.CamaraReady;
 import domain.Conference;
 import domain.Reviwed;
 import domain.Reviwer;
@@ -102,29 +99,14 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/author/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("submissionReviwedForm") final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		ModelAndView result;
-		final Submission submission = new Submission();
-		final Reviwed reviwed = new Reviwed();
+		Submission submission = null;
+		Reviwed reviwed = null;
 		Reviwed reviwedSave = null;
 
 		try {
-			reviwed.setSummary(submissionReviwedForm.getSummary());
-			reviwed.setTitle(submissionReviwedForm.getTitle());
-			reviwed.setUrlDocument(submissionReviwedForm.getUrlDocument());
-
-			final UserAccount user = LoginService.getPrincipal();
-			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
-			submission.setId(submissionReviwedForm.getId());
-			submission.setVersion(submissionReviwedForm.getVersion());
-			submission.setAuthor(a);
-			submission.setCamaraReady(new CamaraReady());
-			submission.setReviwers(new HashSet<Reviwer>());
-			submission.setConference(submissionReviwedForm.getConference());
-			submission.setMoment(new Date());
-			submission.setStatus(0);
-			submission.setTicker(SubmissionService.generarTicker());
-
-			//reviwed = this.reviwedService.reconstruct(submissionReviwedForm, binding);
-			//submission = this.submissionService.reconstruct(submissionReviwedForm, binding);
+			reviwed = this.reviwedService.reconstruct(submissionReviwedForm, binding);
+			submissionReviwedForm.setReviwed(reviwed);
+			submission = this.submissionService.reconstruct(submissionReviwedForm, binding);
 			if (!binding.hasErrors()) {
 				reviwedSave = this.reviwedService.save(reviwed);
 				submission.setReviwed(reviwedSave);

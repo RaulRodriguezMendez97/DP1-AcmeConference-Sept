@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 import domain.Conference;
-import domain.DomainEntity;
+import domain.Submission;
 
-public class SubmissionReviwedForm extends DomainEntity {
+public class SubmissionReviwedForm extends Submission {
 
 	private String		title;
 	private String		summary;
@@ -49,12 +49,14 @@ public class SubmissionReviwedForm extends DomainEntity {
 		this.urlDocument = urlDocument;
 	}
 
+	@Override
 	@NotNull
 	@Valid
 	public Conference getConference() {
 		return this.conference;
 	}
 
+	@Override
 	public void setConference(final Conference conference) {
 		this.conference = conference;
 	}

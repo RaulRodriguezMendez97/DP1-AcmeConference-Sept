@@ -89,24 +89,22 @@ public class SubmissionService {
 
 	public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		final Submission res = new Submission();
-		final Reviwed reviwed = new Reviwed();
+		//final Reviwed reviwed = new Reviwed();
 
 		if (submissionReviwedForm.getId() == 0) {
 			final UserAccount user = LoginService.getPrincipal();
 			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
-			//			res.setId(submissionReviwedForm.getId());
-			//			res.setVersion(submissionReviwedForm.getVersion());
+			res.setId(submissionReviwedForm.getId());
+			res.setVersion(submissionReviwedForm.getVersion());
 			res.setConference(submissionReviwedForm.getConference());
 			res.setMoment(new Date());
 			res.setAuthor(a);
 			res.setStatus(0);
 			res.setTicker(SubmissionService.generarTicker());
-			reviwed.setSummary(submissionReviwedForm.getSummary());
-			reviwed.setTitle(submissionReviwedForm.getTitle());
-			reviwed.setUrlDocument(submissionReviwedForm.getUrlDocument());
-			res.setReviwed(reviwed);
-			res.setCamaraReady(new CamaraReady());
+			res.setReviwed(submissionReviwedForm.getReviwed());
+			res.setCamaraReady(null);
 			res.setReviwers(new HashSet<Reviwer>());
+			this.validator.validate(res, binding);
 			//		} else {
 			//			res = this.submissionRepository.findOne(submissionReviwedForm.getId());
 			//			final Submission p = new Submission();

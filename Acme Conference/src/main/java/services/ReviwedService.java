@@ -49,6 +49,8 @@ public class ReviwedService {
 	public Reviwed reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		final Reviwed res = new Reviwed();
 		if (submissionReviwedForm.getId() == 0) {
+			res.setId(submissionReviwedForm.getId());
+			res.setVersion(submissionReviwedForm.getVersion());
 			res.setSummary(submissionReviwedForm.getSummary());
 			res.setTitle(submissionReviwedForm.getTitle());
 			res.setUrlDocument(submissionReviwedForm.getUrlDocument());
