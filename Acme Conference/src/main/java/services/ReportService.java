@@ -68,6 +68,8 @@ public class ReportService {
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("REVIWER"));
 		Assert.isTrue(report.getReviwer().equals(this.reviwerRepository.getReviwerByUserAccount(userAccount.getId())));
+		if (report.getId() == 0)
+			Assert.isTrue(report.getDecision() == 0);
 		final Report reportSave = this.reportRepository.save(report);
 		return reportSave;
 	}
