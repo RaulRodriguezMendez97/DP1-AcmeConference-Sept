@@ -37,19 +37,13 @@ requestURI="submission/author/list.do" >
 
 
 
-
 <security:authorize access="hasRole('REVIWER')">
 <display:table pagesize="5" name="submissions" id="row"
 requestURI="submission/reviwer/list.do" >
-
-	<display:column property="moment" titleKey="submission.moment"/>
-	<display:column property="status" titleKey="submission.status"/>
-	<display:column property="conference.title" titleKey="submission.conference.table"/>
-
-	<display:column>
-		<a href="report/reviwer/list.do?submissionId=${row.id}"><spring:message code="submission.reviwer.report" /></a> 
-	</display:column>
-
+<display:column property="ticker" titleKey="submission.ticker" />
+<display:column property="moment" titleKey="submission.moment"/>
+<display:column property="status" titleKey="submission.status"/>
+<display:column property="conference.title" titleKey="submission.conference.table"/>
 </display:table>
 
 </security:authorize>

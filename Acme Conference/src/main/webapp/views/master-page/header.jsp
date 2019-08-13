@@ -52,7 +52,8 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('REVIWER')">
-			<li><a href="submission/reviwer/list.do"><spring:message code="master.page.reviwer.submissions" /></a></li>		
+			<li><a href="report/reviwer/list.do"><spring:message code="master.page.reviwer.report" /></a></li>
+			<li><a href="submission/reviwer/list.do"><spring:message code="master.page.reviwer.submission" /></a></li>				
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

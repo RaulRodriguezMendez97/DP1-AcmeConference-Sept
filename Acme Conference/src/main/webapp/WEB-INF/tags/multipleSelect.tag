@@ -1,5 +1,5 @@
 <%--
- * textarea.tag
+ * select.tag
  *
  * Copyright (C) 2019 Universidad de Sevilla
  * 
@@ -24,18 +24,30 @@
 
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
-<%@ attribute name="readonly" required="false" %>
+<%@ attribute name="items" required="true" type="java.util.Collection" %>
+<%@ attribute name="itemLabel" required="true" %>
 
-<jstl:if test="${readonly == null}">
-	<jstl:set var="readonly" value="false" />
+<%@ attribute name="id" required="false" %>
+<%@ attribute name="onchange" required="false" %>
+
+<jstl:if test="${id == null}">
+	<jstl:set var="id" value="${UUID.randomUUID().toString()}" />
+</jstl:if>
+
+<jstl:if test="${onchange == null}">
+	<jstl:set var="onchange" value="javascript: return true;" />
 </jstl:if>
 
 <%-- Definition --%>
 
-<div class="form-group">
+<div>
 	<form:label path="${path}">
 		<spring:message code="${code}" />
-	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
+	</form:label>	
+	<form:select multiple="true" id="${id}" path="${path}" onchange="${onchange}">
+		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
+	</form:select>
 	<form:errors path="${path}" cssClass="error" />
 </div>
+
+

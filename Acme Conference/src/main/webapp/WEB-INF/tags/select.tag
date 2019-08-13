@@ -1,7 +1,7 @@
 <%--
  * select.tag
  *
- * Copyright (C) 2018 Universidad de Sevilla
+ * Copyright (C) 2019 Universidad de Sevilla
  * 
  * The use of this project is hereby constrained to the conditions of the 
  * TDG Licence, a copy of which you may download from 
@@ -45,7 +45,7 @@
 		<spring:message code="${code}" />
 	</form:label>	
 	<form:select id="${id}" path="${path}" onchange="${onchange}">
-		<form:option value="0" label="----" />		
+		<form:option value="0" label="----" />
 		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 	</form:select>
 	<form:errors path="${path}" cssClass="error" />

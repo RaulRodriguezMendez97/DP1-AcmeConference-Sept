@@ -13,15 +13,18 @@
 <display:table pagesize="5" name="reports" id="row"
 requestURI="report/reviwer/list.do" >
 
-
+<display:column property="submission.ticker" titleKey="report.submission.ticker" />
 <display:column property="originalityScore" titleKey="report.originalityScore" />
 <display:column property="qualityScore" titleKey="report.qualityScore" />
 <display:column property="eadabilityScore" titleKey="report.eadabilityScore" />
 <display:column property="decision" titleKey="report.decision" />
-<display:column property="comments" titleKey="report.comments" />
+<display:column property="comment" titleKey="report.comments" />
+<display:column>
+	<a href="report/reviwer/edit.do?reportId=${row.id}"><spring:message code="report.edit" /></a>
+</display:column>
 
 </display:table>
-<acme:cancel url="submission/reviwer/list.do" code="report.cancel"/>
 <input type="button" name="create" value="<spring:message code="report.create" />"
-			onclick="javascript: relativeRedir('report/reviwer/create.do?submissionId=${submissionId}');" /><br>
+			onclick="javascript: relativeRedir('report/reviwer/create.do');" /><br>
+
 </security:authorize>

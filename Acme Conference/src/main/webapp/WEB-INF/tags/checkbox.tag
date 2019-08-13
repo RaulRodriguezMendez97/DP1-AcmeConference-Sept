@@ -36,6 +36,6 @@
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
+	<form:checkbox id="checkbox" path="${path}" readonly="${readonly}" />
 	<form:errors path="${path}" cssClass="error" />
 </div>

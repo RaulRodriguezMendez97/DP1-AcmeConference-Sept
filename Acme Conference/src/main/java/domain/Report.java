@@ -1,11 +1,8 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
@@ -17,22 +14,21 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class Report extends DomainEntity {
 
-	private int					originalityScore;
-	private int					qualityScore;
-	private int					eadabilityScore;
-	private int					decision;
-	private Collection<String>	comments;
-	private Reviwer				reviwer;
-	private Submission			submission;
+	private int			originalityScore;
+	private int			qualityScore;
+	private int			eadabilityScore;
+	private int			decision;
+	private String		comment;
+	private Reviwer		reviwer;
+	private Submission	submission;
 
 
-	@ElementCollection
-	public Collection<String> getComments() {
-		return this.comments;
+	public String getComment() {
+		return this.comment;
 	}
 
-	public void setComments(final Collection<String> comments) {
-		this.comments = comments;
+	public void setComment(final String comment) {
+		this.comment = comment;
 	}
 
 	@ManyToOne(optional = false)

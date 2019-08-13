@@ -785,11 +785,7 @@
 		<property name="qualityScore" value="4" />
 		<property name="eadabilityScore" value="6" />
 		<property name="decision" value="0" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer1" />
 		<property name="submission" ref="submission1" />
 	</bean>
@@ -798,11 +794,7 @@
 		<property name="qualityScore" value="6" />
 		<property name="eadabilityScore" value="2" />
 		<property name="decision" value="0" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer1" />
 		<property name="submission" ref="submission2" />
 	</bean>
@@ -811,11 +803,7 @@
 		<property name="qualityScore" value="8" />
 		<property name="eadabilityScore" value="9" />
 		<property name="decision" value="1" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer2" />
 		<property name="submission" ref="submission2" />
 	</bean>
@@ -824,11 +812,7 @@
 		<property name="qualityScore" value="4" />
 		<property name="eadabilityScore" value="10" />
 		<property name="decision" value="1" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer3" />
 		<property name="submission" ref="submission2" />
 	</bean>
@@ -837,11 +821,7 @@
 		<property name="qualityScore" value="4" />
 		<property name="eadabilityScore" value="5" />
 		<property name="decision" value="1" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer3" />
 		<property name="submission" ref="submission3" />
 	</bean>
@@ -850,11 +830,7 @@
 		<property name="qualityScore" value="10" />
 		<property name="eadabilityScore" value="4" />
 		<property name="decision" value="0" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer3" />
 		<property name="submission" ref="submission4" />
 	</bean>
@@ -863,11 +839,7 @@
 		<property name="qualityScore" value="1" />
 		<property name="eadabilityScore" value="5" />
 		<property name="decision" value="0" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer3" />
 		<property name="submission" ref="submission2" />
 	</bean>
@@ -876,11 +848,7 @@
 		<property name="qualityScore" value="8" />
 		<property name="eadabilityScore" value="5" />
 		<property name="decision" value="1" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission5" />
 	</bean>
@@ -889,11 +857,7 @@
 		<property name="qualityScore" value="4" />
 		<property name="eadabilityScore" value="5" />
 		<property name="decision" value="0" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission6" />
 	</bean>
@@ -902,11 +866,7 @@
 		<property name="qualityScore" value="9" />
 		<property name="eadabilityScore" value="5" />
 		<property name="decision" value="2" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission7" />
 	</bean>
@@ -915,11 +875,7 @@
 		<property name="qualityScore" value="5" />
 		<property name="eadabilityScore" value="5" />
 		<property name="decision" value="1" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission8" />
 	</bean>
@@ -928,11 +884,7 @@
 		<property name="qualityScore" value="0" />
 		<property name="eadabilityScore" value="2" />
 		<property name="decision" value="0" />
-		<property name="comments">
-			<list>
-
-			</list>
-		</property>
+		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission8" />
 	</bean>
