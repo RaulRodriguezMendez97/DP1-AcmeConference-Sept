@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
-import services.AuthorService;
 import services.ConferenceService;
-import services.MessageBoxService;
 import services.MessageService;
 import services.TopicService;
 import domain.Actor;
@@ -34,16 +32,10 @@ public class MessageBroadcastAdministratorController extends AbstractController 
 	private MessageService		messageService;
 
 	@Autowired
-	private MessageBoxService	messageBoxService;
-
-	@Autowired
 	private TopicService		topicService;
 
 	@Autowired
 	private ConferenceService	conferenceService;
-
-	@Autowired
-	private AuthorService		authorService;
 
 
 	@RequestMapping(value = "/send", method = RequestMethod.GET)
