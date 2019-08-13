@@ -64,6 +64,8 @@ public class SubmissionService {
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
 		Assert.isTrue(submission.getAuthor().equals(this.authorService.getAuthorByUserAccount(userAccount.getId())));
+		if (submission.getId() == 0)
+			Assert.isTrue(submission.getStatus() == 0);
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
 	}
@@ -93,8 +95,6 @@ public class SubmissionService {
 
 	public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		final Submission res = new Submission();
-		//final Reviwed reviwed = new Reviwed();
-
 		if (submissionReviwedForm.getId() == 0) {
 			final UserAccount user = LoginService.getPrincipal();
 			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
