@@ -65,4 +65,12 @@ public class ActorService {
 		return this.actorRepository.getAuthorWithSubmission(conference);
 	}
 
+	public Collection<Actor> getAuthorWithRegistration(final Conference conferece) {
+		return this.actorRepository.getAuthorWithRegistration(conferece);
+	}
+
+	public Collection<Actor> getAuthors() {
+		return this.actorRepository.getAuthors();
+	}
+
 }

@@ -145,7 +145,7 @@ public class MessageService {
 	}
 
 	//----BROADCAST----
-	//RECONSTRUCT BROADCAST
+	//RECONSTRUCT BROADCAST WITH CONFERENCE
 	public Message reconstructBroadcast(final MessageBroadcastForm message, final BindingResult binding) {
 		final Message res = new Message();
 
@@ -162,6 +162,28 @@ public class MessageService {
 
 		if (message.getConference() == null)
 			binding.rejectValue("conference", "NoConference");
+
+		this.validator.validate(res, binding);
+		return res;
+	}
+
+	//RECONSTRUCT BROADCAST WITHOUT CONFERENCE
+	public Message reconstructBroadcast2(final MessageBroadcastForm message, final BindingResult binding) {
+		final Message res = new Message();
+
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor sender = this.actorService.getActorByUserAccount(user.getId());
+
+		res.setSender(sender);
+		res.setMoment(this.fechaSumada());
+		res.setEmailReceiver("");
+		res.setReceiver(null);
+		res.setTopic(message.getTopic());
+		res.setBody(message.getBody());
+		res.setSubject(message.getSubject());
+
+		if (message.getConference() != null)
+			binding.rejectValue("conference", "WithoutConference");
 
 		this.validator.validate(res, binding);
 		return res;

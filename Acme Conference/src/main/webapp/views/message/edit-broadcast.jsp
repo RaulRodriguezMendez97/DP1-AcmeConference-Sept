@@ -34,8 +34,17 @@
 		<acme:select items="${topics }" itemLabel="name" code="mensaje.topic" path="topic"/>
 		
 		<br/>
-		<input type="submit" name="save" 
-		value="<spring:message code="mensaje.save" />" />
+		<input type="submit" name="save-submission" 
+		value="<spring:message code="mensaje.send.submission" />" />
+		
+		<input type="submit" name="save-registration" 
+		value="<spring:message code="mensaje.send.registration" />" />
+		
+		<input type="submit" name="save-authors" 
+		value="<spring:message code="mensaje.send.authors" />" />
+		
+		<input type="submit" name="save-alls" 
+		value="<spring:message code="mensaje.send.alls" />" />
 
 	</form:form>	
 	

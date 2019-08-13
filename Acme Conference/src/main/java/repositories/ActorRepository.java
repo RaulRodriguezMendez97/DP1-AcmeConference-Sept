@@ -26,4 +26,10 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	@Query("select s.author from Submission s where s.status = 2 and s.conference=?1")
 	public Collection<Actor> getAuthorWithSubmission(Conference conference);
 
+	@Query("select r.creditCard.author from Registration r where r.conference=?1")
+	public Collection<Actor> getAuthorWithRegistration(Conference conferece);
+
+	@Query("select a from Actor a where 'AUTHOR'member of a.userAccount.authorities")
+	public Collection<Actor> getAuthors();
+
 }

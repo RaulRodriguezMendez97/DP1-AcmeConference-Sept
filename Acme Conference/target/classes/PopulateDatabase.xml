@@ -1011,7 +1011,11 @@
 		<property name="urlDocument" value="http://urlDocumentCamaraReady5.com" />
 	</bean>
 
-
+	<!-- Registration -->
+	<bean id="registration1" class="domain.Registration">
+		<property name="creditCard" ref="creditCard1"></property>
+		<property name="conference" ref="conference4"></property>
+	</bean>
 
 
 

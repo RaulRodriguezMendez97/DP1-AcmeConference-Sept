@@ -54,8 +54,8 @@ public class MessageBroadcastAdministratorController extends AbstractController 
 		return result;
 	}
 
-	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(@ModelAttribute("mensaje") final MessageBroadcastForm mensaje, final BindingResult binding) {
+	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "save-submission")
+	public ModelAndView sendSubmission(@ModelAttribute("mensaje") final MessageBroadcastForm mensaje, final BindingResult binding) {
 		ModelAndView result;
 
 		try {
@@ -63,6 +63,102 @@ public class MessageBroadcastAdministratorController extends AbstractController 
 			if (!binding.hasErrors()) {
 				final Message saved = this.messageService.save(m);
 				final Collection<Actor> actors = this.actorService.getAuthorWithSubmission(mensaje.getConference());
+				this.messageService.sendBroadcast(actors, saved);
+				result = new ModelAndView("redirect:../../message/actor/list.do");
+			} else {
+				final Collection<Topic> topics = this.topicService.findAll();
+				final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
+				result = new ModelAndView("mensaje/edit-broadcast");
+				result.addObject("mensaje", mensaje);
+				result.addObject("topics", topics);
+				result.addObject("conferences", conferences);
+			}
+		} catch (final Exception e) {
+			final Collection<Topic> topics = this.topicService.findAll();
+			final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
+			result = new ModelAndView("mensaje/edit-broadcast");
+			result.addObject("mensaje", mensaje);
+			result.addObject("topics", topics);
+			result.addObject("conferences", conferences);
+			result.addObject("exception", e);
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "save-registration")
+	public ModelAndView sendRegistration(@ModelAttribute("mensaje") final MessageBroadcastForm mensaje, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			final Message m = this.messageService.reconstructBroadcast(mensaje, binding);
+			if (!binding.hasErrors()) {
+				final Message saved = this.messageService.save(m);
+				final Collection<Actor> actors = this.actorService.getAuthorWithRegistration(mensaje.getConference());
+				this.messageService.sendBroadcast(actors, saved);
+				result = new ModelAndView("redirect:../../message/actor/list.do");
+			} else {
+				final Collection<Topic> topics = this.topicService.findAll();
+				final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
+				result = new ModelAndView("mensaje/edit-broadcast");
+				result.addObject("mensaje", mensaje);
+				result.addObject("topics", topics);
+				result.addObject("conferences", conferences);
+			}
+		} catch (final Exception e) {
+			final Collection<Topic> topics = this.topicService.findAll();
+			final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
+			result = new ModelAndView("mensaje/edit-broadcast");
+			result.addObject("mensaje", mensaje);
+			result.addObject("topics", topics);
+			result.addObject("conferences", conferences);
+			result.addObject("exception", e);
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "save-authors")
+	public ModelAndView sendAuthors(@ModelAttribute("mensaje") final MessageBroadcastForm mensaje, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			final Message m = this.messageService.reconstructBroadcast2(mensaje, binding);
+			if (!binding.hasErrors()) {
+				final Message saved = this.messageService.save(m);
+				final Collection<Actor> actors = this.actorService.getAuthors();
+				this.messageService.sendBroadcast(actors, saved);
+				result = new ModelAndView("redirect:../../message/actor/list.do");
+			} else {
+				final Collection<Topic> topics = this.topicService.findAll();
+				final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
+				result = new ModelAndView("mensaje/edit-broadcast");
+				result.addObject("mensaje", mensaje);
+				result.addObject("topics", topics);
+				result.addObject("conferences", conferences);
+			}
+		} catch (final Exception e) {
+			final Collection<Topic> topics = this.topicService.findAll();
+			final Collection<Conference> conferences = this.conferenceService.getConferencesInSaveMode();
+			result = new ModelAndView("mensaje/edit-broadcast");
+			result.addObject("mensaje", mensaje);
+			result.addObject("topics", topics);
+			result.addObject("conferences", conferences);
+			result.addObject("exception", e);
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "save-alls")
+	public ModelAndView sendAll(@ModelAttribute("mensaje") final MessageBroadcastForm mensaje, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			final Message m = this.messageService.reconstructBroadcast2(mensaje, binding);
+			if (!binding.hasErrors()) {
+				final Message saved = this.messageService.save(m);
+				final Collection<Actor> actors = this.actorService.findAll();
 				this.messageService.sendBroadcast(actors, saved);
 				result = new ModelAndView("redirect:../../message/actor/list.do");
 			} else {
