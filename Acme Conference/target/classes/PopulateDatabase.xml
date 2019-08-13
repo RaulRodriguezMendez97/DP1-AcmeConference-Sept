@@ -663,8 +663,8 @@
 		<property name="submissionDeadline" value="08/08/2018 11:30" />
 		<property name="notificacionDeadline" value="13/10/2019 11:30" />
 		<property name="cameraDeadline" value="08/11/2019 11:30" />
-		<property name="startDate" value="13/11/2019 11:30" />
-		<property name="endDate" value="08/12/2019 11:30" />
+		<property name="startDate" value="10/11/2019 11:30" />
+		<property name="endDate" value="12/12/2019 11:30" />
 		<property name="summary" value="summary conference 4" />
 		<property name="fee" value="9.0" />
 		<property name="finalMode" value="1" />
@@ -677,8 +677,8 @@
 		<property name="submissionDeadline" value="10/07/2018 11:30" />
 		<property name="notificacionDeadline" value="15/10/2019 11:30" />
 		<property name="cameraDeadline" value="10/11/2019 11:30" />
-		<property name="startDate" value="27/06/2019 11:30" />
-		<property name="endDate" value="23/12/2019 11:30" />
+		<property name="startDate" value="05/06/2020 11:30" />
+		<property name="endDate" value="05/12/2020 11:30" />
 		<property name="summary" value="summary conference 5" />
 		<property name="fee" value="2.0" />
 		<property name="finalMode" value="1" />
