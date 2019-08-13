@@ -4,6 +4,7 @@ package services;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,8 @@ public class ReportService {
 	private ReviwerRepository	reviwerRepository;
 	@Autowired
 	private Validator			validator;
+	@Autowired
+	private SubmissionService	submissionService;
 
 
 	public Report create() {
@@ -76,27 +79,34 @@ public class ReportService {
 		this.reportRepository.delete(report);
 	}
 
-	public Report reconstruct(final Report report, final BindingResult binding) {
+	public Report reconstruct(final Report report, final int submissionId, final BindingResult binding) {
 		Report res;
 		if (report.getId() == 0) {
 			res = report;
 			final UserAccount user = LoginService.getPrincipal();
 			final Reviwer reviwer = this.reviwerRepository.getReviwerByUserAccount(user.getId());
+			final Submission submission = this.submissionService.findOne(submissionId);
 			res.setReviwer(reviwer);
+			res.setSubmission(submission);
+			res.setDecision(0);
+			this.validator.validate(res, binding);
 		} else {
 			res = this.reportRepository.findOne(report.getId());
 			final Report o = new Report();
 			o.setId(res.getId());
 			o.setVersion(res.getVersion());
 			o.setReviwer(res.getReviwer());
+			o.setSubmission(res.getSubmission());
 
 			o.setComment(report.getComment());
-			o.setSubmission(report.getSubmission());
 			o.setDecision(report.getDecision());
 			o.setEadabilityScore(report.getEadabilityScore());
 			o.setOriginalityScore(report.getOriginalityScore());
 			o.setQualityScore(report.getQualityScore());
 			this.validator.validate(o, binding);
+
+			if (binding.hasErrors())
+				throw new ValidationException();
 
 			res = o;
 		}

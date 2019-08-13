@@ -20,11 +20,12 @@ requestURI="report/reviwer/list.do" >
 <display:column property="decision" titleKey="report.decision" />
 <display:column property="comment" titleKey="report.comments" />
 <display:column>
-	<a href="report/reviwer/edit.do?reportId=${row.id}"><spring:message code="report.edit" /></a>
+	<a href="report/reviwer/edit.do?submissionId=${submissionId}&reportId=${row.id}"><spring:message code="report.edit" /></a>
 </display:column>
 
 </display:table>
+<acme:cancel url="submission/reviwer/list.do" code="report.cancel"/>
 <input type="button" name="create" value="<spring:message code="report.create" />"
-			onclick="javascript: relativeRedir('report/reviwer/create.do');" /><br>
+			onclick="javascript: relativeRedir('report/reviwer/create.do?submissionId=${submissionId}');" /><br>
 
 </security:authorize>

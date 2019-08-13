@@ -19,24 +19,32 @@
 
 
 <security:authorize access="hasRole('REVIWER')">
-<form:form action="report/reviwer/edit.do" modelAttribute="report">
+<form:form action="report/reviwer/edit.do?submissionId=${submissionId}" modelAttribute="report">
 		<form:hidden path="id"/>
 		<form:hidden path="version"/>
-
 
 <acme:textbox code="report.originalityScore" path="originalityScore"/>
 <acme:textbox code="report.qualityScore" path="qualityScore"/>
 <acme:textbox code="report.eadabilityScore" path="eadabilityScore"/>
-<acme:textbox code="report.decision" path="decision"/>
+<jstl:if test="${report.id ne 0}">
+	<form:label path="decision"><spring:message code="report.decision" />:</form:label>
+		<form:select path="decision">
+			<form:option value="0" label="Rejected" />	
+			<form:option value="1" label="Border line" />	
+			<form:option value="2" label="Accept" />		
+		</form:select>
+</jstl:if>
 <acme:textbox code="report.comments" path="comment"/>
+<!--
 <acme:selectWithoutNullOption items="${submissions}" itemLabel="ticker" code="submission" path="submission"/>
+-->
 
 <br/>
 <input type="submit" name="save" value="<spring:message code="report.save" />" />
 <jstl:if test="${report.id ne 0 }">	
 	<input type="submit" name="delete" value="<spring:message code="report.delete" />" />
 </jstl:if>
-<acme:cancel url="report/reviwer/list.do" code="report.cancel"/>
+<acme:cancel url="report/reviwer/list.do?submissionId=${submissionId}" code="report.cancel"/>
 
 
 </form:form>
