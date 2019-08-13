@@ -19,13 +19,16 @@
 
 <security:authorize access="hasRole('AUTHOR')">
 
-<form:form action="submission/author/edit.do" modelAttribute="submission">
+<form:form action="submission/author/edit.do" modelAttribute="submissionReviwedForm">
 
+<acme:textbox code="submission.reviwed.title" path="title"/>
+<acme:textbox code="submission.reviwed.summary" path="summary"/>
+<acme:textbox code="submission.reviwed.urlDocument" path="urlDocument"/>
 <acme:select items="${conferences}" itemLabel="title" code="submission.conference.table" path="conference"/>
 
 <br/>
 <input type="submit" name="save" value="<spring:message code="submission.save" />" />
-<jstl:if test="${submission.id ne 0 }">	
+<jstl:if test="${submissionReviwedForm.id ne 0 }">	
 	<input type="submit" name="delete" value="<spring:message code="submission.delete" />" />
 </jstl:if>
 <acme:cancel url="submission/author/list.do" code="submission.cancel"/>

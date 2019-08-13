@@ -6,6 +6,8 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import domain.Conference;
 import domain.Reviwed;
 import domain.Reviwer;
 import domain.Submission;
+import forms.SubmissionReviwedForm;
 
 @Controller
 @RequestMapping("/submission")
@@ -80,17 +83,53 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/author/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-		final Submission submission;
+		SubmissionReviwedForm submissionReviwedForm = new SubmissionReviwedForm();
 		final Collection<Conference> conferences;
-		//final UserAccount user = LoginService.getPrincipal();
 
-		conferences = this.conferenceService.findAll();
-		submission = this.submissionService.create();
-		Assert.notNull(submission);
+		//conferences = this.conferenceService.findAll();
+		conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
+		submissionReviwedForm = submissionReviwedForm.create();
+		Assert.notNull(submissionReviwedForm);
 
 		result = new ModelAndView("submission/edit");
-		result.addObject("submission", submission);
+		result.addObject("submissionReviwedForm", submissionReviwedForm);
 		result.addObject("conferences", conferences);
+		return result;
+	}
+
+	@RequestMapping(value = "/author/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@ModelAttribute("submissionReviwedForm") final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
+		ModelAndView result;
+		Submission submission = null;
+		Reviwed reviwed = null;
+		Reviwed reviwedSave = null;
+
+		try {
+			reviwed = this.reviwedService.reconstruct(submissionReviwedForm, binding);
+			submissionReviwedForm.setReviwed(reviwed);
+			submission = this.submissionService.reconstruct(submissionReviwedForm, binding);
+			if (!binding.hasErrors()) {
+				reviwedSave = this.reviwedService.save(reviwed);
+				submission.setReviwed(reviwedSave);
+				this.submissionService.save(submission);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				final Collection<Conference> conferences;
+				//conferences = this.conferenceService.findAll();
+				conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
+				result = new ModelAndView("submission/edit");
+				result.addObject("submissionReviwedForm", submissionReviwedForm);
+				result.addObject("conferences", conferences);
+			}
+		} catch (final Exception e) {
+			final Collection<Conference> conferences;
+			//conferences = this.conferenceService.findAll();
+			conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
+			result = new ModelAndView("submission/edit");
+			result.addObject("exception", e);
+			result.addObject("submissionReviwedForm", submissionReviwedForm);
+			result.addObject("conferences", conferences);
+		}
 		return result;
 	}
 

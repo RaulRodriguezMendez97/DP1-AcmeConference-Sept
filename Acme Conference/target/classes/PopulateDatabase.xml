@@ -660,7 +660,7 @@
 		<property name="title" value="title conference 4" />
 		<property name="acronym" value="acronym conference 4" />
 		<property name="venue" value="venue conference 4" />
-		<property name="submissionDeadline" value="08/10/2019 11:30" />
+		<property name="submissionDeadline" value="08/08/2018 11:30" />
 		<property name="notificacionDeadline" value="13/10/2019 11:30" />
 		<property name="cameraDeadline" value="08/11/2019 11:30" />
 		<property name="startDate" value="13/11/2019 11:30" />
@@ -674,7 +674,7 @@
 		<property name="title" value="title conference 5" />
 		<property name="acronym" value="acronym conference 5" />
 		<property name="venue" value="venue conference 5" />
-		<property name="submissionDeadline" value="10/10/2019 11:30" />
+		<property name="submissionDeadline" value="10/07/2018 11:30" />
 		<property name="notificacionDeadline" value="15/10/2019 11:30" />
 		<property name="cameraDeadline" value="10/11/2019 11:30" />
 		<property name="startDate" value="27/06/2019 11:30" />
