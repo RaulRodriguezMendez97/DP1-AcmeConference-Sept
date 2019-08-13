@@ -61,7 +61,6 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/author/detail", method = RequestMethod.GET)
 	public ModelAndView detail(@RequestParam final Integer submissionId) {
 		ModelAndView result;
-		//final Collection<String> vacio = new HashSet<>();
 		try {
 			final Submission submission = this.submissionService.findOne(submissionId);
 			final Conference conference = this.conferenceService.findOne(submission.getConference().getId());
@@ -86,7 +85,6 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		SubmissionReviwedForm submissionReviwedForm = new SubmissionReviwedForm();
 		final Collection<Conference> conferences;
 
-		//conferences = this.conferenceService.findAll();
 		conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 		submissionReviwedForm = submissionReviwedForm.create();
 		Assert.notNull(submissionReviwedForm);
@@ -115,7 +113,6 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 				result = new ModelAndView("redirect:list.do");
 			} else {
 				final Collection<Conference> conferences;
-				//conferences = this.conferenceService.findAll();
 				conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 				result = new ModelAndView("submission/edit");
 				result.addObject("submissionReviwedForm", submissionReviwedForm);
@@ -123,7 +120,6 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			}
 		} catch (final Exception e) {
 			final Collection<Conference> conferences;
-			//conferences = this.conferenceService.findAll();
 			conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 			result = new ModelAndView("submission/edit");
 			result.addObject("exception", e);

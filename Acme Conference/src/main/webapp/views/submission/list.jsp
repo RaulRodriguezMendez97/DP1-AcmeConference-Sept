@@ -36,7 +36,6 @@ requestURI="submission/author/list.do" >
 </security:authorize>
 
 
-
 <security:authorize access="hasRole('REVIWER')">
 <display:table pagesize="5" name="submissions" id="row"
 requestURI="submission/reviwer/list.do" >

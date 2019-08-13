@@ -20,6 +20,8 @@
 <security:authorize access="hasRole('AUTHOR')">
 
 <form:form action="submission/author/edit.do" modelAttribute="submissionReviwedForm">
+<form:hidden path="id"/>
+<form:hidden path="version" />
 
 <acme:textbox code="submission.reviwed.title" path="title"/>
 <acme:textbox code="submission.reviwed.summary" path="summary"/>

@@ -35,9 +35,6 @@
 		</form:select>
 </jstl:if>
 <acme:textbox code="report.comments" path="comment"/>
-<!--
-<acme:selectWithoutNullOption items="${submissions}" itemLabel="ticker" code="submission" path="submission"/>
--->
 
 <br/>
 <input type="submit" name="save" value="<spring:message code="report.save" />" />

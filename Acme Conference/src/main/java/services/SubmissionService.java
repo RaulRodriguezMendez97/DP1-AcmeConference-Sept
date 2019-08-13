@@ -50,9 +50,12 @@ public class SubmissionService {
 	}
 
 	public Submission findOne(final int submissionId) {
-		return this.submissionRepository.findOne(submissionId);
+		final Submission submission = this.submissionRepository.findOne(submissionId);
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
+		Assert.isTrue(submission.getAuthor().equals(this.authorService.getAuthorByUserAccount(userAccount.getId())));
+		return submission;
 	}
-
 	public Collection<Submission> findAll() {
 		return this.submissionRepository.findAll();
 	}
@@ -60,6 +63,7 @@ public class SubmissionService {
 	public Submission save(final Submission submission) {
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
+		Assert.isTrue(submission.getAuthor().equals(this.authorService.getAuthorByUserAccount(userAccount.getId())));
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
 	}
