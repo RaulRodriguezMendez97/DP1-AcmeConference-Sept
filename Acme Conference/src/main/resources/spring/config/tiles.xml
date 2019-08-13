@@ -33,6 +33,7 @@
 		<value>/views/customizable/tiles.xml</value>
 		<value>/views/submission/tiles.xml</value>
 		<value>/views/report/tiles.xml</value>
+		<value>/views/reviwer/tiles.xml</value>
 		
 		
 		

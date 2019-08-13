@@ -46,6 +46,8 @@
 		
 		<security:intercept-url pattern="/author/create.do" access="permitAll" />
 		<security:intercept-url pattern="/reviwer/create.do" access="permitAll" />
+		<security:intercept-url pattern="/reviwer/edit.do" access="isAnonymous()" />
+			<security:intercept-url pattern="/author/edit.do" access="isAnonymous()" />  
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/register.do" access="permitAll" />  

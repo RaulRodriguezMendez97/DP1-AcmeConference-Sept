@@ -39,7 +39,9 @@
 		
 		<bean class="converters.StringToConferenceConverter" />
 		<bean class="converters.ConferenceToStringConverter" />
-				
+		
+		<bean class="converters.StringToReviwerConverter" />
+		<bean class="converters.ReviwerToStringConverter" />
 				
 	</util:list>
 	
