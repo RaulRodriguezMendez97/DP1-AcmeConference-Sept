@@ -18,7 +18,9 @@ import org.springframework.validation.Validator;
 
 import repositories.ReviwerRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Reviwer;
 import forms.RegistrationFormReviwer;
 
@@ -62,6 +64,14 @@ public class ReviwerService {
 
 		reviwer.setUserAccount(user);
 		return reviwer;
+	}
+	public Reviwer findOne(final int reviwerId) {
+		final Reviwer reviwer = this.reviwerRepository.findOne(reviwerId);
+		final UserAccount userLoged = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(userLoged.getId());
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REVIWER"));
+		Assert.isTrue(reviwer.equals(a));
+		return this.reviwerRepository.findOne(reviwerId);
 	}
 
 	public Collection<Reviwer> findAll() {
@@ -194,8 +204,8 @@ public class ReviwerService {
 			p.setPhone(registrationForm.getPhone());
 			p.setPhoto(registrationForm.getPhoto());
 			p.setSurname(registrationForm.getSurname());
-			res.setKeyWords(res.getKeyWords());
-			res.setMiddleName(registrationForm.getMiddleName());
+			p.setKeyWords(res.getKeyWords());
+			p.setMiddleName(registrationForm.getMiddleName());
 
 			if (p.getPhone().length() <= 5)
 				p.setPhone("");

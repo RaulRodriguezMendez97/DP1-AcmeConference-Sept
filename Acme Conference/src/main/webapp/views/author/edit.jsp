@@ -19,11 +19,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
-<form:form action="reviwer/edit.do" modelAttribute="registrationForm">
+<form:form action="author/edit.do" modelAttribute="registrationForm">
 	<jstl:if test="${not empty exception}">
 		<p style="color: red">
-			<spring:message code="reviwer.error" />
+			<spring:message code="author.error" />
 		</p>
 	</jstl:if>
 	<form:hidden path="id" />
@@ -34,59 +33,59 @@
 
 	<fieldset>
 		<legend>
-			<spring:message code="reviwer.personalDatas" />
+			<spring:message code="author.personalDatas" />
 		</legend>
 
 		<form:label path="name">
-			<spring:message code="reviwer.name" />
+			<spring:message code="author.name" />
 		</form:label>
 		<form:input path="name" />
 		<form:errors cssClass="error" path="name" />
 		<br />
 
 		<form:label path="middleName">
-			<spring:message code="reviwer.middleName" />
+			<spring:message code="author.middleName" />
 		</form:label>
 		<form:input path="middleName" />
 		<form:errors cssClass="error" path="middleName" />
 		<br />
 
 		<form:label path="surname">
-			<spring:message code="reviwer.surname" />
+			<spring:message code="author.surname" />
 		</form:label>
 		<form:input path="surname" />
 		<form:errors cssClass="error" path="surname" />
 		<br />
 
 		<form:label path="photo">
-			<spring:message code="reviwer.photo" />
+			<spring:message code="author.photo" />
 		</form:label>
 		<form:input path="photo" />
 		<form:errors cssClass="error" path="photo" />
 		<br />
 
 		<form:label path="email">
-			<spring:message code="reviwer.email" />
+			<spring:message code="author.email" />
 		</form:label>
 		<form:input path="email" />
 		<form:errors cssClass="error" path="email" />
 		<br />
 
 		<form:label path="phone">
-			<spring:message code="reviwer.phone" />
+			<spring:message code="author.phone" />
 		</form:label>
 		<form:input path="phone" />
 		<form:errors cssClass="error" path="phone" />
 		<br />
 
 		<form:label path="address">
-			<spring:message code="reviwer.adress" />
+			<spring:message code="author.adress" />
 		</form:label>
 		<form:input path="address" />
 		<form:errors cssClass="error" path="address" />
 		<br />
 		<p>
-			<spring:message code="reviwer.information" />
+			<spring:message code="author.information" />
 		</p>
 	</fieldset>
 	<br />
@@ -97,20 +96,20 @@
 			<spring:message code="administrator.userAccount" />
 		</legend>
 
-		<acme:textbox code="reviwer.username" path="userAccount.username" />
+		<acme:textbox code="author.username" path="userAccount.username" />
 
-		<acme:password code="reviwer.password" path="userAccount.password" />
+		<acme:password code="author.password" path="userAccount.password" />
 
 
-		<acme:password code="reviwer.confirmation.password" path="password" />
+		<acme:password code="author.confirmation.password" path="password" />
 
 	</fieldset>
 	<br />
 
-	<input type="submit" name="save" onclick=" return validar(); "	value="<spring:message code="reviwer.save"/> ">
+	<input type="submit" name="save" onclick=" return validar(); "	value="<spring:message code="author.save"/> ">
 
 	<input type="button" name="cancel"
-		value="<spring:message code="reviwer.cancel" />"
+		value="<spring:message code="author.cancel" />"
 		onclick="javascript: relativeRedir('welcome/index.do');" />
 
 </form:form>

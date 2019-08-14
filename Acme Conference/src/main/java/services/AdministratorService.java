@@ -19,6 +19,7 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Administrator;
 import forms.RegistrationFormAdmin;
 
@@ -61,6 +62,15 @@ public class AdministratorService {
 
 		admin.setUserAccount(user);
 		return admin;
+	}
+
+	public Administrator findOne(final int adminId) {
+		final Administrator admin = this.administratorRepository.findOne(adminId);
+		final UserAccount userLoged = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(userLoged.getId());
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Assert.isTrue(admin.equals(a));
+		return this.administratorRepository.findOne(adminId);
 	}
 
 	public Administrator save(final Administrator admin) {
@@ -203,7 +213,8 @@ public class AdministratorService {
 			a.setVersion(res.getVersion());
 			a.setAddress(registrationForm.getAddress());
 			a.setEmail(registrationForm.getEmail());
-
+			a.setMiddleName(registrationForm.getMiddleName());
+			a.setSurname(registrationForm.getSurname());
 			a.setName(registrationForm.getName());
 			a.setPhone(registrationForm.getPhone());
 			a.setPhoto(registrationForm.getPhoto());

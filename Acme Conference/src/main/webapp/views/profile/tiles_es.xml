@@ -3,7 +3,7 @@
 <!-- 
  * tiles_es.xml
  *
- * Copyright (C) 2018 Universidad de Sevilla
+ * Copyright (C) 2019 Universidad de Sevilla
  * 
  * The use of this project is hereby constrained to the conditions of the 
  * TDG Licence, a copy of which you may download from 
@@ -15,25 +15,30 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
+
 	
-	<definition name="profile/personal-data" extends="master.page">	
-		<put-attribute name="title" value="Datos personales" />
-		<put-attribute name="body" value="/views/profile/personal-data.jsp" />
+	<definition name="profile/action-1" extends="master.page">	
+		<put-attribute name="title" value="Perfil: Datos personales" />
+		<put-attribute name="body" value="/views/profile/action-1.jsp" />
 	</definition>
+
 	
 	<definition name="profile/editAdmin" extends="master.page">	
 		<put-attribute name="title" value="Perfil: 	Editar sus datos personales" />
-		<put-attribute name="body" value="/views/profile/action-3.jsp" />
+		<put-attribute name="body" value="/views/profile/action-2.jsp" />
 	</definition>
 	
-	<definition name="profile/editSponsor" extends="master.page">	
+	<definition name="profile/editReviwer" extends="master.page">	
 		<put-attribute name="title" value="Perfil: 	Editar sus datos personales" />
-		<put-attribute name="body" value="/views/profile/action-3.jsp" />
+		<put-attribute name="body" value="/views/profile/action-2.jsp" />
 	</definition>
 	
-	<definition name="profile/editReferee" extends="master.page">	
-		<put-attribute name="title" value="Perfil: 	Editar sus datos personales" />
-		<put-attribute name="body" value="/views/profile/action-3.jsp" />
+	
+	<definition name="profile/editAuthor" extends="master.page">	
+		<put-attribute name="title" value="Profile: Edit personal datas" />
+		<put-attribute name="body" value="/views/profile/action-2.jsp" />
 	</definition>
+	
+	
 	
 </tiles-definitions>

@@ -42,6 +42,9 @@
 		
 		<bean class="converters.StringToReviwerConverter" />
 		<bean class="converters.ReviwerToStringConverter" />
+		
+		<bean class="converters.StringToAuthorConverter" />
+		<bean class="converters.AuthorToStringConverter" />
 				
 	</util:list>
 	

@@ -16,13 +16,14 @@ import javax.validation.constraints.Size;
 
 import security.Authority;
 import security.UserAccount;
-import domain.Reviwer;
+import domain.Author;
+import domain.Paper;
 
-public class RegistrationFormReviwer extends Reviwer {
+public class RegistrationFormAuthor extends Author {
 
 	// Constructors -----------------------------------------------------------
 
-	public RegistrationFormReviwer() {
+	public RegistrationFormAuthor() {
 		super();
 	}
 
@@ -53,9 +54,9 @@ public class RegistrationFormReviwer extends Reviwer {
 
 	// Business methods -------------------------------------------------------
 
-	public RegistrationFormReviwer createToReviwer() {
+	public RegistrationFormAuthor createToAuthor() {
 
-		final RegistrationFormReviwer registrationForm = new RegistrationFormReviwer();
+		final RegistrationFormAuthor registrationForm = new RegistrationFormAuthor();
 
 		registrationForm.setPatternPhone(false);
 		registrationForm.setAddress("");
@@ -64,7 +65,8 @@ public class RegistrationFormReviwer extends Reviwer {
 		registrationForm.setPhoto("");
 		registrationForm.setAddress("");
 		registrationForm.setPassword("");
-		registrationForm.setKeyWords(new HashSet<String>());
+		registrationForm.setPapers(new HashSet<Paper>());
+
 		registrationForm.setMiddleName("");
 		registrationForm.setSurname("");
 
@@ -72,7 +74,7 @@ public class RegistrationFormReviwer extends Reviwer {
 		final UserAccount user = new UserAccount();
 		user.setAuthorities(new HashSet<Authority>());
 		final Authority ad = new Authority();
-		ad.setAuthority(Authority.REVIWER);
+		ad.setAuthority(Authority.AUTHOR);
 		user.getAuthorities().add(ad);
 
 		//NUEVO
