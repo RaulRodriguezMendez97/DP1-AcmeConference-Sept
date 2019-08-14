@@ -3,7 +3,6 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -17,10 +16,6 @@ import repositories.SubmissionRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Author;
-import domain.CamaraReady;
-import domain.Conference;
-import domain.Reviwed;
-import domain.Reviwer;
 import domain.Submission;
 import forms.SubmissionReviwedForm;
 
@@ -36,18 +31,21 @@ public class SubmissionService {
 	private Validator				validator;
 
 
-	public Submission create() {
-		final Submission submission = new Submission();
-		submission.setTicker(SubmissionService.generarTicker());
-		submission.setStatus(0);//UNDER REVIEW
-		submission.setAuthor(new Author());
-		submission.setCamaraReady(new CamaraReady());
-		submission.setConference(new Conference());
-		submission.setMoment(new Date());
-		submission.setReviwed(new Reviwed());
-		submission.setReviwers(new HashSet<Reviwer>());
-		return submission;
-	}
+	//	public Submission create() {
+	//		final Submission submission = new Submission();
+	//		final UserAccount user = LoginService.getPrincipal();
+	//		final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+	//
+	//		submission.setTicker("");
+	//		submission.setStatus(0);
+	//		submission.setAuthor(a);
+	//		submission.setCamaraReady(null);
+	//		submission.setConference(new Conference());
+	//		submission.setMoment(new Date());
+	//		submission.setReviwed(new Reviwed());
+	//		submission.setReviwers(new HashSet<Reviwer>());
+	//		return submission;
+	//	}
 
 	public Submission findOne(final int submissionId) {
 		final Submission submission = this.submissionRepository.findOne(submissionId);
@@ -96,18 +94,20 @@ public class SubmissionService {
 	public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		final Submission res = new Submission();
 		if (submissionReviwedForm.getId() == 0) {
+
 			final UserAccount user = LoginService.getPrincipal();
 			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+			res.setAuthor(a);
+
 			res.setId(submissionReviwedForm.getId());
 			res.setVersion(submissionReviwedForm.getVersion());
 			res.setConference(submissionReviwedForm.getConference());
 			res.setMoment(new Date());
-			res.setAuthor(a);
 			res.setStatus(0);
 			res.setTicker(SubmissionService.generarTicker());
 			res.setReviwed(submissionReviwedForm.getReviwed());
-			res.setCamaraReady(null);
-			res.setReviwers(new HashSet<Reviwer>());
+			res.setCamaraReady(submissionReviwedForm.getCamaraReady());
+			res.setReviwers(submissionReviwedForm.getReviwers());
 			this.validator.validate(res, binding);
 			//		} else {
 			//			res = this.submissionRepository.findOne(submissionReviwedForm.getId());

@@ -26,14 +26,14 @@
 <acme:textbox code="report.originalityScore" path="originalityScore"/>
 <acme:textbox code="report.qualityScore" path="qualityScore"/>
 <acme:textbox code="report.eadabilityScore" path="eadabilityScore"/>
-<jstl:if test="${report.id ne 0}">
+
 	<form:label path="decision"><spring:message code="report.decision" />:</form:label>
 		<form:select path="decision">
 			<form:option value="0" label="Rejected" />	
 			<form:option value="1" label="Border line" />	
 			<form:option value="2" label="Accept" />		
 		</form:select>
-</jstl:if>
+
 <acme:textbox code="report.comments" path="comment"/>
 
 <br/>

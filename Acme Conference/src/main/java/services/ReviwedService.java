@@ -23,17 +23,15 @@ public class ReviwedService {
 	private ReviwedRepository	reviwedRepository;
 	@Autowired
 	private Validator			validator;
-	@Autowired
-	private SubmissionService	submissionService;
 
 
-	public Reviwed create() {
-		final Reviwed reviwed = new Reviwed();
-		reviwed.setSummary("");
-		reviwed.setTitle("");
-		reviwed.setUrlDocument("");
-		return reviwed;
-	}
+	//	public Reviwed create() {
+	//		final Reviwed reviwed = new Reviwed();
+	//		reviwed.setSummary("");
+	//		reviwed.setTitle("");
+	//		reviwed.setUrlDocument("");
+	//		return reviwed;
+	//	}
 
 	public Reviwed findOne(final int reviwedId) {
 		return this.reviwedRepository.findOne(reviwedId);

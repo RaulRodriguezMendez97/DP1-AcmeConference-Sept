@@ -28,7 +28,7 @@ public class Submission extends DomainEntity {
 
 	private String				ticker;
 	private Date				moment;
-	private int					status;
+	private int					status;			//0->under-reviwed, 1->rejected, 2->accepted
 	private Author				author;
 	private Conference			conference;	//1 Obligatoriamente
 	private Collection<Reviwer>	reviwers;		// Puede estar vacio

@@ -15,12 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import security.UserAccount;
+import services.AdministratorService;
 import services.AuthorService;
 import services.CamaraReadyService;
 import services.ConferenceService;
 import services.ReviwedService;
 import services.ReviwerService;
 import services.SubmissionService;
+import domain.Administrator;
 import domain.Author;
 import domain.Conference;
 import domain.Reviwed;
@@ -33,17 +35,19 @@ import forms.SubmissionReviwedForm;
 public class SubmissionAuthorAdministratorReviwerController extends AbstractController {
 
 	@Autowired
-	private SubmissionService	submissionService;
+	private SubmissionService		submissionService;
 	@Autowired
-	private ConferenceService	conferenceService;
+	private ConferenceService		conferenceService;
 	@Autowired
-	private ReviwedService		reviwedService;
+	private ReviwedService			reviwedService;
 	@Autowired
-	private CamaraReadyService	camaraReadyService;
+	private CamaraReadyService		camaraReadyService;
 	@Autowired
-	private AuthorService		authorService;
+	private AuthorService			authorService;
 	@Autowired
-	private ReviwerService		reviwerService;
+	private ReviwerService			reviwerService;
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	@RequestMapping(value = "/author/list", method = RequestMethod.GET)
@@ -138,6 +142,45 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/submissionsUnderReviwed", method = RequestMethod.GET)
+	public ModelAndView listAdministratorUnderReviwed() {
+		final ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus0(admin.getId());
+
+		result = new ModelAndView("submission/list");
+		result.addObject("submissions", submissions);
+		result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/submissionsRejected", method = RequestMethod.GET)
+	public ModelAndView listAdministratorRejected() {
+		final ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus1(admin.getId());
+
+		result = new ModelAndView("submission/list");
+		result.addObject("submissions", submissions);
+		result.addObject("uri", "submission/administrator/submissionsRejected.do");
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/submissionsAccepted", method = RequestMethod.GET)
+	public ModelAndView listAdministratorAccepted() {
+		final ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus2(admin.getId());
+
+		result = new ModelAndView("submission/list");
+		result.addObject("submissions", submissions);
+		result.addObject("uri", "submission/administrator/submissionsAccepted.do");
 		return result;
 	}
 

@@ -1,21 +1,25 @@
 
 package forms;
 
-import javax.validation.Valid;
+import java.util.Date;
+import java.util.HashSet;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
+import domain.Author;
 import domain.Conference;
+import domain.Reviwed;
+import domain.Reviwer;
 import domain.Submission;
 
 public class SubmissionReviwedForm extends Submission {
 
-	private String		title;
-	private String		summary;
-	private String		urlDocument;
-	private Conference	conference;
+	private String	title;
+	private String	summary;
+	private String	urlDocument;
 
 
 	@NotNull
@@ -49,26 +53,23 @@ public class SubmissionReviwedForm extends Submission {
 		this.urlDocument = urlDocument;
 	}
 
-	@Override
-	@NotNull
-	@Valid
-	public Conference getConference() {
-		return this.conference;
-	}
-
-	@Override
-	public void setConference(final Conference conference) {
-		this.conference = conference;
-	}
-
 	public SubmissionReviwedForm create() {
 		final SubmissionReviwedForm res = new SubmissionReviwedForm();
 
+		//Reviwed
 		res.setSummary("");
 		res.setTitle("");
-		res.setConference(new Conference());
 		res.setUrlDocument("");
 
+		//Submission
+		res.setConference(new Conference());
+		res.setStatus(0);
+		res.setMoment(new Date());
+		res.setReviwers(new HashSet<Reviwer>());
+		res.setCamaraReady(null);
+		res.setTicker("");
+		res.setAuthor(new Author());
+		res.setReviwed(new Reviwed());
 		return res;
 	}
 

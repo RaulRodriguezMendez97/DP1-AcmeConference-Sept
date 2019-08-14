@@ -42,8 +42,14 @@
 					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.start.less.5" /></a></li>
 				</ul>
 			</li>
-
-			<li><a href="submission/administrator/list.do"><spring:message code="master.page.submission" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.submission" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="submission/administrator/submissionsUnderReviwed.do"><spring:message code="master.page.administrator.submission.underReviwed" /></a></li>
+					<li><a href="submission/administrator/submissionsRejected.do"><spring:message code="master.page.administrator.submission.rejected" /></a></li>
+					<li><a href="submission/administrator/submissionsAccepted.do"><spring:message code="master.page.administrator.submission.accepted" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUTHOR')">
