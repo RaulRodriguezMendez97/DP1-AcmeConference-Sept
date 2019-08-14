@@ -53,7 +53,7 @@ requestURI="submission/reviwer/list.do" >
 
 <security:authorize access="hasRole('ADMIN')">
 <display:table pagesize="5" name="submissions" id="row"
-requestURI="${uri}" >
+requestURI="${uriL}" >
 <display:column property="ticker" titleKey="submission.ticker" />
 <display:column property="moment" titleKey="submission.moment"/>
 <display:column property="status" titleKey="submission.status"/>
@@ -64,7 +64,7 @@ requestURI="${uri}" >
 	</display:column>
 </jstl:if>
 <display:column>
-		<a href="submission/administrator/detail.do?submissionId=${row.id}"><spring:message code="submission.details" /></a> 
+		<a href="${uriD}?submissionId=${row.id}"><spring:message code="submission.details" /></a> 
 </display:column>
 </display:table>
 </security:authorize>

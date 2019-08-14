@@ -142,6 +142,8 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		return result;
 	}
 
+	//ADMINISTRATOR
+
 	@RequestMapping(value = "/administrator/submissionsUnderReviwed", method = RequestMethod.GET)
 	public ModelAndView listAdministratorUnderReviwed() {
 		final ModelAndView result;
@@ -151,38 +153,13 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
-		result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
+		result.addObject("uriL", "submission/administrator/submissionsUnderReviwed.do");
+		result.addObject("uriD", "submission/administrator/detailSubmissionUnderReviwed.do");
 		return result;
 	}
 
-	@RequestMapping(value = "/administrator/submissionsRejected", method = RequestMethod.GET)
-	public ModelAndView listAdministratorRejected() {
-		final ModelAndView result;
-		final UserAccount user = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
-		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus1(admin.getId());
-
-		result = new ModelAndView("submission/list");
-		result.addObject("submissions", submissions);
-		result.addObject("uri", "submission/administrator/submissionsRejected.do");
-		return result;
-	}
-
-	@RequestMapping(value = "/administrator/submissionsAccepted", method = RequestMethod.GET)
-	public ModelAndView listAdministratorAccepted() {
-		final ModelAndView result;
-		final UserAccount user = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
-		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus2(admin.getId());
-
-		result = new ModelAndView("submission/list");
-		result.addObject("submissions", submissions);
-		result.addObject("uri", "submission/administrator/submissionsAccepted.do");
-		return result;
-	}
-
-	@RequestMapping(value = "/administrator/detail", method = RequestMethod.GET)
-	public ModelAndView detailSubmissionAdministrator(@RequestParam final Integer submissionId) {
+	@RequestMapping(value = "/administrator/detailSubmissionUnderReviwed", method = RequestMethod.GET)
+	public ModelAndView detailSubmissionAdministratorUnderReviwed(@RequestParam final Integer submissionId) {
 		ModelAndView result;
 		try {
 			final Submission submission = this.submissionService.findOneAdministrator(submissionId);
@@ -198,6 +175,80 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reviwed", reviwed);
 			result.addObject("reviwed", reviwed);
 			result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/submissionsRejected", method = RequestMethod.GET)
+	public ModelAndView listAdministratorRejected() {
+		final ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus1(admin.getId());
+
+		result = new ModelAndView("submission/list");
+		result.addObject("submissions", submissions);
+		result.addObject("uriL", "submission/administrator/submissionsRejected.do");
+		result.addObject("uriD", "submission/administrator/detailSubmissionRejected.do");
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detailSubmissionRejected", method = RequestMethod.GET)
+	public ModelAndView detailSubmissionAdministratorRejected(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final Submission submission = this.submissionService.findOneAdministrator(submissionId);
+			final Conference conference = this.conferenceService.findOne(submission.getConference().getId());
+			final Reviwed reviwed = this.reviwedService.findOne(submission.getReviwed().getId());
+			Assert.notNull(submission);
+			Assert.notNull(conference);
+			Assert.notNull(reviwed);
+
+			result = new ModelAndView("submission/detail");
+			result.addObject("submission", submission);
+			result.addObject("conference", conference);
+			result.addObject("reviwed", reviwed);
+			result.addObject("reviwed", reviwed);
+			result.addObject("uri", "submission/administrator/submissionsRejected.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/submissionsAccepted", method = RequestMethod.GET)
+	public ModelAndView listAdministratorAccepted() {
+		final ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus2(admin.getId());
+
+		result = new ModelAndView("submission/list");
+		result.addObject("submissions", submissions);
+		result.addObject("uriL", "submission/administrator/submissionsAccepted.do");
+		result.addObject("uriD", "submission/administrator/detailSubmissionAccepted.do");
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detailSubmissionAccepted", method = RequestMethod.GET)
+	public ModelAndView detailSubmissionAdministrator(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final Submission submission = this.submissionService.findOneAdministrator(submissionId);
+			final Conference conference = this.conferenceService.findOne(submission.getConference().getId());
+			final Reviwed reviwed = this.reviwedService.findOne(submission.getReviwed().getId());
+			Assert.notNull(submission);
+			Assert.notNull(conference);
+			Assert.notNull(reviwed);
+
+			result = new ModelAndView("submission/detail");
+			result.addObject("submission", submission);
+			result.addObject("conference", conference);
+			result.addObject("reviwed", reviwed);
+			result.addObject("reviwed", reviwed);
+			result.addObject("uri", "submission/administrator/submissionsAccepted.do");
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../");
 		}
