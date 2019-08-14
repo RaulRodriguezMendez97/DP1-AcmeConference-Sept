@@ -36,3 +36,20 @@
 <acme:cancel url="submission/author/list.do" code="submission.cancel"/>
 </form:form>
 </security:authorize>
+
+
+
+
+
+<security:authorize access="hasRole('ADMIN')">
+<form:form action="submission/administrator/edit.do" modelAttribute="submission">
+<form:hidden path="id"/>
+<form:hidden path="version" />
+
+<acme:multipleSelect items="${reviwers}" itemLabel="email" code="submission.reviwers" path="reviwers"/>
+
+<br/>
+<input type="submit" name="save" value="<spring:message code="submission.save" />" />
+<acme:cancel url="submission/administrator/submissionsUnderReviwed.do" code="submission.cancel"/>
+</form:form>
+</security:authorize>

@@ -87,7 +87,7 @@ public class ReportService {
 			res = report;
 			final UserAccount user = LoginService.getPrincipal();
 			final Reviwer reviwer = this.reviwerRepository.getReviwerByUserAccount(user.getId());
-			final Submission submission = this.submissionService.findOne(submissionId);
+			final Submission submission = this.submissionService.findOneReviwer(submissionId);
 			res.setReviwer(reviwer);
 			res.setSubmission(submission);
 			res.setDecision(0);

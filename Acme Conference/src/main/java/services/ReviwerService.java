@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -63,6 +64,9 @@ public class ReviwerService {
 		return reviwer;
 	}
 
+	public Collection<Reviwer> findAll() {
+		return this.reviwerRepository.findAll();
+	}
 	public Reviwer save(final Reviwer r) {
 
 		Reviwer res = null;

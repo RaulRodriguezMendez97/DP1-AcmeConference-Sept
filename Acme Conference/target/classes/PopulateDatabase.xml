@@ -689,7 +689,7 @@
 	<bean id="submission1" class="domain.Submission">
 		<property name="ticker" value="ASD-123S" />
 		<property name="moment" value="11/05/2018 11:30" />
-		<property name="status" value="0" />
+		<property name="status" value="2" />
 		<property name="author" ref="author1" />
 		<property name="conference" ref="conference1" />
 		<property name="reviwed" ref="reviwed1" />
@@ -706,7 +706,7 @@
 	<bean id="submission2" class="domain.Submission">
 		<property name="ticker" value="ASF-1234" />
 		<property name="moment" value="07/19/2019 11:30" />
-		<property name="status" value="0" />
+		<property name="status" value="2" />
 		<property name="author" ref="author1" />
 		<property name="conference" ref="conference2" />
 		<property name="reviwed" ref="reviwed2" />
@@ -722,11 +722,10 @@
 	<bean id="submission3" class="domain.Submission">
 		<property name="ticker" value="ASP-1235" />
 		<property name="moment" value="07/10/2019 11:30" />
-		<property name="status" value="1" />
+		<property name="status" value="0" />
 		<property name="author" ref="author1" />
 		<property name="conference" ref="conference3" />
 		<property name="reviwed" ref="reviwed3" />
-		<property name="camaraReady" ref="camaraReady3" />
 	</bean>
 	<bean id="submission4" class="domain.Submission">
 		<property name="ticker" value="PSP-1235" />
@@ -735,7 +734,6 @@
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference1" />
 		<property name="reviwed" ref="reviwed4" />
-		<property name="camaraReady" ref="camaraReady4" />
 	</bean>
 	<bean id="submission5" class="domain.Submission">
 		<property name="ticker" value="ESP-1235" />
@@ -744,12 +742,11 @@
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference2" />
 		<property name="reviwed" ref="reviwed5" />
-		<property name="camaraReady" ref="camaraReady5" />
 	</bean>
 	<bean id="submission6" class="domain.Submission">
 		<property name="ticker" value="ESU-1235" />
 		<property name="moment" value="04/10/2019 11:30" />
-		<property name="status" value="2" />
+		<property name="status" value="0" />
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference3" />
 		<property name="reviwed" ref="reviwed6" />
@@ -757,7 +754,7 @@
 	<bean id="submission7" class="domain.Submission">
 		<property name="ticker" value="ELU-1235" />
 		<property name="moment" value="03/10/2019 11:30" />
-		<property name="status" value="2" />
+		<property name="status" value="0" />
 		<property name="author" ref="author3" />
 		<property name="conference" ref="conference4" />
 		<property name="reviwed" ref="reviwed7" />
@@ -773,7 +770,7 @@
 	<bean id="submission9" class="domain.Submission">
 		<property name="ticker" value="ENU-1235" />
 		<property name="moment" value="03/10/2019 11:30" />
-		<property name="status" value="2" />
+		<property name="status" value="0" />
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference4" />
 		<property name="reviwed" ref="reviwed9" />

@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 import domain.Author;
+import domain.CamaraReady;
 import domain.Conference;
 import domain.Reviwed;
 import domain.Reviwer;
@@ -66,7 +67,7 @@ public class SubmissionReviwedForm extends Submission {
 		res.setStatus(0);
 		res.setMoment(new Date());
 		res.setReviwers(new HashSet<Reviwer>());
-		res.setCamaraReady(null);
+		res.setCamaraReady(new CamaraReady());
 		res.setTicker("");
 		res.setAuthor(new Author());
 		res.setReviwed(new Reviwed());

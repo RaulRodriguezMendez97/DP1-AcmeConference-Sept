@@ -17,7 +17,6 @@ import security.LoginService;
 import security.UserAccount;
 import services.AdministratorService;
 import services.AuthorService;
-import services.CamaraReadyService;
 import services.ConferenceService;
 import services.ReviwedService;
 import services.ReviwerService;
@@ -41,8 +40,6 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@Autowired
 	private ReviwedService			reviwedService;
 	@Autowired
-	private CamaraReadyService		camaraReadyService;
-	@Autowired
 	private AuthorService			authorService;
 	@Autowired
 	private ReviwerService			reviwerService;
@@ -63,10 +60,10 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	}
 
 	@RequestMapping(value = "/author/detail", method = RequestMethod.GET)
-	public ModelAndView detail(@RequestParam final Integer submissionId) {
+	public ModelAndView detailSubmissionAuthor(@RequestParam final Integer submissionId) {
 		ModelAndView result;
 		try {
-			final Submission submission = this.submissionService.findOne(submissionId);
+			final Submission submission = this.submissionService.findOneAuthor(submissionId);
 			final Conference conference = this.conferenceService.findOne(submission.getConference().getId());
 			final Reviwed reviwed = this.reviwedService.findOne(submission.getReviwed().getId());
 			Assert.notNull(submission);
@@ -100,7 +97,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	}
 
 	@RequestMapping(value = "/author/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("submissionReviwedForm") final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
+	public ModelAndView saveSubmissionAuthor(@ModelAttribute("submissionReviwedForm") final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		ModelAndView result;
 		Submission submission = null;
 		Reviwed reviwed = null;
@@ -181,6 +178,70 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
 		result.addObject("uri", "submission/administrator/submissionsAccepted.do");
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detail", method = RequestMethod.GET)
+	public ModelAndView detailSubmissionAdministrator(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final Submission submission = this.submissionService.findOneAdministrator(submissionId);
+			final Conference conference = this.conferenceService.findOne(submission.getConference().getId());
+			final Reviwed reviwed = this.reviwedService.findOne(submission.getReviwed().getId());
+			Assert.notNull(submission);
+			Assert.notNull(conference);
+			Assert.notNull(reviwed);
+
+			result = new ModelAndView("submission/detail");
+			result.addObject("submission", submission);
+			result.addObject("conference", conference);
+			result.addObject("reviwed", reviwed);
+			result.addObject("reviwed", reviwed);
+			result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int submissionId) {
+		ModelAndView result;
+		try {
+			final Submission submission = this.submissionService.findOneAdministrator(submissionId);
+			final Collection<Reviwer> reviwers = this.reviwerService.findAll();
+			Assert.notNull(submission);
+			result = new ModelAndView("submission/edit");
+			result.addObject("submission", submission);
+			result.addObject("reviwers", reviwers);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:submissionsUnderReviwed.do");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveSubmissionAdministrator(final Submission submission, final BindingResult binding) {
+		ModelAndView result;
+
+		//		try {
+		final Submission s = this.submissionService.reconstructSubmissionAdministrator(submission, binding);
+		if (!binding.hasErrors()) {
+			this.submissionService.saveAdmin(s);
+			result = new ModelAndView("redirect:submissionsUnderReviwed.do");
+		} else {
+			final Collection<Reviwer> reviwers = this.reviwerService.findAll();
+			result = new ModelAndView("submission/edit");
+			result.addObject("submission", submission);
+			result.addObject("reviwers", reviwers);
+		}
+		//		} catch (final Exception e) {
+		//			final Collection<Reviwer> reviwers = this.reviwerService.findAll();
+		//			result = new ModelAndView("submission/edit");
+		//			result.addObject("exception", e);
+		//			result.addObject("submission", submission);
+		//			result.addObject("reviwers", reviwers);
+		//		}
 		return result;
 	}
 

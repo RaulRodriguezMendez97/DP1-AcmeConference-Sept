@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,11 +48,28 @@ public class SubmissionService {
 	//		return submission;
 	//	}
 
-	public Submission findOne(final int submissionId) {
+	//FindOne si esta logueado como author
+	public Submission findOneAuthor(final int submissionId) {
 		final Submission submission = this.submissionRepository.findOne(submissionId);
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
 		Assert.isTrue(submission.getAuthor().equals(this.authorService.getAuthorByUserAccount(userAccount.getId())));
+		return submission;
+	}
+
+	//FindOne si esta logueado como Administrator
+	public Submission findOneAdministrator(final int submissionId) {
+		final Submission submission = this.submissionRepository.findOne(submissionId);
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		return submission;
+	}
+
+	//FindOne si esta logueado como Reviwer
+	public Submission findOneReviwer(final int submissionId) {
+		final Submission submission = this.submissionRepository.findOne(submissionId);
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("REVIWER"));
 		return submission;
 	}
 	public Collection<Submission> findAll() {
@@ -60,10 +78,23 @@ public class SubmissionService {
 
 	public Submission save(final Submission submission) {
 		final UserAccount userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR") || userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		Assert.isTrue(submission.getAuthor().equals(this.authorService.getAuthorByUserAccount(userAccount.getId())));
 		if (submission.getId() == 0)
 			Assert.isTrue(submission.getStatus() == 0);
+		if (submission.getStatus() == 2)
+			Assert.isTrue(!submission.getReviwers().isEmpty());
+		final Submission submissionSave = this.submissionRepository.save(submission);
+		return submissionSave;
+	}
+
+	public Submission saveAdmin(final Submission submission) {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		if (submission.getId() == 0)
+			Assert.isTrue(submission.getStatus() == 0);
+		if (submission.getStatus() == 2)
+			Assert.isTrue(!submission.getReviwers().isEmpty());
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
 	}
@@ -99,7 +130,7 @@ public class SubmissionService {
 			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
 			res.setAuthor(a);
 
-			res.setId(submissionReviwedForm.getId());
+			//			res.setId(submissionReviwedForm.getId());
 			res.setVersion(submissionReviwedForm.getVersion());
 			res.setConference(submissionReviwedForm.getConference());
 			res.setMoment(new Date());
@@ -128,6 +159,33 @@ public class SubmissionService {
 			//
 			//			this.validator.validate(p, binding);
 			//			res = p;
+		}
+		return res;
+	}
+
+	public Submission reconstructSubmissionAdministrator(final Submission submission, final BindingResult binding) {
+		Submission res = null;
+		if (submission.getId() == 0) {
+
+		} else {
+			res = this.submissionRepository.findOne(submission.getId());
+			final Submission p = new Submission();
+			p.setId(res.getId());
+			p.setVersion(res.getVersion());
+			p.setMoment(res.getMoment());
+			p.setAuthor(res.getAuthor());
+			p.setConference(res.getConference());
+			p.setCamaraReady(res.getCamaraReady());
+			p.setStatus(res.getStatus());
+			p.setTicker(res.getTicker());
+			p.setReviwed(res.getReviwed());
+
+			p.setReviwers(submission.getReviwers());
+
+			this.validator.validate(p, binding);
+			if (binding.hasErrors())
+				throw new ValidationException();
+			res = p;
 		}
 		return res;
 	}
