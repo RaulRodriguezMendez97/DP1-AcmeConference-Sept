@@ -12,7 +12,6 @@ import org.springframework.validation.Validator;
 
 import repositories.PictureRepository;
 import domain.Picture;
-import domain.Section;
 
 @Service
 @Transactional
@@ -27,7 +26,6 @@ public class PictureService {
 	public Picture create() {
 		final Picture picture = new Picture();
 		picture.setUrlPicture("");
-		picture.setSection(new Section());
 		return picture;
 	}
 
@@ -57,7 +55,6 @@ public class PictureService {
 			copy.setId(res.getId());
 			copy.setVersion(res.getVersion());
 			copy.setUrlPicture(picture.getUrlPicture());
-			copy.setSection(picture.getSection());
 			this.validator.validate(copy, binding);
 
 			res = copy;

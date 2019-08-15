@@ -14,95 +14,25 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<script type="text/javascript" src="scripts/finder.js"></script>
+<security:authorize access="hasRole('ADMIN')">
 
-<security:authorize access="hasRole('HANDYWORKER')">
+<spring:message	code="tutorial.title" />: <jstl:out value="${tutorial.title}"></jstl:out> <br/>
+<spring:message	code="tutorial.speaker" />: <jstl:out value="${tutorial.speaker}"></jstl:out> <br/>
+<spring:message	code="tutorial.room" />: <jstl:out value="${tutorial.room}"></jstl:out> <br/>
+<spring:message	code="tutorial.schedule" />: <jstl:out value="${tutorial.schedule}"></jstl:out> <br/>
+<spring:message	code="tutorial.duration" />: <jstl:out value="${tutorial.duration}"></jstl:out> <br/>
+<spring:message	code="tutorial.summary" />: <jstl:out value="${tutorial.summary}"></jstl:out> <br/>
+<spring:message	code="tutorial.attachments" />: <jstl:out value="${tutorial.attachments}"></jstl:out> <br/>
+	<display:table name="sections" id="row" >
+		<display:column titleKey="tutorial.section.title">
+			<jstl:out value="${row.title}"></jstl:out>
+		</display:column>
 
-<p><spring:message code="finder.show" /></p>
-<jstl:if test="${not empty exception}">
-		<p style="color:red"> <spring:message code="finder.error" /> </p>
-</jstl:if>
+		<display:column titleKey="tutorial.section.summary">
+			<jstl:out value="${row.summary}"></jstl:out>
+		</display:column>
+	</display:table>
 
-<display:table pagesize="5" name="finder" id="row" requestURI="finder/show.do" >
-
-<display:column property="ticker" titleKey="filter.ticker" />
-<display:column property="description" titleKey="filter.description"/>
-<display:column property="address" titleKey="filter.address" />
-<display:column property="startDate" titleKey="filter.startDate" />
-<display:column property="endDate" titleKey="filter.endDate" />
-<display:column property="lowPrice" titleKey="filter.lowPrice" />
-<display:column property="highPrice" titleKey="filter.highPrice" />
-<display:column property="category.name" titleKey="filter.category" />
-<display:column property="warranty.title" titleKey="filter.warranty" />
-
-</display:table>
-
-<div style="text-align:center;">
-	<a href="finder/handy-worker/list.do" ><spring:message code="filter.busqueda-anterior" /></a>
-</div>
-
-<spring:message code="finder.keyword"/>:
-<input id="keyword" type = "text" name = "keyword" oninput="getValue()" value="${finder.ticker}">
-<br />
-
-<form:form action="finder/handy-worker/save.do" modelAttribute="finder">
-	<form:hidden path="id"/>
-	<form:hidden path="version"/>
-	<form:hidden path="moment"/>
-	<form:hidden id="ticker" path="ticker" value=""/>
-	<form:hidden id="description" path="description" value=""/>
-	<form:hidden id="address" path="address" value=""/>
-	
-	<form:label path="startDate">
-	<spring:message code="filter.startDate"/>:
-	</form:label>
-	<form:input path="startDate"/>
-	<form:errors cssClass="error" path="startDate"/>
-	<br />
-	
-	<form:label path="endDate">
-	<spring:message code="filter.endDate"/>:
-	</form:label>
-	<form:input path="endDate"/>
-	<form:errors cssClass="error" path="endDate"/>
-	<br />
-	
-	<form:label path="lowPrice">
-	<spring:message code="filter.lowPrice"/>:
-	</form:label>
-	<form:input path="lowPrice"/>
-	<form:errors cssClass="error" path="lowPrice"/>
-	<br />
-	
-	<form:label path="highPrice">
-	<spring:message code="filter.highPrice"/>:
-	</form:label>
-	<form:input path="highPrice"/>
-	<form:errors cssClass="error" path="highPrice"/>
-	<br />
-	
-	<form:label path="category">
-	<spring:message code="filter.category"/>:
-	</form:label>
-	<form:select path="category">
-		<form:options items="${categories}" itemLabel="name" itemValue="id"/>
-		<form:option label="todas" value="-1"></form:option>
-	</form:select>
-	<br />
-	
-	<form:label path="warranty">
-	<spring:message code="filter.warranty"/>:
-	</form:label>
-	<form:select path="warranty">
-		<form:options items="${warranties}" itemLabel="title" itemValue="id"/>
-		<form:option label="todas" value="-1"></form:option>
-	</form:select>
-	
-	<br /><br />
-		
-	<input type="submit" name="search" 
-	value="<spring:message code="filter.search" />" onclick="cadenaVacia()" />
-</form:form>
 </security:authorize>
 
 

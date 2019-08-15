@@ -32,6 +32,18 @@
 			<jstl:out value="${row.speaker}"></jstl:out>
 		</display:column>
 
+		<display:column titleKey="tutorial.duration">
+			<jstl:out value="${row.duration}"></jstl:out>
+		</display:column>
+
+		<display:column titleKey="tutorial.schedule">
+			<jstl:out value="${row.schedule}"></jstl:out>
+		</display:column>
+
+		<display:column titleKey="tutorial.room">
+			<jstl:out value="${row.room}"></jstl:out>
+		</display:column>
+
 		<display:column titleKey="tutorial.show">
 			<a href="tutorial/administrator/show.do?tutorialId=${row.id}"><spring:message
 					code="tutorial.show" /></a>

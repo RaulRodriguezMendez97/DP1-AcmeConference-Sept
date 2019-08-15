@@ -453,17 +453,14 @@
 	<!-- Picture -->
 	<bean id="picture1" class="domain.Picture">
 		<property name="urlPicture" value="https://goo.gl/images/BBstA5"></property>
-		<property name="section" ref="section1"></property>
 	</bean>
 
 	<bean id="picture2" class="domain.Picture">
 		<property name="urlPicture" value="https://goo.gl/images/C8yiYE"></property>
-		<property name="section" ref="section1"></property>
 	</bean>
 
 	<bean id="picture3" class="domain.Picture">
 		<property name="urlPicture" value="https://goo.gl/images/dLjah6"></property>
-		<property name="section" ref="section2"></property>
 	</bean>
 
 
@@ -472,31 +469,55 @@
 		<property name="title" value="Sección 1"></property>
 		<property name="summary" value="summary seccion 1"></property>
 		<property name="tutorial" ref="tutorial1"></property>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="section2" class="domain.Section">
 		<property name="title" value="Sección 2"></property>
 		<property name="summary" value="summary seccion 2"></property>
 		<property name="tutorial" ref="tutorial1"></property>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="section3" class="domain.Section">
 		<property name="title" value="Sección 3"></property>
 		<property name="summary" value="summary seccion 3"></property>
 		<property name="tutorial" ref="tutorial2"></property>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="section4" class="domain.Section">
 		<property name="title" value="Sección 4"></property>
 		<property name="summary" value="summary seccion 4"></property>
 		<property name="tutorial" ref="tutorial2"></property>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="section5" class="domain.Section">
 		<property name="title" value="Sección 5"></property>
 		<property name="summary" value="summary seccion 5"></property>
 		<property name="tutorial" ref="tutorial3"></property>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="section6" class="domain.Section">
 		<property name="title" value="Sección 6"></property>
 		<property name="summary" value="summary seccion 6"></property>
 		<property name="tutorial" ref="tutorial3"></property>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Tutorial -->

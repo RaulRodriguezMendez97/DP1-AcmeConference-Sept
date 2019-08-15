@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.SectionRepository;
+import domain.Picture;
 import domain.Section;
 import domain.Tutorial;
 
@@ -29,6 +31,7 @@ public class SectionService {
 		section.setSummary("");
 		section.setTitle("");
 		section.setTutorial(new Tutorial());
+		section.setPictures(new HashSet<Picture>());
 		return section;
 	}
 
@@ -60,6 +63,7 @@ public class SectionService {
 			copy.setSummary(section.getSummary());
 			copy.setTitle(section.getTitle());
 			copy.setTutorial(section.getTutorial());
+			copy.setPictures(section.getPictures());
 			this.validator.validate(copy, binding);
 
 			res = copy;
@@ -72,4 +76,7 @@ public class SectionService {
 		this.sectionRepository.delete(section.getId());
 	}
 
+	public Collection<Section> getSectionsByTutorial(final int tutorialId) {
+		return this.sectionRepository.getSectionsByTutorial(tutorialId);
+	}
 }
