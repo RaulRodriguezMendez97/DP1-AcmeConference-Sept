@@ -94,6 +94,11 @@
 		<security:intercept-url pattern="/conference/administrator/camera-ready-less-5.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/conference/administrator/start-less-5.do" access="hasRole('ADMIN')" /> 
 		
+		<security:intercept-url pattern="/tutorial/administrator/list.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/tutorial/administrator/edit.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/tutorial/administrator/delete.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/tutorial/administrator/show.do" access="hasRole('ADMIN')" /> 
+		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
