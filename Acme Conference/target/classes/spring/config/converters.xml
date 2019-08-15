@@ -45,6 +45,24 @@
 		
 		<bean class="converters.StringToAuthorConverter" />
 		<bean class="converters.AuthorToStringConverter" />
+		
+		<bean class="converters.StringToActivityConverter" />
+		<bean class="converters.ActivityToStringConverter" />
+		
+		<bean class="converters.StringToPresentationConverter" />
+		<bean class="converters.PresentationToStringConverter" />
+		
+		<bean class="converters.StringToPanelConverter" />
+		<bean class="converters.PanelToStringConverter" />
+		
+		<bean class="converters.StringToTutorialConverter" />
+		<bean class="converters.TutorialToStringConverter" />
+		
+		<bean class="converters.StringToPictureConverter" />
+		<bean class="converters.PictureToStringConverter" />
+		
+		<bean class="converters.StringToSectionConverter" />
+		<bean class="converters.SectionToStringConverter" />
 				
 	</util:list>
 	
