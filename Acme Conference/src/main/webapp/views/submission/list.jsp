@@ -24,7 +24,19 @@ requestURI="submission/author/list.do" >
 	  		 <a href="submission/author/detail.do?submissionId=${row.id}"><spring:message code="submission.details" /></a> 
 </display:column>
 <display:column property="moment" titleKey="submission.moment"/>
-<display:column property="status" titleKey="submission.status"/>
+<display:column titleKey="submission.status">
+
+	<jstl:if test="${row.status eq 0 }">
+		<spring:message code="submission.status.0" />
+	</jstl:if>
+	<jstl:if test="${row.status eq 1 }">
+		<spring:message code="submission.status.1" />
+	</jstl:if>
+	<jstl:if test="${row.status eq 2 }">
+		<spring:message code="submission.status.2" />
+	</jstl:if>
+
+</display:column>
 <display:column property="conference.title" titleKey="submission.conference.table"/>
 <display:column property="reviwed.title" titleKey="submission.reviwed.table.title"/>
 <display:column property="reviwed.summary" titleKey="submission.reviwed.table.summary"/>
