@@ -40,11 +40,6 @@ public class PictureService {
 	}
 
 	public Picture save(final Picture picture) {
-
-		if (picture.getId() != 0) {
-
-		}
-
 		final Picture saved = this.pictureRepository.save(picture);
 		return saved;
 	}
@@ -65,7 +60,7 @@ public class PictureService {
 			copy.setSection(picture.getSection());
 			this.validator.validate(copy, binding);
 
-			return copy;
+			res = copy;
 		}
 		return res;
 
