@@ -26,7 +26,7 @@ public class CamaraReadyAuthorController extends AbstractController {
 
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam final Integer idSubmission) {
+	public ModelAndView show(@RequestParam final Integer idSubmission) {
 		ModelAndView result;
 		try {
 			final String lang = LocaleContextHolder.getLocale().getLanguage();
@@ -41,6 +41,34 @@ public class CamaraReadyAuthorController extends AbstractController {
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
 		}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam final Integer idSubmission) {
+		ModelAndView result;
+
+		final CamaraReady camaraReady = this.camaraReadyService.create();
+
+		result = new ModelAndView("camera-ready/edit");
+		result.addObject("camaraReady", camaraReady);
+		result.addObject("idSubmission", idSubmission);
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final Integer idCameraReady, @RequestParam final Integer idSubmission) {
+		ModelAndView result;
+
+		final CamaraReady camaraReady = this.camaraReadyService.findOne(idCameraReady);
+
+		result = new ModelAndView("camera-ready/edit");
+		result.addObject("camaraReady", camaraReady);
+		result.addObject("idSubmission", idSubmission);
+
 		return result;
 
 	}

@@ -19,11 +19,11 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <security:authorize access="hasRole('AUTHOR')">
-
+<jstl:if test="${camaraReady ne null }">
 	<b><spring:message code="camaraReady.title" /> : </b> <jstl:out value="${camaraReady.title}"></jstl:out> <br/>
 	<b><spring:message code="camaraReady.summary" /> : </b> <jstl:out value="${camaraReady.summary}"></jstl:out> <br/>
 	<b><spring:message code="camaraReady.urlDocument" /> : </b> <jstl:out value="${camaraReady.urlDocument}"></jstl:out> <br/>
-
+</jstl:if>
 	<h3><spring:message code="submission.conference" /></h3>
 	<jstl:if test="${lang eq 'es' }">
 	<b><spring:message code="conference.cameraDeadline" />:</b>
@@ -38,7 +38,18 @@
 	</jstl:if>
 	
 <br/>
-<input type="button" name="cancel" value="<spring:message code="camaraReady.cancel" />"
+
+<jstl:if test="${camaraReady eq null }">
+	<input type="button" name="save" value="<spring:message code="camaraReady.create" />"
+			onclick="javascript: relativeRedir('camera-ready/author/create.do?idSubmission=${submission.id}');" />
+</jstl:if>
+
+<jstl:if test="${camaraReady ne null }">
+	<input type="button" name="save" value="<spring:message code="camaraReady.edit" />"
+			onclick="javascript: relativeRedir('camera-ready/author/edit.do?idCameraReady=${camaraReady.id }&&idSubmission=${submission.id}');" />
+</jstl:if>
+	
+	<input type="button" name="cancel" value="<spring:message code="camaraReady.cancel" />"
 			onclick="javascript: relativeRedir('submission/author/list.do');" />
 
 </security:authorize>

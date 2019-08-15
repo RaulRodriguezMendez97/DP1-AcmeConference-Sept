@@ -18,22 +18,23 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<security:authorize access="hasRole('ADMIN')">
+<security:authorize access="hasRole('AUTHOR')">
 
-<form:form action="topic/administrator/create.do" modelAttribute="topic">
+<form:form action="camera-ready/author/edit.do" modelAttribute="camaraReady">
 
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	
-	<acme:textbox code="topic.name" path="name"/>
-	<acme:textbox code="topic.spanishName" path="spanishName"/>
+	<acme:textbox code="camaraReady.title" path="title"/>
+	<acme:textbox code="camaraReady.summary" path="summary"/>
+	<acme:textbox code="camaraReady.urlDocument" path="urlDocument"/>
 	
 	<br/>
 	<input type="submit" name="save" 
-	value="<spring:message code="topic.save" />" />
+	value="<spring:message code="camaraReady.save" />" />
 
-	<input type="button" name="cancel" value="<spring:message code="topic.cancel" />"
-			onclick="javascript: relativeRedir('topic/administrator/list.do');" />
+	<input type="button" name="cancel" value="<spring:message code="camaraReady.cancel" />"
+			onclick="javascript: relativeRedir('camera-ready/author/show.do?idSubmission=${idSubmission}');" />
 </form:form>
 
 
