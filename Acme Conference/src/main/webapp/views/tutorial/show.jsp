@@ -16,13 +16,14 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<spring:message	code="tutorial.title" />: <jstl:out value="${tutorial.title}"></jstl:out> <br/>
-<spring:message	code="tutorial.speaker" />: <jstl:out value="${tutorial.speaker}"></jstl:out> <br/>
-<spring:message	code="tutorial.room" />: <jstl:out value="${tutorial.room}"></jstl:out> <br/>
-<spring:message	code="tutorial.schedule" />: <jstl:out value="${tutorial.schedule}"></jstl:out> <br/>
-<spring:message	code="tutorial.duration" />: <jstl:out value="${tutorial.duration}"></jstl:out> <br/>
-<spring:message	code="tutorial.summary" />: <jstl:out value="${tutorial.summary}"></jstl:out> <br/>
-<spring:message	code="tutorial.attachments" />: <jstl:out value="${tutorial.attachments}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.title" />:</b> <jstl:out value="${tutorial.title}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.speaker" />:</b> <jstl:out value="${tutorial.speaker}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.room" />:</b> <jstl:out value="${tutorial.room}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.schedule" />:</b> <jstl:out value="${tutorial.schedule}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.duration" />:</b> <jstl:out value="${tutorial.duration}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.summary" />:</b> <jstl:out value="${tutorial.summary}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.attachments" />:</b> <jstl:out value="${tutorial.attachments}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.sections" />:</b>
 	<display:table name="sections" id="row" >
 		<display:column titleKey="tutorial.section.title">
 			<jstl:out value="${row.title}"></jstl:out>
@@ -30,6 +31,12 @@
 
 		<display:column titleKey="tutorial.section.summary">
 			<jstl:out value="${row.summary}"></jstl:out>
+		</display:column>
+
+		<display:column titleKey="tutorial.section.pictures">
+			<jstl:forEach items="${row.pictures}" var="item">
+    			<img width="80" height="80" src="${item.urlPicture}">
+			</jstl:forEach>
 		</display:column>
 	</display:table>
 
