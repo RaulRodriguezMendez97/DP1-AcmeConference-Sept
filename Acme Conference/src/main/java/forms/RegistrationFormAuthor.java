@@ -66,7 +66,6 @@ public class RegistrationFormAuthor extends Author {
 		registrationForm.setAddress("");
 		registrationForm.setPassword("");
 		registrationForm.setPapers(new HashSet<Paper>());
-
 		registrationForm.setMiddleName("");
 		registrationForm.setSurname("");
 

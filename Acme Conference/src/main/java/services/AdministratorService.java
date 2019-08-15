@@ -148,9 +148,6 @@ public class AdministratorService {
 
 			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
 
-			if (res.getPhone().length() <= 5)
-				res.setPhone("");
-
 			if (registrationForm.getPatternPhone() == false) {
 				final String regexTelefono = "^\\+[0-9]{0,3}\\s\\([0-9]{0,3}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}|^\\+[0-9]\\ $|^$|^\\+$";
 				final Pattern patternTelefono = Pattern.compile(regexTelefono);
@@ -218,9 +215,6 @@ public class AdministratorService {
 			a.setName(registrationForm.getName());
 			a.setPhone(registrationForm.getPhone());
 			a.setPhoto(registrationForm.getPhoto());
-
-			if (a.getPhone().length() <= 5)
-				a.setPhone("");
 
 			if (registrationForm.getPatternPhone() == false) {
 				final String regexTelefono = "^\\+[0-9]{0,3}\\s\\([0-9]{0,3}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}|^\\+[0-9]\\ $|^$|^\\+$";

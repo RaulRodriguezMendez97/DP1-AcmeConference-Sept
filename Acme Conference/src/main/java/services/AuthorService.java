@@ -107,7 +107,7 @@ public class AuthorService {
 		res = this.authorRepository.save(a);
 		return res;
 	}
-	public final Author reconstruct(final RegistrationFormAuthor registrationForm, final BindingResult binding) {
+	public Author reconstruct(final RegistrationFormAuthor registrationForm, final BindingResult binding) {
 		Author res = new Author();
 
 		if (registrationForm.getId() == 0) {
@@ -132,9 +132,6 @@ public class AuthorService {
 			user.setPassword(registrationForm.getUserAccount().getPassword());
 
 			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
-
-			if (res.getPhone().length() <= 5)
-				res.setPhone("");
 
 			if (registrationForm.getPatternPhone() == false) {
 				final String regexTelefono = "^\\+[0-9]{0,3}\\s\\([0-9]{0,3}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}|^\\+[0-9]\\ $|^$|^\\+$";
@@ -195,9 +192,6 @@ public class AuthorService {
 			p.setSurname(registrationForm.getSurname());
 			p.setPapers(res.getPapers());
 			p.setMiddleName(registrationForm.getMiddleName());
-
-			if (p.getPhone().length() <= 5)
-				p.setPhone("");
 
 			final String regexEmail1 = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";
 			final Pattern patternEmail1 = Pattern.compile(regexEmail1);

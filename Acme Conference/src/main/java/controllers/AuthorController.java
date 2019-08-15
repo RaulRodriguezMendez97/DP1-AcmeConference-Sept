@@ -62,7 +62,9 @@ public class AuthorController extends AbstractController {
 		try {
 
 			author = this.authorService.reconstruct(registrationForm, binding);
+
 			if (!binding.hasErrors() && registrationForm.getUserAccount().getPassword().equals(registrationForm.getPassword())) {
+
 				this.authorService.save(author);
 				result = new ModelAndView("redirect:/");
 			} else {
