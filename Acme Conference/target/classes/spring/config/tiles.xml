@@ -35,9 +35,7 @@
 		<value>/views/report/tiles.xml</value>
 		<value>/views/reviwer/tiles.xml</value>
 		<value>/views/author/tiles.xml</value>
-		
-		
-		
+		<value>/views/tutorial/tiles.xml</value>
 		
 	</util:list>
 

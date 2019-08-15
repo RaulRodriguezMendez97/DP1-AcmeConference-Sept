@@ -1,5 +1,5 @@
 <%--
- * action-2.jsp
+ * action-1.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -16,12 +16,22 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="tutorial.sponsorship" /></p>
-<display:table pagesize="5" name="sponsorships" id="row"
-requestURI="tutorial/showTutorialSponsorshipHW.do" >
 
-<display:column property="urlBanner" titleKey="tutorial.sponsorship.urlBanner" />
-<display:column property="linkTargetPage" titleKey="tutorial.sponsorship.linkTargetPage" />
-<display:column property="creditCard.number" titleKey="tutorial.sponsorship.creditCard" />
-<display:column property="sponsor.id" titleKey="tutorial.sponsorship.sponsor" />
+<security:authorize access="hasRole('ADMIN')">
+
+<display:table pagesize="5" name="tutorials" id="row"
+requestURI="tutorial/administrator/list.do" >
+	
+	<!--<display:column  titleKey="topic.name" >
+		<jstl:out value="${row.spanishName}"></jstl:out>
+    </display:column>-->
+
+	<display:column>
+	   <a href="tutorial/administrator/show.do?tutorialId=${row.id}"><spring:message code="tutorial.show" /></a>   
+    </display:column>
+
 </display:table>
+
+<input type="button" name="create" value="<spring:message code="tutorial.create" />"
+			onclick="javascript: relativeRedir('tutorial/administrator/edit.do');" />
+</security:authorize>

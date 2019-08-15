@@ -50,6 +50,14 @@
 					<li><a href="submission/administrator/submissionsAccepted.do"><spring:message code="master.page.administrator.submission.accepted" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.administrador.activity" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="tutorial/administrator/list.do"><spring:message code="master.page.administrator.tutorial" /></a></li>
+					<li><a href="panel/administrator/list.do"><spring:message code="master.page.administrator.panel" /></a></li>
+					<li><a href="presentation/administrator/list.do"><spring:message code="master.page.administrator.presentation" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUTHOR')">
