@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,6 +85,28 @@ public class CamaraReadyAuthorController extends AbstractController {
 		}
 		return result;
 
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(@RequestParam final Integer idSubmission, final CamaraReady camaraReady, final BindingResult binding) {
+
+		ModelAndView result;
+
+		final CamaraReady c = this.camaraReadyService.reconstruct(camaraReady, binding);
+		if (!binding.hasErrors()) {
+			final CamaraReady saved = this.camaraReadyService.save(c);
+			final Submission submission = this.submissionService.findOne(idSubmission);
+			submission.setCamaraReady(saved);
+			this.submissionService.save(submission);
+			result = new ModelAndView("redirect:show.do?idSubmission=" + idSubmission);
+		} else {
+			result = new ModelAndView("camera-ready/edit");
+			result.addObject("camaraReady", camaraReady);
+			result.addObject("idSubmission", idSubmission);
+
+		}
+
+		return result;
 	}
 
 }

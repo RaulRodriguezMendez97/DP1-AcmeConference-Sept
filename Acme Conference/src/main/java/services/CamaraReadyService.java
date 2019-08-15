@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CamaraReadyRepository;
 import domain.CamaraReady;
@@ -17,6 +19,9 @@ public class CamaraReadyService {
 
 	@Autowired
 	private CamaraReadyRepository	camaraReadyRepository;
+
+	@Autowired
+	private Validator				validator;
 
 
 	public CamaraReady create() {
@@ -44,5 +49,16 @@ public class CamaraReadyService {
 	public CamaraReady save(final CamaraReady camaraReady) {
 		final CamaraReady saved = this.camaraReadyRepository.save(camaraReady);
 		return saved;
+	}
+
+	public CamaraReady reconstruct(final CamaraReady camaraReady, final BindingResult binding) {
+		CamaraReady res;
+
+		//if (camaraReady.getId() == 0) {
+		res = camaraReady;
+		this.validator.validate(res, binding);
+		return res;
+
+		//}
 	}
 }

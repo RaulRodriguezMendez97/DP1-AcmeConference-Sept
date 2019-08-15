@@ -20,7 +20,7 @@
 
 <security:authorize access="hasRole('AUTHOR')">
 
-<form:form action="camera-ready/author/edit.do" modelAttribute="camaraReady">
+<form:form action="camera-ready/author/edit.do?idSubmission=${idSubmission }" modelAttribute="camaraReady">
 
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
