@@ -66,4 +66,8 @@ public class PictureService {
 
 	}
 
+	public void delete(final Picture picture) {
+		this.pictureRepository.delete(picture.getId());
+	}
+
 }

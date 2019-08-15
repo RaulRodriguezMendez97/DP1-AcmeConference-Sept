@@ -80,4 +80,8 @@ public class PanelService {
 
 	}
 
+	public void delete(final Panel panel) {
+		this.panelRepository.delete(panel.getId());
+	}
+
 }

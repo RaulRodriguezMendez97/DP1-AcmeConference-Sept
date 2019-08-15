@@ -82,4 +82,8 @@ public class PresentationService {
 		return res;
 
 	}
+
+	public void delete(final Presentation presentation) {
+		this.presentationRepository.delete(presentation.getId());
+	}
 }

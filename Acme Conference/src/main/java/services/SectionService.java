@@ -68,4 +68,8 @@ public class SectionService {
 
 	}
 
+	public void delete(final Section section) {
+		this.sectionRepository.delete(section.getId());
+	}
+
 }

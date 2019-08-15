@@ -79,4 +79,8 @@ public class TutorialService {
 		return res;
 
 	}
+
+	public void delete(final Tutorial tutorial) {
+		this.tutorialRepository.delete(tutorial.getId());
+	}
 }
