@@ -2,6 +2,7 @@
 package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +29,15 @@ public class CamaraReadyAuthorController extends AbstractController {
 	public ModelAndView list(@RequestParam final Integer idSubmission) {
 		ModelAndView result;
 		try {
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
 			final CamaraReady camaraReady = this.camaraReadyService.getCameraReadyBySubmission(idSubmission);
 			final Submission submission = this.submissionService.findOne(idSubmission);
 			Assert.isTrue(submission.getStatus() == 2);
 
 			result = new ModelAndView("camera-ready/show");
 			result.addObject("camaraReady", camaraReady);
+			result.addObject("submission", submission);
+			result.addObject("lang", lang);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
 		}

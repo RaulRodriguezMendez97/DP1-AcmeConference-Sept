@@ -16,7 +16,7 @@
        
  <tiles-definitions>
  	 	<definition name="camera-ready/show" extends="master.page">
- 		<put-attribute name="title" value="Camera-Ready" /> 
+ 		<put-attribute name="title" value="Datos de Camera-Ready" /> 
  		<put-attribute name="body" value="/views/camera-ready/show.jsp" /> 
  	</definition>
   </tiles-definitions>

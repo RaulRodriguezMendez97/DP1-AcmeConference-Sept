@@ -18,170 +18,27 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-<security:authorize access="hasRole('ADMIN')">
+<security:authorize access="hasRole('AUTHOR')">
 
-	<b><spring:message code="conference.title" /> : </b> <jstl:out value="${conference.title}"></jstl:out> <br/>
-	<b><spring:message code="conference.acronym" /> : </b> <jstl:out value="${conference.acronym}"></jstl:out> <br/>
-	<b><spring:message code="conference.venue" /> : </b> <jstl:out value="${conference.venue}"></jstl:out> <br/>
-	<b><spring:message code="conference.fee" /> : </b> <jstl:out value="${conference.fee}"></jstl:out> <br/>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.submissionDeadline" />:</b>
-		<fmt:formatDate value="${conference.submissionDeadline}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.submissionDeadline" />:</b>
-		<fmt:formatDate value="${conference.submissionDeadline}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.notificacionDeadline" />:</b>
-		<fmt:formatDate value="${conference.notificacionDeadline}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.notificacionDeadline" />:</b>
-		<fmt:formatDate value="${conference.notificacionDeadline}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
+	<b><spring:message code="camaraReady.title" /> : </b> <jstl:out value="${camaraReady.title}"></jstl:out> <br/>
+	<b><spring:message code="camaraReady.summary" /> : </b> <jstl:out value="${camaraReady.summary}"></jstl:out> <br/>
+	<b><spring:message code="camaraReady.urlDocument" /> : </b> <jstl:out value="${camaraReady.urlDocument}"></jstl:out> <br/>
+
+	<h3><spring:message code="submission.conference" /></h3>
 	<jstl:if test="${lang eq 'es' }">
 	<b><spring:message code="conference.cameraDeadline" />:</b>
-		<fmt:formatDate value="${conference.cameraDeadline}" pattern="dd-MM-yy HH:mm" />
+		<fmt:formatDate value="${submission.conference.cameraDeadline}" pattern="dd-MM-yy HH:mm" />
 		<br />
 	</jstl:if>
 	
 	<jstl:if test="${lang eq 'en' }">
 	<b><spring:message code="conference.cameraDeadline" />:</b>
-		<fmt:formatDate value="${conference.cameraDeadline}" pattern="yy/MM/dd HH:mm" />
+		<fmt:formatDate value="${submission.conference.cameraDeadline}" pattern="yy/MM/dd HH:mm" />
 		<br />
 	</jstl:if>
 	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.startDate" />:</b>
-		<fmt:formatDate value="${conference.startDate}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.startDate" />:</b>
-		<fmt:formatDate value="${conference.startDate}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.endDate" />:</b>
-		<fmt:formatDate value="${conference.endDate}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.endDate" />:</b>
-		<fmt:formatDate value="${conference.endDate}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<b><spring:message code="conference.finalMode" />:</b>
-		<jstl:choose>
-			<jstl:when test="${conference.finalMode eq 0}">
-				<spring:message code="conference.inDraftMode" /> <br/>
-			</jstl:when>
-		
-			<jstl:otherwise>
-				<spring:message code="conference.inSaveMode" /><br/>
-			</jstl:otherwise>
-	</jstl:choose>
-
 <br/>
-<input type="button" name="cancel" value="<spring:message code="conference.cancel" />"
-			onclick="javascript: relativeRedir('conference/administrator/list.do');" />
-
-</security:authorize>
-
-<security:authorize access="isAnonymous()">
-
-	<b><spring:message code="conference.title" /> : </b> <jstl:out value="${conference.title}"></jstl:out> <br/>
-	<b><spring:message code="conference.acronym" /> : </b> <jstl:out value="${conference.acronym}"></jstl:out> <br/>
-	<b><spring:message code="conference.venue" /> : </b> <jstl:out value="${conference.venue}"></jstl:out> <br/>
-	<b><spring:message code="conference.fee" /> : </b> <jstl:out value="${conference.fee}"></jstl:out> <br/>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.submissionDeadline" />:</b>
-		<fmt:formatDate value="${conference.submissionDeadline}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.submissionDeadline" />:</b>
-		<fmt:formatDate value="${conference.submissionDeadline}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.notificacionDeadline" />:</b>
-		<fmt:formatDate value="${conference.notificacionDeadline}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.notificacionDeadline" />:</b>
-		<fmt:formatDate value="${conference.notificacionDeadline}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.cameraDeadline" />:</b>
-		<fmt:formatDate value="${conference.cameraDeadline}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.cameraDeadline" />:</b>
-		<fmt:formatDate value="${conference.cameraDeadline}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.startDate" />:</b>
-		<fmt:formatDate value="${conference.startDate}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.startDate" />:</b>
-		<fmt:formatDate value="${conference.startDate}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'es' }">
-	<b><spring:message code="conference.endDate" />:</b>
-		<fmt:formatDate value="${conference.endDate}" pattern="dd-MM-yy HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<jstl:if test="${lang eq 'en' }">
-	<b><spring:message code="conference.endDate" />:</b>
-		<fmt:formatDate value="${conference.endDate}" pattern="yy/MM/dd HH:mm" />
-		<br />
-	</jstl:if>
-	
-	<b><spring:message code="conference.finalMode" />:</b>
-		<jstl:choose>
-			<jstl:when test="${conference.finalMode eq 0}">
-				<spring:message code="conference.inDraftMode" /> <br/>
-			</jstl:when>
-		
-			<jstl:otherwise>
-				<spring:message code="conference.inSaveMode" /><br/>
-			</jstl:otherwise>
-	</jstl:choose>
-
-<br/>
-<input type="button" name="cancel" value="<spring:message code="conference.cancel" />"
-			onclick="javascript: relativeRedir('conference/list.do');" />
+<input type="button" name="cancel" value="<spring:message code="camaraReady.cancel" />"
+			onclick="javascript: relativeRedir('submission/author/list.do');" />
 
 </security:authorize>
