@@ -37,8 +37,11 @@ public class CamaraReadyService {
 		return this.camaraReadyRepository.findOne(camaraReadyId);
 	}
 
-	public CamaraReady save(final CamaraReady camaraReady) {
+	public CamaraReady getCameraReadyBySubmission(final Integer id) {
+		return this.camaraReadyRepository.getCameraReadyBySubmission(id);
+	}
 
+	public CamaraReady save(final CamaraReady camaraReady) {
 		final CamaraReady saved = this.camaraReadyRepository.save(camaraReady);
 		return saved;
 	}

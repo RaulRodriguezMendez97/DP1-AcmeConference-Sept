@@ -99,6 +99,8 @@
 		<security:intercept-url pattern="/tutorial/administrator/delete.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/tutorial/administrator/show.do" access="hasRole('ADMIN')" /> 
 		
+		<security:intercept-url pattern="/camera-ready/author/show.do" access="hasRole('AUTHOR')" />
+		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

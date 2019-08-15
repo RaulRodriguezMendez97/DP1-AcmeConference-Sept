@@ -48,6 +48,10 @@ public class SubmissionService {
 	//		return submission;
 	//	}
 
+	public Submission findOne(final Integer id) {
+		return this.submissionRepository.findOne(id);
+	}
+
 	//FindOne si esta logueado como author
 	public Submission findOneAuthor(final int submissionId) {
 		final Submission submission = this.submissionRepository.findOne(submissionId);

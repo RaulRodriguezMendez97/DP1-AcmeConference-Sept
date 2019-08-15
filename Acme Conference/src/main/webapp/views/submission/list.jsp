@@ -41,6 +41,11 @@ requestURI="submission/author/list.do" >
 <display:column property="reviwed.title" titleKey="submission.reviwed.table.title"/>
 <display:column property="reviwed.summary" titleKey="submission.reviwed.table.summary"/>
 <display:column property="reviwed.urlDocument" titleKey="submission.reviwed.table.urlDocument"/>
+<display:column>
+	<jstl:if test="${row.status eq 2  }">
+		<a href="camera-ready/author/show.do?idSubmission=${row.id}"><spring:message code="submission.camaraReady" /></a> 
+	</jstl:if>
+</display:column>
 </display:table>
 
 <input type="button" name="create" value="<spring:message code="submission.create" />"

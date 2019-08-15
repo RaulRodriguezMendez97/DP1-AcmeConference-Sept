@@ -36,7 +36,7 @@
 		<value>/views/reviwer/tiles.xml</value>
 		<value>/views/author/tiles.xml</value>
 		<value>/views/tutorial/tiles.xml</value>
-		
+		<value>/views/camera-ready/tiles.xml</value>
 	</util:list>
 
 </beans>
