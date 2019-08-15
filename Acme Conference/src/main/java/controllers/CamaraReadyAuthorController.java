@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.CamaraReadyService;
 import services.SubmissionService;
 import domain.CamaraReady;
@@ -21,8 +22,12 @@ public class CamaraReadyAuthorController extends AbstractController {
 
 	@Autowired
 	private CamaraReadyService	camaraReadyService;
+
 	@Autowired
 	private SubmissionService	submissionService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -48,27 +53,35 @@ public class CamaraReadyAuthorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final Integer idSubmission) {
 		ModelAndView result;
+		try {
 
-		final CamaraReady camaraReady = this.camaraReadyService.create();
+			final CamaraReady camaraReady = this.camaraReadyService.create();
+			Assert.isTrue(idSubmission != null);
 
-		result = new ModelAndView("camera-ready/edit");
-		result.addObject("camaraReady", camaraReady);
-		result.addObject("idSubmission", idSubmission);
+			result = new ModelAndView("camera-ready/edit");
+			result.addObject("camaraReady", camaraReady);
+			result.addObject("idSubmission", idSubmission);
 
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
 		return result;
 
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final Integer idCameraReady, @RequestParam final Integer idSubmission) {
 		ModelAndView result;
+		try {
+			final CamaraReady camaraReady = this.camaraReadyService.findOne(idCameraReady);
+			Assert.isTrue(idSubmission != null);
+			Assert.isTrue(idCameraReady != null);
 
-		final CamaraReady camaraReady = this.camaraReadyService.findOne(idCameraReady);
-
-		result = new ModelAndView("camera-ready/edit");
-		result.addObject("camaraReady", camaraReady);
-		result.addObject("idSubmission", idSubmission);
-
+			result = new ModelAndView("camera-ready/edit");
+			result.addObject("camaraReady", camaraReady);
+			result.addObject("idSubmission", idSubmission);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
 		return result;
 
 	}
