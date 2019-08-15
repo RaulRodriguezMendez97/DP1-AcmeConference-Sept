@@ -452,15 +452,15 @@
 
 	<!-- Picture -->
 	<bean id="picture1" class="domain.Picture">
-		<property name="urlPicture" value="https://goo.gl/images/BBstA5"></property>
+		<property name="urlPicture" value="https://fundaciongabo.org/sites/default/files/imagenportada/2017-11/conferencia-de-prensa-02-1024x568.jpg"></property>
 	</bean>
 
 	<bean id="picture2" class="domain.Picture">
-		<property name="urlPicture" value="https://goo.gl/images/C8yiYE"></property>
+		<property name="urlPicture" value="https://fundaciongabo.org/sites/default/files/imagenportada/2017-11/conferencia-de-prensa-02-1024x568.jpg"></property>
 	</bean>
 
 	<bean id="picture3" class="domain.Picture">
-		<property name="urlPicture" value="https://goo.gl/images/dLjah6"></property>
+		<property name="urlPicture" value="https://fundaciongabo.org/sites/default/files/imagenportada/2017-11/conferencia-de-prensa-02-1024x568.jpg"></property>
 	</bean>
 
 
@@ -471,6 +471,7 @@
 		<property name="tutorial" ref="tutorial1"></property>
 		<property name="pictures">
 			<list>
+				<ref bean="picture1" />
 			</list>
 		</property>
 	</bean>
@@ -480,6 +481,7 @@
 		<property name="tutorial" ref="tutorial1"></property>
 		<property name="pictures">
 			<list>
+				<ref bean="picture2" />
 			</list>
 		</property>
 	</bean>
@@ -489,6 +491,7 @@
 		<property name="tutorial" ref="tutorial2"></property>
 		<property name="pictures">
 			<list>
+				<ref bean="picture3" />
 			</list>
 		</property>
 	</bean>
