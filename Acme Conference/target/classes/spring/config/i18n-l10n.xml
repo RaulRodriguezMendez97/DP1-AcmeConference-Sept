@@ -33,7 +33,8 @@
 		<value>/views/submission/messages</value>
 		<value>/views/report/messages</value>
 		<value>/views/reviwer/messages</value>		
-		<value>/views/author/messages</value>				
+		<value>/views/author/messages</value>	
+		<value>/views/tutorial/messages</value>			
 		
 	</util:list>
 

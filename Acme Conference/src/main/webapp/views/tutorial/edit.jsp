@@ -1,5 +1,5 @@
 <%--
- * action-2.jsp
+ * action-1.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -15,13 +15,26 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<p><spring:message code="tutorial.sections" /></p>
-<display:table pagesize="5" name="sections" id="row"
-requestURI="tutorial/showTutorialSectionHW.do" >
 
-<display:column property="number" titleKey="tutorial.section.number" />
-<display:column property="title" titleKey="tutorial.section.title" />
-<display:column property="number" titleKey="tutorial.section.pieceOfText" />
+<security:authorize access="hasRole('ADMIN')">
 
-</display:table>
+<form:form action="topic/administrator/create.do" modelAttribute="topic">
+
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	
+	<acme:textbox code="topic.name" path="name"/>
+	<acme:textbox code="topic.spanishName" path="spanishName"/>
+	
+	<br/>
+	<input type="submit" name="save" 
+	value="<spring:message code="topic.save" />" />
+
+	<input type="button" name="cancel" value="<spring:message code="topic.cancel" />"
+			onclick="javascript: relativeRedir('topic/administrator/list.do');" />
+</form:form>
+
+
+</security:authorize>
