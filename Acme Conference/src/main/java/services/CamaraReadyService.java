@@ -63,6 +63,10 @@ public class CamaraReadyService {
 	}
 
 	public CamaraReady save(final CamaraReady camaraReady) {
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		Assert.isTrue(camaraReady.getAuthor().equals(a) || camaraReady.getCoAuthors().contains(a));
+
 		final CamaraReady saved = this.camaraReadyRepository.save(camaraReady);
 		return saved;
 	}
