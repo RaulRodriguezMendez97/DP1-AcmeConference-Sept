@@ -687,8 +687,8 @@
 		<property name="acronym" value="acronym conference 5" />
 		<property name="venue" value="venue conference 5" />
 		<property name="submissionDeadline" value="10/07/2018 11:30" />
-		<property name="notificacionDeadline" value="15/10/2019 11:30" />
-		<property name="cameraDeadline" value="10/11/2019 11:30" />
+		<property name="notificacionDeadline" value="15/10/2018 11:30" />
+		<property name="cameraDeadline" value="10/11/2018 11:30" />
 		<property name="startDate" value="05/06/2020 11:30" />
 		<property name="endDate" value="05/12/2020 11:30" />
 		<property name="summary" value="summary conference 5" />
@@ -869,46 +869,71 @@
 		<property name="title" value="title1" />
 		<property name="summary" value="summary1" />
 		<property name="urlDocument" value="http://urlDocument1.com" />
+		<property name="author" ref="author1"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="reviwed2" class="domain.Reviwed">
 		<property name="title" value="title2" />
 		<property name="summary" value="summary2" />
 		<property name="urlDocument" value="http://urlDocument2.com" />
+		<property name="author" ref="author1"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="reviwed3" class="domain.Reviwed">
 		<property name="title" value="title3" />
 		<property name="summary" value="summary3" />
 		<property name="urlDocument" value="http://urlDocument3.com" />
+		<property name="author" ref="author1"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="reviwed4" class="domain.Reviwed">
 		<property name="title" value="title4" />
 		<property name="summary" value="summary4" />
 		<property name="urlDocument" value="http://urlDocument4.com" />
+		<property name="author" ref="author2"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="reviwed5" class="domain.Reviwed">
 		<property name="title" value="title5" />
 		<property name="summary" value="summary5" />
 		<property name="urlDocument" value="http://urlDocument5.com" />
+		<property name="author" ref="author2"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="reviwed6" class="domain.Reviwed">
 		<property name="title" value="title6" />
 		<property name="summary" value="summary6" />
 		<property name="urlDocument" value="http://urlDocument6.com" />
+		<property name="author" ref="author2"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="reviwed7" class="domain.Reviwed">
 		<property name="title" value="title7" />
 		<property name="summary" value="summary7" />
 		<property name="urlDocument" value="http://urlDocument7.com" />
-	</bean>
-	<bean id="reviwed8" class="domain.Reviwed">
-		<property name="title" value="title8" />
-		<property name="summary" value="summary8" />
-		<property name="urlDocument" value="http://urlDocument8.com" />
-	</bean>
-	<bean id="reviwed9" class="domain.Reviwed">
-		<property name="title" value="title9" />
-		<property name="summary" value="summary9" />
-		<property name="urlDocument" value="http://urlDocument9.com" />
+		<property name="author" ref="author1"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Camara ready -->
@@ -916,17 +941,29 @@
 		<property name="title" value="titleCamaraReady1" />
 		<property name="summary" value="summaryCamaraReady1" />
 		<property name="urlDocument" value="http://urlDocumentCamaraReady1.com" />
+		<property name="author" ref="author1"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="camaraReady2" class="domain.CamaraReady">
 		<property name="title" value="titleCamaraReady2" />
 		<property name="summary" value="summaryCamaraReady2" />
 		<property name="urlDocument" value="http://urlDocumentCamaraReady2.com" />
+		<property name="author" ref="author1"></property>
+		<property name="coAuthors">
+			<list>
+				<ref bean="author2"></ref>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Registration -->
 	<bean id="registration1" class="domain.Registration">
 		<property name="creditCard" ref="creditCard1"></property>
 		<property name="conference" ref="conference4"></property>
+
 	</bean>
 
 
