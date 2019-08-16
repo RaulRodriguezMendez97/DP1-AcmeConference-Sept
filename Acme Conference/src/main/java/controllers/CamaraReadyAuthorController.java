@@ -98,7 +98,7 @@ public class CamaraReadyAuthorController extends AbstractController {
 				final CamaraReady saved = this.camaraReadyService.save(c);
 				final Submission submission = this.submissionService.findOne(idSubmission);
 				submission.setCamaraReady(saved);
-				this.submissionService.save(submission);
+				this.submissionService.saveAuthor(submission);
 				result = new ModelAndView("redirect:show.do?idSubmission=" + idSubmission);
 			} else {
 				result = new ModelAndView("camera-ready/edit");
