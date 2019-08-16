@@ -92,18 +92,24 @@ public class CamaraReadyAuthorController extends AbstractController {
 
 		ModelAndView result;
 
-		final CamaraReady c = this.camaraReadyService.reconstruct(camaraReady, binding);
-		if (!binding.hasErrors()) {
-			final CamaraReady saved = this.camaraReadyService.save(c);
-			final Submission submission = this.submissionService.findOne(idSubmission);
-			submission.setCamaraReady(saved);
-			this.submissionService.save(submission);
-			result = new ModelAndView("redirect:show.do?idSubmission=" + idSubmission);
-		} else {
+		try {
+			final CamaraReady c = this.camaraReadyService.reconstruct(camaraReady, idSubmission, binding);
+			if (!binding.hasErrors()) {
+				final CamaraReady saved = this.camaraReadyService.save(c);
+				final Submission submission = this.submissionService.findOne(idSubmission);
+				submission.setCamaraReady(saved);
+				this.submissionService.save(submission);
+				result = new ModelAndView("redirect:show.do?idSubmission=" + idSubmission);
+			} else {
+				result = new ModelAndView("camera-ready/edit");
+				result.addObject("camaraReady", camaraReady);
+				result.addObject("idSubmission", idSubmission);
+			}
+		} catch (final IllegalArgumentException e) {
 			result = new ModelAndView("camera-ready/edit");
 			result.addObject("camaraReady", camaraReady);
 			result.addObject("idSubmission", idSubmission);
-
+			result.addObject("exception", e);
 		}
 
 		return result;

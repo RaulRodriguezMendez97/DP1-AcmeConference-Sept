@@ -22,6 +22,10 @@
 
 <form:form action="camera-ready/author/edit.do?idSubmission=${idSubmission }" modelAttribute="camaraReady">
 
+		<jstl:if test="${not empty exception}">
+			<p style="color:red"> <spring:message code="camara-ready.error" /> </p>
+		</jstl:if>
+
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	

@@ -2,16 +2,19 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.CamaraReadyRepository;
 import domain.CamaraReady;
+import domain.Submission;
 
 @Service
 @Transactional
@@ -19,6 +22,9 @@ public class CamaraReadyService {
 
 	@Autowired
 	private CamaraReadyRepository	camaraReadyRepository;
+
+	@Autowired
+	private SubmissionService		submissionService;
 
 	@Autowired
 	private Validator				validator;
@@ -51,12 +57,17 @@ public class CamaraReadyService {
 		return saved;
 	}
 
-	public CamaraReady reconstruct(final CamaraReady camaraReady, final BindingResult binding) {
+	public CamaraReady reconstruct(final CamaraReady camaraReady, final Integer submissionId, final BindingResult binding) {
 		CamaraReady res;
 
 		//if (camaraReady.getId() == 0) {
 		res = camaraReady;
+
+		final Submission submission = this.submissionService.findOne(submissionId);
+		Assert.isTrue(submission.getConference().getCameraDeadline().after(new Date()));
+
 		this.validator.validate(res, binding);
+
 		return res;
 
 		//}

@@ -641,7 +641,7 @@
 		<property name="venue" value="venue conference 1" />
 		<property name="submissionDeadline" value="03/01/2020 11:30" />
 		<property name="notificacionDeadline" value="03/02/2020 11:30" />
-		<property name="cameraDeadline" value="03/03/2020 11:30" />
+		<property name="cameraDeadline" value="03/03/2018 11:30" />
 		<property name="startDate" value="03/04/2020 11:30" />
 		<property name="endDate" value="03/08/2020 11:30" />
 		<property name="summary" value="summary conference 1" />
