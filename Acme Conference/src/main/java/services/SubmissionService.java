@@ -80,9 +80,9 @@ public class SubmissionService {
 		return this.submissionRepository.findAll();
 	}
 
-	public Submission save(final Submission submission) {
+	public Submission saveAuthor(final Submission submission) {
 		final UserAccount userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR") || userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
 		Assert.isTrue(submission.getAuthor().equals(this.authorService.getAuthorByUserAccount(userAccount.getId())));
 		if (submission.getId() == 0)
 			Assert.isTrue(submission.getStatus() == 0);

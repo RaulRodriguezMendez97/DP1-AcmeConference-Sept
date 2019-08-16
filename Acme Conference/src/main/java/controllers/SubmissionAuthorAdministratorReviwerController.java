@@ -110,7 +110,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			if (!binding.hasErrors()) {
 				reviwedSave = this.reviwedService.save(reviwed);
 				submission.setReviwed(reviwedSave);
-				this.submissionService.save(submission);
+				this.submissionService.saveAuthor(submission);
 				result = new ModelAndView("redirect:list.do");
 			} else {
 				final Collection<Conference> conferences;
@@ -275,24 +275,24 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	public ModelAndView saveSubmissionAdministrator(final Submission submission, final BindingResult binding) {
 		ModelAndView result;
 
-		//		try {
-		final Submission s = this.submissionService.reconstructSubmissionAdministrator(submission, binding);
-		if (!binding.hasErrors()) {
-			this.submissionService.saveAdmin(s);
-			result = new ModelAndView("redirect:submissionsUnderReviwed.do");
-		} else {
+		try {
+			final Submission s = this.submissionService.reconstructSubmissionAdministrator(submission, binding);
+			if (!binding.hasErrors()) {
+				this.submissionService.saveAdmin(s);
+				result = new ModelAndView("redirect:submissionsUnderReviwed.do");
+			} else {
+				final Collection<Reviwer> reviwers = this.reviwerService.findAll();
+				result = new ModelAndView("submission/edit");
+				result.addObject("submission", submission);
+				result.addObject("reviwers", reviwers);
+			}
+		} catch (final Exception e) {
 			final Collection<Reviwer> reviwers = this.reviwerService.findAll();
 			result = new ModelAndView("submission/edit");
+			result.addObject("exception", e);
 			result.addObject("submission", submission);
 			result.addObject("reviwers", reviwers);
 		}
-		//		} catch (final Exception e) {
-		//			final Collection<Reviwer> reviwers = this.reviwerService.findAll();
-		//			result = new ModelAndView("submission/edit");
-		//			result.addObject("exception", e);
-		//			result.addObject("submission", submission);
-		//			result.addObject("reviwers", reviwers);
-		//		}
 		return result;
 	}
 
