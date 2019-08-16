@@ -603,16 +603,7 @@
 		<property name="conference" ref="conference2"></property>
 		<property name="camaraReady" ref="camaraReady2"></property>
 	</bean>
-	<bean id="presentation3" class="domain.Presentation">
-		<property name="title" value="Titulo de la tercera presentacion"></property>
-		<property name="speaker" value="Antonio"></property>
-		<property name="duration" value="30"></property>
-		<property name="schedule" value="03/08/2019 11:30"></property>
-		<property name="room" value="habitacion3"></property>
-		<property name="summary" value="resumen de la tercera presentacion"></property>
-		<property name="conference" ref="conference3"></property>
-		<property name="camaraReady" ref="camaraReady3"></property>
-	</bean>
+
 
 	<!-- CustomizableSystem -->
 	<bean id="customizableSystem1" class="domain.CustomizableSystem">
@@ -641,12 +632,12 @@
 		<property name="venue" value="venue conference 1" />
 		<property name="submissionDeadline" value="03/01/2020 11:30" />
 		<property name="notificacionDeadline" value="03/02/2020 11:30" />
-		<property name="cameraDeadline" value="03/03/2020 11:30" />
+		<property name="cameraDeadline" value="03/03/2018 11:30" />
 		<property name="startDate" value="03/04/2020 11:30" />
 		<property name="endDate" value="03/08/2020 11:30" />
 		<property name="summary" value="summary conference 1" />
 		<property name="fee" value="6.0" />
-		<property name="finalMode" value="0" />
+		<property name="finalMode" value="1" />
 		<property name="admin" ref="administrator1" />
 	</bean>
 	<bean id="conference2" class="domain.Conference">
@@ -729,7 +720,7 @@
 		<property name="moment" value="07/19/2019 11:30" />
 		<property name="status" value="2" />
 		<property name="author" ref="author1" />
-		<property name="conference" ref="conference2" />
+		<property name="conference" ref="conference1" />
 		<property name="reviwed" ref="reviwed2" />
 		<property name="camaraReady" ref="camaraReady2" />
 		<property name="reviwers">
@@ -745,7 +736,7 @@
 		<property name="moment" value="07/10/2019 11:30" />
 		<property name="status" value="0" />
 		<property name="author" ref="author1" />
-		<property name="conference" ref="conference3" />
+		<property name="conference" ref="conference4" />
 		<property name="reviwed" ref="reviwed3" />
 	</bean>
 	<bean id="submission4" class="domain.Submission">
@@ -753,7 +744,7 @@
 		<property name="moment" value="06/10/2019 11:30" />
 		<property name="status" value="0" />
 		<property name="author" ref="author2" />
-		<property name="conference" ref="conference1" />
+		<property name="conference" ref="conference4" />
 		<property name="reviwed" ref="reviwed4" />
 	</bean>
 	<bean id="submission5" class="domain.Submission">
@@ -761,7 +752,7 @@
 		<property name="moment" value="05/10/2019 11:30" />
 		<property name="status" value="1" />
 		<property name="author" ref="author2" />
-		<property name="conference" ref="conference2" />
+		<property name="conference" ref="conference5" />
 		<property name="reviwed" ref="reviwed5" />
 	</bean>
 	<bean id="submission6" class="domain.Submission">
@@ -769,32 +760,24 @@
 		<property name="moment" value="04/10/2019 11:30" />
 		<property name="status" value="0" />
 		<property name="author" ref="author2" />
-		<property name="conference" ref="conference3" />
+		<property name="conference" ref="conference5" />
 		<property name="reviwed" ref="reviwed6" />
 	</bean>
+	
 	<bean id="submission7" class="domain.Submission">
-		<property name="ticker" value="ELU-1235" />
-		<property name="moment" value="03/10/2019 11:30" />
-		<property name="status" value="0" />
-		<property name="author" ref="author3" />
-		<property name="conference" ref="conference4" />
-		<property name="reviwed" ref="reviwed7" />
-	</bean>
-	<bean id="submission8" class="domain.Submission">
-		<property name="ticker" value="EMU-1235" />
-		<property name="moment" value="03/10/2019 11:30" />
-		<property name="status" value="1" />
+		<property name="ticker" value="ASF-1214" />
+		<property name="moment" value="07/19/2019 11:30" />
+		<property name="status" value="2" />
 		<property name="author" ref="author1" />
-		<property name="conference" ref="conference5" />
-		<property name="reviwed" ref="reviwed8" />
-	</bean>
-	<bean id="submission9" class="domain.Submission">
-		<property name="ticker" value="ENU-1235" />
-		<property name="moment" value="03/10/2019 11:30" />
-		<property name="status" value="0" />
-		<property name="author" ref="author2" />
-		<property name="conference" ref="conference4" />
-		<property name="reviwed" ref="reviwed9" />
+		<property name="conference" ref="conference1" />
+		<property name="reviwed" ref="reviwed7" />
+		<property name="reviwers">
+			<list>
+				<ref bean="reviwer1" />
+
+			</list>
+		
+		</property>
 	</bean>
 
 	<!-- Report -->
@@ -879,33 +862,7 @@
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission6" />
 	</bean>
-	<bean id="report10" class="domain.Report">
-		<property name="originalityScore" value="2" />
-		<property name="qualityScore" value="9" />
-		<property name="eadabilityScore" value="5" />
-		<property name="decision" value="2" />
-		<property name="comment" value=""/>
-		<property name="reviwer" ref="reviwer4" />
-		<property name="submission" ref="submission7" />
-	</bean>
-	<bean id="report11" class="domain.Report">
-		<property name="originalityScore" value="5" />
-		<property name="qualityScore" value="5" />
-		<property name="eadabilityScore" value="5" />
-		<property name="decision" value="1" />
-		<property name="comment" value=""/>
-		<property name="reviwer" ref="reviwer4" />
-		<property name="submission" ref="submission8" />
-	</bean>
-	<bean id="report12" class="domain.Report">
-		<property name="originalityScore" value="4" />
-		<property name="qualityScore" value="0" />
-		<property name="eadabilityScore" value="2" />
-		<property name="decision" value="0" />
-		<property name="comment" value=""/>
-		<property name="reviwer" ref="reviwer4" />
-		<property name="submission" ref="submission8" />
-	</bean>
+
 	
 	<!-- Reviwed -->
 	<bean id="reviwed1" class="domain.Reviwed">
@@ -964,21 +921,6 @@
 		<property name="title" value="titleCamaraReady2" />
 		<property name="summary" value="summaryCamaraReady2" />
 		<property name="urlDocument" value="http://urlDocumentCamaraReady2.com" />
-	</bean>
-	<bean id="camaraReady3" class="domain.CamaraReady">
-		<property name="title" value="titleCamaraReady3" />
-		<property name="summary" value="summaryCamaraReady3" />
-		<property name="urlDocument" value="http://urlDocumentCamaraReady3.com" />
-	</bean>
-	<bean id="camaraReady4" class="domain.CamaraReady">
-		<property name="title" value="titleCamaraReady4" />
-		<property name="summary" value="summaryCamaraReady4" />
-		<property name="urlDocument" value="http://urlDocumentCamaraReady4.com" />
-	</bean>
-	<bean id="camaraReady5" class="domain.CamaraReady">
-		<property name="title" value="titleCamaraReady5" />
-		<property name="summary" value="summaryCamaraReady5" />
-		<property name="urlDocument" value="http://urlDocumentCamaraReady5.com" />
 	</bean>
 
 	<!-- Registration -->
