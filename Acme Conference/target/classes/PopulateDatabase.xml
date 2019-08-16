@@ -688,7 +688,7 @@
 		<property name="venue" value="venue conference 5" />
 		<property name="submissionDeadline" value="10/07/2018 11:30" />
 		<property name="notificacionDeadline" value="15/10/2018 11:30" />
-		<property name="cameraDeadline" value="10/11/2018 11:30" />
+		<property name="cameraDeadline" value="12/11/2019 11:30" />
 		<property name="startDate" value="05/06/2020 11:30" />
 		<property name="endDate" value="05/12/2020 11:30" />
 		<property name="summary" value="summary conference 5" />
@@ -720,7 +720,7 @@
 		<property name="moment" value="07/19/2019 11:30" />
 		<property name="status" value="2" />
 		<property name="author" ref="author1" />
-		<property name="conference" ref="conference1" />
+		<property name="conference" ref="conference5" />
 		<property name="reviwed" ref="reviwed2" />
 		<property name="camaraReady" ref="camaraReady2" />
 		<property name="reviwers">
@@ -769,7 +769,7 @@
 		<property name="moment" value="07/19/2019 11:30" />
 		<property name="status" value="2" />
 		<property name="author" ref="author1" />
-		<property name="conference" ref="conference1" />
+		<property name="conference" ref="conference4" />
 		<property name="reviwed" ref="reviwed7" />
 		<property name="reviwers">
 			<list>

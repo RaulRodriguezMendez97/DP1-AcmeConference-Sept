@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -13,6 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.CamaraReadyRepository;
+import security.LoginService;
+import security.UserAccount;
+import domain.Actor;
+import domain.Author;
 import domain.CamaraReady;
 import domain.Submission;
 
@@ -29,6 +34,9 @@ public class CamaraReadyService {
 	@Autowired
 	private Validator				validator;
 
+	@Autowired
+	private ActorService			actorService;
+
 
 	public CamaraReady create() {
 		final CamaraReady res = new CamaraReady();
@@ -36,6 +44,8 @@ public class CamaraReadyService {
 		res.setSummary("");
 		res.setTitle("");
 		res.setUrlDocument("");
+		res.setAuthor(new Author());
+		res.setCoAuthors(new ArrayList<Author>());
 
 		return res;
 	}
@@ -60,16 +70,40 @@ public class CamaraReadyService {
 	public CamaraReady reconstruct(final CamaraReady camaraReady, final Integer submissionId, final BindingResult binding) {
 		CamaraReady res;
 
-		//if (camaraReady.getId() == 0) {
-		res = camaraReady;
+		if (camaraReady.getId() == 0) {
+			res = camaraReady;
 
-		final Submission submission = this.submissionService.findOne(submissionId);
-		Assert.isTrue(submission.getConference().getCameraDeadline().after(new Date()));
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
-		this.validator.validate(res, binding);
+			camaraReady.setAuthor((Author) a);
 
-		return res;
+			final Submission submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(submission.getConference().getCameraDeadline().after(new Date()));
 
-		//}
+			this.validator.validate(res, binding);
+
+			return res;
+
+		} else {
+			res = this.camaraReadyRepository.findOne(camaraReady.getId());
+
+			final CamaraReady copy = new CamaraReady();
+			copy.setId(res.getId());
+			copy.setVersion(res.getVersion());
+			copy.setAuthor(res.getAuthor());
+
+			copy.setTitle(camaraReady.getTitle());
+			copy.setSummary(camaraReady.getSummary());
+			copy.setUrlDocument(camaraReady.getUrlDocument());
+			copy.setCoAuthors(camaraReady.getCoAuthors());
+
+			final Submission submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(submission.getConference().getCameraDeadline().after(new Date()));
+
+			this.validator.validate(copy, binding);
+
+			return copy;
+		}
 	}
 }

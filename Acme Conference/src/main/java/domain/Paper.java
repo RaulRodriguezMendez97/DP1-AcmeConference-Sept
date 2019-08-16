@@ -74,7 +74,6 @@ public class Paper extends DomainEntity {
 
 	@ManyToMany
 	@Valid
-	@NotNull
 	public Collection<Author> getCoAuthors() {
 		return this.coAuthors;
 	}

@@ -32,6 +32,7 @@
 	<acme:textbox code="camaraReady.title" path="title"/>
 	<acme:textbox code="camaraReady.summary" path="summary"/>
 	<acme:textbox code="camaraReady.urlDocument" path="urlDocument"/>
+	<acme:selectWithoutNullOption items="${coAuthors }" itemLabel="name" code="camaraReady.coAuthors" path="coAuthors"/>
 	
 	<br/>
 	<input type="submit" name="save" 

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -219,5 +220,9 @@ public class AuthorService {
 		}
 		return res;
 
+	}
+
+	public Collection<Author> getAuthorsUnlessConnected(final Author a) {
+		return this.authorRepository.getAuthorsUnlessConnected(a);
 	}
 }
