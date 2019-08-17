@@ -872,6 +872,8 @@
 		<property name="author" ref="author1"></property>
 		<property name="coAuthors">
 			<list>
+				<ref bean="author2"></ref>
+				<ref bean="author3"></ref>
 			</list>
 		</property>
 	</bean>
