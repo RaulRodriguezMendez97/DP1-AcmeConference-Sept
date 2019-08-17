@@ -21,49 +21,28 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-	<display:table pagesize="5" name="tutorials" id="row"
-		requestURI="tutorial/administrator/list.do">
-
-		<display:column titleKey="tutorial.sections">
-			<a href="section/administrator/list.do?tutorialId=${row.id}"><spring:message
-					code="tutorial.sections" /></a>
-		</display:column>
-		<display:column titleKey="tutorial.title">
+	<b><spring:message code="tutorial.sections" />:</b>
+	<display:table pagesize="5" name="sections" id="row"
+		requestURI="section/administrator/list.do">
+		<display:column titleKey="tutorial.section.title">
 			<jstl:out value="${row.title}"></jstl:out>
 		</display:column>
 
-		<display:column titleKey="tutorial.speaker">
-			<jstl:out value="${row.speaker}"></jstl:out>
+		<display:column titleKey="tutorial.section.summary">
+			<jstl:out value="${row.summary}"></jstl:out>
 		</display:column>
 
-		<display:column titleKey="tutorial.duration">
-			<jstl:out value="${row.duration}"></jstl:out>
-		</display:column>
-
-		<display:column titleKey="tutorial.schedule">
-			<jstl:out value="${row.schedule}"></jstl:out>
-		</display:column>
-
-		<display:column titleKey="tutorial.room">
-			<jstl:out value="${row.room}"></jstl:out>
-		</display:column>
-
-		<display:column titleKey="tutorial.show">
-			<a href="tutorial/administrator/show.do?tutorialId=${row.id}"><spring:message
-					code="tutorial.show" /></a>
-		</display:column>
-		<display:column titleKey="tutorial.edit">
-			<jstl:if test="${row.conference.finalMode eq 0 }">
-				<a href="tutorial/administrator/edit.do?tutorialId=${row.id}"><spring:message
-						code="tutorial.edit" /></a>
-			</jstl:if>
-			<jstl:if test="${row.conference.finalMode eq 1 }">
-				-
-			</jstl:if>
+		<display:column titleKey="tutorial.section.pictures">
+			<jstl:forEach items="${row.pictures}" var="item">
+				<img width="80" height="80" src="${item.urlPicture}">
+			</jstl:forEach>
 		</display:column>
 	</display:table>
 
 	<input type="button" name="create"
-		value="<spring:message code="tutorial.create" />"
-		onclick="javascript: relativeRedir('tutorial/administrator/create.do');" />
+		value="<spring:message code="section.create" />"
+		onclick="javascript: relativeRedir('section/administrator/create.do?tutorialId='${tutorialId});" />
+	<input type="button" name="back"
+		value="<spring:message code="tutorial.back" />"
+		onclick="javascript: relativeRedir('tutorial/administrator/list.do');" />
 </security:authorize>

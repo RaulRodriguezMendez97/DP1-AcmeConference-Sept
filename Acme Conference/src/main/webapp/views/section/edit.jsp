@@ -20,19 +20,11 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<form:form action="tutorial/administrator/edit.do" modelAttribute="tutorial">
+<form:form action="section/administrator/edit.do" modelAttribute="section">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<acme:textbox code="tutorial.title" path="title"/>
-	<acme:textbox code="tutorial.speaker" path="speaker"/>
-	<acme:textbox code="tutorial.duration" path="duration"/>
-	<acme:textbox code="tutorial.schedule" path="schedule"/>
-	<acme:textbox code="tutorial.room" path="room"/>
-	<acme:textbox code="tutorial.summary" path="summary"/>
-	<spring:message code="tutorial.attachmets.comment" />
-	<acme:textbox code="tutorial.attachments" path="attachments"/>
-	<acme:select items="${conferences}" itemLabel="title" code="tutorial.conference" path="conference"/>
-	
+	<acme:textbox code="tutorial.section.title" path="title"/>
+	<acme:textbox code="tutorial.section.summary" path="summary"/>
 	<br/>
 	<input type="submit" name="save" 
 	value="<spring:message code="tutorial.save" />" />
@@ -41,7 +33,7 @@
 	value="<spring:message code="tutorial.delete" />" />
 
 	<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
-			onclick="javascript: relativeRedir('tutorial/administrator/list.do');" />
+			onclick="javascript: relativeRedir('section/administrator/list.do?tutorialId='${tutorialId});" />
 </form:form>
 
 

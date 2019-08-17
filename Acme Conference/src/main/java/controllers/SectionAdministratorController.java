@@ -39,6 +39,7 @@ public class SectionAdministratorController extends AbstractController {
 			final Collection<Section> sections = this.sectionService.getSectionsByTutorial(tutorialId);
 			result = new ModelAndView("section/list");
 			result.addObject("sections", sections);
+			result.addObject("tutorialId", tutorialId);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/");
 		}
