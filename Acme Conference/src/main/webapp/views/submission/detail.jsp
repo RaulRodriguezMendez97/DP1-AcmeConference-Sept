@@ -128,12 +128,19 @@
 <b><spring:message code="submission.reviwed.summary" /> : </b> <jstl:out value="${reviwed.summary}"></jstl:out> <br/>
 <b><spring:message code="submission.reviwed.urlDocument" /> : </b> <jstl:out value="${reviwed.urlDocument}"></jstl:out> <br/>
 <b><spring:message code="submission.reviwed.author" /> : </b> <jstl:out value="${reviwed.author.email}"></jstl:out> <br/>
-<b><spring:message code="submission.reviwed.coAuthors" /></b> 
-	<ul>
-		<jstl:forEach var="coAutor" items="${reviwed.coAuthors}">
-			<li><b><spring:message code="submission.reviwed.author" /> :</b> <jstl:out value="${coAutor.name}, ${coAutor.email}"></jstl:out> </li>
-		</jstl:forEach>
-	</ul>
+<b><spring:message code="submission.reviwed.coAuthors" /></b>
+	
+	<jstl:if test="${empty reviwed.coAuthors}">
+		<b>: </b><spring:message code="submission.coAuthors.null" /><br/>
+	</jstl:if>
+	<jstl:if test="${reviwed.coAuthors ne null }">
+		<ul>
+			<jstl:forEach var="coAutor" items="${reviwed.coAuthors}">
+				<li><b><spring:message code="submission.reviwed.author" /> :</b> <jstl:out value="${coAutor.name}, ${coAutor.email}"></jstl:out> </li>
+			</jstl:forEach>
+		</ul>
+	</jstl:if>
+	 
 
 <h3><spring:message code="submission.camaraReady" /></h3>
 <jstl:if test="${submission.camaraReady eq null}">
