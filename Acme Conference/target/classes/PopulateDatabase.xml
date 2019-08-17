@@ -674,7 +674,7 @@
 		<property name="venue" value="venue conference 4" />
 		<property name="submissionDeadline" value="08/08/2018 11:30" />
 		<property name="notificacionDeadline" value="13/10/2019 11:30" />
-		<property name="cameraDeadline" value="08/11/2019 11:30" />
+		<property name="cameraDeadline" value="09/11/2019 11:30" />
 		<property name="startDate" value="10/11/2019 11:30" />
 		<property name="endDate" value="12/12/2019 11:30" />
 		<property name="summary" value="summary conference 4" />
