@@ -158,9 +158,11 @@
 </jstl:if>
 
 <jstl:if test="${submission.reviwers ne null }">
-	<jstl:forEach var="reviwer" items="${submission.reviwers}">
-		<b><spring:message code="submission.reviwers.reviwer" /> : </b> <jstl:out value="${reviwer.name}, ${reviwer.email}"></jstl:out> <br/>
-	</jstl:forEach>
+	<ul>
+		<jstl:forEach var="reviwer" items="${submission.reviwers}">
+			<li><b><spring:message code="submission.reviwers.reviwer" /> : </b> <jstl:out value="${reviwer.name}, ${reviwer.email}"></jstl:out></li>
+		</jstl:forEach>
+	</ul>
 </jstl:if>
 
 
