@@ -37,9 +37,6 @@ public class CamaraReadyService {
 	@Autowired
 	private ActorService			actorService;
 
-	@Autowired
-	private AuthorService			authorService;
-
 
 	public CamaraReady create() {
 		final CamaraReady res = new CamaraReady();
