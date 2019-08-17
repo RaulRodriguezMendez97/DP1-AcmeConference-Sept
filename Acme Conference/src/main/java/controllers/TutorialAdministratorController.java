@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.PictureService;
+import services.ConferenceService;
 import services.SectionService;
 import services.TutorialService;
 import domain.Tutorial;
@@ -22,18 +22,17 @@ import domain.Tutorial;
 public class TutorialAdministratorController extends AbstractController {
 
 	@Autowired
-	private TutorialService	tutorialService;
+	private TutorialService		tutorialService;
 	@Autowired
-	private SectionService	sectionService;
+	private SectionService		sectionService;
 	@Autowired
-	private PictureService	pictureService;
+	private ConferenceService	conferenceService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
 		final Collection<Tutorial> tutorials = this.tutorialService.findAll();
-
 		result = new ModelAndView("tutorial/list");
 		result.addObject("tutorials", tutorials);
 		return result;
@@ -53,29 +52,46 @@ public class TutorialAdministratorController extends AbstractController {
 			result = new ModelAndView("redirect:.list.do");
 		}
 		return result;
-
 	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-
 		final Tutorial tutorial = this.tutorialService.create();
-
 		result = new ModelAndView("tutorial/edit");
 		result.addObject("tutorial", tutorial);
+		result.addObject("conferences", this.conferenceService.getConferencesInDraftMode());
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final Integer tutorialId) {
+		ModelAndView result;
+		try {
+			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
+			Assert.notNull(tutorial);
+			result = new ModelAndView("tutorial/edit");
+			result.addObject("tutorial", tutorial);
+			result.addObject("conferences", this.conferenceService.getConferencesInDraftMode());
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:.list.do");
+		}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Tutorial tutorial, final BindingResult binding) {
 		ModelAndView result;
 		try {
+			final Tutorial t = this.tutorialService.reconstruct(tutorial, binding);
 			if (!binding.hasErrors()) {
-				this.tutorialService.save(tutorial);
+				this.tutorialService.save(t);
 				result = new ModelAndView("redirect:list.do");
 			} else {
 				result = new ModelAndView("tutorial/edit");
 				result.addObject("tutorial", tutorial);
+				result.addObject("conferences", this.conferenceService.getConferencesInDraftMode());
 			}
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");

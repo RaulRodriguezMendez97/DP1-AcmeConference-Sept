@@ -62,4 +62,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 		nativeQuery = true)
 	public List<Object[]> getAvgMinMaxDesvDaysByConference();
 
+	@Query("select c from Conference c where c.finalMode = 0")
+	public Collection<Conference> getConferencesInDraftMode();
+
 }

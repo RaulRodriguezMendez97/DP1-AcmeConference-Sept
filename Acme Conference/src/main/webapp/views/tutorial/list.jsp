@@ -24,6 +24,10 @@
 	<display:table pagesize="5" name="tutorials" id="row"
 		requestURI="tutorial/administrator/list.do">
 
+		<display:column titleKey="tutorial.sections">
+			<a href="section/administrator/list.do?tutorialId=${row.id}"><spring:message
+					code="tutorial.sections" /></a>
+		</display:column>
 		<display:column titleKey="tutorial.title">
 			<jstl:out value="${row.title}"></jstl:out>
 		</display:column>
@@ -48,10 +52,15 @@
 			<a href="tutorial/administrator/show.do?tutorialId=${row.id}"><spring:message
 					code="tutorial.show" /></a>
 		</display:column>
+		
+		<display:column titleKey="tutorial.edit">
+			<a href="tutorial/administrator/edit.do?tutorialId=${row.id}"><spring:message
+					code="tutorial.edit" /></a>
+		</display:column>
 
 	</display:table>
 
 	<input type="button" name="create"
 		value="<spring:message code="tutorial.create" />"
-		onclick="javascript: relativeRedir('tutorial/administrator/edit.do');" />
+		onclick="javascript: relativeRedir('tutorial/administrator/create.do');" />
 </security:authorize>

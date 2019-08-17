@@ -20,20 +20,25 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<form:form action="topic/administrator/create.do" modelAttribute="topic">
-
-	<form:hidden path="id"/>
-	<form:hidden path="version"/>
-	
-	<acme:textbox code="topic.name" path="name"/>
-	<acme:textbox code="topic.spanishName" path="spanishName"/>
+<form:form action="tutorial/administrator/edit.do" modelAttribute="tutorial">
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<acme:textbox code="tutorial.title" path="title"/>
+	<acme:textbox code="tutorial.speaker" path="speaker"/>
+	<acme:textbox code="tutorial.duration" path="duration"/>
+	<acme:textbox code="tutorial.schedule" path="schedule"/>
+	<acme:textbox code="tutorial.room" path="room"/>
+	<acme:textbox code="tutorial.summary" path="summary"/>
+	<spring:message code="tutorial.attachmets.comment" />
+	<acme:textbox code="tutorial.attachments" path="attachments"/>
+	<acme:select items="${conferences}" itemLabel="id" code="tutorial.conference" path="conference"/>
 	
 	<br/>
 	<input type="submit" name="save" 
-	value="<spring:message code="topic.save" />" />
+	value="<spring:message code="tutorial.save" />" />
 
-	<input type="button" name="cancel" value="<spring:message code="topic.cancel" />"
-			onclick="javascript: relativeRedir('topic/administrator/list.do');" />
+	<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
+			onclick="javascript: relativeRedir('tutorial/administrator/list.do');" />
 </form:form>
 
 

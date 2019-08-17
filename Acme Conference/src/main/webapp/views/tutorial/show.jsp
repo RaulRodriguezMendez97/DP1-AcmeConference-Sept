@@ -39,6 +39,10 @@
 			</jstl:forEach>
 		</display:column>
 	</display:table>
+	
+	<input type="button" name="back"
+		value="<spring:message code="tutorial.back" />"
+		onclick="javascript: relativeRedir('tutorial/administrator/list.do');" />
 
 </security:authorize>
 

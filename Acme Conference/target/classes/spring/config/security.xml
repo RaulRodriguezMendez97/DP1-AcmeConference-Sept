@@ -97,7 +97,11 @@
 		<security:intercept-url pattern="/tutorial/administrator/list.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/tutorial/administrator/edit.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/tutorial/administrator/delete.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/tutorial/administrator/show.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/tutorial/administrator/show.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/tutorial/administrator/create.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/section/administrator/list.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/section/administrator/editdo" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/section/administrator/create.do" access="hasRole('ADMIN')" /> 
 		
 		<security:intercept-url pattern="/camera-ready/author/show.do" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/camera-ready/author/create.do" access="hasRole('AUTHOR')" />
