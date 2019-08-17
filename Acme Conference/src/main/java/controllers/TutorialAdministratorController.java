@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ConferenceService;
 import services.SectionService;
 import services.TutorialService;
+import domain.Conference;
 import domain.Tutorial;
 
 @Controller
@@ -49,7 +50,7 @@ public class TutorialAdministratorController extends AbstractController {
 			result.addObject("tutorial", tutorial);
 			result.addObject("sections", this.sectionService.getSectionsByTutorial(tutorialId));
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:.list.do");
+			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
 	}
@@ -60,7 +61,7 @@ public class TutorialAdministratorController extends AbstractController {
 		final Tutorial tutorial = this.tutorialService.create();
 		result = new ModelAndView("tutorial/edit");
 		result.addObject("tutorial", tutorial);
-		result.addObject("conferences", this.conferenceService.getConferencesInDraftMode());
+		result.addObject("conferences", this.conferenceService.getFutureAndDraftModeConferences());
 		return result;
 	}
 
@@ -70,11 +71,13 @@ public class TutorialAdministratorController extends AbstractController {
 		try {
 			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
 			Assert.notNull(tutorial);
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			result = new ModelAndView("tutorial/edit");
 			result.addObject("tutorial", tutorial);
-			result.addObject("conferences", this.conferenceService.getConferencesInDraftMode());
+			result.addObject("conferences", conferences);
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:.list.do");
+			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
 
@@ -85,13 +88,14 @@ public class TutorialAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Tutorial t = this.tutorialService.reconstruct(tutorial, binding);
-			if (!binding.hasErrors()) {
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			if (!binding.hasErrors() && conferences.contains(tutorial.getConference())) {
 				this.tutorialService.save(t);
 				result = new ModelAndView("redirect:list.do");
 			} else {
 				result = new ModelAndView("tutorial/edit");
 				result.addObject("tutorial", tutorial);
-				result.addObject("conferences", this.conferenceService.getConferencesInDraftMode());
+				result.addObject("conferences", conferences);
 			}
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
@@ -99,18 +103,21 @@ public class TutorialAdministratorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final Integer idTopic) {
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@RequestParam final Tutorial tutorial) {
 		ModelAndView result;
+		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
 		try {
-			final Tutorial tutorial = this.tutorialService.findOne(idTopic);
-			Assert.notNull(tutorial);
-			this.tutorialService.delete(tutorial);
+			final Tutorial t = this.tutorialService.findOne(tutorial.getId());
+			Assert.notNull(t);
+			Assert.isTrue(conferences.contains(t.getConference()));
+			this.tutorialService.delete(t);
 			result = new ModelAndView("redirect:list.do");
 
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:.list.do");
-
+			result = new ModelAndView("tutorial/edit");
+			result.addObject("tutorial", tutorial);
+			result.addObject("conferences", conferences);
 		}
 		return result;
 

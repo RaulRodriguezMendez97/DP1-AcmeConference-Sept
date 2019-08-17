@@ -35,7 +35,8 @@
 		<value>/views/reviwer/messages</value>		
 		<value>/views/author/messages</value>	
 		<value>/views/tutorial/messages</value>			
-		<value>/views/camera-ready/messages</value>			
+		<value>/views/camera-ready/messages</value>	
+		<value>/views/section/messages</value>			
 		
 	</util:list>
 

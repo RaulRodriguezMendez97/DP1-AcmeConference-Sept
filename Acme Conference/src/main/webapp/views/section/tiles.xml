@@ -16,17 +16,14 @@
        
 <tiles-definitions>
 
-	<definition name="section/showSections" extends="master.page">	
-		<put-attribute name="title" value="Sections tutorial" />
-		<put-attribute name="body" value="/views/section/showSections.jsp" />
+	<definition name="section/list" extends="master.page">	
+		<put-attribute name="title" value="Tutorials list" />
+		<put-attribute name="body" value="/views/section/list.jsp" />
 	</definition>
-	<definition name="section/editSection" extends="master.page">	
-		<put-attribute name="title" value="Edit section" />
-		<put-attribute name="body" value="/views/section/editSection.jsp" />
+		
+	<definition name="section/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit sections" />
+		<put-attribute name="body" value="/views/section/edit.jsp" />
 	</definition>
-
-	<definition name="section/action-2" extends="master.page">	
-		<put-attribute name="title" value="Editar sección" />
-		<put-attribute name="body" value="/views/section/action-2.jsp" />
-	</definition>
+	
 </tiles-definitions>

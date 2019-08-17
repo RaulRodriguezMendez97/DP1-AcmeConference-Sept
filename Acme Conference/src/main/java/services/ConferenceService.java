@@ -206,6 +206,10 @@ public class ConferenceService {
 		return this.conferenceRepository.getConferencesInDraftMode();
 	}
 
+	public Collection<Conference> getFutureAndDraftModeConferences() {
+		return this.conferenceRepository.getFutureAndDraftModeConferences();
+	}
+
 	//DASHBOARD
 
 	public List<Object[]> getAvgMinMaxDesvSubmissionsByConference() {

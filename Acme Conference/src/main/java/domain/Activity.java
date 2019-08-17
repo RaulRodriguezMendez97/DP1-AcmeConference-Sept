@@ -19,6 +19,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import validators.URLCollection;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Activity extends DomainEntity {
@@ -105,6 +107,7 @@ public class Activity extends DomainEntity {
 		this.summary = summary;
 	}
 
+	@URLCollection
 	@ElementCollection
 	public Collection<String> getAttachments() {
 		return this.attachments;
