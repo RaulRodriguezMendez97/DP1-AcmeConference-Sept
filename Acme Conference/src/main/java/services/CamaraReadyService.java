@@ -1,9 +1,9 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -37,6 +37,9 @@ public class CamaraReadyService {
 	@Autowired
 	private ActorService			actorService;
 
+	@Autowired
+	private AuthorService			authorService;
+
 
 	public CamaraReady create() {
 		final CamaraReady res = new CamaraReady();
@@ -45,7 +48,7 @@ public class CamaraReadyService {
 		res.setTitle("");
 		res.setUrlDocument("");
 		res.setAuthor(new Author());
-		res.setCoAuthors(new ArrayList<Author>());
+		res.setCoAuthors(new HashSet<Author>());
 
 		return res;
 	}
@@ -91,16 +94,35 @@ public class CamaraReadyService {
 
 		} else {
 			res = this.camaraReadyRepository.findOne(camaraReady.getId());
-
 			final CamaraReady copy = new CamaraReady();
-			copy.setId(res.getId());
-			copy.setVersion(res.getVersion());
-			copy.setAuthor(res.getAuthor());
 
-			copy.setTitle(camaraReady.getTitle());
-			copy.setSummary(camaraReady.getSummary());
-			copy.setUrlDocument(camaraReady.getUrlDocument());
-			copy.setCoAuthors(camaraReady.getCoAuthors());
+			final UserAccount userAccount = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(userAccount.getId());
+
+			if (a.equals(res.getAuthor())) {
+				copy.setId(res.getId());
+				copy.setVersion(res.getVersion());
+				copy.setAuthor(res.getAuthor());
+
+				copy.setTitle(camaraReady.getTitle());
+				copy.setSummary(camaraReady.getSummary());
+				copy.setUrlDocument(camaraReady.getUrlDocument());
+				copy.setCoAuthors(camaraReady.getCoAuthors());
+
+			} else if (res.getCoAuthors().contains(a)) {
+				copy.setId(res.getId());
+				copy.setVersion(res.getVersion());
+				copy.setAuthor(res.getAuthor());
+
+				copy.setCoAuthors(camaraReady.getCoAuthors());
+				copy.setTitle(camaraReady.getTitle());
+				copy.setSummary(camaraReady.getSummary());
+				copy.setUrlDocument(camaraReady.getUrlDocument());
+
+				if (this.comparaListas(camaraReady.getCoAuthors(), res.getCoAuthors()) == false)
+					binding.rejectValue("coAuthors", "NoCoAuthors");
+
+			}
 
 			final Submission submission = this.submissionService.findOne(submissionId);
 			Assert.isTrue(submission.getConference().getCameraDeadline().after(new Date()));
@@ -109,5 +131,21 @@ public class CamaraReadyService {
 
 			return copy;
 		}
+	}
+
+	public Boolean comparaListas(final Collection<Author> main, final Collection<Author> secundary) {
+		Boolean res = true;
+
+		if (main.size() != secundary.size())
+			res = false;
+
+		if (res != false)
+			for (final Author a : main)
+				if (!secundary.contains(a)) {
+					res = false;
+					break;
+				}
+		return res;
+
 	}
 }
