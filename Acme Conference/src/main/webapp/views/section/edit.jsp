@@ -33,7 +33,7 @@
 	value="<spring:message code="tutorial.delete" />" />
 
 	<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
-			onclick="javascript: relativeRedir('section/administrator/list.do?tutorialId='${tutorialId});" />
+			onclick="javascript: relativeRedir('section/administrator/list.do?tutorialId=${tutorialId}');" />
 </form:form>
 
 

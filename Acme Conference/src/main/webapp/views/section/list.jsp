@@ -24,6 +24,7 @@
 	<b><spring:message code="tutorial.sections" />:</b>
 	<display:table pagesize="5" name="sections" id="row"
 		requestURI="section/administrator/list.do">
+		
 		<display:column titleKey="tutorial.section.title">
 			<jstl:out value="${row.title}"></jstl:out>
 		</display:column>
@@ -37,11 +38,31 @@
 				<img width="80" height="80" src="${item.urlPicture}">
 			</jstl:forEach>
 		</display:column>
+		
+		<display:column titleKey="tutorial.edit">
+			<jstl:if test="${row.tutorial.conference.finalMode eq 0 }">
+				<a href="section/administrator/edit.do?tutorialId=${row.tutorial.id}&sectionId=${row.id}"><spring:message
+						code="tutorial.edit" /></a>
+			</jstl:if>
+			<jstl:if test="${row.tutorial.conference.finalMode eq 1 }">
+				-
+			</jstl:if>
+		</display:column>
+		
+		<display:column titleKey="tutorial.delete">
+			<jstl:if test="${row.tutorial.conference.finalMode eq 0 }">
+				<a href="section/administrator/delete.do?tutorialId=${row.tutorial.id}&sectionId=${row.id}"><spring:message
+						code="tutorial.delete" /></a>
+			</jstl:if>
+			<jstl:if test="${row.tutorial.conference.finalMode eq 1 }">
+				-
+			</jstl:if>
+		</display:column>
 	</display:table>
 
 	<input type="button" name="create"
 		value="<spring:message code="section.create" />"
-		onclick="javascript: relativeRedir('section/administrator/create.do?tutorialId='${tutorialId});" />
+		onclick="javascript: relativeRedir('section/administrator/create.do?tutorialId=${tutorialId}');" />
 	<input type="button" name="back"
 		value="<spring:message code="tutorial.back" />"
 		onclick="javascript: relativeRedir('tutorial/administrator/list.do');" />
