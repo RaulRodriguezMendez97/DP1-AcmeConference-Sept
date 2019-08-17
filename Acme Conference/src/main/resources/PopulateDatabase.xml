@@ -528,7 +528,7 @@
 		<property name="title" value="Titulo del primer tutorial"></property>
 		<property name="speaker" value="Raul"></property>
 		<property name="duration" value="10"></property>
-		<property name="schedule" value="05/08/2019 11:30"></property>
+		<property name="schedule" value="05/08/2020 11:30"></property>
 		<property name="room" value="habitación1"></property>
 		<property name="summary" value="resumen del primer tutorial"></property>
 		<property name="conference" ref="conference1"></property>
@@ -537,7 +537,7 @@
 		<property name="title" value="Titulo del segundo tutorial"></property>
 		<property name="speaker" value="Cristian"></property>
 		<property name="duration" value="20"></property>
-		<property name="schedule" value="06/08/2019 11:30"></property>
+		<property name="schedule" value="06/08/2020 11:30"></property>
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen del segundo tutorial"></property>
 		<property name="conference" ref="conference2"></property>
@@ -547,7 +547,7 @@
 		<property name="title" value="Titulo del tercer tutorial"></property>
 		<property name="speaker" value="Jesus"></property>
 		<property name="duration" value="30"></property>
-		<property name="schedule" value="07/08/2019 11:30"></property>
+		<property name="schedule" value="07/08/2020 11:30"></property>
 		<property name="room" value="habitacion3"></property>
 		<property name="summary" value="resumen del tercer tutorial"></property>
 		<property name="conference" ref="conference3"></property>
@@ -558,7 +558,7 @@
 		<property name="title" value="Titulo del primer panel"></property>
 		<property name="speaker" value="Raul"></property>
 		<property name="duration" value="10"></property>
-		<property name="schedule" value="04/08/2019 11:30"></property>
+		<property name="schedule" value="04/08/2020 11:30"></property>
 		<property name="room" value="habitación1"></property>
 		<property name="summary" value="resumen del primer panel"></property>
 		<property name="conference" ref="conference1"></property>
@@ -567,7 +567,7 @@
 		<property name="title" value="Titulo del segundo panel"></property>
 		<property name="speaker" value="Cristian"></property>
 		<property name="duration" value="20"></property>
-		<property name="schedule" value="05/08/2019 11:30"></property>
+		<property name="schedule" value="05/08/2020 11:30"></property>
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen del segundo panel"></property>
 		<property name="conference" ref="conference2"></property>
@@ -576,7 +576,7 @@
 		<property name="title" value="Titulo del tercer panel"></property>
 		<property name="speaker" value="Antonio"></property>
 		<property name="duration" value="30"></property>
-		<property name="schedule" value="06/08/2019 11:30"></property>
+		<property name="schedule" value="06/08/2020 11:30"></property>
 		<property name="room" value="habitacion3"></property>
 		<property name="summary" value="resumen del tercer panel"></property>
 		<property name="conference" ref="conference3"></property>
@@ -587,7 +587,7 @@
 		<property name="title" value="Titulo de la primera presentacion"></property>
 		<property name="speaker" value="Raul"></property>
 		<property name="duration" value="10"></property>
-		<property name="schedule" value="01/08/2019 11:30"></property>
+		<property name="schedule" value="01/08/2020 11:30"></property>
 		<property name="room" value="habitación1"></property>
 		<property name="summary" value="resumen de la primera presentacion"></property>
 		<property name="conference" ref="conference1"></property>
@@ -597,7 +597,7 @@
 		<property name="title" value="Titulo de la segunda presentacion"></property>
 		<property name="speaker" value="Cristian"></property>
 		<property name="duration" value="20"></property>
-		<property name="schedule" value="02/08/2019 11:30"></property>
+		<property name="schedule" value="02/08/2020 11:30"></property>
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen de la segunda presentacion"></property>
 		<property name="conference" ref="conference2"></property>

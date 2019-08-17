@@ -51,7 +51,6 @@ public class TutorialService {
 		final Tutorial saved = this.tutorialRepository.save(tutorial);
 		return saved;
 	}
-
 	public Tutorial reconstruct(final Tutorial tutorial, final BindingResult binding) {
 		Tutorial res;
 
