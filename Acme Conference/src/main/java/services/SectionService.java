@@ -62,8 +62,8 @@ public class SectionService {
 			copy.setVersion(res.getVersion());
 			copy.setSummary(section.getSummary());
 			copy.setTitle(section.getTitle());
-			copy.setTutorial(section.getTutorial());
-			copy.setPictures(section.getPictures());
+			copy.setTutorial(res.getTutorial());
+			copy.setPictures(res.getPictures());
 			this.validator.validate(copy, binding);
 
 			res = copy;

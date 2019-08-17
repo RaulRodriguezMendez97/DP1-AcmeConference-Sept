@@ -83,26 +83,27 @@ public class SectionAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final Tutorial tutorial, final BindingResult binding) {
+	public ModelAndView edit(final Section section, final BindingResult binding) {
 		ModelAndView result;
 		try {
-			final Tutorial t = this.tutorialService.reconstruct(tutorial, binding);
+
+			final Tutorial tutorial = section.getTutorial();
 			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
-			if (!binding.hasErrors() && conferences.contains(tutorial.getConference())) {
-				this.tutorialService.save(t);
-				result = new ModelAndView("redirect:list.do");
+			Assert.isTrue(conferences.contains(tutorial.getConference()));
+			final Section s = this.sectionService.reconstruct(section, binding);
+			if (!binding.hasErrors()) {
+				this.sectionService.save(s);
+				result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
 			} else {
 				result = new ModelAndView("tutorial/edit");
-				result.addObject("tutorial", tutorial);
-				result.addObject("conferences", conferences);
+				result.addObject("tutorial", tutorial.getId());
 			}
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
-
-	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final Integer tutorialId, @RequestParam final Integer sectionId) {
 		ModelAndView result;
 		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
