@@ -13,5 +13,5 @@
 <b><spring:message code="report.rejected" /> : </b> <jstl:out value="${reportRejected}"></jstl:out> <br/>
 <b><spring:message code="report.borderLine" /> : </b> <jstl:out value="${reportBorderLine}"></jstl:out> <br/>
 
-<acme:cancel url="submission/administrator/submissionsUnderReviwed.do" code="submission.cancel"/>
+<acme:cancel url="${uri}" code="submission.cancel"/>
 </security:authorize>

@@ -820,7 +820,7 @@
 		<property name="originalityScore" value="2" />
 		<property name="qualityScore" value="4" />
 		<property name="eadabilityScore" value="6" />
-		<property name="decision" value="0" />
+		<property name="decision" value="2" />
 		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer1" />
 		<property name="submission" ref="submission1" />
@@ -847,7 +847,7 @@
 		<property name="originalityScore" value="7" />
 		<property name="qualityScore" value="4" />
 		<property name="eadabilityScore" value="10" />
-		<property name="decision" value="1" />
+		<property name="decision" value="2" />
 		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer3" />
 		<property name="submission" ref="submission2" />
@@ -874,7 +874,7 @@
 		<property name="originalityScore" value="1" />
 		<property name="qualityScore" value="1" />
 		<property name="eadabilityScore" value="5" />
-		<property name="decision" value="0" />
+		<property name="decision" value="2" />
 		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer3" />
 		<property name="submission" ref="submission2" />
@@ -883,7 +883,7 @@
 		<property name="originalityScore" value="10" />
 		<property name="qualityScore" value="8" />
 		<property name="eadabilityScore" value="5" />
-		<property name="decision" value="1" />
+		<property name="decision" value="0" />
 		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission5" />
@@ -896,6 +896,24 @@
 		<property name="comment" value=""/>
 		<property name="reviwer" ref="reviwer4" />
 		<property name="submission" ref="submission6" />
+	</bean>
+	<bean id="report10" class="domain.Report">
+		<property name="originalityScore" value="3" />
+		<property name="qualityScore" value="4" />
+		<property name="eadabilityScore" value="5" />
+		<property name="decision" value="2" />
+		<property name="comment" value=""/>
+		<property name="reviwer" ref="reviwer4" />
+		<property name="submission" ref="submission7" />
+	</bean>
+	<bean id="report11" class="domain.Report">
+		<property name="originalityScore" value="7" />
+		<property name="qualityScore" value="4" />
+		<property name="eadabilityScore" value="5" />
+		<property name="decision" value="2" />
+		<property name="comment" value=""/>
+		<property name="reviwer" ref="reviwer4" />
+		<property name="submission" ref="submission7" />
 	</bean>
 
 	

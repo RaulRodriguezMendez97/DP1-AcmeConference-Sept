@@ -176,6 +176,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		result.addObject("submissions", submissions);
 		result.addObject("uriL", "submission/administrator/submissionsUnderReviwed.do");
 		result.addObject("uriD", "submission/administrator/detailSubmissionUnderReviwed.do");
+		result.addObject("uriDR", "submission/administrator/detailReportsSubmissionUnderReviwed.do");
 		return result;
 	}
 
@@ -213,6 +214,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		result.addObject("submissions", submissions);
 		result.addObject("uriL", "submission/administrator/submissionsRejected.do");
 		result.addObject("uriD", "submission/administrator/detailSubmissionRejected.do");
+		result.addObject("uriDR", "submission/administrator/detailReportsSubmissionRejected.do");
 		return result;
 	}
 
@@ -250,6 +252,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		result.addObject("submissions", submissions);
 		result.addObject("uriL", "submission/administrator/submissionsAccepted.do");
 		result.addObject("uriD", "submission/administrator/detailSubmissionAccepted.do");
+		result.addObject("uriDR", "submission/administrator/detailReportsSubmissionAccepted.do");
 		return result;
 	}
 
@@ -317,8 +320,8 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		return result;
 	}
 
-	@RequestMapping(value = "/administrator/detailReports", method = RequestMethod.GET)
-	public ModelAndView detailsReports(@RequestParam final Integer submissionId) {
+	@RequestMapping(value = "/administrator/detailReportsSubmissionAccepted", method = RequestMethod.GET)
+	public ModelAndView detailsReportsSubAccepted(@RequestParam final Integer submissionId) {
 		ModelAndView result;
 		try {
 			final int reportAccepted = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId);
@@ -329,6 +332,45 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reportAccepted", reportAccepted);
 			result.addObject("reportRejected", reportRejected);
 			result.addObject("reportBorderLine", reportBorderLine);
+			result.addObject("uri", "submission/administrator/submissionsAccepted.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detailReportsSubmissionRejected", method = RequestMethod.GET)
+	public ModelAndView detailsReportsSubRejected(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final int reportAccepted = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId);
+			final int reportRejected = this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			final int reportBorderLine = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
+
+			result = new ModelAndView("submission/detailReports");
+			result.addObject("reportAccepted", reportAccepted);
+			result.addObject("reportRejected", reportRejected);
+			result.addObject("reportBorderLine", reportBorderLine);
+			result.addObject("uri", "submission/administrator/submissionsRejected.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detailReportsSubmissionUnderReviwed", method = RequestMethod.GET)
+	public ModelAndView detailsReportsSubUnderReviwed(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final int reportAccepted = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId);
+			final int reportRejected = this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			final int reportBorderLine = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
+
+			result = new ModelAndView("submission/detailReports");
+			result.addObject("reportAccepted", reportAccepted);
+			result.addObject("reportRejected", reportRejected);
+			result.addObject("reportBorderLine", reportBorderLine);
+			result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../");
 		}
