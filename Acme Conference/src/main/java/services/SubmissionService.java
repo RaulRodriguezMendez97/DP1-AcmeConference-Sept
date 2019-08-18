@@ -86,8 +86,6 @@ public class SubmissionService {
 		Assert.isTrue(submission.getAuthor().equals(this.authorService.getAuthorByUserAccount(userAccount.getId())));
 		if (submission.getId() == 0)
 			Assert.isTrue(submission.getStatus() == 0);
-		if (submission.getStatus() == 2)
-			Assert.isTrue(!submission.getReviwers().isEmpty());
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
 	}
@@ -97,7 +95,9 @@ public class SubmissionService {
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		if (submission.getId() == 0)
 			Assert.isTrue(submission.getStatus() == 0);
-		if (submission.getStatus() == 2)
+		if (submission.getStatus() == 1)//Rechazada
+			Assert.isTrue(submission.getReviwers().isEmpty() || submission.getReviwers().equals(null));
+		if (submission.getStatus() == 2)//Aceptada
 			Assert.isTrue(!submission.getReviwers().isEmpty());
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
@@ -134,7 +134,7 @@ public class SubmissionService {
 			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
 			res.setAuthor(a);
 
-			//			res.setId(submissionReviwedForm.getId());
+			res.setId(submissionReviwedForm.getId());
 			res.setVersion(submissionReviwedForm.getVersion());
 			res.setConference(submissionReviwedForm.getConference());
 			res.setMoment(new Date());
@@ -180,10 +180,10 @@ public class SubmissionService {
 			p.setAuthor(res.getAuthor());
 			p.setConference(res.getConference());
 			p.setCamaraReady(res.getCamaraReady());
-			p.setStatus(res.getStatus());
 			p.setTicker(res.getTicker());
 			p.setReviwed(res.getReviwed());
 
+			p.setStatus(submission.getStatus());
 			p.setReviwers(submission.getReviwers());
 
 			this.validator.validate(p, binding);

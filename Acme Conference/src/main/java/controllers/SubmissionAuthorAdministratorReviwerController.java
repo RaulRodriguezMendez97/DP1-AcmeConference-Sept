@@ -83,9 +83,14 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/author/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final Author a = this.authorService.getAuthorByUserAccount(user.getId());
 		SubmissionReviwedForm submissionReviwedForm = new SubmissionReviwedForm();
 		final Collection<Conference> conferences;
+		final Collection<Author> coAuthors;
 
+		coAuthors = this.authorService.findAll();
+		coAuthors.remove(a);
 		conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 		submissionReviwedForm = submissionReviwedForm.create();
 		Assert.notNull(submissionReviwedForm);
@@ -93,6 +98,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		result = new ModelAndView("submission/edit");
 		result.addObject("submissionReviwedForm", submissionReviwedForm);
 		result.addObject("conferences", conferences);
+		result.addObject("coAuthors", coAuthors);
 		return result;
 	}
 
@@ -113,19 +119,31 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 				this.submissionService.saveAuthor(submission);
 				result = new ModelAndView("redirect:list.do");
 			} else {
+				final UserAccount user = LoginService.getPrincipal();
+				final Author a = this.authorService.getAuthorByUserAccount(user.getId());
 				final Collection<Conference> conferences;
+				final Collection<Author> coAuthors;
+				coAuthors = this.authorService.findAll();
+				coAuthors.remove(a);
 				conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 				result = new ModelAndView("submission/edit");
 				result.addObject("submissionReviwedForm", submissionReviwedForm);
 				result.addObject("conferences", conferences);
+				result.addObject("coAuthors", coAuthors);
 			}
 		} catch (final Exception e) {
+			final UserAccount user = LoginService.getPrincipal();
+			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
 			final Collection<Conference> conferences;
+			final Collection<Author> coAuthors;
+			coAuthors = this.authorService.findAll();
+			coAuthors.remove(a);
 			conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 			result = new ModelAndView("submission/edit");
 			result.addObject("exception", e);
 			result.addObject("submissionReviwedForm", submissionReviwedForm);
 			result.addObject("conferences", conferences);
+			result.addObject("coAuthors", coAuthors);
 		}
 		return result;
 	}

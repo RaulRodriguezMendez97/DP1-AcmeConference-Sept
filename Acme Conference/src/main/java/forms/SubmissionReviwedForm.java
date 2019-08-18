@@ -1,9 +1,12 @@
 
 package forms;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 
+import javax.persistence.ManyToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -18,10 +21,21 @@ import domain.Submission;
 
 public class SubmissionReviwedForm extends Submission {
 
-	private String	title;
-	private String	summary;
-	private String	urlDocument;
+	private String				title;
+	private String				summary;
+	private String				urlDocument;
+	private Collection<Author>	coAuthors;
 
+
+	@Valid
+	@ManyToMany
+	public Collection<Author> getCoAuthors() {
+		return this.coAuthors;
+	}
+
+	public void setCoAuthors(final Collection<Author> coAuthors) {
+		this.coAuthors = coAuthors;
+	}
 
 	@NotNull
 	@NotBlank
@@ -61,6 +75,7 @@ public class SubmissionReviwedForm extends Submission {
 		res.setSummary("");
 		res.setTitle("");
 		res.setUrlDocument("");
+		res.setCoAuthors(new HashSet<Author>());
 
 		//Submission
 		res.setConference(new Conference());

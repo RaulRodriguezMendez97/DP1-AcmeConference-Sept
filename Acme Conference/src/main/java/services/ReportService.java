@@ -119,4 +119,19 @@ public class ReportService {
 		return this.reportRepository.getReportsByReviwer(reviwerId);
 	}
 
+	//Numero de report con decicion aceptada, dada una submission
+	public int getReportsDecicionAceptadaBySubmission(final int submissionId) {
+		return this.reportRepository.getReportsConDecisionIgualAceptadaBySubmission(submissionId);
+	}
+
+	//Numero de report con decicion rechazada, dada una submission
+	public int getReportsDecicionRechazadaBySubmission(final int submissionId) {
+		return this.reportRepository.getReportsConDecisionIgualRechazadaBySubmission(submissionId);
+	}
+
+	//Numero de report con decicion border-line, dada una submission
+	public int getReportsDecicionBorderLineBySubmission(final int submissionId) {
+		return this.reportRepository.getReportsConDecisionIgualBorderLineBySubmission(submissionId);
+	}
+
 }

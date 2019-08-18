@@ -74,6 +74,10 @@ public class AuthorService {
 		return this.authorRepository.findOne(authorId);
 	}
 
+	public Collection<Author> findAll() {
+		return this.authorRepository.findAll();
+	}
+
 	public Author save(final Author a) {
 		Author res = null;
 		Assert.isTrue(a != null && a.getName() != null && a.getSurname() != null && a.getName() != "" && a.getUserAccount() != null && a.getEmail() != null && a.getEmail() != "", "Company.save -> Name, Surname or email invalid");

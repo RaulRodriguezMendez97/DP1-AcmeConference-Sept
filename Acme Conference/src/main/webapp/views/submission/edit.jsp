@@ -27,6 +27,7 @@
 <acme:textbox code="submission.reviwed.summary" path="summary"/>
 <acme:textbox code="submission.reviwed.urlDocument" path="urlDocument"/>
 <acme:select items="${conferences}" itemLabel="title" code="submission.conference.table" path="conference"/>
+<acme:multipleSelect items="${coAuthors}" itemLabel="email" code="submission.reviwed.coAuthors" path="coAuthors"/>
 
 <br/>
 <input type="submit" name="save" value="<spring:message code="submission.save" />" />
@@ -47,6 +48,12 @@
 <form:hidden path="version" />
 
 <acme:multipleSelect items="${reviwers}" itemLabel="email" code="submission.reviwers" path="reviwers"/>
+<form:label path="status"><spring:message code="submission.status" />:</form:label>
+		<form:select path="status">
+			<form:option value="0" label="Under-reviwed" />	
+			<form:option value="1" label="Rejected" />	
+			<form:option value="2" label="Accepted" />		
+		</form:select>
 
 <br/>
 <input type="submit" name="save" value="<spring:message code="submission.save" />" />
