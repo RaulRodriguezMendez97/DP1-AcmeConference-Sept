@@ -17,14 +17,10 @@
 <tiles-definitions>
 
 	
-	<definition name="author/create" extends="master.page">	
-		<put-attribute name="title" value="Create new author" />
-		<put-attribute name="body" value="/views/author/edit.jsp" />
+	<definition name="registration/create" extends="master.page">	
+		<put-attribute name="title" value="Register for a conference" />
+		<put-attribute name="body" value="/views/registration/edit.jsp" />
 	</definition>
 	
-	<definition name="author/action-2" extends="master.page">	
-		<put-attribute name="title" value="Author" />
-		<put-attribute name="body" value="/views/author/action-2.jsp" />
-	</definition>
-	
+
 </tiles-definitions>

@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
@@ -47,6 +48,7 @@ public class Actor extends DomainEntity {
 
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -54,7 +56,7 @@ public class Actor extends DomainEntity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getMiddleName() {
 		return this.middleName;
 	}
@@ -65,6 +67,7 @@ public class Actor extends DomainEntity {
 
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getSurname() {
 		return this.surname;
 	}
@@ -74,6 +77,7 @@ public class Actor extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getPhoto() {
 		return this.photo;
 	}
@@ -85,6 +89,7 @@ public class Actor extends DomainEntity {
 	@Column(unique = true)
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getEmail() {
 		return this.email;
 	}
@@ -94,6 +99,7 @@ public class Actor extends DomainEntity {
 	}
 
 	//	@Pattern(regexp = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$")
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getPhone() {
 		return this.phone;
 	}
@@ -103,6 +109,7 @@ public class Actor extends DomainEntity {
 	}
 
 	//OPCIONAL
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getAddress() {
 		return this.address;
 	}

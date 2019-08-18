@@ -107,6 +107,9 @@
 		<security:intercept-url pattern="/camera-ready/author/show.do" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/camera-ready/author/create.do" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/camera-ready/author/edit.do" access="hasRole('AUTHOR')" />
+		<security:intercept-url pattern="/registration/author/edit.do" access="hasRole('AUTHOR')" />
+		<security:intercept-url pattern="/registration/author/create.do" access="hasRole('AUTHOR')" />
+		<security:intercept-url pattern="/registration/author/list.do" access="hasRole('AUTHOR')" />
 		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

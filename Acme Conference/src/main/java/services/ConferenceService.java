@@ -210,6 +210,12 @@ public class ConferenceService {
 		return this.conferenceRepository.getFutureAndDraftModeConferences();
 	}
 
+	public Collection<Conference> getAllConferenceByAuthor() {
+		final UserAccount user = LoginService.getPrincipal();
+		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
+		return this.conferenceRepository.getAllConferenceByAuthor(user.getId());
+	}
+
 	//DASHBOARD
 
 	public List<Object[]> getAvgMinMaxDesvSubmissionsByConference() {

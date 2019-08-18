@@ -13,6 +13,9 @@ import domain.Conference;
 @Repository
 public interface ConferenceRepository extends JpaRepository<Conference, Integer> {
 
+	@Query("select r.conference from Registration  r where r.creditCard.author.id=?1")
+	public Collection<Conference> getAllConferenceByAuthor(final int authorId);
+
 	@Query("select c from Conference c where c.admin.id = ?1")
 	public Collection<Conference> getConferencesByAdmin(Integer idAdmin);
 

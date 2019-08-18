@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="registration/edit.do" modelAttribute="registration">
+<form:form action="registration/author/edit.do" modelAttribute="registration">
 	<jstl:if test="${not empty exception}">
 		<p style="color: red">
 			
@@ -28,84 +28,80 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
-
-
 	<fieldset>
 		<legend>
-			<spring:message code="registration.personalDatas" />
+			<spring:message code="CreditCard.Datas" />
 		</legend>
+	<form:label path="creditCard">
+		<spring:message code="creditCard.holderName" />
+	</form:label>
+	<form:input path="creditCard" />
+	<form:errors cssClass="error" path="creditCard" />
+	<br /><br />
+	<form:label path="creditCard.brandName">
+		<spring:message code="creditCard.brandName" />
+	</form:label>
+	
+	<form:select id="creditCard.brandName" path="creditCard.brandName">
+		<form:options items="${marcas}"/>
+	</form:select>
+	<form:errors cssClass="error" path="creditCard.brandName" />
+	<br /><br />
 
-		<form:label path="name">
-			<spring:message code="registration.name" />
-		</form:label>
-		<form:input path="name" />
-		<form:errors cssClass="error" path="name" />
-		<br />
-
-		<form:label path="middleName">
-			<spring:message code="registration.middleName" />
-		</form:label>
-		<form:input path="middleName" />
-		<form:errors cssClass="error" path="middleName" />
-		<br />
-
-		<form:label path="surname">
-			<spring:message code="registration.surname" />
-		</form:label>
-		<form:input path="surname" />
-		<form:errors cssClass="error" path="surname" />
-		<br />
-
-		<form:label path="photo">
-			<spring:message code="registration.photo" />
-		</form:label>
-		<form:input path="photo" />
-		<form:errors cssClass="error" path="photo" />
-		<br />
-
-		<form:label path="email">
-			<spring:message code="registration.email" />
-		</form:label>
-		<form:input path="email" />
-		<form:errors cssClass="error" path="email" />
-		<br />
-
-		<form:label path="phone">
-			<spring:message code="registration.phone" />
-		</form:label>
-		<form:input path="phone" />
-		<form:errors cssClass="error" path="phone" />
-		<br />
-
-		<form:label path="address">
-			<spring:message code="registration.adress" />
-		</form:label>
-		<form:input path="address" />
-		<form:errors cssClass="error" path="address" />
-		<br />
+	<form:label path="creditCard.number">
+		<spring:message code="creditCard.number" />
+	</form:label>
+	
+	<form:input path="creditCard.number" />
+	<form:errors cssClass="error" path="creditCard.number" />
+	<br /><br />
+	
+	<form:label path="creditCard.expirationMonth">
+		<spring:message code="creditCard.expirationMonth" />
+	</form:label>
+	
+	<form:input path="creditCard.expirationMonth" />
+	<form:errors cssClass="error" path="creditCard.expirationMonth" />
+	<br /><br />
+	<form:label path="creditCard.expirationYear">
+		<spring:message code="creditCard.expirationYear" />
+	</form:label>
+	
+	<form:input path="creditCard.expirationYear" />
+	<form:errors cssClass="error" path="creditCard.expirationYear" />
+	<br /><br />
+	
+	<form:label path="creditCard.CW">
+		<spring:message code="creditCard.CW" />
+	</form:label>
+	
+	<form:input path="creditCard.CW" />
+	<form:errors cssClass="error" path="creditCard.CW" />
+	<br /><br />
 		<p>
 			<spring:message code="registration.information" />
 		</p>
+				<legend>
+			<spring:message code="select.creditCard" />
+		</legend>
+	<acme:select items="${myCreditCards}" itemLabel="number" code="registration.creditCard" path="creditCard"/>
+	
+	<br />
 	</fieldset>
 	<br />
-
-
+	
+	
 	<fieldset>
 		<legend>
-			<spring:message code="administrator.userAccount" />
+			<spring:message code="select.conference" />
 		</legend>
-
-		<acme:textbox code="registration.username" path="userAccount.username" />
-
-		<acme:password code="registration.password" path="userAccount.password" />
-
-
-		<acme:password code="registration.confirmation.password" path="password" />
-
+	<acme:select items="${conferences}" itemLabel="title" code="registration.conference" path="conference"/>
 	</fieldset>
 	<br />
+	
 
-	<input type="submit" name="save" onclick=" return validar(); "	value="<spring:message code="registration.save"/> ">
+
+	<input type="submit" name="save" value="<spring:message code="registration.save"/> ">
 
 	<input type="button" name="cancel"
 		value="<spring:message code="registration.cancel" />"
@@ -113,25 +109,3 @@
 
 </form:form>
 
-<script>
-	function validar() {
-		return validar_phone();
-	}
-
-	function validar_phone() {
-		var numeroTelefono = document.getElementById('phone');
-		var expresionRegular1 = /^\+[0-9]{0,3}\ \([0-9]{0,3}\)\ [0-9]{4,}$|^\+[1-9][0-9]{0,2}\ [0-9]{4,}$|^[0-9]{4,}|^\+[0-9]\ $|^$|^\+$/gm;//<-- hay que cambiar el pattern
-
-		if (!expresionRegular1.test(numeroTelefono.value)) {
-			var confirmarTelefono = confirm('Are you sure you want to register that phone number?');
-
-			if (confirmarTelefono == true) {
-
-				document.getElementById('patternPhone').value = true;
-
-			}
-		}
-		return confirmarTelefono;
-
-	}
-</script>

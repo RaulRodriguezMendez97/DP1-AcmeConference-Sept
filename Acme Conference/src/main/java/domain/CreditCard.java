@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,7 +19,7 @@ public class CreditCard extends DomainEntity {
 
 	private String	holdName;
 	private String	brandName;
-	private int		number;
+	private String	number;
 	private int		expirationMonth;
 	private int		expirationYear;
 	private int		CW;
@@ -37,6 +38,7 @@ public class CreditCard extends DomainEntity {
 	}
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getHoldName() {
 		return this.holdName;
 	}
@@ -46,6 +48,7 @@ public class CreditCard extends DomainEntity {
 
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	public String getBrandName() {
 		return this.brandName;
 	}
@@ -54,10 +57,10 @@ public class CreditCard extends DomainEntity {
 	}
 
 	@Column(unique = true)
-	public int getNumber() {
+	public String getNumber() {
 		return this.number;
 	}
-	public void setNumber(final int number) {
+	public void setNumber(final String number) {
 		this.number = number;
 	}
 

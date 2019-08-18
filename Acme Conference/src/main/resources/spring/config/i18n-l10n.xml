@@ -37,6 +37,7 @@
 		<value>/views/tutorial/messages</value>			
 		<value>/views/camera-ready/messages</value>	
 		<value>/views/section/messages</value>			
+		<value>/views/registration/messages</value>			
 		
 	</util:list>
 

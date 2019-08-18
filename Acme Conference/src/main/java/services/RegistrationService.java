@@ -9,12 +9,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.validation.Validator;
 
 import repositories.RegistrationRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Author;
 import domain.Conference;
 import domain.CreditCard;
 import domain.Registration;
@@ -27,8 +27,9 @@ public class RegistrationService {
 	private RegistrationRepository	registrationRepository;
 	@Autowired
 	private ActorService			actorService;
+
 	@Autowired
-	private Validator				validator;
+	private AuthorService			authorService;
 
 
 	public Registration create() {
@@ -63,6 +64,13 @@ public class RegistrationService {
 		registration = this.registrationRepository.save(r);
 
 		return registration;
+	}
+
+	public Collection<Registration> getAllRegistrationByAuthor() {
+		final UserAccount user = LoginService.getPrincipal();
+		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
+		final Author author = this.authorService.getAuthorByUserAccount(user.getId());
+		return this.registrationRepository.getAllRegistrationByAuthor(author.getId());
 	}
 
 }
