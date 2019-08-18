@@ -83,5 +83,8 @@ requestURI="${uriL}" >
 <display:column>
 		<a href="${uriD}?submissionId=${row.id}"><spring:message code="submission.details" /></a> 
 </display:column>
+<display:column>
+		<a href="submission/administrator/detailReports.do?submissionId=${row.id}"><spring:message code="submission.detailsReports" /></a> 
+</display:column>
 </display:table>
 </security:authorize>

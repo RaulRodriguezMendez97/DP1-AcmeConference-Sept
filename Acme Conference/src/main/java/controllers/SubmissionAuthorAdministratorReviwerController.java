@@ -18,6 +18,7 @@ import security.UserAccount;
 import services.AdministratorService;
 import services.AuthorService;
 import services.ConferenceService;
+import services.ReportService;
 import services.ReviwedService;
 import services.ReviwerService;
 import services.SubmissionService;
@@ -45,6 +46,8 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	private ReviwerService			reviwerService;
 	@Autowired
 	private AdministratorService	administratorService;
+	@Autowired
+	private ReportService			reportService;
 
 
 	@RequestMapping(value = "/author/list", method = RequestMethod.GET)
@@ -310,6 +313,24 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("exception", e);
 			result.addObject("submission", submission);
 			result.addObject("reviwers", reviwers);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detailReports", method = RequestMethod.GET)
+	public ModelAndView detailsReports(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final int reportAccepted = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId);
+			final int reportRejected = this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			final int reportBorderLine = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
+
+			result = new ModelAndView("submission/detailReports");
+			result.addObject("reportAccepted", reportAccepted);
+			result.addObject("reportRejected", reportRejected);
+			result.addObject("reportBorderLine", reportBorderLine);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
 		}
 		return result;
 	}

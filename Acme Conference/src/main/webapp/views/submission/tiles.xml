@@ -24,6 +24,10 @@
 		<put-attribute name="title" value="Submission detail" />
 		<put-attribute name="body" value="/views/submission/detail.jsp" />
 	</definition>
+	<definition name="submission/detailReports" extends="master.page">	
+		<put-attribute name="title" value="Details reports" />
+		<put-attribute name="body" value="/views/submission/detailReports.jsp" />
+	</definition>
 	<definition name="submission/edit" extends="master.page">	
 		<put-attribute name="title" value="New submission" />
 		<put-attribute name="body" value="/views/submission/edit.jsp" />
