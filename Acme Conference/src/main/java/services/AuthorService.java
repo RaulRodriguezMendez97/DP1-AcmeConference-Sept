@@ -22,7 +22,6 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Author;
-import domain.Paper;
 import forms.RegistrationFormAuthor;
 
 @Service
@@ -50,7 +49,6 @@ public class AuthorService {
 		author.setEmail("");
 		author.setPhone("");
 		author.setAddress("");
-		author.setPapers(new HashSet<Paper>());
 
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
@@ -120,7 +118,6 @@ public class AuthorService {
 			res.setPhone(registrationForm.getPhone());
 			res.setPhoto(registrationForm.getPhoto());
 			res.setSurname(registrationForm.getSurname());
-			res.setPapers(new HashSet<Paper>());
 			res.setMiddleName(registrationForm.getMiddleName());
 
 			final Authority ad = new Authority();
@@ -191,7 +188,6 @@ public class AuthorService {
 			p.setPhone(registrationForm.getPhone());
 			p.setPhoto(registrationForm.getPhoto());
 			p.setSurname(registrationForm.getSurname());
-			p.setPapers(res.getPapers());
 			p.setMiddleName(registrationForm.getMiddleName());
 
 			final String regexEmail1 = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";

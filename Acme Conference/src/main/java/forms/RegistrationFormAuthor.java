@@ -17,7 +17,6 @@ import javax.validation.constraints.Size;
 import security.Authority;
 import security.UserAccount;
 import domain.Author;
-import domain.Paper;
 
 public class RegistrationFormAuthor extends Author {
 
@@ -65,7 +64,6 @@ public class RegistrationFormAuthor extends Author {
 		registrationForm.setPhoto("");
 		registrationForm.setAddress("");
 		registrationForm.setPassword("");
-		registrationForm.setPapers(new HashSet<Paper>());
 		registrationForm.setMiddleName("");
 		registrationForm.setSurname("");
 
