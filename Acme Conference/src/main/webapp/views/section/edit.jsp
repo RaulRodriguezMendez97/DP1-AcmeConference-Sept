@@ -25,13 +25,16 @@
 	<form:hidden path="version" />
 	<acme:textbox code="tutorial.section.title" path="title"/>
 	<acme:textbox code="tutorial.section.summary" path="summary"/>
-	<br/>
+	<acme:textbox code="section.form.picture" path="picture"/>
+	<jstl:forEach items="${section.pictures}" var="item">
+		<img width="80" height="80" src="${item.urlPicture}"><br/>
+		<a href="picture/administrator/delete.do?tutorialId=${tutorialId}&sectionId=${section.id}"><spring:message
+						code="tutorial.delete" /></a>
+	</jstl:forEach>
+		<br/>
 	<input type="submit" name="save" 
 	value="<spring:message code="tutorial.save" />" />
 	
-	<input type="submit" name="delete" 
-	value="<spring:message code="tutorial.delete" />" />
-
 	<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
 			onclick="javascript: relativeRedir('section/administrator/list.do?tutorialId=${tutorialId}');" />
 </form:form>

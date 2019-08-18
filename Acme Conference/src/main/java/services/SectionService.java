@@ -15,6 +15,7 @@ import repositories.SectionRepository;
 import domain.Picture;
 import domain.Section;
 import domain.Tutorial;
+import forms.SectionPictureForm;
 
 @Service
 @Transactional
@@ -45,23 +46,27 @@ public class SectionService {
 
 	public Section save(final Section section) {
 		final Section saved = this.sectionRepository.save(section);
+
 		return saved;
 	}
 
-	public Section reconstruct(final Section section, final BindingResult binding) {
-		Section res;
+	public Section reconstruct(final SectionPictureForm sectionPictureForm, final BindingResult binding) {
+		Section res = new Section();
 
-		if (section.getId() == 0) {
-			res = section;
+		if (sectionPictureForm.getId() == 0) {
+			res.setSummary(sectionPictureForm.getSummary());
+			res.setTitle(sectionPictureForm.getTitle());
+			res.setTutorial(sectionPictureForm.getTutorial());
+
 			this.validator.validate(res, binding);
 
 		} else {
-			res = this.sectionRepository.findOne(section.getId());
+			res = this.sectionRepository.findOne(sectionPictureForm.getId());
 			final Section copy = new Section();
 			copy.setId(res.getId());
 			copy.setVersion(res.getVersion());
-			copy.setSummary(section.getSummary());
-			copy.setTitle(section.getTitle());
+			copy.setSummary(sectionPictureForm.getSummary());
+			copy.setTitle(sectionPictureForm.getTitle());
 			copy.setTutorial(res.getTutorial());
 			copy.setPictures(res.getPictures());
 			this.validator.validate(copy, binding);
@@ -71,9 +76,8 @@ public class SectionService {
 		return res;
 
 	}
-
-	public void delete(final Section section) {
-		this.sectionRepository.delete(section.getId());
+	public void delete(final int sectionId) {
+		this.sectionRepository.delete(sectionId);
 	}
 
 	public Collection<Section> getSectionsByTutorial(final int tutorialId) {

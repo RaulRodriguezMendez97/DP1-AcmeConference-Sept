@@ -532,6 +532,11 @@
 		<property name="room" value="habitación1"></property>
 		<property name="summary" value="resumen del primer tutorial"></property>
 		<property name="conference" ref="conference1"></property>
+		<property name="attachments">
+			<list>
+				<value>https://www.google.com</value>
+			</list>
+		</property>
 	</bean>
 	<bean id="tutorial2" class="domain.Tutorial">
 		<property name="title" value="Titulo del segundo tutorial"></property>
@@ -541,7 +546,11 @@
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen del segundo tutorial"></property>
 		<property name="conference" ref="conference2"></property>
-
+		<property name="attachments">
+			<list>
+				<value>https://www.google.com</value>
+			</list>
+		</property>
 	</bean>
 	<bean id="tutorial3" class="domain.Tutorial">
 		<property name="title" value="Titulo del tercer tutorial"></property>
@@ -551,6 +560,11 @@
 		<property name="room" value="habitacion3"></property>
 		<property name="summary" value="resumen del tercer tutorial"></property>
 		<property name="conference" ref="conference3"></property>
+		<property name="attachments">
+			<list>
+				<value>https://www.google.es</value>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Panel -->
@@ -562,6 +576,10 @@
 		<property name="room" value="habitación1"></property>
 		<property name="summary" value="resumen del primer panel"></property>
 		<property name="conference" ref="conference1"></property>
+			<property name="attachments">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="panel2" class="domain.Panel">
 		<property name="title" value="Titulo del segundo panel"></property>
@@ -571,6 +589,10 @@
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen del segundo panel"></property>
 		<property name="conference" ref="conference2"></property>
+			<property name="attachments">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="panel3" class="domain.Panel">
 		<property name="title" value="Titulo del tercer panel"></property>
@@ -580,6 +602,10 @@
 		<property name="room" value="habitacion3"></property>
 		<property name="summary" value="resumen del tercer panel"></property>
 		<property name="conference" ref="conference3"></property>
+			<property name="attachments">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Presentation -->
@@ -592,6 +618,10 @@
 		<property name="summary" value="resumen de la primera presentacion"></property>
 		<property name="conference" ref="conference1"></property>
 		<property name="camaraReady" ref="camaraReady1"></property>
+			<property name="attachments">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="presentation2" class="domain.Presentation">
 		<property name="title" value="Titulo de la segunda presentacion"></property>
@@ -602,6 +632,11 @@
 		<property name="summary" value="resumen de la segunda presentacion"></property>
 		<property name="conference" ref="conference2"></property>
 		<property name="camaraReady" ref="camaraReady2"></property>
+			<property name="attachments">
+			<list>
+				<value>https://www.google.es</value>
+			</list>
+		</property>
 	</bean>
 
 
