@@ -27,9 +27,11 @@
 	<acme:textbox code="tutorial.section.summary" path="summary"/>
 	<acme:textbox code="section.form.picture" path="picture"/>
 	<jstl:forEach items="${section.pictures}" var="item">
+	<div>
 		<img width="80" height="80" src="${item.urlPicture}"><br/>
 		<a href="picture/administrator/delete.do?tutorialId=${tutorialId}&sectionId=${section.id}"><spring:message
 						code="tutorial.delete" /></a>
+	</div>
 	</jstl:forEach>
 		<br/>
 	<input type="submit" name="save" 

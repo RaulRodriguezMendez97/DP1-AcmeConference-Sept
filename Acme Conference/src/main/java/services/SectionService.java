@@ -46,7 +46,6 @@ public class SectionService {
 
 	public Section save(final Section section) {
 		final Section saved = this.sectionRepository.save(section);
-
 		return saved;
 	}
 
@@ -57,7 +56,7 @@ public class SectionService {
 			res.setSummary(sectionPictureForm.getSummary());
 			res.setTitle(sectionPictureForm.getTitle());
 			res.setTutorial(sectionPictureForm.getTutorial());
-
+			res.setPictures(new HashSet<Picture>());
 			this.validator.validate(res, binding);
 
 		} else {

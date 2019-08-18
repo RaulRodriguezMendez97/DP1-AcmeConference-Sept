@@ -2,7 +2,6 @@
 package controllers;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,9 +99,7 @@ public class SectionAdministratorController extends AbstractController {
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			final Section section = this.sectionService.reconstruct(sectionPictureForm, binding);
 			if (!binding.hasErrors()) {
-				if (sectionPictureForm.getPicture() == "" && sectionPictureForm.getId() == 0)
-					section.setPictures(new HashSet<Picture>());
-				else {
+				if (sectionPictureForm.getPicture() != "") {
 					final Picture p = new Picture();
 					p.setUrlPicture(sectionPictureForm.getPicture());
 					final Picture pictureSaved = this.pictureService.save(p);
@@ -112,6 +109,7 @@ public class SectionAdministratorController extends AbstractController {
 				result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
 			} else {
 				result = new ModelAndView("section/edit");
+				sectionPictureForm.setPictures(s.getPictures());
 				result.addObject("section", sectionPictureForm);
 				result.addObject("tutorialId", tutorial.getId());
 			}
