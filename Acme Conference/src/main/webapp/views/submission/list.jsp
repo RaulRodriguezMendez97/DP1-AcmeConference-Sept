@@ -77,15 +77,12 @@ requestURI="${uriL}" >
 <display:column property="conference.title" titleKey="submission.conference.table"/>
 
 <display:column>
-	<jstl:if test="${row.status eq 0}">	
+	<jstl:if test="${(row.status eq 0) and (empty row.reviwers)}">	
 		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.asignar" /></a>
 	</jstl:if>
-</display:column>
-
-
-<display:column>
-	<jstl:if test="${(row.status eq 0) and (fechaActual > row.conference.submissionDeadline)}">	
-		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.editar" /></a>
+	
+	<jstl:if test="${(row.status eq 0) and (row.reviwers ne null) and (fechaActual > row.conference.submissionDeadline)}">	
+		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.changeStatus" /></a>
 	</jstl:if>
 </display:column>
 

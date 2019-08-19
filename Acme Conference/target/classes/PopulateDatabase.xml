@@ -781,6 +781,11 @@
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference5" />
 		<property name="reviwed" ref="reviwed4" />
+		<property name="reviwers">
+			<list>
+				<ref bean="reviwer3"></ref>
+			</list>
+		</property>
 	</bean>
 	<bean id="submission5" class="domain.Submission">
 		<property name="ticker" value="ESP-1235" />
@@ -797,6 +802,11 @@
 		<property name="author" ref="author2" />
 		<property name="conference" ref="conference5" />
 		<property name="reviwed" ref="reviwed6" />
+		<property name="reviwers">
+			<list>
+				<ref bean="reviwer4"></ref>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="submission7" class="domain.Submission">

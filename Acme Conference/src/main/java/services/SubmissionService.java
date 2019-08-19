@@ -194,7 +194,12 @@ public class SubmissionService {
 			p.setTicker(res.getTicker());
 			p.setReviwed(res.getReviwed());
 
-			p.setStatus(submission.getStatus());
+			if (submission.getStatus() != 0) {
+				p.setStatus(submission.getStatus());
+				p.setReviwers(res.getReviwers());
+			}
+
+			p.setStatus(res.getStatus());
 			p.setReviwers(submission.getReviwers());
 
 			this.validator.validate(p, binding);

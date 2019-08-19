@@ -52,12 +52,13 @@
 <form:hidden path="id"/>
 <form:hidden path="version" />
 
-<acme:multipleSelect items="${reviwers}" itemLabel="email" code="submission.reviwers" path="reviwers"/>
+<jstl:if test="${(submission.status eq 0) and (empty submission.reviwers)}">	
+	<acme:multipleSelect items="${reviwers}" itemLabel="email" code="submission.reviwers" path="reviwers"/>
+</jstl:if>
 
-<jstl:if test="${fechaActual > submission.conference.submissionDeadline}">	
+<jstl:if test="${(submission.status eq 0) and (submission.reviwers ne null) and (fechaActual > submission.conference.submissionDeadline)}">	
 	<form:label path="status"><spring:message code="submission.status" />:</form:label>
 		<form:select path="status">
-			<form:option value="0" label="Under-reviwed" />	
 			<jstl:if test="${res < 0}">
 				<form:option value="1" label="Rejected" />	
 			</jstl:if>
