@@ -29,7 +29,7 @@
 	<jstl:forEach items="${section.pictures}" var="item">
 	<div>
 		<img width="80" height="80" src="${item.urlPicture}"><br/>
-		<a href="picture/administrator/delete.do?tutorialId=${tutorialId}&sectionId=${section.id}"><spring:message
+		<a href="picture/administrator/delete.do?tutorialId=${tutorialId}&sectionId=${section.id}&pictureId=${item.id}"><spring:message
 						code="tutorial.delete" /></a>
 	</div>
 	</jstl:forEach>
