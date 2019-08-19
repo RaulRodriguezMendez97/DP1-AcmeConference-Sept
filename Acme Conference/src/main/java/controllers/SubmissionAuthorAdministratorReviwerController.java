@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -172,8 +173,11 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
 		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus0(admin.getId());
 
+		final Date fechaActual = new Date();
+
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
+		result.addObject("fechaActual", fechaActual);
 		result.addObject("uriL", "submission/administrator/submissionsUnderReviwed.do");
 		result.addObject("uriD", "submission/administrator/detailSubmissionUnderReviwed.do");
 		result.addObject("uriDR", "submission/administrator/detailReportsSubmissionUnderReviwed.do");

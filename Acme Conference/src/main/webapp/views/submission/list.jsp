@@ -75,11 +75,21 @@ requestURI="${uriL}" >
 <display:column property="moment" titleKey="submission.moment"/>
 <display:column property="status" titleKey="submission.status"/>
 <display:column property="conference.title" titleKey="submission.conference.table"/>
-<jstl:if test="${row.status eq 0}">	
-	<display:column>
+
+<display:column>
+	<jstl:if test="${row.status eq 0}">	
 		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.editar" /></a>
-	</display:column>
-</jstl:if>
+	</jstl:if>
+</display:column>
+
+
+<display:column>
+	<jstl:if test="${(row.status eq 0) and (fechaActual > row.conference.submissionDeadline)}">	
+		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.editar" /></a>
+	</jstl:if>
+</display:column>
+
+
 <display:column>
 		<a href="${uriD}?submissionId=${row.id}"><spring:message code="submission.details" /></a> 
 </display:column>
