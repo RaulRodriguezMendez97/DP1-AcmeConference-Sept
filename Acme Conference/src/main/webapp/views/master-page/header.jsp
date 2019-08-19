@@ -38,8 +38,8 @@
 					<li class="arrow"></li>
 					<li><a href="conference/administrator/submission-last-5.do"><spring:message code="master.page.administrator.conference.submission.less.5" /></a></li>
 					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.notification.less.5" /></a></li>
-					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.camera.less.5" /></a></li>
-					<li><a href="conference/administrator/notification-less-5.do"><spring:message code="master.page.administrator.conference.start.less.5" /></a></li>
+					<li><a href="conference/administrator/camera-ready-less-5.do"><spring:message code="master.page.administrator.conference.camera.less.5" /></a></li>
+					<li><a href="conference/administrator/start-less-5.do"><spring:message code="master.page.administrator.conference.start.less.5" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.submission" /></a>
