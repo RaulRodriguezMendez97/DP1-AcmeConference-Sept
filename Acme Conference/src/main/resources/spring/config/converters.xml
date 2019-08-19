@@ -67,7 +67,9 @@
 				
 		<bean class="converters.StringToRegistrationConverter" />
 		<bean class="converters.RegistrationToStringConverter" />
-				
+		
+		<bean class="converters.StringToCreditCardConverter" />
+		<bean class="converters.CreditCardToStringConverter" />
 	</util:list>
 	
 </beans>

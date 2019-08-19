@@ -305,9 +305,9 @@
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holdName" value="nombre1"></property>
 		<property name="brandName" value="VISA"></property>
-		<property name="number" value="123321"></property>
+		<property name="number" value="5325065299416578"></property>
 		<property name="expirationMonth" value="3"></property>
-		<property name="expirationYear" value="2019"></property>
+		<property name="expirationYear" value="2022"></property>
 		<property name="CW" value="101"></property>
 		<property name="author" ref="author1" />
 	</bean>
@@ -315,25 +315,25 @@
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holdName" value="nombre2"></property>
 		<property name="brandName" value="VISA"></property>
-		<property name="number" value="321123"></property>
+		<property name="number" value="5536973139301709"></property>
 		<property name="expirationMonth" value="5"></property>
-		<property name="expirationYear" value="2020"></property>
+		<property name="expirationYear" value="2021"></property>
 		<property name="CW" value="201"></property>
 		<property name="author" ref="author2" />
 	</bean>
 	<bean id="creditCard3" class="domain.CreditCard">
 		<property name="holdName" value="nombre3"></property>
 		<property name="brandName" value="VISA"></property>
-		<property name="number" value="321124"></property>
+		<property name="number" value="5141210625716091"></property>
 		<property name="expirationMonth" value="6"></property>
-		<property name="expirationYear" value="2020"></property>
+		<property name="expirationYear" value="2021"></property>
 		<property name="CW" value="202"></property>
 		<property name="author" ref="author3" />
 	</bean>
 	<bean id="creditCard4" class="domain.CreditCard">
 		<property name="holdName" value="nombre4"></property>
 		<property name="brandName" value="VISA"></property>
-		<property name="number" value="321126"></property>
+		<property name="number" value="5390389640123794"></property>
 		<property name="expirationMonth" value="2"></property>
 		<property name="expirationYear" value="2022"></property>
 		<property name="CW" value="203"></property>

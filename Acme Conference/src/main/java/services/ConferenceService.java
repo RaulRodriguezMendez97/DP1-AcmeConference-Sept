@@ -17,6 +17,7 @@ import repositories.ConferenceRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.Author;
 import domain.Conference;
 
 @Service
@@ -28,6 +29,8 @@ public class ConferenceService {
 
 	@Autowired
 	private ActorService			actorService;
+	@Autowired
+	private AuthorService			authorService;
 
 	@Autowired
 	private Validator				validator;
@@ -213,7 +216,8 @@ public class ConferenceService {
 	public Collection<Conference> getAllConferenceByAuthor() {
 		final UserAccount user = LoginService.getPrincipal();
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
-		return this.conferenceRepository.getAllConferenceByAuthor(user.getId());
+		final Author author = this.authorService.getAuthorByUserAccount(user.getId());
+		return this.conferenceRepository.getAllConferenceByAuthor(author.getId());
 	}
 
 	//DASHBOARD

@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -55,8 +56,9 @@ public class CreditCard extends DomainEntity {
 	public void setBrandName(final String brandName) {
 		this.brandName = brandName;
 	}
-
+	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	@Column(unique = true)
+	@CreditCardNumber
 	public String getNumber() {
 		return this.number;
 	}

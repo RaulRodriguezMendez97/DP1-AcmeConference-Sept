@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RegistrationRepository;
 import security.LoginService;
@@ -18,6 +20,7 @@ import domain.Author;
 import domain.Conference;
 import domain.CreditCard;
 import domain.Registration;
+import forms.RegistrationAndCreditCardForm;
 
 @Service
 @Transactional
@@ -30,6 +33,9 @@ public class RegistrationService {
 
 	@Autowired
 	private AuthorService			authorService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	public Registration create() {
@@ -71,6 +77,19 @@ public class RegistrationService {
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));
 		final Author author = this.authorService.getAuthorByUserAccount(user.getId());
 		return this.registrationRepository.getAllRegistrationByAuthor(author.getId());
+	}
+	public Registration reconstruct(final RegistrationAndCreditCardForm registrationForm, final BindingResult binding) {
+
+		final Registration res = new Registration();
+		res.setId(registrationForm.getId());
+		res.setVersion(registrationForm.getVersion());
+		res.setCreditCard(registrationForm.getCreditCard());
+		res.setConference(registrationForm.getConference());
+
+		this.validator.validate(res, binding);
+
+		return res;
+
 	}
 
 }
