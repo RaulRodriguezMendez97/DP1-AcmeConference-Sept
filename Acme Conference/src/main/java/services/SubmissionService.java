@@ -30,6 +30,8 @@ public class SubmissionService {
 	private AuthorService			authorService;
 	@Autowired
 	private Validator				validator;
+	@Autowired
+	private ReportService			reportService;
 
 
 	//	public Submission create() {
@@ -93,12 +95,21 @@ public class SubmissionService {
 	public Submission saveAdmin(final Submission submission) {
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-		if (submission.getId() == 0)
-			Assert.isTrue(submission.getStatus() == 0);
-		if (submission.getStatus() == 1)//Rechazada
-			Assert.isTrue(submission.getReviwers().isEmpty() || submission.getReviwers().equals(null));
-		if (submission.getStatus() == 2)//Aceptada
+
+		if (submission.getStatus() == 2 || submission.getStatus() == 1)//Aceptada o rechazada
 			Assert.isTrue(!submission.getReviwers().isEmpty());
+
+		final int aceptadas = this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId());
+		final int rechazadas = this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId());
+		final Date fechaActual = new Date();
+
+		if ((aceptadas >= rechazadas) && (fechaActual.after(submission.getConference().getSubmissionDeadline())))
+			Assert.isTrue(submission.getStatus() == 2);
+		else if ((rechazadas > aceptadas) && (fechaActual.after(submission.getConference().getSubmissionDeadline())))
+			Assert.isTrue(submission.getStatus() == 1 || submission.getStatus() == 0);
+		else
+			Assert.isTrue(submission.getStatus() == 2 || submission.getStatus() == 0);
+
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
 	}

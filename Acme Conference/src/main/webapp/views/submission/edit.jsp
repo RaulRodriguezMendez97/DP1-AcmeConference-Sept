@@ -44,16 +44,28 @@
 
 <security:authorize access="hasRole('ADMIN')">
 <form:form action="submission/administrator/edit.do" modelAttribute="submission">
+
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="submission.error" /> </p>
+</jstl:if>
+
 <form:hidden path="id"/>
 <form:hidden path="version" />
 
 <acme:multipleSelect items="${reviwers}" itemLabel="email" code="submission.reviwers" path="reviwers"/>
-<form:label path="status"><spring:message code="submission.status" />:</form:label>
+
+<jstl:if test="${fechaActual > submission.conference.submissionDeadline}">	
+	<form:label path="status"><spring:message code="submission.status" />:</form:label>
 		<form:select path="status">
 			<form:option value="0" label="Under-reviwed" />	
-			<form:option value="1" label="Rejected" />	
-			<form:option value="2" label="Accepted" />		
+			<jstl:if test="${res < 0}">
+				<form:option value="1" label="Rejected" />	
+			</jstl:if>
+			<jstl:if test="${res >= 0}">
+				<form:option value="2" label="Accepted" />
+			</jstl:if>	
 		</form:select>
+</jstl:if>
 
 <br/>
 <input type="submit" name="save" value="<spring:message code="submission.save" />" />

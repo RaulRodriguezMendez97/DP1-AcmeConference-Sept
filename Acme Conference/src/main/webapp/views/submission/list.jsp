@@ -78,7 +78,7 @@ requestURI="${uriL}" >
 
 <display:column>
 	<jstl:if test="${row.status eq 0}">	
-		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.editar" /></a>
+		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.asignar" /></a>
 	</jstl:if>
 </display:column>
 
