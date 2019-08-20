@@ -100,10 +100,17 @@ public class SectionAdministratorController extends AbstractController {
 			final Section section = this.sectionService.reconstruct(sectionPictureForm, binding);
 			if (!binding.hasErrors()) {
 				if (sectionPictureForm.getPicture() != "") {
-					final Picture p = new Picture();
+					Picture p = new Picture();
 					p.setUrlPicture(sectionPictureForm.getPicture());
-					final Picture pictureSaved = this.pictureService.save(p);
-					section.getPictures().add(pictureSaved);
+					final BindingResult binding2 = null;
+					p = this.pictureService.reconstruct(p, binding2);
+					if (binding2.hasErrors())
+						binding.rejectValue("picture", "{org.hibernate.validator.constraints.URL.message}");
+					else {
+						final Picture pictureSaved = this.pictureService.save(p);
+						section.getPictures().add(pictureSaved);
+					}
+
 				}
 				this.sectionService.save(section);
 				result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());

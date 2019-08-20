@@ -82,4 +82,10 @@ public class SectionService {
 	public Collection<Section> getSectionsByTutorial(final int tutorialId) {
 		return this.sectionRepository.getSectionsByTutorial(tutorialId);
 	}
+
+	public void deleteAllSectionsByTutorial(final int tutorialId) {
+		final Collection<Section> sections = this.getSectionsByTutorial(tutorialId);
+		for (final Section s : sections)
+			this.sectionRepository.delete(s.getId());
+	}
 }

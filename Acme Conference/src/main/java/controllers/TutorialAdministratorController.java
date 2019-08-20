@@ -104,14 +104,15 @@ public class TutorialAdministratorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@RequestParam final Tutorial tutorial) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Tutorial tutorial) {
 		ModelAndView result;
 		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
 		try {
 			final Tutorial t = this.tutorialService.findOne(tutorial.getId());
 			Assert.notNull(t);
 			Assert.isTrue(conferences.contains(t.getConference()));
+			this.sectionService.deleteAllSectionsByTutorial(tutorial.getId());
 			this.tutorialService.delete(t);
 			result = new ModelAndView("redirect:list.do");
 
