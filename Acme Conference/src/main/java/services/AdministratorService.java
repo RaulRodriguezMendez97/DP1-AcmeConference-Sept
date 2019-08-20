@@ -21,6 +21,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
+import domain.MessageBox;
 import forms.RegistrationFormAdmin;
 
 @Service
@@ -31,6 +32,8 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 	@Autowired
 	private ActorService			actorService;
+	@Autowired
+	private MessageBoxService		messageBoxService;
 	@Autowired
 	private Validator				validator;
 
@@ -120,6 +123,12 @@ public class AdministratorService {
 		}
 
 		res = this.administratorRepository.save(admin);
+
+		if (admin.getId() == 0) {
+			final MessageBox mb = this.messageBoxService.create();
+			mb.setActor(res);
+			this.messageBoxService.save(mb);
+		}
 
 		return res;
 	}
