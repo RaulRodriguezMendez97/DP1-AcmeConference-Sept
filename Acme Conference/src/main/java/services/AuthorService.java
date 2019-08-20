@@ -22,6 +22,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Author;
+import domain.MessageBox;
 import forms.RegistrationFormAuthor;
 
 @Service
@@ -32,6 +33,8 @@ public class AuthorService {
 	private AuthorRepository	authorRepository;
 	@Autowired
 	private ActorService		actorService;
+	@Autowired
+	private MessageBoxService	messageBoxService;
 	@Autowired
 	private Validator			validator;
 
@@ -108,6 +111,13 @@ public class AuthorService {
 			user.setPassword(hash);
 		}
 		res = this.authorRepository.save(a);
+
+		if (a.getId() == 0) {
+			final MessageBox mb = this.messageBoxService.create();
+			mb.setActor(res);
+			this.messageBoxService.save(mb);
+		}
+
 		return res;
 	}
 	public Author reconstruct(final RegistrationFormAuthor registrationForm, final BindingResult binding) {

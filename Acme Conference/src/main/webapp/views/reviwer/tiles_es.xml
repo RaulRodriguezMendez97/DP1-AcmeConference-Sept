@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="reviwer/create" extends="master.page">	
-		<put-attribute name="title" value="Cliente: Crear nuevo reviwer" />
+		<put-attribute name="title" value="Crear nuevo reviwer" />
 		<put-attribute name="body" value="/views/reviwer/edit.jsp" />
 	</definition>
 	
