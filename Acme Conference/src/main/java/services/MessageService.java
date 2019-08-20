@@ -132,7 +132,14 @@ public class MessageService {
 
 	public Collection<Message> getMessagesByFinder(final String email, final String topic) {
 		final Collection<Message> res = new ArrayList<>();
-		final List<Message> mensajesQuery = (List<Message>) this.messageRepository.getMessagesByFinder(email, topic);
+		List<Message> mensajesQuery = new ArrayList<>();
+		mensajesQuery = (List<Message>) this.messageRepository.getMessagesByFinder1(email, topic);
+		final List<Message> mensajesQuery2 = (List<Message>) this.messageRepository.getMessagesByFinder2(email, topic);
+
+		for (final Message m : mensajesQuery2)
+			if (!mensajesQuery.contains(m))
+				mensajesQuery.add(m);
+
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 		final MessageBox messageBox = this.messageBoxService.getMessageBoxByActor(a.getId());
