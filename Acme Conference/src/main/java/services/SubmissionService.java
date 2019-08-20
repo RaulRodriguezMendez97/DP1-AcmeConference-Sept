@@ -1,8 +1,11 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
@@ -17,6 +20,7 @@ import repositories.SubmissionRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Author;
+import domain.Reviwer;
 import domain.Submission;
 import forms.SubmissionReviwedForm;
 
@@ -30,6 +34,8 @@ public class SubmissionService {
 	private AuthorService			authorService;
 	@Autowired
 	private Validator				validator;
+	@Autowired
+	private ReviwerService			reviwerService;
 
 
 	//	public Submission create() {
@@ -221,6 +227,58 @@ public class SubmissionService {
 
 		return ticker;
 
+	}
+
+	private static List<String> trocear(final String cadena) {
+		final List<String> palabras = new ArrayList<>();
+		final String[] trozos = cadena.trim().split(" ");
+		for (final String a : trozos)
+			palabras.add(a);
+		return palabras;
+	}
+
+	public Submission asignarAutomaticamenteReviwers(final Submission submission) {
+		//Reviwers
+		final List<Reviwer> reviwers = (List<Reviwer>) this.reviwerService.findAll();
+		final Collection<Reviwer> rev = new HashSet<>();
+		final List<String> palabrasTitulo = SubmissionService.trocear(submission.getConference().getTitle());
+		final List<String> palabrasResumen = SubmissionService.trocear(submission.getConference().getSummary());
+		Boolean res = false;
+		Submission submissionSave = null;
+
+		if (reviwers.size() >= 3) {
+			for (int i = 1; i <= 3; i++) {
+				final int tam = reviwers.size();
+				final int a = (int) (Math.random() * tam - 1);
+				final Reviwer aux = reviwers.get(a);
+
+				for (final String keys : aux.getKeyWords())
+					for (final String pt : palabrasTitulo)
+						if (keys.equals(pt)) {
+							rev.add(aux);
+							reviwers.remove(aux);
+							res = true;
+							break;
+						}
+
+				if (res == false) {
+
+					for (final String keys : aux.getKeyWords())
+						for (final String pr : palabrasResumen)
+							if (keys.equals(pr)) {
+								rev.add(aux);
+								reviwers.remove(aux);
+								res = true;
+								break;
+							}
+
+				} else
+					break;
+			}
+			submission.setReviwers(reviwers);
+			submissionSave = this.submissionRepository.save(submission);
+		}
+		return submissionSave;
 	}
 
 }
