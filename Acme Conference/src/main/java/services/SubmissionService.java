@@ -30,8 +30,6 @@ public class SubmissionService {
 	private AuthorService			authorService;
 	@Autowired
 	private Validator				validator;
-	@Autowired
-	private ReportService			reportService;
 
 
 	//	public Submission create() {
@@ -98,17 +96,6 @@ public class SubmissionService {
 
 		if (submission.getStatus() == 2 || submission.getStatus() == 1)//Aceptada o rechazada
 			Assert.isTrue(!submission.getReviwers().isEmpty());
-
-		final int aceptadas = this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId());
-		final int rechazadas = this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId());
-		final Date fechaActual = new Date();
-
-		if ((aceptadas >= rechazadas) && (fechaActual.after(submission.getConference().getSubmissionDeadline())))
-			Assert.isTrue(submission.getStatus() == 2);
-		else if ((rechazadas > aceptadas) && (fechaActual.after(submission.getConference().getSubmissionDeadline())))
-			Assert.isTrue(submission.getStatus() == 1 || submission.getStatus() == 0);
-		else
-			Assert.isTrue(submission.getStatus() == 2 || submission.getStatus() == 0);
 
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
@@ -194,13 +181,15 @@ public class SubmissionService {
 			p.setTicker(res.getTicker());
 			p.setReviwed(res.getReviwed());
 
-			if (submission.getStatus() != 0) {
+			if (!res.getReviwers().isEmpty()) {
 				p.setStatus(submission.getStatus());
 				p.setReviwers(res.getReviwers());
 			}
 
-			p.setStatus(res.getStatus());
-			p.setReviwers(submission.getReviwers());
+			if (res.getReviwers().isEmpty() || res.getReviwers().equals(null)) {
+				p.setStatus(res.getStatus());
+				p.setReviwers(submission.getReviwers());
+			}
 
 			this.validator.validate(p, binding);
 			if (binding.hasErrors())

@@ -81,7 +81,7 @@ requestURI="${uriL}" >
 		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.asignar" /></a>
 	</jstl:if>
 	
-	<jstl:if test="${(row.status eq 0) and (row.reviwers ne null) and (fechaActual > row.conference.submissionDeadline)}">	
+	<jstl:if test="${(row.status eq 0) and ((row.reviwers ne null) and (!empty row.reviwers)) and (fechaActual > row.conference.submissionDeadline)}">	
 		<a href="submission/administrator/edit.do?submissionId=${row.id}"><spring:message code="submission.changeStatus" /></a>
 	</jstl:if>
 </display:column>

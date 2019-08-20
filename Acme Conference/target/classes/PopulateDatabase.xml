@@ -731,6 +731,20 @@
 		<property name="finalMode" value="1" />
 		<property name="admin" ref="administrator1" />
 	</bean>
+	<bean id="conference6" class="domain.Conference">
+		<property name="title" value="title conference 6" />
+		<property name="acronym" value="acronym conference 6" />
+		<property name="venue" value="venue conference 6" />
+		<property name="submissionDeadline" value="08/19/2019 11:30" />
+		<property name="notificacionDeadline" value="03/02/2020 11:30" />
+		<property name="cameraDeadline" value="03/03/2020 11:30" />
+		<property name="startDate" value="03/04/2020 11:30" />
+		<property name="endDate" value="03/08/2020 11:30" />
+		<property name="summary" value="summary conference 6" />
+		<property name="fee" value="4.0" />
+		<property name="finalMode" value="1" />
+		<property name="admin" ref="administrator1" />
+	</bean>
 
 	<!-- Submission -->
 	<bean id="submission1" class="domain.Submission">
@@ -823,6 +837,15 @@
 			</list>
 		
 		</property>
+	</bean>
+	
+	<bean id="submission8" class="domain.Submission">
+		<property name="ticker" value="PPP-1214" />
+		<property name="moment" value="07/19/2019 11:30" />
+		<property name="status" value="0" />
+		<property name="author" ref="author1" />
+		<property name="conference" ref="conference6" />
+		<property name="reviwed" ref="reviwed8" />
 	</bean>
 
 	<!-- Report -->
@@ -994,6 +1017,16 @@
 		<property name="title" value="title7" />
 		<property name="summary" value="summary7" />
 		<property name="urlDocument" value="http://urlDocument7.com" />
+		<property name="author" ref="author1"></property>
+		<property name="coAuthors">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="reviwed8" class="domain.Reviwed">
+		<property name="title" value="title8" />
+		<property name="summary" value="summary8" />
+		<property name="urlDocument" value="http://urlDocument8.com" />
 		<property name="author" ref="author1"></property>
 		<property name="coAuthors">
 			<list>

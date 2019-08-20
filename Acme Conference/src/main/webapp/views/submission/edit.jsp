@@ -56,7 +56,7 @@
 	<acme:multipleSelect items="${reviwers}" itemLabel="email" code="submission.reviwers" path="reviwers"/>
 </jstl:if>
 
-<jstl:if test="${(submission.status eq 0) and (submission.reviwers ne null) and (fechaActual > submission.conference.submissionDeadline)}">	
+<jstl:if test="${(submission.status eq 0) and ((submission.reviwers ne null) and (!empty submission.reviwers)) and (fechaActual > submission.conference.submissionDeadline)}">	
 	<form:label path="status"><spring:message code="submission.status" />:</form:label>
 		<form:select path="status">
 			<jstl:if test="${res < 0}">
