@@ -65,7 +65,9 @@ public class CamaraReadyService {
 	public CamaraReady save(final CamaraReady camaraReady) {
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
-		Assert.isTrue(camaraReady.getAuthor().equals(a) || camaraReady.getCoAuthors().contains(a));
+		Assert.isTrue(camaraReady.getAuthor().equals(a));
+
+		//Assert.isTrue(camaraReady.getAuthor().equals(a) || camaraReady.getCoAuthors().contains(a));
 
 		final CamaraReady saved = this.camaraReadyRepository.save(camaraReady);
 		return saved;
@@ -93,33 +95,33 @@ public class CamaraReadyService {
 			res = this.camaraReadyRepository.findOne(camaraReady.getId());
 			final CamaraReady copy = new CamaraReady();
 
-			final UserAccount userAccount = LoginService.getPrincipal();
-			final Actor a = this.actorService.getActorByUserAccount(userAccount.getId());
+			//			final UserAccount userAccount = LoginService.getPrincipal();
+			//			final Actor a = this.actorService.getActorByUserAccount(userAccount.getId());
 
-			if (a.equals(res.getAuthor())) {
-				copy.setId(res.getId());
-				copy.setVersion(res.getVersion());
-				copy.setAuthor(res.getAuthor());
+			//if (a.equals(res.getAuthor())) {
+			copy.setId(res.getId());
+			copy.setVersion(res.getVersion());
+			copy.setAuthor(res.getAuthor());
 
-				copy.setTitle(camaraReady.getTitle());
-				copy.setSummary(camaraReady.getSummary());
-				copy.setUrlDocument(camaraReady.getUrlDocument());
-				copy.setCoAuthors(camaraReady.getCoAuthors());
+			copy.setTitle(camaraReady.getTitle());
+			copy.setSummary(camaraReady.getSummary());
+			copy.setUrlDocument(camaraReady.getUrlDocument());
+			copy.setCoAuthors(camaraReady.getCoAuthors());
 
-			} else if (res.getCoAuthors().contains(a)) {
-				copy.setId(res.getId());
-				copy.setVersion(res.getVersion());
-				copy.setAuthor(res.getAuthor());
-
-				copy.setCoAuthors(camaraReady.getCoAuthors());
-				copy.setTitle(camaraReady.getTitle());
-				copy.setSummary(camaraReady.getSummary());
-				copy.setUrlDocument(camaraReady.getUrlDocument());
-
-				if (this.comparaListas(camaraReady.getCoAuthors(), res.getCoAuthors()) == false)
-					binding.rejectValue("coAuthors", "NoCoAuthors");
-
-			}
+			//			} else if (res.getCoAuthors().contains(a)) {
+			//				copy.setId(res.getId());
+			//				copy.setVersion(res.getVersion());
+			//				copy.setAuthor(res.getAuthor());
+			//
+			//				copy.setCoAuthors(camaraReady.getCoAuthors());
+			//				copy.setTitle(camaraReady.getTitle());
+			//				copy.setSummary(camaraReady.getSummary());
+			//				copy.setUrlDocument(camaraReady.getUrlDocument());
+			//
+			//				if (this.comparaListas(camaraReady.getCoAuthors(), res.getCoAuthors()) == false)
+			//					binding.rejectValue("coAuthors", "NoCoAuthors");
+			//
+			//			}
 
 			final Submission submission = this.submissionService.findOne(submissionId);
 			Assert.isTrue(submission.getConference().getCameraDeadline().after(new Date()));
@@ -130,19 +132,19 @@ public class CamaraReadyService {
 		}
 	}
 
-	public Boolean comparaListas(final Collection<Author> main, final Collection<Author> secundary) {
-		Boolean res = true;
-
-		if (main.size() != secundary.size())
-			res = false;
-
-		if (res != false)
-			for (final Author a : main)
-				if (!secundary.contains(a)) {
-					res = false;
-					break;
-				}
-		return res;
-
-	}
+	//	public Boolean comparaListas(final Collection<Author> main, final Collection<Author> secundary) {
+	//		Boolean res = true;
+	//
+	//		if (main.size() != secundary.size())
+	//			res = false;
+	//
+	//		if (res != false)
+	//			for (final Author a : main)
+	//				if (!secundary.contains(a)) {
+	//					res = false;
+	//					break;
+	//				}
+	//		return res;
+	//
+	//	}
 }

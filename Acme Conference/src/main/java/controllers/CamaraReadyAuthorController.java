@@ -57,7 +57,9 @@ public class CamaraReadyAuthorController extends AbstractController {
 			if (camaraReady != null) {
 				final UserAccount user = LoginService.getPrincipal();
 				final Actor a = this.actorService.getActorByUserAccount(user.getId());
-				Assert.isTrue(camaraReady.getAuthor().equals(a) || camaraReady.getCoAuthors().contains(a));
+				Assert.isTrue(camaraReady.getAuthor().equals(a));
+
+				//Assert.isTrue(camaraReady.getAuthor().equals(a) || camaraReady.getCoAuthors().contains(a));
 			}
 
 			result = new ModelAndView("camera-ready/show");
@@ -108,7 +110,9 @@ public class CamaraReadyAuthorController extends AbstractController {
 			final Author a = (Author) this.actorService.getActorByUserAccount(user.getId());
 			final Collection<Author> coAuthors = this.authorService.getAuthorsUnlessConnected(s.getAuthor());
 
-			Assert.isTrue(camaraReady.getAuthor().equals(a) || camaraReady.getCoAuthors().contains(a));
+			Assert.isTrue(camaraReady.getAuthor().equals(a));
+
+			//Assert.isTrue(camaraReady.getAuthor().equals(a) || camaraReady.getCoAuthors().contains(a));
 			Assert.isTrue(this.submissionService.findOne(idSubmission).getStatus() == 2);
 
 			result = new ModelAndView("camera-ready/edit");
