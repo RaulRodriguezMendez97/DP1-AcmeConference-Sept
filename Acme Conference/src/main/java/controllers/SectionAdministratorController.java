@@ -69,6 +69,7 @@ public class SectionAdministratorController extends AbstractController {
 		}
 		return result;
 	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final Integer tutorialId, @RequestParam final Integer sectionId) {
 		ModelAndView result;
@@ -99,26 +100,12 @@ public class SectionAdministratorController extends AbstractController {
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			final Section section = this.sectionService.reconstruct(sectionPictureForm, binding);
 			if (!binding.hasErrors()) {
-				if (sectionPictureForm.getPicture() != "") {
-					Picture p = new Picture();
-					p.setUrlPicture(sectionPictureForm.getPicture());
-					p = this.pictureService.reconstruct(p, binding);
-					if (binding.hasErrors()) {
-						binding.rejectValue("picture", "section.NotValidURL");
-						result = new ModelAndView("section/edit");
-						sectionPictureForm.setPictures(section.getPictures());
-						result.addObject("section", sectionPictureForm);
-						result.addObject("tutorialId", tutorial.getId());
-					} else {
-						final Picture pictureSaved = this.pictureService.save(p);
-						section.getPictures().add(pictureSaved);
-						this.sectionService.save(section);
-						result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
-					}
-				} else {
-					this.sectionService.save(section);
-					result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
-				}
+				final Picture p = new Picture();
+				p.setUrlPicture(sectionPictureForm.getPicture());
+				final Picture pictureSaved = this.pictureService.save(p);
+				section.getPictures().add(pictureSaved);
+				this.sectionService.save(section);
+				result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
 			} else {
 				result = new ModelAndView("section/edit");
 				sectionPictureForm.setPictures(section.getPictures());
@@ -130,6 +117,7 @@ public class SectionAdministratorController extends AbstractController {
 		}
 		return result;
 	}
+
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final Integer tutorialId, @RequestParam final Integer sectionId) {
 		ModelAndView result;

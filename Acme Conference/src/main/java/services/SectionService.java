@@ -22,6 +22,8 @@ import forms.SectionPictureForm;
 public class SectionService {
 
 	@Autowired
+	private PictureService		pictureService;
+	@Autowired
 	private SectionRepository	sectionRepository;
 	@Autowired
 	private Validator			validator;
@@ -71,6 +73,14 @@ public class SectionService {
 			this.validator.validate(copy, binding);
 
 			res = copy;
+		}
+
+		if (sectionPictureForm.getPicture() != "") {
+			Picture p = new Picture();
+			p.setUrlPicture(sectionPictureForm.getPicture());
+			p = this.pictureService.reconstruct(p, binding);
+			if (binding.hasFieldErrors("urlPicture"))
+				binding.rejectValue("picture", "section.NotValidURL");
 		}
 		return res;
 
