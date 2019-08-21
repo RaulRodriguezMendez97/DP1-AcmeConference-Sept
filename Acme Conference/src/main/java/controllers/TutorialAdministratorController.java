@@ -89,8 +89,8 @@ public class TutorialAdministratorController extends AbstractController {
 		try {
 			final Tutorial t = this.tutorialService.reconstruct(tutorial, binding);
 			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
-			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			if (!binding.hasErrors()) {
+				Assert.isTrue(conferences.contains(tutorial.getConference()));
 				this.tutorialService.save(t);
 				result = new ModelAndView("redirect:list.do");
 			} else {

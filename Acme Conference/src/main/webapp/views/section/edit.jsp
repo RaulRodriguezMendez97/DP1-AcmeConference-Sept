@@ -23,6 +23,7 @@
 <form:form action="section/administrator/edit.do" modelAttribute="section">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="tutorial" />
 	<acme:textbox code="tutorial.section.title" path="title"/>
 	<acme:textbox code="tutorial.section.summary" path="summary"/>
 	<acme:textbox code="section.form.picture" path="picture"/>

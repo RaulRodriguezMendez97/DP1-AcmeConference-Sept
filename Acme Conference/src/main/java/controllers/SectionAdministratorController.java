@@ -60,6 +60,7 @@ public class SectionAdministratorController extends AbstractController {
 			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
 			Assert.notNull(tutorial);
 			final SectionPictureForm sectionPictureForm = new SectionPictureForm().create();
+			sectionPictureForm.setTutorial(this.tutorialService.findOne(tutorialId));
 			result = new ModelAndView("section/edit");
 			result.addObject("section", sectionPictureForm);
 			result.addObject("tutorialId", tutorialId);
@@ -93,8 +94,7 @@ public class SectionAdministratorController extends AbstractController {
 	public ModelAndView edit(@ModelAttribute("section") final SectionPictureForm sectionPictureForm, final BindingResult binding) {
 		ModelAndView result;
 		try {
-			final Section s = this.sectionService.findOne(sectionPictureForm.getId());
-			final Tutorial tutorial = s.getTutorial();
+			final Tutorial tutorial = sectionPictureForm.getTutorial();
 			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			final Section section = this.sectionService.reconstruct(sectionPictureForm, binding);
@@ -102,21 +102,26 @@ public class SectionAdministratorController extends AbstractController {
 				if (sectionPictureForm.getPicture() != "") {
 					Picture p = new Picture();
 					p.setUrlPicture(sectionPictureForm.getPicture());
-					final BindingResult binding2 = null;
-					p = this.pictureService.reconstruct(p, binding2);
-					if (binding2.hasErrors())
-						binding.rejectValue("picture", "{org.hibernate.validator.constraints.URL.message}");
-					else {
+					p = this.pictureService.reconstruct(p, binding);
+					if (binding.hasErrors()) {
+						binding.rejectValue("picture", "section.NotValidURL");
+						result = new ModelAndView("section/edit");
+						sectionPictureForm.setPictures(section.getPictures());
+						result.addObject("section", sectionPictureForm);
+						result.addObject("tutorialId", tutorial.getId());
+					} else {
 						final Picture pictureSaved = this.pictureService.save(p);
 						section.getPictures().add(pictureSaved);
+						this.sectionService.save(section);
+						result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
 					}
-
+				} else {
+					this.sectionService.save(section);
+					result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
 				}
-				this.sectionService.save(section);
-				result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
 			} else {
 				result = new ModelAndView("section/edit");
-				sectionPictureForm.setPictures(s.getPictures());
+				sectionPictureForm.setPictures(section.getPictures());
 				result.addObject("section", sectionPictureForm);
 				result.addObject("tutorialId", tutorial.getId());
 			}
@@ -149,6 +154,7 @@ public class SectionAdministratorController extends AbstractController {
 		sectionPictureForm.setPictures(section.getPictures());
 		sectionPictureForm.setId(section.getId());
 		sectionPictureForm.setVersion(section.getVersion());
+		sectionPictureForm.setTutorial(section.getTutorial());
 		return sectionPictureForm;
 	}
 
