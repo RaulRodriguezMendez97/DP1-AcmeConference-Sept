@@ -25,20 +25,6 @@ public class AuthorController extends AbstractController {
 	private CustomizableSystemService	customizableService;
 
 
-	//	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	//	public ModelAndView customer() {
-	//		final ModelAndView result;
-	//		final Collection<Customer> customers;
-	//
-	//		customers= this.customerService.findAll();
-	//		Assert.notNull(customers);
-	//
-	//		result = new ModelAndView("customer/list");
-	//		result.addObject("customers", customers);
-	//		return result;
-	//
-	//	}
-
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView createForm() {
 		ModelAndView result;

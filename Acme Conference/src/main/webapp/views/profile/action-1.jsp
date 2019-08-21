@@ -40,10 +40,7 @@
 
 
 
-<security:authorize access="hasRole('AUTHOR')">
-	 <b><spring:message code="profile.author.papers" /> </b> <jstl:out value="${actor.papers}"/> <br/>
-	 <br />
-	</security:authorize>
+
 
 </fieldset>
 
