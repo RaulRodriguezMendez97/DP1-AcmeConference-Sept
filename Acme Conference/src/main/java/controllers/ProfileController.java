@@ -209,6 +209,7 @@ public class ProfileController extends AbstractController {
 			registrationForm.setEmail(reviwer.getEmail());
 			registrationForm.setPhone(reviwer.getPhone());
 			registrationForm.setAddress(reviwer.getAddress());
+			registrationForm.setKeyWords(reviwer.getKeyWords());
 			registrationForm.setPassword(reviwer.getUserAccount().getPassword());
 
 			registrationForm.setPatternPhone(false);

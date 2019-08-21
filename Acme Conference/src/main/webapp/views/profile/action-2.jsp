@@ -49,6 +49,14 @@
 	
 	<acme:textbox code="profile.action.3.address" path="address"/>
 	
+	<security:authorize access="hasRole('REVIWER')">
+	<br> 
+	
+	<acme:textbox code="profile.reviwer.3.keyWords" path="keyWords"/>
+	<p><spring:message code="aclaracion.keywords" /></p>
+
+</security:authorize>
+	
 	
 	</fieldset>
 	<br />

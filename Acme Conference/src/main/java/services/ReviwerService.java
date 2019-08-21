@@ -211,7 +211,7 @@ public class ReviwerService {
 			p.setPhone(registrationForm.getPhone());
 			p.setPhoto(registrationForm.getPhoto());
 			p.setSurname(registrationForm.getSurname());
-			p.setKeyWords(res.getKeyWords());
+			p.setKeyWords(registrationForm.getKeyWords());
 			p.setMiddleName(registrationForm.getMiddleName());
 
 			final String regexEmail1 = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";
