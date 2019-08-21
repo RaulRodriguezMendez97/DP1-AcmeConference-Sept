@@ -4,14 +4,15 @@ package controllers;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AuthorService;
 import services.ConferenceService;
 import services.CreditCardService;
 import services.CustomizableSystemService;
@@ -32,13 +33,22 @@ public class RegistrationAuthorController {
 	private ConferenceService			conferenceService;
 
 	@Autowired
-	private AuthorService				authorService;
-
-	@Autowired
 	private CustomizableSystemService	customizableService;
 	@Autowired
 	private CreditCardService			creditCardService;
 
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		final ModelAndView result;
+		final Collection<Registration> registrations;
+
+		registrations = this.registrationService.getAllRegistrationByAuthor();
+
+		result = new ModelAndView("registration/list");
+		result.addObject("registrations", registrations);
+		return result;
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView createForm() {
@@ -75,7 +85,7 @@ public class RegistrationAuthorController {
 				final CreditCard creditCardSave = this.creditCardService.save(creditCard);
 				res.setCreditCard(creditCardSave);
 				this.registrationService.save(res);
-				result = new ModelAndView("redirect:/");
+				result = new ModelAndView("redirect:list.do");
 			} else {
 				final Collection<Conference> conferences = this.conferenceService.getIncomingConferences();
 				final Collection<Conference> conferencesAuthor = this.conferenceService.getAllConferenceByAuthor();
@@ -104,6 +114,20 @@ public class RegistrationAuthorController {
 			result.addObject("myCreditCards", myCreditCards);
 
 		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final Integer idRegistration) {
+		ModelAndView result;
+
+		final Registration registration = this.registrationService.findOne(idRegistration);
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
+		result = new ModelAndView("registration/show");
+		result.addObject("registration", registration);
+		result.addObject("lang", lang);
 
 		return result;
 	}

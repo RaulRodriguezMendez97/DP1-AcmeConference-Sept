@@ -62,7 +62,7 @@
 		
 		<security:authorize access="hasRole('AUTHOR')">
 			<li><a href="submission/author/list.do"><spring:message code="master.page.author.submissions" /></a></li>
-			<li><a href="registration/author/create.do"><spring:message	code="master.page.author.registrations" /></a>
+			<li><a href="registration/author/list.do"><spring:message	code="master.page.author.registrations" /></a>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('REVIWER')">

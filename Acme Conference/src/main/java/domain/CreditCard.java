@@ -59,6 +59,8 @@ public class CreditCard extends DomainEntity {
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	@Column(unique = true)
 	@CreditCardNumber
+	@NotNull
+	@NotBlank
 	public String getNumber() {
 		return this.number;
 	}
@@ -81,7 +83,7 @@ public class CreditCard extends DomainEntity {
 		this.expirationYear = expirationYear;
 	}
 
-	@Range(min = 100, max = 999)
+	@Range(min = 000, max = 999)
 	public int getCW() {
 		return this.CW;
 	}

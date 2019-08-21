@@ -115,7 +115,7 @@
 </jstl:if>
 	<input type="button" name="cancel"
 		value="<spring:message code="registration.cancel" />"
-		onclick="javascript: relativeRedir('welcome/index.do');" />
+		onclick="javascript: relativeRedir('registration/author/list.do');" />
 
 </form:form>
 
