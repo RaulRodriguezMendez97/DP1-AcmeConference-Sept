@@ -27,11 +27,16 @@ public class ReportReviwerController extends AbstractController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int submissionId) {
-		final ModelAndView result;
-		final Collection<Report> reports = this.reportService.getReportsBySubmission(submissionId);
-		result = new ModelAndView("report/list");
-		result.addObject("reports", reports);
-		result.addObject("submissionId", submissionId);
+		ModelAndView result;
+		try {
+			final Collection<Report> reports = this.reportService.getReportsBySubmission(submissionId);
+			result = new ModelAndView("report/list");
+			result.addObject("reports", reports);
+			result.addObject("submissionId", submissionId);
+			return result;
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
 		return result;
 	}
 
@@ -56,7 +61,8 @@ public class ReportReviwerController extends AbstractController {
 			result.addObject("report", report);
 			result.addObject("submissionId", submissionId);
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:list.do?submissionId=" + submissionId);
+			//result = new ModelAndView("redirect:list.do?submissionId=" + submissionId);
+			result = new ModelAndView("redirect:../");
 		}
 		return result;
 	}

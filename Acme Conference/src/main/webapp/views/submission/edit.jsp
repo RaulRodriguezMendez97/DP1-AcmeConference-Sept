@@ -68,8 +68,12 @@
 		</form:select>
 </jstl:if>
 
-<br/>
+
 <input type="submit" name="save" value="<spring:message code="submission.save" />" />
 <acme:cancel url="submission/administrator/submissionsUnderReviwed.do" code="submission.cancel"/>
+
+<jstl:if test="${(submission.status eq 0) and (empty submission.reviwers)}">	
+		<input type="submit" name="asignar" value="<spring:message code="submission.asignarAutomaticamente" />" />
+</jstl:if>
 </form:form>
 </security:authorize>

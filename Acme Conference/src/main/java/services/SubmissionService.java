@@ -19,6 +19,7 @@ import org.springframework.validation.Validator;
 import repositories.SubmissionRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 import domain.Author;
 import domain.Reviwer;
 import domain.Submission;
@@ -38,6 +39,8 @@ public class SubmissionService {
 	private ReviwerService			reviwerService;
 	@Autowired
 	private MessageService			messageService;
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	//	public Submission create() {
@@ -73,7 +76,9 @@ public class SubmissionService {
 	public Submission findOneAdministrator(final int submissionId) {
 		final Submission submission = this.submissionRepository.findOne(submissionId);
 		final UserAccount userAccount = LoginService.getPrincipal();
+		final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Assert.isTrue(submission.getConference().getAdmin().equals(admin));
 		return submission;
 	}
 
@@ -81,7 +86,10 @@ public class SubmissionService {
 	public Submission findOneReviwer(final int submissionId) {
 		final Submission submission = this.submissionRepository.findOne(submissionId);
 		final UserAccount userAccount = LoginService.getPrincipal();
+		final Reviwer reviwer = this.reviwerService.getReviwerByUserAccount(userAccount.getId());
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("REVIWER"));
+		Assert.isTrue(submission.getReviwers().contains(reviwer));
+
 		return submission;
 	}
 	public Collection<Submission> findAll() {
@@ -240,16 +248,15 @@ public class SubmissionService {
 		return palabras;
 	}
 
-	public Submission asignarAutomaticamenteReviwers(final Submission submission) {
+	public Submission asignarAutomaticamenteReviwers(final Submission submission, final BindingResult binding) {
 		//Reviwers
 		final List<Reviwer> reviwers = (List<Reviwer>) this.reviwerService.findAll();
 		final Collection<Reviwer> rev = new HashSet<>();
 		final List<String> palabrasTitulo = SubmissionService.trocear(submission.getConference().getTitle());
 		final List<String> palabrasResumen = SubmissionService.trocear(submission.getConference().getSummary());
 		Boolean res = false;
-		Submission submissionSave = null;
 
-		if (reviwers.size() >= 3) {
+		if (reviwers.size() >= 3)
 			for (int i = 1; i <= 3; i++) {
 				final int tam = reviwers.size();
 				final int a = (int) (Math.random() * tam - 1);
@@ -278,10 +285,28 @@ public class SubmissionService {
 				} else
 					break;
 			}
-			submission.setReviwers(reviwers);
-			submissionSave = this.submissionRepository.save(submission);
-		}
-		return submissionSave;
+
+		Submission submissionRes = null;
+		submissionRes = this.submissionRepository.findOne(submission.getId());
+		final Submission p = new Submission();
+
+		p.setId(submissionRes.getId());
+		p.setVersion(submissionRes.getVersion());
+		p.setMoment(submissionRes.getMoment());
+		p.setAuthor(submissionRes.getAuthor());
+		p.setConference(submissionRes.getConference());
+		p.setCamaraReady(submissionRes.getCamaraReady());
+		p.setTicker(submissionRes.getTicker());
+		p.setReviwed(submissionRes.getReviwed());
+		p.setStatus(submissionRes.getStatus());
+		p.setReviwers(rev);
+
+		this.validator.validate(p, binding);
+		if (binding.hasErrors())
+			throw new ValidationException();
+		submissionRes = p;
+
+		return submissionRes;
 	}
 
 }
