@@ -216,9 +216,9 @@ public class MessageService {
 		res.setMoment(this.fechaSumada());
 		res.setSubject("Submission status update");
 		if (s.getStatus() == 1)
-			res.setBody("Your submission to the conference " + s.getConference().getTitle() + " has been rejected");
+			res.setBody("Your submission with ticker " + s.getTicker() + " to the conference " + s.getConference().getTitle() + " has been rejected");
 		else
-			res.setBody("Your submission to the conference " + s.getConference().getTitle() + " has been accepted");
+			res.setBody("Your submission with ticker " + s.getTicker() + " to the conference " + s.getConference().getTitle() + " has been accepted");
 		res.setTopic(this.topicService.getRegistrationTopic());
 		res.setEmailReceiver(s.getAuthor().getEmail());
 		res.setSender(s.getConference().getAdmin());

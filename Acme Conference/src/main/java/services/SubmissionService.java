@@ -102,8 +102,10 @@ public class SubmissionService {
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		if (submission.getStatus() == 2 || submission.getStatus() == 1)//Aceptada o rechazada
+		if (submission.getStatus() == 2 || submission.getStatus() == 1) {//Aceptada o rechazada
 			Assert.isTrue(!submission.getReviwers().isEmpty());
+			this.messageService.sendMessageSubmission(submission);
+		}
 
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
