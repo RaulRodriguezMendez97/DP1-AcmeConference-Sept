@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import security.UserAccount;
 import services.AdministratorService;
 import services.AuthorService;
 import services.ConferenceService;
+import services.ReportService;
 import services.ReviwedService;
 import services.ReviwerService;
 import services.SubmissionService;
@@ -45,6 +47,8 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	private ReviwerService			reviwerService;
 	@Autowired
 	private AdministratorService	administratorService;
+	@Autowired
+	private ReportService			reportService;
 
 
 	@RequestMapping(value = "/author/list", method = RequestMethod.GET)
@@ -169,10 +173,14 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
 		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus0(admin.getId());
 
+		final Date fechaActual = new Date();
+
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
+		result.addObject("fechaActual", fechaActual);
 		result.addObject("uriL", "submission/administrator/submissionsUnderReviwed.do");
 		result.addObject("uriD", "submission/administrator/detailSubmissionUnderReviwed.do");
+		result.addObject("uriDR", "submission/administrator/detailReportsSubmissionUnderReviwed.do");
 		return result;
 	}
 
@@ -210,6 +218,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		result.addObject("submissions", submissions);
 		result.addObject("uriL", "submission/administrator/submissionsRejected.do");
 		result.addObject("uriD", "submission/administrator/detailSubmissionRejected.do");
+		result.addObject("uriDR", "submission/administrator/detailReportsSubmissionRejected.do");
 		return result;
 	}
 
@@ -247,6 +256,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		result.addObject("submissions", submissions);
 		result.addObject("uriL", "submission/administrator/submissionsAccepted.do");
 		result.addObject("uriD", "submission/administrator/detailSubmissionAccepted.do");
+		result.addObject("uriDR", "submission/administrator/detailReportsSubmissionAccepted.do");
 		return result;
 	}
 
@@ -279,10 +289,22 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 		try {
 			final Submission submission = this.submissionService.findOneAdministrator(submissionId);
 			final Collection<Reviwer> reviwers = this.reviwerService.findAll();
+			final Date fechaActual = new Date();
+
+			final int res;
+			if (this.reportService.getReportsDecicionAceptadaBySubmission(submissionId) >= this.reportService.getReportsDecicionRechazadaBySubmission(submissionId))
+				res = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId) - this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			else if (this.reportService.getReportsDecicionRechazadaBySubmission(submissionId) > this.reportService.getReportsDecicionAceptadaBySubmission(submissionId))
+				res = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId) - this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			else
+				res = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
+
 			Assert.notNull(submission);
 			result = new ModelAndView("submission/edit");
 			result.addObject("submission", submission);
+			result.addObject("fechaActual", fechaActual);
 			result.addObject("reviwers", reviwers);
+			result.addObject("res", res);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:submissionsUnderReviwed.do");
 		}
@@ -299,17 +321,93 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 				this.submissionService.saveAdmin(s);
 				result = new ModelAndView("redirect:submissionsUnderReviwed.do");
 			} else {
+				final int res;
+				if (this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()) >= this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId()))
+					res = this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()) - this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId());
+				else if (this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId()) > this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()))
+					res = this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()) - this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId());
+				else
+					res = this.reportService.getReportsDecicionBorderLineBySubmission(submission.getId());
+				final Date fechaActual = new Date();
 				final Collection<Reviwer> reviwers = this.reviwerService.findAll();
 				result = new ModelAndView("submission/edit");
 				result.addObject("submission", submission);
 				result.addObject("reviwers", reviwers);
+				result.addObject("fechaActual", fechaActual);
+				result.addObject("res", res);
 			}
 		} catch (final Exception e) {
+			final int res;
+			if (this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()) >= this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId()))
+				res = this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()) - this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId());
+			else if (this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId()) > this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()))
+				res = this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()) - this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId());
+			else
+				res = this.reportService.getReportsDecicionBorderLineBySubmission(submission.getId());
+			final Date fechaActual = new Date();
 			final Collection<Reviwer> reviwers = this.reviwerService.findAll();
 			result = new ModelAndView("submission/edit");
 			result.addObject("exception", e);
 			result.addObject("submission", submission);
 			result.addObject("reviwers", reviwers);
+			result.addObject("fechaActual", fechaActual);
+			result.addObject("res", res);
+		}
+		return result;
+	}
+	@RequestMapping(value = "/administrator/detailReportsSubmissionAccepted", method = RequestMethod.GET)
+	public ModelAndView detailsReportsSubAccepted(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final int reportAccepted = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId);
+			final int reportRejected = this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			final int reportBorderLine = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
+
+			result = new ModelAndView("submission/detailReports");
+			result.addObject("reportAccepted", reportAccepted);
+			result.addObject("reportRejected", reportRejected);
+			result.addObject("reportBorderLine", reportBorderLine);
+			result.addObject("uri", "submission/administrator/submissionsAccepted.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detailReportsSubmissionRejected", method = RequestMethod.GET)
+	public ModelAndView detailsReportsSubRejected(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final int reportAccepted = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId);
+			final int reportRejected = this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			final int reportBorderLine = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
+
+			result = new ModelAndView("submission/detailReports");
+			result.addObject("reportAccepted", reportAccepted);
+			result.addObject("reportRejected", reportRejected);
+			result.addObject("reportBorderLine", reportBorderLine);
+			result.addObject("uri", "submission/administrator/submissionsRejected.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/administrator/detailReportsSubmissionUnderReviwed", method = RequestMethod.GET)
+	public ModelAndView detailsReportsSubUnderReviwed(@RequestParam final Integer submissionId) {
+		ModelAndView result;
+		try {
+			final int reportAccepted = this.reportService.getReportsDecicionAceptadaBySubmission(submissionId);
+			final int reportRejected = this.reportService.getReportsDecicionRechazadaBySubmission(submissionId);
+			final int reportBorderLine = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
+
+			result = new ModelAndView("submission/detailReports");
+			result.addObject("reportAccepted", reportAccepted);
+			result.addObject("reportRejected", reportRejected);
+			result.addObject("reportBorderLine", reportBorderLine);
+			result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
 		}
 		return result;
 	}
