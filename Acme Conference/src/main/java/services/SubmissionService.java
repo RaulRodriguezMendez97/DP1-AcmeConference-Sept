@@ -36,6 +36,8 @@ public class SubmissionService {
 	private Validator				validator;
 	@Autowired
 	private ReviwerService			reviwerService;
+	@Autowired
+	private MessageService			messageService;
 
 
 	//	public Submission create() {
@@ -106,7 +108,6 @@ public class SubmissionService {
 		final Submission submissionSave = this.submissionRepository.save(submission);
 		return submissionSave;
 	}
-
 	public Collection<Submission> getSubmissionByAuthor(final Integer authorId) {
 		return this.submissionRepository.getSubmissionByAuthor(authorId);
 	}

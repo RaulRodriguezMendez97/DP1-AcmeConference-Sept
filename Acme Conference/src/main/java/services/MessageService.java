@@ -21,6 +21,7 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Message;
 import domain.MessageBox;
+import domain.Submission;
 import domain.Topic;
 import forms.MessageBroadcastForm;
 
@@ -39,6 +40,9 @@ public class MessageService {
 
 	@Autowired
 	private MessageBoxService	messageBoxService;
+
+	@Autowired
+	private TopicService		topicService;
 
 
 	public Message create() {
@@ -206,4 +210,24 @@ public class MessageService {
 
 	}
 	//----BROADCAST----
+
+	public void sendMessageSubmission(final Submission s) {
+		final Message res = this.create();
+		res.setMoment(this.fechaSumada());
+		res.setSubject("Submission status update");
+		if (s.getStatus() == 1)
+			res.setBody("Your submission to the conference " + s.getConference().getTitle() + " has been rejected");
+		else
+			res.setBody("Your submission to the conference " + s.getConference().getTitle() + " has been accepted");
+		res.setTopic(this.topicService.getRegistrationTopic());
+		res.setEmailReceiver(s.getAuthor().getEmail());
+		res.setSender(s.getConference().getAdmin());
+		res.setReceiver(s.getAuthor());
+
+		final Message saved = this.messageRepository.save(res);
+
+		final MessageBox mb = this.messageBoxService.getMessageBoxByActor(s.getAuthor().getId());
+		mb.getMessages().add(saved);
+		this.messageBoxService.save(mb);
+	}
 }

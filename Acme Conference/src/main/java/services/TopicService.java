@@ -58,4 +58,8 @@ public class TopicService {
 		this.topicRepository.delete(t);
 	}
 
+	public Topic getRegistrationTopic() {
+		return this.topicRepository.getRegistrationTopic();
+	}
+
 }
