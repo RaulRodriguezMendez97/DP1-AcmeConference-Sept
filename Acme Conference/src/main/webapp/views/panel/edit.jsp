@@ -20,7 +20,7 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<form:form action="tutorial/administrator/edit.do" modelAttribute="tutorial">
+<form:form action="panel/administrator/edit.do" modelAttribute="panel">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<acme:textbox code="tutorial.title" path="title"/>
@@ -41,7 +41,7 @@
 	value="<spring:message code="tutorial.delete" />" />
 
 	<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
-			onclick="javascript: relativeRedir('tutorial/administrator/list.do');" />
+			onclick="javascript: relativeRedir('panel/administrator/list.do');" />
 </form:form>
 
 
