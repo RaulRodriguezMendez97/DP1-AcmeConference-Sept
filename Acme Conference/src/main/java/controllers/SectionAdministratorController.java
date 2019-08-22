@@ -100,10 +100,12 @@ public class SectionAdministratorController extends AbstractController {
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			final Section section = this.sectionService.reconstruct(sectionPictureForm, binding);
 			if (!binding.hasErrors()) {
-				final Picture p = new Picture();
-				p.setUrlPicture(sectionPictureForm.getPicture());
-				final Picture pictureSaved = this.pictureService.save(p);
-				section.getPictures().add(pictureSaved);
+				if (sectionPictureForm.getPicture() != "") {
+					final Picture p = new Picture();
+					p.setUrlPicture(sectionPictureForm.getPicture());
+					final Picture pictureSaved = this.pictureService.save(p);
+					section.getPictures().add(pictureSaved);
+				}
 				this.sectionService.save(section);
 				result = new ModelAndView("redirect:list.do?tutorialId=" + tutorial.getId());
 			} else {
