@@ -13,19 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ConferenceService;
-import services.SectionService;
-import services.TutorialService;
+import services.PanelService;
 import domain.Conference;
-import domain.Tutorial;
+import domain.Panel;
 
 @Controller
-@RequestMapping("/tutorial/administrator")
+@RequestMapping("/panel/administrator")
 public class PanelAdministratorController extends AbstractController {
 
 	@Autowired
-	private TutorialService		tutorialService;
-	@Autowired
-	private SectionService		sectionService;
+	private PanelService		panelService;
 	@Autowired
 	private ConferenceService	conferenceService;
 
@@ -33,22 +30,21 @@ public class PanelAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Tutorial> tutorials = this.tutorialService.findAll();
-		result = new ModelAndView("tutorial/list");
-		result.addObject("tutorials", tutorials);
+		final Collection<Panel> panels = this.panelService.findAll();
+		result = new ModelAndView("panel/list");
+		result.addObject("panels", panels);
 		return result;
 
 	}
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam final Integer tutorialId) {
+	public ModelAndView show(@RequestParam final Integer panelId) {
 		ModelAndView result;
 		try {
-			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
-			Assert.notNull(tutorial);
-			result = new ModelAndView("tutorial/show");
-			result.addObject("tutorial", tutorial);
-			result.addObject("sections", this.sectionService.getSectionsByTutorial(tutorialId));
+			final Panel panel = this.panelService.findOne(panelId);
+			Assert.notNull(panel);
+			result = new ModelAndView("panel/show");
+			result.addObject("panel", panel);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
 		}
@@ -58,23 +54,23 @@ public class PanelAdministratorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-		final Tutorial tutorial = this.tutorialService.create();
-		result = new ModelAndView("tutorial/edit");
-		result.addObject("tutorial", tutorial);
+		final Panel panel = this.panelService.create();
+		result = new ModelAndView("panel/edit");
+		result.addObject("panel", panel);
 		result.addObject("conferences", this.conferenceService.getFutureAndDraftModeConferences());
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final Integer tutorialId) {
+	public ModelAndView edit(@RequestParam final Integer panelId) {
 		ModelAndView result;
 		try {
-			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
-			Assert.notNull(tutorial);
+			final Panel panel = this.panelService.findOne(panelId);
+			Assert.notNull(panel);
 			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
-			Assert.isTrue(conferences.contains(tutorial.getConference()));
-			result = new ModelAndView("tutorial/edit");
-			result.addObject("tutorial", tutorial);
+			Assert.isTrue(conferences.contains(panel.getConference()));
+			result = new ModelAndView("panel/edit");
+			result.addObject("panel", panel);
 			result.addObject("conferences", conferences);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
@@ -84,18 +80,18 @@ public class PanelAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final Tutorial tutorial, final BindingResult binding) {
+	public ModelAndView edit(final Panel panel, final BindingResult binding) {
 		ModelAndView result;
 		try {
-			final Tutorial t = this.tutorialService.reconstruct(tutorial, binding);
+			final Panel p = this.panelService.reconstruct(panel, binding);
 			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
 			if (!binding.hasErrors()) {
-				Assert.isTrue(conferences.contains(tutorial.getConference()));
-				this.tutorialService.save(t);
+				Assert.isTrue(conferences.contains(panel.getConference()));
+				this.panelService.save(p);
 				result = new ModelAndView("redirect:list.do");
 			} else {
-				result = new ModelAndView("tutorial/edit");
-				result.addObject("tutorial", tutorial);
+				result = new ModelAndView("panel/edit");
+				result.addObject("panel", panel);
 				result.addObject("conferences", conferences);
 			}
 		} catch (final Exception e) {
@@ -105,20 +101,19 @@ public class PanelAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Tutorial tutorial) {
+	public ModelAndView delete(final Panel panel) {
 		ModelAndView result;
 		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
 		try {
-			final Tutorial t = this.tutorialService.findOne(tutorial.getId());
-			Assert.notNull(t);
-			Assert.isTrue(conferences.contains(t.getConference()));
-			this.sectionService.deleteAllSectionsByTutorial(tutorial.getId());
-			this.tutorialService.delete(t);
+			final Panel p = this.panelService.findOne(panel.getId());
+			Assert.notNull(p);
+			Assert.isTrue(conferences.contains(p.getConference()));
+			this.panelService.delete(p);
 			result = new ModelAndView("redirect:list.do");
 
 		} catch (final Exception e) {
-			result = new ModelAndView("tutorial/edit");
-			result.addObject("tutorial", tutorial);
+			result = new ModelAndView("panel/edit");
+			result.addObject("panel", panel);
 			result.addObject("conferences", conferences);
 		}
 		return result;
