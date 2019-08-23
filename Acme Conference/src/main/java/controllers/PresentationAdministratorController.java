@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CamaraReadyService;
 import services.ConferenceService;
 import services.PresentationService;
 import domain.Conference;
@@ -25,6 +26,8 @@ public class PresentationAdministratorController extends AbstractController {
 	private PresentationService	presentationService;
 	@Autowired
 	private ConferenceService	conferenceService;
+	@Autowired
+	private CamaraReadyService	cameraReadyService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -58,6 +61,7 @@ public class PresentationAdministratorController extends AbstractController {
 		result = new ModelAndView("presentation/edit");
 		result.addObject("presentation", presentation);
 		result.addObject("conferences", this.conferenceService.getFutureAndDraftModeConferences());
+		result.addObject("papers", this.cameraReadyService.findAll());
 		return result;
 	}
 
@@ -72,6 +76,7 @@ public class PresentationAdministratorController extends AbstractController {
 			result = new ModelAndView("presentation/edit");
 			result.addObject("presentation", presentation);
 			result.addObject("conferences", conferences);
+			result.addObject("papers", this.cameraReadyService.findAll());
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
 		}
@@ -93,6 +98,7 @@ public class PresentationAdministratorController extends AbstractController {
 				result = new ModelAndView("presentation/edit");
 				result.addObject("presentation", presentation);
 				result.addObject("conferences", conferences);
+				result.addObject("papers", this.cameraReadyService.findAll());
 			}
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
@@ -115,6 +121,7 @@ public class PresentationAdministratorController extends AbstractController {
 			result = new ModelAndView("presentation/edit");
 			result.addObject("presentation", presentation);
 			result.addObject("conferences", conferences);
+			result.addObject("papers", this.cameraReadyService.findAll());
 		}
 		return result;
 

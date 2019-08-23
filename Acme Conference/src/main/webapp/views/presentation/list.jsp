@@ -21,8 +21,8 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-	<display:table pagesize="5" name="panels" id="row"
-		requestURI="panel/administrator/list.do">
+	<display:table pagesize="5" name="presentations" id="row"
+		requestURI="presentation/administrator/list.do">
 
 		<display:column titleKey="tutorial.title">
 			<jstl:out value="${row.title}"></jstl:out>
@@ -45,12 +45,12 @@
 		</display:column>
 
 		<display:column titleKey="tutorial.show">
-			<a href="panel/administrator/show.do?panelId=${row.id}"><spring:message
+			<a href="presentation/administrator/show.do?presentationId=${row.id}"><spring:message
 					code="tutorial.show" /></a>
 		</display:column>
 		<display:column titleKey="tutorial.edit">
 			<jstl:if test="${row.conference.finalMode eq 0 }">
-				<a href="panel/administrator/edit.do?panelId=${row.id}"><spring:message
+				<a href="presentation/administrator/edit.do?presentationId=${row.id}"><spring:message
 						code="tutorial.edit" /></a>
 			</jstl:if>
 			<jstl:if test="${row.conference.finalMode eq 1 }">
@@ -60,6 +60,6 @@
 	</display:table>
 
 	<input type="button" name="create"
-		value="<spring:message code="panel.create" />"
-		onclick="javascript: relativeRedir('panel/administrator/create.do');" />
+		value="<spring:message code="presentation.create" />"
+		onclick="javascript: relativeRedir('presentation/administrator/create.do');" />
 </security:authorize>
