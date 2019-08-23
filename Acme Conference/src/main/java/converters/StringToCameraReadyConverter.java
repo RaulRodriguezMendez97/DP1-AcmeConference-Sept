@@ -21,7 +21,7 @@ import domain.CamaraReady;
 
 @Component
 @Transactional
-public class StringToCamaraReadyConverter implements Converter<String, CamaraReady> {
+public class StringToCameraReadyConverter implements Converter<String, CamaraReady> {
 
 	@Autowired
 	CamaraReadyRepository	camaraReadyRepository;
