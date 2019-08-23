@@ -40,6 +40,7 @@
 		<value>/views/section/tiles.xml</value>
 		<value>/views/registration/tiles.xml</value>
 		<value>/views/panel/tiles.xml</value>
+		<value>/views/presentation/tiles.xml</value>
 	</util:list>
 
 </beans>
