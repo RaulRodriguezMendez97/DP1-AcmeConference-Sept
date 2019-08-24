@@ -212,22 +212,26 @@ public class MessageService {
 	//----BROADCAST----
 
 	public void sendMessageSubmission(final Submission s) {
-		final Message res = this.create();
-		res.setMoment(this.fechaSumada());
-		res.setSubject("Submission status update");
-		if (s.getStatus() == 1)
-			res.setBody("Your submission with ticker " + s.getTicker() + " to the conference " + s.getConference().getTitle() + " has been rejected");
-		else
-			res.setBody("Your submission with ticker " + s.getTicker() + " to the conference " + s.getConference().getTitle() + " has been accepted");
-		res.setTopic(this.topicService.getRegistrationTopic());
-		res.setEmailReceiver(s.getAuthor().getEmail());
-		res.setSender(s.getConference().getAdmin());
-		res.setReceiver(s.getAuthor());
+		if (s.getConference().getNotificacionDeadline().after(new Date())) {
 
-		final Message saved = this.messageRepository.save(res);
+			final Message res = this.create();
+			res.setMoment(this.fechaSumada());
+			res.setSubject("Submission status update");
+			if (s.getStatus() == 1)
+				res.setBody("Your submission with ticker " + s.getTicker() + " to the conference " + s.getConference().getTitle() + " has been rejected");
+			else
+				res.setBody("Your submission with ticker " + s.getTicker() + " to the conference " + s.getConference().getTitle() + " has been accepted");
+			res.setTopic(this.topicService.getRegistrationTopic());
+			res.setEmailReceiver(s.getAuthor().getEmail());
+			res.setSender(s.getConference().getAdmin());
+			res.setReceiver(s.getAuthor());
 
-		final MessageBox mb = this.messageBoxService.getMessageBoxByActor(s.getAuthor().getId());
-		mb.getMessages().add(saved);
-		this.messageBoxService.save(mb);
+			final Message saved = this.messageRepository.save(res);
+
+			final MessageBox mb = this.messageBoxService.getMessageBoxByActor(s.getAuthor().getId());
+			mb.getMessages().add(saved);
+			this.messageBoxService.save(mb);
+
+		}
 	}
 }
