@@ -382,7 +382,7 @@
 	<bean id="author2" class="domain.Author">
 		<property name="name" value="Mirella" />
 		<property name="middleName" value="" />
-		<property name="surname" value="Lorca" />
+		<property name="surname" value="Norca" />
 		<property name="email" value="mirellaLorca@hotmail.com" />
 		<property name="phone" value="+34 620670520" />
 		<property name="address" value="SEVILLA" />
@@ -390,7 +390,7 @@
 	</bean>
 	<bean id="author3" class="domain.Author">
 		<property name="name" value="Jose" />
-		<property name="middleName" value="" />
+		<property name="middleName" value="Tonto" />
 		<property name="surname" value="Lorca" />
 		<property name="email" value="joseLorca@hotmail.com" />
 		<property name="userAccount" ref="userAccount6" />
@@ -748,7 +748,7 @@
 
 	<!-- Submission -->
 	<bean id="submission1" class="domain.Submission">
-		<property name="ticker" value="ASD-123S" />
+		<property name="ticker" value="MLX-123S" />
 		<property name="moment" value="11/05/2018 11:30" />
 		<property name="status" value="2" />
 		<property name="author" ref="author1" />
@@ -765,7 +765,7 @@
 		
 	</bean>
 	<bean id="submission2" class="domain.Submission">
-		<property name="ticker" value="ASF-1234" />
+		<property name="ticker" value="MLX-1234" />
 		<property name="moment" value="07/19/2019 11:30" />
 		<property name="status" value="2" />
 		<property name="author" ref="author1" />
@@ -781,7 +781,7 @@
 		</property>
 	</bean>
 	<bean id="submission3" class="domain.Submission">
-		<property name="ticker" value="ASP-1235" />
+		<property name="ticker" value="MLX-1235" />
 		<property name="moment" value="07/10/2019 11:30" />
 		<property name="status" value="0" />
 		<property name="author" ref="author1" />
@@ -789,7 +789,7 @@
 		<property name="reviwed" ref="reviwed3" />
 	</bean>
 	<bean id="submission4" class="domain.Submission">
-		<property name="ticker" value="PSP-1235" />
+		<property name="ticker" value="MNX-1235" />
 		<property name="moment" value="06/10/2019 11:30" />
 		<property name="status" value="0" />
 		<property name="author" ref="author2" />
@@ -802,7 +802,7 @@
 		</property>
 	</bean>
 	<bean id="submission5" class="domain.Submission">
-		<property name="ticker" value="ESP-1235" />
+		<property name="ticker" value="MNX-123P" />
 		<property name="moment" value="05/10/2019 11:30" />
 		<property name="status" value="1" />
 		<property name="author" ref="author2" />
@@ -810,7 +810,7 @@
 		<property name="reviwed" ref="reviwed5" />
 	</bean>
 	<bean id="submission6" class="domain.Submission">
-		<property name="ticker" value="ESU-1235" />
+		<property name="ticker" value="MNX-123M" />
 		<property name="moment" value="04/10/2019 11:30" />
 		<property name="status" value="0" />
 		<property name="author" ref="author2" />
@@ -824,7 +824,7 @@
 	</bean>
 	
 	<bean id="submission7" class="domain.Submission">
-		<property name="ticker" value="ASF-1214" />
+		<property name="ticker" value="MLX-2214" />
 		<property name="moment" value="07/19/2019 11:30" />
 		<property name="status" value="2" />
 		<property name="author" ref="author1" />
@@ -840,10 +840,10 @@
 	</bean>
 	
 	<bean id="submission8" class="domain.Submission">
-		<property name="ticker" value="PPP-1214" />
+		<property name="ticker" value="JLT-1214" />
 		<property name="moment" value="07/19/2019 11:30" />
 		<property name="status" value="0" />
-		<property name="author" ref="author1" />
+		<property name="author" ref="author3" />
 		<property name="conference" ref="conference6" />
 		<property name="reviwed" ref="reviwed8" />
 	</bean>
@@ -885,15 +885,7 @@
 		<property name="reviwer" ref="reviwer3" />
 		<property name="submission" ref="submission2" />
 	</bean>
-	<bean id="report5" class="domain.Report">
-		<property name="originalityScore" value="3" />
-		<property name="qualityScore" value="4" />
-		<property name="eadabilityScore" value="5" />
-		<property name="decision" value="1" />
-		<property name="comment" value=""/>
-		<property name="reviwer" ref="reviwer3" />
-		<property name="submission" ref="submission3" />
-	</bean>
+	
 	<bean id="report6" class="domain.Report">
 		<property name="originalityScore" value="5" />
 		<property name="qualityScore" value="10" />

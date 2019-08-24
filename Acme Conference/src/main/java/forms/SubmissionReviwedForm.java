@@ -2,10 +2,8 @@
 package forms;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 
-import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -13,22 +11,29 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 import domain.Author;
-import domain.CamaraReady;
 import domain.Conference;
-import domain.Reviwed;
-import domain.Reviwer;
-import domain.Submission;
+import domain.DomainEntity;
 
-public class SubmissionReviwedForm extends Submission {
+public class SubmissionReviwedForm extends DomainEntity {
 
 	private String				title;
 	private String				summary;
 	private String				urlDocument;
 	private Collection<Author>	coAuthors;
+	private Conference			conf;
 
+
+	@NotNull
+	@Valid
+	public Conference getConf() {
+		return this.conf;
+	}
+
+	public void setConf(final Conference conf) {
+		this.conf = conf;
+	}
 
 	@Valid
-	@ManyToMany
 	public Collection<Author> getCoAuthors() {
 		return this.coAuthors;
 	}
@@ -78,14 +83,8 @@ public class SubmissionReviwedForm extends Submission {
 		res.setCoAuthors(new HashSet<Author>());
 
 		//Submission
-		res.setConference(new Conference());
-		res.setStatus(0);
-		res.setMoment(new Date());
-		res.setReviwers(new HashSet<Reviwer>());
-		res.setCamaraReady(new CamaraReady());
-		res.setTicker("");
-		res.setAuthor(new Author());
-		res.setReviwed(new Reviwed());
+		res.setConf(new Conference());
+
 		return res;
 	}
 

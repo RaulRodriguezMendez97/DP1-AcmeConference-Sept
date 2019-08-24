@@ -26,7 +26,7 @@
 <acme:textbox code="submission.reviwed.title" path="title"/>
 <acme:textbox code="submission.reviwed.summary" path="summary"/>
 <acme:textbox code="submission.reviwed.urlDocument" path="urlDocument"/>
-<acme:select items="${conferences}" itemLabel="title" code="submission.conference.table" path="conference"/>
+<acme:select items="${conferences}" itemLabel="title" code="submission.conference.table" path="conf"/>
 <acme:multipleSelect items="${coAuthors}" itemLabel="email" code="submission.reviwed.coAuthors" path="coAuthors"/>
 
 <br/>

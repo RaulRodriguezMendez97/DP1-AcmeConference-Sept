@@ -12,9 +12,7 @@ import org.springframework.validation.Validator;
 import repositories.ReviwedRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Author;
 import domain.Reviwed;
-import forms.SubmissionReviwedForm;
 
 @Service
 @Transactional
@@ -24,8 +22,6 @@ public class ReviwedService {
 	private ReviwedRepository	reviwedRepository;
 	@Autowired
 	private Validator			validator;
-	@Autowired
-	private AuthorService		authorService;
 
 
 	//	public Reviwed create() {
@@ -47,38 +43,23 @@ public class ReviwedService {
 		return reviwedSave;
 	}
 
-	public Reviwed reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
-		final Reviwed res = new Reviwed();
-		if (submissionReviwedForm.getId() == 0) {
-			final UserAccount user = LoginService.getPrincipal();
-			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
-			res.setId(submissionReviwedForm.getId());
-			res.setVersion(submissionReviwedForm.getVersion());
-			res.setSummary(submissionReviwedForm.getSummary());
-			res.setTitle(submissionReviwedForm.getTitle());
-			res.setUrlDocument(submissionReviwedForm.getUrlDocument());
-			res.setCoAuthors(submissionReviwedForm.getCoAuthors());
-			res.setAuthor(a);
+	public Reviwed reconstruct(final Reviwed reviwed, final BindingResult binding) {
+		Reviwed res = null;
+		if (reviwed.getId() == 0) {
+			/*
+			 * final UserAccount user = LoginService.getPrincipal();
+			 * final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+			 * res.setId(submissionReviwedForm.getId());
+			 * res.setVersion(submissionReviwedForm.getVersion());
+			 * res.setSummary(submissionReviwedForm.getSummary());
+			 * res.setTitle(submissionReviwedForm.getTitle());
+			 * res.setUrlDocument(submissionReviwedForm.getUrlDocument());
+			 * res.setCoAuthors(submissionReviwedForm.getCoAuthors());
+			 * res.setAuthor(a);
+			 */
+			res = reviwed;
 			this.validator.validate(res, binding);
-		} /*
-		 * else {
-		 * Submission submission;
-		 * submission = this.submissionService.findOne(submissionReviwedForm.getId());
-		 * res = submission.getReviwed();
-		 * final Reviwed p = new Reviwed();
-		 * 
-		 * p.setId(res.getId());
-		 * p.setVersion(res.getVersion());
-		 * p.setSummary(submissionReviwedForm.getSummary());
-		 * p.setTitle(submissionReviwedForm.getTitle());
-		 * p.setUrlDocument(submissionReviwedForm.getUrlDocument());
-		 * this.validator.validate(p, binding);
-		 * 
-		 * if (binding.hasErrors())
-		 * throw new ValidationException();
-		 */
-		//res = p;
-		//}
+		}
 		return res;
 	}
 }

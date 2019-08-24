@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ReportService;
+import services.SubmissionService;
 import domain.Report;
 
 @Controller
@@ -22,7 +23,9 @@ import domain.Report;
 public class ReportReviwerController extends AbstractController {
 
 	@Autowired
-	private ReportService	reportService;
+	private ReportService		reportService;
+	@Autowired
+	private SubmissionService	submissionService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -33,6 +36,7 @@ public class ReportReviwerController extends AbstractController {
 			result = new ModelAndView("report/list");
 			result.addObject("reports", reports);
 			result.addObject("submissionId", submissionId);
+			result.addObject("submission", this.submissionService.findOneReviwer(submissionId));
 			return result;
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../");

@@ -21,6 +21,8 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Author;
+import domain.CamaraReady;
+import domain.Reviwed;
 import domain.Reviwer;
 import domain.Submission;
 import forms.SubmissionReviwedForm;
@@ -148,36 +150,16 @@ public class SubmissionService {
 			final UserAccount user = LoginService.getPrincipal();
 			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
 			res.setAuthor(a);
-
-			res.setId(submissionReviwedForm.getId());
-			res.setVersion(submissionReviwedForm.getVersion());
-			res.setConference(submissionReviwedForm.getConference());
+			res.setConference(submissionReviwedForm.getConf());
 			res.setMoment(new Date());
 			res.setStatus(0);
-			res.setTicker(SubmissionService.generarTicker());
-			res.setReviwed(submissionReviwedForm.getReviwed());
-			res.setCamaraReady(submissionReviwedForm.getCamaraReady());
-			res.setReviwers(submissionReviwedForm.getReviwers());
+			res.setTicker(this.generarTicker());
+			res.setReviwed(new Reviwed());
+			res.setCamaraReady(new CamaraReady());
+			res.setReviwers(new HashSet<Reviwer>());
 			this.validator.validate(res, binding);
-			//		} else {
-			//			res = this.submissionRepository.findOne(submissionReviwedForm.getId());
-			//			final Submission p = new Submission();
-			//			p.setId(res.getId());
-			//			p.setVersion(res.getVersion());
-			//			p.setMoment(res.getMoment());
-			//			p.setAuthor(res.getAuthor());
-			//			p.setConference(submissionReviwedForm.getConference());
-			//			p.setCamaraReady(res.getCamaraReady());
-			//			p.setReviwers(res.getReviwers());
-			//			p.setStatus(res.getStatus());
-			//			p.setTicker(res.getTicker());
-			//			reviwed.setSummary(submissionReviwedForm.getSummary());
-			//			reviwed.setTitle(submissionReviwedForm.getTitle());
-			//			reviwed.setUrlDocument(submissionReviwedForm.getUrlDocument());
-			//			p.setReviwed(reviwed);
-			//
-			//			this.validator.validate(p, binding);
-			//			res = p;
+			if (binding.hasErrors())
+				throw new ValidationException();
 		}
 		return res;
 	}
@@ -217,16 +199,17 @@ public class SubmissionService {
 	}
 
 	//TICKER
-	public static String generarTicker() {
-		final int tamLetras = 3;
+	public String generarTicker() {
+		//final int tamLetras = 3;
 		final int tam = 4;
 		String d = "";
-		final String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-		for (int i = 0; i < tamLetras; i++) {
-			final Integer random = (int) (Math.floor(Math.random() * letras.length()) % letras.length());
-			d = d + letras.charAt(random);
-		}
+		final UserAccount userAccount = LoginService.getPrincipal();
+		final Author author = this.authorService.getAuthorByUserAccount(userAccount.getId());
+		d = d + author.getName().charAt(0) + author.getSurname().charAt(0);
+		if (author.getMiddleName().equals(""))
+			d = d + "X";
+		else
+			d = d + author.getMiddleName().charAt(0);
 
 		String ticker = d + "-";
 		final String a = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -239,7 +222,6 @@ public class SubmissionService {
 		return ticker;
 
 	}
-
 	private static List<String> trocear(final String cadena) {
 		final List<String> palabras = new ArrayList<>();
 		final String[] trozos = cadena.trim().split(" ");
