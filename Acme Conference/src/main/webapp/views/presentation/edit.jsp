@@ -32,7 +32,7 @@
 	<spring:message code="tutorial.attachmets.comment" />
 	<acme:textbox code="tutorial.attachments" path="attachments"/>
 	<acme:select items="${conferences}" itemLabel="title" code="tutorial.conference" path="conference"/>
-	<acme:select items="${papers}" itemLabel="title" code="tutorial.conference" path="camaraReady"/>
+	<acme:select items="${papers}" itemLabel="title" code="presentation.cameraReady" path="camaraReady"/>
 	
 	<br/>
 	<input type="submit" name="save" 
