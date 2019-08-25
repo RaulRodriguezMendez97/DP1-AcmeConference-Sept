@@ -110,23 +110,37 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	public ModelAndView saveSubmissionAuthor(@ModelAttribute("submissionReviwedForm") final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		ModelAndView result;
 
-		//		try {
 		final Submission submission = this.submissionService.reconstruct(submissionReviwedForm, binding);
-		if (binding.hasErrors()) {
-			final Reviwed r = new Reviwed();
-			final UserAccount user = LoginService.getPrincipal();
-			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
-			r.setAuthor(a);
-			r.setCoAuthors(submissionReviwedForm.getCoAuthors());
-			r.setSummary(submissionReviwedForm.getSummary());
-			r.setTitle(submissionReviwedForm.getTitle());
-			r.setUrlDocument(submissionReviwedForm.getUrlDocument());
+		try {
 
-			final Reviwed reviwedSave = this.reviwedService.save(r);
-			submission.setReviwed(reviwedSave);
-			this.submissionService.saveAuthor(submission);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+			if (!binding.hasErrors()) {
+				final Reviwed r = new Reviwed();
+				final UserAccount user = LoginService.getPrincipal();
+				final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+				r.setAuthor(a);
+				r.setCoAuthors(submissionReviwedForm.getCoAuthors());
+				r.setSummary(submissionReviwedForm.getSummary());
+				r.setTitle(submissionReviwedForm.getTitle());
+				r.setUrlDocument(submissionReviwedForm.getUrlDocument());
+
+				final Reviwed reviwedSave = this.reviwedService.save(r);
+				submission.setReviwed(reviwedSave);
+				this.submissionService.saveAuthor(submission);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				final UserAccount user = LoginService.getPrincipal();
+				final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+				final Collection<Conference> conferences;
+				final Collection<Author> coAuthors;
+				coAuthors = this.authorService.findAll();
+				coAuthors.remove(a);
+				conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
+				result = new ModelAndView("submission/edit");
+				result.addObject("submissionReviwedForm", submissionReviwedForm);
+				result.addObject("conferences", conferences);
+				result.addObject("coAuthors", coAuthors);
+			}
+		} catch (final Exception e) {
 			final UserAccount user = LoginService.getPrincipal();
 			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
 			final Collection<Conference> conferences;
@@ -135,24 +149,11 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			coAuthors.remove(a);
 			conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
 			result = new ModelAndView("submission/edit");
+			result.addObject("exception", e);
 			result.addObject("submissionReviwedForm", submissionReviwedForm);
 			result.addObject("conferences", conferences);
 			result.addObject("coAuthors", coAuthors);
 		}
-		//		} catch (final Exception e) {
-		//			final UserAccount user = LoginService.getPrincipal();
-		//			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
-		//			final Collection<Conference> conferences;
-		//			final Collection<Author> coAuthors;
-		//			coAuthors = this.authorService.findAll();
-		//			coAuthors.remove(a);
-		//			conferences = this.conferenceService.getConferencesSubmissionDeadlinePosteriorNow();
-		//			result = new ModelAndView("submission/edit");
-		//			result.addObject("exception", e);
-		//			result.addObject("submissionReviwedForm", submissionReviwedForm);
-		//			result.addObject("conferences", conferences);
-		//			result.addObject("coAuthors", coAuthors);
-		//		}
 		return result;
 	}
 

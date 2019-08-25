@@ -21,8 +21,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Author;
-import domain.CamaraReady;
-import domain.Reviwed;
+import domain.Conference;
 import domain.Reviwer;
 import domain.Submission;
 import forms.SubmissionReviwedForm;
@@ -43,23 +42,25 @@ public class SubmissionService {
 	private MessageService			messageService;
 	@Autowired
 	private AdministratorService	administratorService;
+	@Autowired
+	private ReviwedService			reviwedService;
 
 
-	//	public Submission create() {
-	//		final Submission submission = new Submission();
-	//		final UserAccount user = LoginService.getPrincipal();
-	//		final Author a = this.authorService.getAuthorByUserAccount(user.getId());
-	//
-	//		submission.setTicker("");
-	//		submission.setStatus(0);
-	//		submission.setAuthor(a);
-	//		submission.setCamaraReady(null);
-	//		submission.setConference(new Conference());
-	//		submission.setMoment(new Date());
-	//		submission.setReviwed(new Reviwed());
-	//		submission.setReviwers(new HashSet<Reviwer>());
-	//		return submission;
-	//	}
+	public Submission create() {
+		final Submission submission = new Submission();
+		final UserAccount user = LoginService.getPrincipal();
+		final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+
+		submission.setTicker(this.generarTicker());
+		submission.setStatus(0);
+		submission.setAuthor(a);
+		submission.setCamaraReady(null);
+		submission.setConference(new Conference());
+		submission.setMoment(new Date());
+		submission.setReviwed(this.reviwedService.create());
+		submission.setReviwers(new HashSet<Reviwer>());
+		return submission;
+	}
 
 	public Submission findOne(final Integer id) {
 		return this.submissionRepository.findOne(id);
@@ -144,22 +145,12 @@ public class SubmissionService {
 	//RECONSTRUCT
 
 	public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
-		final Submission res = new Submission();
+		final Submission res = this.create();
 		if (submissionReviwedForm.getId() == 0) {
-
-			final UserAccount user = LoginService.getPrincipal();
-			final Author a = this.authorService.getAuthorByUserAccount(user.getId());
-			res.setAuthor(a);
 			res.setConference(submissionReviwedForm.getConf());
-			res.setMoment(new Date());
-			res.setStatus(0);
-			res.setTicker(this.generarTicker());
-			res.setReviwed(new Reviwed());
-			res.setCamaraReady(new CamaraReady());
-			res.setReviwers(new HashSet<Reviwer>());
 			this.validator.validate(res, binding);
-			if (binding.hasErrors())
-				throw new ValidationException();
+			//			if (binding.hasErrors())
+			//				throw new ValidationException();
 		}
 		return res;
 	}
