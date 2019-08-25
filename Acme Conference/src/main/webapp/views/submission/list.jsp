@@ -90,6 +90,8 @@ requestURI="${uriL}" >
 
 
 
+
+
 <display:column>
 		<a href="${uriD}?submissionId=${row.id}"><spring:message code="submission.details" /></a> 
 </display:column>

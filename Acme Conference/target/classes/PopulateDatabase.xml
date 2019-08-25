@@ -412,6 +412,7 @@
 		<property name="userAccount" ref="userAccount8" />
 		<property name="keyWords">
 			<list>
+				<value>title</value>
 			</list>
 		</property>
 	</bean>
@@ -423,6 +424,7 @@
 		<property name="userAccount" ref="userAccount9" />
 		<property name="keyWords">
 			<list>
+				<value>conference</value>
 			</list>
 		</property>
 	</bean>
@@ -704,7 +706,7 @@
 		<property name="admin" ref="administrator3" />
 	</bean>
 	<bean id="conference4" class="domain.Conference">
-		<property name="title" value="title conference 4" />
+		<property name="title" value="Title conference 4" />
 		<property name="acronym" value="acronym conference 4" />
 		<property name="venue" value="venue conference 4" />
 		<property name="submissionDeadline" value="10/15/2019 11:30" />

@@ -22,6 +22,7 @@ import security.UserAccount;
 import domain.Administrator;
 import domain.Author;
 import domain.Conference;
+import domain.Reviwed;
 import domain.Reviwer;
 import domain.Submission;
 import forms.SubmissionReviwedForm;
@@ -44,12 +45,15 @@ public class SubmissionService {
 	private AdministratorService	administratorService;
 	@Autowired
 	private ReviwedService			reviwedService;
+	@Autowired
+	private ReportService			reportService;
 
 
 	public Submission create() {
 		final Submission submission = new Submission();
 		final UserAccount user = LoginService.getPrincipal();
 		final Author a = this.authorService.getAuthorByUserAccount(user.getId());
+		final Reviwed reviwed = this.reviwedService.create();
 
 		submission.setTicker(this.generarTicker());
 		submission.setStatus(0);
@@ -57,7 +61,7 @@ public class SubmissionService {
 		submission.setCamaraReady(null);
 		submission.setConference(new Conference());
 		submission.setMoment(new Date());
-		submission.setReviwed(this.reviwedService.create());
+		submission.setReviwed(reviwed);
 		submission.setReviwers(new HashSet<Reviwer>());
 		return submission;
 	}
@@ -143,14 +147,21 @@ public class SubmissionService {
 	}
 
 	//RECONSTRUCT
-
 	public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
 		final Submission res = this.create();
+		final Reviwed reviwed = this.reviwedService.create();
+
+		reviwed.setCoAuthors(submissionReviwedForm.getCoAuthors());
+		reviwed.setSummary(submissionReviwedForm.getSummary());
+		reviwed.setTitle(submissionReviwedForm.getTitle());
+		reviwed.setUrlDocument(submissionReviwedForm.getUrlDocument());
+		this.validator.validate(reviwed, binding);
+		final Reviwed reviwedSave = this.reviwedService.save(reviwed);
+
 		if (submissionReviwedForm.getId() == 0) {
 			res.setConference(submissionReviwedForm.getConf());
+			res.setReviwed(reviwedSave);
 			this.validator.validate(res, binding);
-			//			if (binding.hasErrors())
-			//				throw new ValidationException();
 		}
 		return res;
 	}
@@ -213,73 +224,78 @@ public class SubmissionService {
 		return ticker;
 
 	}
-	private static List<String> trocear(final String cadena) {
+	public List<String> trocear(final String cadena) {
 		final List<String> palabras = new ArrayList<>();
-		final String[] trozos = cadena.trim().split(" ");
+		final String[] trozos = cadena.split(" ");
 		for (final String a : trozos)
 			palabras.add(a);
 		return palabras;
 	}
 
+	//Asignar de forma automática los reviwers
 	public Submission asignarAutomaticamenteReviwers(final Submission submission, final BindingResult binding) {
-		//Reviwers
-		final List<Reviwer> reviwers = (List<Reviwer>) this.reviwerService.findAll();
-		final Collection<Reviwer> rev = new HashSet<>();
-		final List<String> palabrasTitulo = SubmissionService.trocear(submission.getConference().getTitle());
-		final List<String> palabrasResumen = SubmissionService.trocear(submission.getConference().getSummary());
-		Boolean res = false;
+		//Reviwers adecuados
+		final Collection<Reviwer> reviwers = this.reviwerService.findAll();
+		final List<Reviwer> listaReviwers = this.reviwersAdecuados(reviwers, submission);
 
-		if (reviwers.size() >= 3)
+		List<Reviwer> rev = new ArrayList<Reviwer>();
+		Submission submissionRes = null;
+
+		if (listaReviwers.size() >= 3)
 			for (int i = 1; i <= 3; i++) {
-				final int tam = reviwers.size();
-				final int a = (int) (Math.random() * tam - 1);
-				final Reviwer aux = reviwers.get(a);
+				final int tam = listaReviwers.size();
+				final int a = (int) Math.floor(Math.random() * ((tam - 1) - 0 + 1) + 0);
+				final Reviwer aux = listaReviwers.get(a);
+				rev.add(aux);
+				listaReviwers.remove(aux);
+				submissionRes = this.submissionRepository.findOne(submission.getId());
+				submissionRes.setReviwers(rev);
+				this.validator.validate(submissionRes, binding);
+			}
+		else {
+			rev = listaReviwers;
+			submissionRes = this.submissionRepository.findOne(submission.getId());
+			submissionRes.setReviwers(rev);
+			this.validator.validate(submissionRes, binding);
+		}
+		return submissionRes;
+	}
 
-				for (final String keys : aux.getKeyWords())
-					for (final String pt : palabrasTitulo)
-						if (keys.equals(pt)) {
-							rev.add(aux);
-							reviwers.remove(aux);
-							res = true;
+	//Cambiar el estado de una submission de forma automática.
+	public Submission changeStatus(final Submission submission, final BindingResult binding) {
+		Submission res = null;
+		res = this.submissionRepository.findOne(submission.getId());
+
+		if (this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()) >= this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId()))
+			res.setStatus(2);
+		else if (this.reportService.getReportsDecicionRechazadaBySubmission(submission.getId()) > this.reportService.getReportsDecicionAceptadaBySubmission(submission.getId()))
+			res.setStatus(1);
+		else
+			res.setStatus(2);
+
+		this.validator.validate(res, binding);
+		return res;
+
+	}
+
+	//Obtener reviwers adecuados
+	public List<Reviwer> reviwersAdecuados(final Collection<Reviwer> reviwers, final Submission submission) {
+		final Submission sub = this.findOne(submission.getId());
+		final List<Reviwer> resultado = new ArrayList<>();
+		for (final Reviwer r : reviwers)
+			for (final String a : this.trocear(sub.getConference().getTitle()))
+				if (!(r.getKeyWords().contains(a))) {
+					for (final String b : this.trocear(sub.getConference().getSummary()))
+						if (r.getKeyWords().contains(b)) {
+							resultado.add(r);
 							break;
 						}
-
-				if (res == false) {
-
-					for (final String keys : aux.getKeyWords())
-						for (final String pr : palabrasResumen)
-							if (keys.equals(pr)) {
-								rev.add(aux);
-								reviwers.remove(aux);
-								res = true;
-								break;
-							}
-
-				} else
 					break;
-			}
-
-		Submission submissionRes = null;
-		submissionRes = this.submissionRepository.findOne(submission.getId());
-		final Submission p = new Submission();
-
-		p.setId(submissionRes.getId());
-		p.setVersion(submissionRes.getVersion());
-		p.setMoment(submissionRes.getMoment());
-		p.setAuthor(submissionRes.getAuthor());
-		p.setConference(submissionRes.getConference());
-		p.setCamaraReady(submissionRes.getCamaraReady());
-		p.setTicker(submissionRes.getTicker());
-		p.setReviwed(submissionRes.getReviwed());
-		p.setStatus(submissionRes.getStatus());
-		p.setReviwers(rev);
-
-		this.validator.validate(p, binding);
-		if (binding.hasErrors())
-			throw new ValidationException();
-		submissionRes = p;
-
-		return submissionRes;
+				} else {
+					resultado.add(r);
+					break;
+				}
+		return resultado;
 	}
 
 }

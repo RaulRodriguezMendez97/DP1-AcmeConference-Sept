@@ -26,7 +26,7 @@
 <acme:textbox code="submission.reviwed.title" path="title"/>
 <acme:textbox code="submission.reviwed.summary" path="summary"/>
 <acme:textbox code="submission.reviwed.urlDocument" path="urlDocument"/>
-<acme:select items="${conferences}" itemLabel="title" code="submission.conference.table" path="conf"/>
+<acme:selectWithoutNullOption items="${conferences}" itemLabel="title" code="submission.conference.table" path="conf"/>
 <acme:multipleSelect items="${coAuthors}" itemLabel="email" code="submission.reviwed.coAuthors" path="coAuthors"/>
 
 <br/>
@@ -54,26 +54,27 @@
 
 <jstl:if test="${(submission.status eq 0) and (empty submission.reviwers)}">	
 	<acme:multipleSelect items="${reviwers}" itemLabel="email" code="submission.reviwers" path="reviwers"/>
+	<input type="submit" name="save" value="<spring:message code="submission.save" />" />
+	<input type="submit" name="asignar" value="<spring:message code="submission.asignarAutomaticamente" />" />
 </jstl:if>
 
 <jstl:if test="${(submission.status eq 0) and ((submission.reviwers ne null) and (!empty submission.reviwers)) and (fechaActual > submission.conference.submissionDeadline)}">	
-	<form:label path="status"><spring:message code="submission.status" />:</form:label>
-		<form:select path="status">
-			<jstl:if test="${res < 0}">
-				<form:option value="1" label="Rejected" />	
-			</jstl:if>
-			<jstl:if test="${res >= 0}">
-				<form:option value="2" label="Accepted" />
-			</jstl:if>	
-		</form:select>
+	<p><spring:message code="change" /></p>
+	<!--  
+		<form:label path="status"><spring:message code="submission.status" />:</form:label>
+			<form:select path="status">
+				<jstl:if test="${res < 0}">
+					<form:option value="1" label="Rejected" />	
+				</jstl:if>
+				<jstl:if test="${res >= 0}">
+					<form:option value="2" label="Accepted" />
+				</jstl:if>	
+			</form:select>
+	-->
+		<input type="submit" name="change" value="<spring:message code="submission.changeStatus" />" />
 </jstl:if>
 
 
-<input type="submit" name="save" value="<spring:message code="submission.save" />" />
 <acme:cancel url="submission/administrator/submissionsUnderReviwed.do" code="submission.cancel"/>
-
-<jstl:if test="${(submission.status eq 0) and (empty submission.reviwers)}">	
-		<input type="submit" name="asignar" value="<spring:message code="submission.asignarAutomaticamente" />" />
-</jstl:if>
 </form:form>
 </security:authorize>
