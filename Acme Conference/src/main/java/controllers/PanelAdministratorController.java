@@ -57,7 +57,7 @@ public class PanelAdministratorController extends AbstractController {
 		final Panel panel = this.panelService.create();
 		result = new ModelAndView("panel/edit");
 		result.addObject("panel", panel);
-		result.addObject("conferences", this.conferenceService.getFutureAndDraftModeConferences());
+		result.addObject("conferences", this.conferenceService.getFutureAndFinalModeConferences());
 		return result;
 	}
 
@@ -67,7 +67,7 @@ public class PanelAdministratorController extends AbstractController {
 		try {
 			final Panel panel = this.panelService.findOne(panelId);
 			Assert.notNull(panel);
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			Assert.isTrue(conferences.contains(panel.getConference()));
 			result = new ModelAndView("panel/edit");
 			result.addObject("panel", panel);
@@ -84,7 +84,7 @@ public class PanelAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Panel p = this.panelService.reconstruct(panel, binding);
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			if (!binding.hasErrors()) {
 				Assert.isTrue(conferences.contains(panel.getConference()));
 				this.panelService.save(p);
@@ -103,7 +103,7 @@ public class PanelAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Panel panel) {
 		ModelAndView result;
-		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+		final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 		try {
 			final Panel p = this.panelService.findOne(panel.getId());
 			Assert.notNull(p);

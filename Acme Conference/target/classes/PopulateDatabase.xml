@@ -547,7 +547,7 @@
 		<property name="schedule" value="06/08/2020 11:30"></property>
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen del segundo tutorial"></property>
-		<property name="conference" ref="conference2"></property>
+		<property name="conference" ref="conference1"></property>
 		<property name="attachments">
 			<list>
 				<value>https://www.google.com</value>
@@ -603,7 +603,7 @@
 		<property name="schedule" value="06/08/2020 11:30"></property>
 		<property name="room" value="habitacion3"></property>
 		<property name="summary" value="resumen del tercer panel"></property>
-		<property name="conference" ref="conference3"></property>
+		<property name="conference" ref="conference4"></property>
 			<property name="attachments">
 			<list>
 			</list>
@@ -632,7 +632,7 @@
 		<property name="schedule" value="02/08/2020 11:30"></property>
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen de la segunda presentacion"></property>
-		<property name="conference" ref="conference2"></property>
+		<property name="conference" ref="conference5"></property>
 		<property name="camaraReady" ref="camaraReady2"></property>
 			<property name="attachments">
 			<list>

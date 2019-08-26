@@ -78,7 +78,7 @@ public class SectionAdministratorController extends AbstractController {
 			Assert.notNull(tutorial);
 			final Section section = this.sectionService.findOne(sectionId);
 			Assert.notNull(section);
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			result = new ModelAndView("section/edit");
 			final SectionPictureForm sectionPictureForm = this.initializeSectionPictureForm(section);
@@ -96,7 +96,7 @@ public class SectionAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Tutorial tutorial = sectionPictureForm.getTutorial();
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			final Section section = this.sectionService.reconstruct(sectionPictureForm, binding);
 			if (!binding.hasErrors()) {
@@ -123,7 +123,7 @@ public class SectionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final Integer tutorialId, @RequestParam final Integer sectionId) {
 		ModelAndView result;
-		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+		final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 		try {
 			final Tutorial t = this.tutorialService.findOne(tutorialId);
 			Assert.notNull(t);

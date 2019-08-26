@@ -49,13 +49,8 @@
 					code="tutorial.show" /></a>
 		</display:column>
 		<display:column titleKey="tutorial.edit">
-			<jstl:if test="${row.conference.finalMode eq 0 }">
-				<a href="panel/administrator/edit.do?panelId=${row.id}"><spring:message
-						code="tutorial.edit" /></a>
-			</jstl:if>
-			<jstl:if test="${row.conference.finalMode eq 1 }">
-				-
-			</jstl:if>
+			<a href="panel/administrator/edit.do?panelId=${row.id}"><spring:message
+					code="tutorial.edit" /></a>
 		</display:column>
 	</display:table>
 

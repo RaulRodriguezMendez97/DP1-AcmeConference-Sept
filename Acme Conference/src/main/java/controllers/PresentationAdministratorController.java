@@ -60,7 +60,7 @@ public class PresentationAdministratorController extends AbstractController {
 		final Presentation presentation = this.presentationService.create();
 		result = new ModelAndView("presentation/edit");
 		result.addObject("presentation", presentation);
-		result.addObject("conferences", this.conferenceService.getFutureAndDraftModeConferences());
+		result.addObject("conferences", this.conferenceService.getFutureAndFinalModeConferences());
 		result.addObject("papers", this.cameraReadyService.findAll());
 		return result;
 	}
@@ -71,7 +71,7 @@ public class PresentationAdministratorController extends AbstractController {
 		try {
 			final Presentation presentation = this.presentationService.findOne(presentationId);
 			Assert.notNull(presentation);
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			Assert.isTrue(conferences.contains(presentation.getConference()));
 			result = new ModelAndView("presentation/edit");
 			result.addObject("presentation", presentation);
@@ -89,7 +89,7 @@ public class PresentationAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Presentation p = this.presentationService.reconstruct(presentation, binding);
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			if (!binding.hasErrors()) {
 				Assert.isTrue(conferences.contains(presentation.getConference()));
 				this.presentationService.save(p);
@@ -109,7 +109,7 @@ public class PresentationAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Presentation presentation) {
 		ModelAndView result;
-		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+		final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 		try {
 			final Presentation p = this.presentationService.findOne(presentation.getId());
 			Assert.notNull(p);

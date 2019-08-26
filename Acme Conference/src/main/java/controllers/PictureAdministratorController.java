@@ -37,7 +37,7 @@ public class PictureAdministratorController extends AbstractController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final Integer tutorialId, @RequestParam final Integer sectionId, @RequestParam final Integer pictureId) {
 		ModelAndView result;
-		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+		final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 		try {
 			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
 			Assert.notNull(tutorial);

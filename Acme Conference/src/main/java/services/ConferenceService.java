@@ -209,8 +209,8 @@ public class ConferenceService {
 		return this.conferenceRepository.getConferencesInDraftMode();
 	}
 
-	public Collection<Conference> getFutureAndDraftModeConferences() {
-		return this.conferenceRepository.getFutureAndDraftModeConferences();
+	public Collection<Conference> getFutureAndFinalModeConferences() {
+		return this.conferenceRepository.getFutureAndFinalModeConferences();
 	}
 
 	public Collection<Conference> getAllConferenceByAuthor() {

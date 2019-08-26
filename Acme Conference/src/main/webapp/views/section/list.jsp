@@ -40,23 +40,13 @@
 		</display:column>
 		
 		<display:column titleKey="tutorial.edit">
-			<jstl:if test="${row.tutorial.conference.finalMode eq 0 }">
-				<a href="section/administrator/edit.do?tutorialId=${row.tutorial.id}&sectionId=${row.id}"><spring:message
-						code="tutorial.edit" /></a>
-			</jstl:if>
-			<jstl:if test="${row.tutorial.conference.finalMode eq 1 }">
-				-
-			</jstl:if>
+			<a href="section/administrator/edit.do?tutorialId=${row.tutorial.id}&sectionId=${row.id}"><spring:message
+					code="tutorial.edit" /></a>
 		</display:column>
 		
 		<display:column titleKey="tutorial.delete">
-			<jstl:if test="${row.tutorial.conference.finalMode eq 0 }">
-				<a href="section/administrator/delete.do?tutorialId=${row.tutorial.id}&sectionId=${row.id}"><spring:message
-						code="tutorial.delete" /></a>
-			</jstl:if>
-			<jstl:if test="${row.tutorial.conference.finalMode eq 1 }">
-				-
-			</jstl:if>
+			<a href="section/administrator/delete.do?tutorialId=${row.tutorial.id}&sectionId=${row.id}"><spring:message
+					code="tutorial.delete" /></a>
 		</display:column>
 	</display:table>
 

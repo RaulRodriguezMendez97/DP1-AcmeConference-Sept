@@ -68,7 +68,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select c from Conference c where c.finalMode = 0")
 	public Collection<Conference> getConferencesInDraftMode();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() < start_date AND final_mode = 0", nativeQuery = true)
-	public Collection<Conference> getFutureAndDraftModeConferences();
+	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() < start_date AND final_mode = 1", nativeQuery = true)
+	public Collection<Conference> getFutureAndFinalModeConferences();
 
 }

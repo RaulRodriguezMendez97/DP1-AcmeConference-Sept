@@ -61,7 +61,7 @@ public class TutorialAdministratorController extends AbstractController {
 		final Tutorial tutorial = this.tutorialService.create();
 		result = new ModelAndView("tutorial/edit");
 		result.addObject("tutorial", tutorial);
-		result.addObject("conferences", this.conferenceService.getFutureAndDraftModeConferences());
+		result.addObject("conferences", this.conferenceService.getFutureAndFinalModeConferences());
 		return result;
 	}
 
@@ -71,7 +71,7 @@ public class TutorialAdministratorController extends AbstractController {
 		try {
 			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
 			Assert.notNull(tutorial);
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			result = new ModelAndView("tutorial/edit");
 			result.addObject("tutorial", tutorial);
@@ -88,7 +88,7 @@ public class TutorialAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Tutorial t = this.tutorialService.reconstruct(tutorial, binding);
-			final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			if (!binding.hasErrors()) {
 				Assert.isTrue(conferences.contains(tutorial.getConference()));
 				this.tutorialService.save(t);
@@ -107,7 +107,7 @@ public class TutorialAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Tutorial tutorial) {
 		ModelAndView result;
-		final Collection<Conference> conferences = this.conferenceService.getFutureAndDraftModeConferences();
+		final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 		try {
 			final Tutorial t = this.tutorialService.findOne(tutorial.getId());
 			Assert.notNull(t);
