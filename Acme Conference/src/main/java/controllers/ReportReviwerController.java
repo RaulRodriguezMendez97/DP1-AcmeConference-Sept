@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ReportService;
 import services.SubmissionService;
 import domain.Report;
+import domain.Submission;
 
 @Controller
 @RequestMapping("/report/reviwer")
@@ -29,7 +30,7 @@ public class ReportReviwerController extends AbstractController {
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam final int submissionId) {
+	public ModelAndView list(@RequestParam final Integer submissionId) {
 		ModelAndView result;
 		try {
 			final Collection<Report> reports = this.reportService.getReportsBySubmission(submissionId);
@@ -39,13 +40,13 @@ public class ReportReviwerController extends AbstractController {
 			result.addObject("submission", this.submissionService.findOneReviwer(submissionId));
 			return result;
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:../../");
 		}
 		return result;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int submissionId) {
+	public ModelAndView create(@RequestParam final Integer submissionId) {
 		final ModelAndView result;
 		final Report report = this.reportService.create();
 
@@ -56,23 +57,23 @@ public class ReportReviwerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int submissionId, @RequestParam final int reportId) {
+	public ModelAndView edit(@RequestParam final Integer submissionId, @RequestParam final Integer reportId) {
 		ModelAndView result;
 		try {
 			final Report report = this.reportService.findOne(reportId);
+			final Submission submission = this.submissionService.findOneReviwer(submissionId);
 			Assert.notNull(report);
+			Assert.notNull(submission);
 			result = new ModelAndView("report/edit");
 			result.addObject("report", report);
 			result.addObject("submissionId", submissionId);
 		} catch (final Exception e) {
-			//result = new ModelAndView("redirect:list.do?submissionId=" + submissionId);
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:../../");
 		}
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(@RequestParam final int submissionId, final Report report, final BindingResult binding) {
+	public ModelAndView edit(@RequestParam final Integer submissionId, final Report report, final BindingResult binding) {
 		ModelAndView result;
 		try {
 			final Report o = this.reportService.reconstruct(report, submissionId, binding);
@@ -98,7 +99,7 @@ public class ReportReviwerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@RequestParam final int submissionId, final Report report, final BindingResult binding) {
+	public ModelAndView delete(@RequestParam final Integer submissionId, final Report report, final BindingResult binding) {
 		ModelAndView result;
 		Report o;
 		try {

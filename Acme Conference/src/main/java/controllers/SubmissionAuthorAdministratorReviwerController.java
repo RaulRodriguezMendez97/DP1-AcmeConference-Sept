@@ -80,7 +80,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("conference", conference);
 			result.addObject("reviwed", reviwed);
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
 	}
@@ -198,7 +198,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reviwed", reviwed);
 			result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:submissionsUnderReviwed.do");
 		}
 		return result;
 	}
@@ -236,7 +236,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reviwed", reviwed);
 			result.addObject("uri", "submission/administrator/submissionsRejected.do");
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:submissionsRejected.do");
 		}
 		return result;
 	}
@@ -274,13 +274,13 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reviwed", reviwed);
 			result.addObject("uri", "submission/administrator/submissionsAccepted.do");
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:submissionsAccepted.do");
 		}
 		return result;
 	}
 
 	@RequestMapping(value = "/administrator/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int submissionId) {
+	public ModelAndView edit(@RequestParam final Integer submissionId) {
 		ModelAndView result;
 		try {
 			final Submission submission = this.submissionService.findOneAdministrator(submissionId);
@@ -378,7 +378,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reportBorderLine", reportBorderLine);
 			result.addObject("uri", "submission/administrator/submissionsAccepted.do");
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:submissionsAccepted.do");
 		}
 		return result;
 	}
@@ -397,7 +397,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reportBorderLine", reportBorderLine);
 			result.addObject("uri", "submission/administrator/submissionsRejected.do");
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:submissionsRejected.do");
 		}
 		return result;
 	}
@@ -416,7 +416,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 			result.addObject("reportBorderLine", reportBorderLine);
 			result.addObject("uri", "submission/administrator/submissionsUnderReviwed.do");
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:../");
+			result = new ModelAndView("redirect:submissionsUnderReviwed.do");
 		}
 		return result;
 	}
