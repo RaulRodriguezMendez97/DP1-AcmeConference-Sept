@@ -23,6 +23,7 @@
 <b><spring:message	code="tutorial.duration" />:</b> <jstl:out value="${tutorial.duration}"></jstl:out> <br/>
 <b><spring:message	code="tutorial.summary" />:</b> <jstl:out value="${tutorial.summary}"></jstl:out> <br/>
 <b><spring:message	code="tutorial.attachments" />:</b> <jstl:out value="${tutorial.attachments}"></jstl:out> <br/>
+<b><spring:message	code="tutorial.conference" />:</b> <jstl:out value="${tutorial.conference.title}"></jstl:out> <br/>
 <b><spring:message	code="tutorial.sections" />:</b>
 	<display:table name="sections" id="row" >
 		<display:column titleKey="tutorial.section.title">

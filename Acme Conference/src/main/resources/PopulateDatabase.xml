@@ -561,7 +561,7 @@
 		<property name="schedule" value="07/08/2020 11:30"></property>
 		<property name="room" value="habitacion3"></property>
 		<property name="summary" value="resumen del tercer tutorial"></property>
-		<property name="conference" ref="conference3"></property>
+		<property name="conference" ref="conference4"></property>
 		<property name="attachments">
 			<list>
 				<value>https://www.google.es</value>
@@ -590,7 +590,7 @@
 		<property name="schedule" value="05/08/2020 11:30"></property>
 		<property name="room" value="habitacionón2"></property>
 		<property name="summary" value="resumen del segundo panel"></property>
-		<property name="conference" ref="conference2"></property>
+		<property name="conference" ref="conference6"></property>
 			<property name="attachments">
 			<list>
 			</list>

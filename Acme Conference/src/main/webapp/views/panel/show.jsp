@@ -23,7 +23,7 @@
 <b><spring:message	code="tutorial.duration" />:</b> <jstl:out value="${panel.duration}"></jstl:out> <br/>
 <b><spring:message	code="tutorial.summary" />:</b> <jstl:out value="${panel.summary}"></jstl:out> <br/>
 <b><spring:message	code="tutorial.attachments" />:</b> <jstl:out value="${panel.attachments}"></jstl:out> <br/>
-	
+<b><spring:message	code="tutorial.conference" />:</b> <jstl:out value="${tutorial.conference.title}"></jstl:out> <br/>
 	<input type="button" name="back"
 		value="<spring:message code="tutorial.back" />"
 		onclick="javascript: relativeRedir('panel/administrator/list.do');" />
