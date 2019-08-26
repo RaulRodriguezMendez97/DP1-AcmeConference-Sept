@@ -24,7 +24,7 @@
 <b><spring:message	code="tutorial.summary" />:</b> <jstl:out value="${presentation.summary}"></jstl:out> <br/>
 <b><spring:message	code="tutorial.attachments" />:</b> <jstl:out value="${presentation.attachments}"></jstl:out> <br/>
 <b><spring:message	code="presentation.cameraReady" />:</b> <jstl:out value="${presentation.camaraReady.title}"></jstl:out> <br/>
-<b><spring:message	code="tutorial.conference" />:</b> <jstl:out value="${tutorial.conference.title}"></jstl:out> <br/>	
+<b><spring:message	code="tutorial.conference" />:</b> <jstl:out value="${presentation.conference.title}"></jstl:out> <br/>	
 	<input type="button" name="back"
 		value="<spring:message code="tutorial.back" />"
 		onclick="javascript: relativeRedir('presentation/administrator/list.do');" />
