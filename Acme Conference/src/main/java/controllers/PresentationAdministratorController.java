@@ -1,6 +1,7 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +122,7 @@ public class PresentationAdministratorController extends AbstractController {
 			result = new ModelAndView("presentation/edit");
 			result.addObject("presentation", presentation);
 			result.addObject("conferences", conferences);
-			result.addObject("papers", this.cameraReadyService.findAll());
+			result.addObject("papers", this.cameraReadyService.getCameraReadyByConference(new ArrayList<Conference>(conferences)));
 		}
 		return result;
 
