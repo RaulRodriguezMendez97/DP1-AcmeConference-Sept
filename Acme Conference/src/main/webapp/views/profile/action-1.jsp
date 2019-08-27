@@ -21,7 +21,7 @@
 
 <security:authorize access="isAuthenticated()">
 
-<img src="<jstl:out value='${actor.photo}'/> ">  <br/>
+<img src="<jstl:out value='${actor.photo}'/>" width="400px" height="200px" />  <br/>
 <br/>
 <fieldset>
 	<legend><spring:message code="profile.personalDatas" /></legend>	
