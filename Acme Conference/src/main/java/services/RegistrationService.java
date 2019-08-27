@@ -35,6 +35,9 @@ public class RegistrationService {
 	private AuthorService			authorService;
 
 	@Autowired
+	private ConferenceService		conferenceService;
+
+	@Autowired
 	private Validator				validator;
 
 
@@ -80,11 +83,16 @@ public class RegistrationService {
 	}
 	public Registration reconstruct(final RegistrationAndCreditCardForm registrationForm, final BindingResult binding) {
 
+		final Collection<Conference> conferencesAuthor = this.conferenceService.getAllConferenceByAuthor();
+
 		final Registration res = new Registration();
 		res.setId(registrationForm.getId());
 		res.setVersion(registrationForm.getVersion());
 		res.setCreditCard(registrationForm.getCreditCard());
 		res.setConference(registrationForm.getConference());
+
+		if (conferencesAuthor.contains(res.getConference()))
+			binding.rejectValue("conference", "conferenceRepetida");
 
 		this.validator.validate(res, binding);
 
