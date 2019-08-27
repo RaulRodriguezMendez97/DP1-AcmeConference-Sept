@@ -173,7 +173,8 @@ public class MessageService {
 
 		if (message.getConference() == null)
 			binding.rejectValue("conference", "NoConference");
-		if (message.getConference().getFinalMode() == 0)
+
+		if (message.getConference() != null && message.getConference().getFinalMode() == 0)
 			binding.rejectValue("conference", "NoValid");
 
 		this.validator.validate(res, binding);
