@@ -121,13 +121,17 @@ public class RegistrationAuthorController {
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final Integer idRegistration) {
 		ModelAndView result;
+		try {
 
-		final Registration registration = this.registrationService.findOne(idRegistration);
-		final String lang = LocaleContextHolder.getLocale().getLanguage();
+			final Registration registration = this.registrationService.findOne(idRegistration);
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
 
-		result = new ModelAndView("registration/show");
-		result.addObject("registration", registration);
-		result.addObject("lang", lang);
+			result = new ModelAndView("registration/show");
+			result.addObject("registration", registration);
+			result.addObject("lang", lang);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do");
+		}
 
 		return result;
 	}
