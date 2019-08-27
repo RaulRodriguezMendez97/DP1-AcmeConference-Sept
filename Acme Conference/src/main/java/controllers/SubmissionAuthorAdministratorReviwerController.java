@@ -297,6 +297,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 				res = this.reportService.getReportsDecicionBorderLineBySubmission(submissionId);
 
 			Assert.notNull(submission);
+			Assert.isTrue(submission.getStatus() == 0);
 			result = new ModelAndView("submission/edit");
 			result.addObject("submission", submission);
 			result.addObject("fechaActual", fechaActual);
