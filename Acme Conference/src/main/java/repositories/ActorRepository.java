@@ -23,7 +23,7 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	@Query("select a.email from Actor a")
 	public List<String> getEmails();
 
-	@Query("select s.author from Submission s where s.status = 2 and s.conference=?1")
+	@Query("select distinct s.author from Submission s where s.status = 2 and s.conference=?1")
 	public Collection<Actor> getAuthorWithSubmission(Conference conference);
 
 	@Query("select r.creditCard.author from Registration r where r.conference=?1")
