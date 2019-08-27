@@ -83,7 +83,9 @@ public class RegistrationService {
 	}
 	public Registration reconstruct(final RegistrationAndCreditCardForm registrationForm, final BindingResult binding) {
 
+		final Collection<Conference> conferences = this.conferenceService.getIncomingConferences();
 		final Collection<Conference> conferencesAuthor = this.conferenceService.getAllConferenceByAuthor();
+		conferences.removeAll(conferencesAuthor);
 
 		final Registration res = new Registration();
 		res.setId(registrationForm.getId());
@@ -91,7 +93,7 @@ public class RegistrationService {
 		res.setCreditCard(registrationForm.getCreditCard());
 		res.setConference(registrationForm.getConference());
 
-		if (conferencesAuthor.contains(res.getConference()))
+		if (!conferences.contains(res.getConference()))
 			binding.rejectValue("conference", "conferenceRepetida");
 
 		this.validator.validate(res, binding);
