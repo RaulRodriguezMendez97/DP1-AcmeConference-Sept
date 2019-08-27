@@ -31,9 +31,16 @@
 	<acme:textbox code="tutorial.summary" path="summary"/>
 	<spring:message code="tutorial.attachmets.comment" />
 	<acme:textbox code="tutorial.attachments" path="attachments"/>
-	<acme:select items="${conferences}" itemLabel="title" code="tutorial.conference" path="conference"/>
-	<acme:select items="${papers}" itemLabel="title" code="presentation.cameraReady" path="camaraReady"/>
-	
+	<acme:select id="select-prueba" items="${conferences}" itemLabel="title" code="tutorial.conference" path="conference"/>
+	<form:label path="camaraReady">
+		<spring:message code="presentation.cameraReady" />
+	</form:label>
+	<form:select id="rellenarme" path="camaraReady">
+	<form:select id="rellenarme" path="camaraReady" value="-1">
+	</form:select>
+	</form:select>
+	<form:errors path="camaraReady" cssClass="error" />
+
 	<br/>
 	<input type="submit" name="save" 
 	value="<spring:message code="tutorial.save" />" />
@@ -45,5 +52,52 @@
 			onclick="javascript: relativeRedir('presentation/administrator/list.do');" />
 </form:form>
 
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#select-prueba').change(function(){
+			var conferenceId = $('#select-prueba option:selected').attr('value');
+			if(conferenceId === ""){
+				conferenceId='-1';
+			}
+			$.ajax({
+				type:'GET',
+				url:'presentation/administrator/camaraReadyList.do?conferenceId='+conferenceId,
+				success: function(res) {
+					var cameras = res.split(';');
+					var i;
+					var injectar = "";
+					injectar += '<option value="-1"> --- </option>';
+					for (i = 0; i < cameras.length; i++) { 
+						p = cameras[i].split(':');
+						injectar += '<option value="'+p[1]+'">'+p[0]+'</option>';
+					}
+					document.getElementById("rellenarme").innerHTML =injectar;
+			    }
+			});
+		});
+		document.getElementById("rellenarme").innerHTML ='<option value="-1"> --- </option>';
+	});
+</script>
+<jstl:if test="${presentation.id ne 0 || error eq 1 }">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var conferenceId = $('#select-prueba option:selected').attr('value');
+			$.ajax({
+				type:'GET',
+				url:'presentation/administrator/camaraReadyList.do?conferenceId='+conferenceId,
+				success: function(res) {
+					var cameras = res.split(';');
+					var i;
+					var injectar = "";
+					injectar += '<option value="-1"> --- </option>';
+					for (i = 0; i < cameras.length; i++) { 
+						p = cameras[i].split(':');
+						injectar += '<option value="'+p[1]+'">'+p[0]+'</option>';
+					}
+					document.getElementById("rellenarme").innerHTML =injectar;
+			    }
+			});
+		});
+	</script>
+</jstl:if>
 </security:authorize>

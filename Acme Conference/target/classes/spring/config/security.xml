@@ -114,6 +114,7 @@
 		<security:intercept-url pattern="/presentation/administrator/delete.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/presentation/administrator/show.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/presentation/administrator/create.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/presentation/administrator/camaraReadyList.do" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/camera-ready/author/show.do" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/camera-ready/author/create.do" access="hasRole('AUTHOR')" />

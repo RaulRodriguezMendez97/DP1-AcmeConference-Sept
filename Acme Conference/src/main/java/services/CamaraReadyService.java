@@ -4,7 +4,6 @@ package services;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -20,7 +19,6 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Author;
 import domain.CamaraReady;
-import domain.Conference;
 import domain.Submission;
 
 @Service
@@ -52,8 +50,8 @@ public class CamaraReadyService {
 		return res;
 	}
 
-	public CamaraReady getCameraReadyByConference(final List<Conference> conferences) {
-		return this.camaraReadyRepository.getCameraReadyByConference(conferences);
+	public Collection<CamaraReady> getCameraReadyByConference(final Integer conferenceId) {
+		return this.camaraReadyRepository.getCameraReadyByConference(conferenceId);
 	}
 
 	public Collection<CamaraReady> findAll() {

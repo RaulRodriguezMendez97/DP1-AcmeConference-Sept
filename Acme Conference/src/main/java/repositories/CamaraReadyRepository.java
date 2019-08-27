@@ -1,15 +1,13 @@
 
 package repositories;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import domain.CamaraReady;
-import domain.Conference;
 
 @Repository
 public interface CamaraReadyRepository extends JpaRepository<CamaraReady, Integer> {
@@ -17,7 +15,7 @@ public interface CamaraReadyRepository extends JpaRepository<CamaraReady, Intege
 	@Query("select s.camaraReady from Submission s where s.id = ?1")
 	public CamaraReady getCameraReadyBySubmission(Integer id);
 
-	@Query("select s.camaraReady from Submission s where s.conference IN (:conferences) and s.status = 2")
-	public CamaraReady getCameraReadyByConference(@Param("conferences") List<Conference> conferences);
+	@Query("select s.camaraReady from Submission s where s.conference.id = ?1 and s.status = 2")
+	public Collection<CamaraReady> getCameraReadyByConference(final Integer id);
 
 }

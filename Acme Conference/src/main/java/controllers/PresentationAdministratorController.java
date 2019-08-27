@@ -3,8 +3,11 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CamaraReadyService;
 import services.ConferenceService;
 import services.PresentationService;
+import domain.CamaraReady;
 import domain.Conference;
 import domain.Presentation;
 
@@ -62,7 +66,6 @@ public class PresentationAdministratorController extends AbstractController {
 		result = new ModelAndView("presentation/edit");
 		result.addObject("presentation", presentation);
 		result.addObject("conferences", this.conferenceService.getFutureAndFinalModeConferences());
-		result.addObject("papers", this.cameraReadyService.findAll());
 		return result;
 	}
 
@@ -77,7 +80,6 @@ public class PresentationAdministratorController extends AbstractController {
 			result = new ModelAndView("presentation/edit");
 			result.addObject("presentation", presentation);
 			result.addObject("conferences", conferences);
-			result.addObject("papers", this.cameraReadyService.findAll());
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
 		}
@@ -99,7 +101,7 @@ public class PresentationAdministratorController extends AbstractController {
 				result = new ModelAndView("presentation/edit");
 				result.addObject("presentation", presentation);
 				result.addObject("conferences", conferences);
-				result.addObject("papers", this.cameraReadyService.findAll());
+				result.addObject("error", "1");
 			}
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
@@ -122,10 +124,27 @@ public class PresentationAdministratorController extends AbstractController {
 			result = new ModelAndView("presentation/edit");
 			result.addObject("presentation", presentation);
 			result.addObject("conferences", conferences);
-			result.addObject("papers", this.cameraReadyService.getCameraReadyByConference(new ArrayList<Conference>(conferences)));
+			result.addObject("error", "1");
 		}
 		return result;
 
+	}
+
+	@RequestMapping(value = "/camaraReadyList", method = RequestMethod.GET)
+	public ResponseEntity<String> list(@RequestParam final int conferenceId) {
+		try {
+			final Collection<CamaraReady> p = this.cameraReadyService.getCameraReadyByConference(conferenceId);
+			final List<CamaraReady> a = new ArrayList<CamaraReady>(p);
+			String camaras = "";
+			for (int x = 0; x < a.size(); x++)
+				if (x == 0)
+					camaras += a.get(x).getTitle() + ":" + a.get(x).getId();
+				else
+					camaras += ";" + a.get(x).getTitle() + ":" + a.get(x).getId();
+			return new ResponseEntity<String>(camaras, HttpStatus.OK);
+		} catch (final Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }
