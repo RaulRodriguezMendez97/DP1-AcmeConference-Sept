@@ -56,47 +56,57 @@
 	$(document).ready(function(){
 		$('#select-prueba').change(function(){
 			var conferenceId = $('#select-prueba option:selected').attr('value');
-			if(conferenceId === ""){
-				conferenceId='-1';
+			if(conferenceId != 0){
+				$.ajax({
+					type:'GET',
+					url:'presentation/administrator/camaraReadyList.do?conferenceId='+conferenceId,
+					success: function(res) {
+						var cameras = res.split(';');
+						var i;
+						var injectar = "";
+						if(cameras[0].length >= 1){
+							for (i = 0; i < cameras.length; i++) { 
+								p = cameras[i].split(':');
+								injectar += '<option value="'+p[1]+'">'+p[0]+'</option>';
+							}
+							document.getElementById("rellenarme").innerHTML =injectar;
+						}else{
+							document.getElementById("rellenarme").innerHTML ='<option value="-1"> --- </option>';
+						}
+				    }
+				});
+			}else{
+				document.getElementById("rellenarme").innerHTML ='<option value="-1"> --- </option>';
 			}
-			$.ajax({
-				type:'GET',
-				url:'presentation/administrator/camaraReadyList.do?conferenceId='+conferenceId,
-				success: function(res) {
-					var cameras = res.split(';');
-					var i;
-					var injectar = "";
-					injectar += '<option value="-1"> --- </option>';
-					for (i = 0; i < cameras.length; i++) { 
-						p = cameras[i].split(':');
-						injectar += '<option value="'+p[1]+'">'+p[0]+'</option>';
-					}
-					document.getElementById("rellenarme").innerHTML =injectar;
-			    }
-			});
-		});
+		});	
 		document.getElementById("rellenarme").innerHTML ='<option value="-1"> --- </option>';
 	});
 </script>
+
 <jstl:if test="${presentation.id ne 0 || error eq 1 }">
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var conferenceId = $('#select-prueba option:selected').attr('value');
-			$.ajax({
-				type:'GET',
-				url:'presentation/administrator/camaraReadyList.do?conferenceId='+conferenceId,
-				success: function(res) {
-					var cameras = res.split(';');
-					var i;
-					var injectar = "";
-					injectar += '<option value="-1"> --- </option>';
-					for (i = 0; i < cameras.length; i++) { 
-						p = cameras[i].split(':');
-						injectar += '<option value="'+p[1]+'">'+p[0]+'</option>';
-					}
-					document.getElementById("rellenarme").innerHTML =injectar;
-			    }
-			});
+			if(conferenceId != 0){
+				$.ajax({
+					type:'GET',
+					url:'presentation/administrator/camaraReadyList.do?conferenceId='+conferenceId,
+					success: function(res) {
+						var cameras = res.split(';');
+						var i;
+						var injectar = "";
+						if(cameras[0].length >= 1){
+							for (i = 0; i < cameras.length; i++) { 
+								p = cameras[i].split(':');
+								injectar += '<option value="'+p[1]+'">'+p[0]+'</option>';
+							}
+							document.getElementById("rellenarme").innerHTML =injectar;
+						}else{
+							document.getElementById("rellenarme").innerHTML ='<option value="-1"> --- </option>';
+						}
+				    }
+				});
+			}
 		});
 	</script>
 </jstl:if>

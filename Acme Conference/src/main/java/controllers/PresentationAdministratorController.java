@@ -36,11 +36,13 @@ public class PresentationAdministratorController extends AbstractController {
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required = false) final String error) {
 		final ModelAndView result;
 		final Collection<Presentation> presentations = this.presentationService.findAll();
 		result = new ModelAndView("presentation/list");
 		result.addObject("presentations", presentations);
+		if (error != null)
+			result.addObject("error", "error");
 		return result;
 
 	}
@@ -95,6 +97,8 @@ public class PresentationAdministratorController extends AbstractController {
 			final Collection<Conference> conferences = this.conferenceService.getFutureAndFinalModeConferences();
 			if (!binding.hasErrors()) {
 				Assert.isTrue(conferences.contains(presentation.getConference()));
+				final Collection<CamaraReady> cameras = this.cameraReadyService.getCameraReadyByConference(presentation.getConference().getId());
+				Assert.isTrue(cameras.contains(presentation.getCamaraReady()));
 				this.presentationService.save(p);
 				result = new ModelAndView("redirect:list.do");
 			} else {
@@ -104,7 +108,7 @@ public class PresentationAdministratorController extends AbstractController {
 				result.addObject("error", "1");
 			}
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:list.do?error=error");
 		}
 		return result;
 	}

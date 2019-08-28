@@ -20,7 +20,9 @@
 
 
 <security:authorize access="hasRole('ADMIN')">
-
+<jstl:if test="${not empty error}">
+<b style="color:red;"><spring:message code="presentation.error" /></b>
+</jstl:if>
 	<display:table pagesize="5" name="presentations" id="row"
 		requestURI="presentation/administrator/list.do">
 
