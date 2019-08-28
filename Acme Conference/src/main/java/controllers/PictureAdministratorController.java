@@ -43,16 +43,17 @@ public class PictureAdministratorController extends AbstractController {
 			Assert.notNull(tutorial);
 			Assert.isTrue(conferences.contains(tutorial.getConference()));
 			final Section section = this.sectionService.findOne(sectionId);
+			Assert.notNull(section);
 			final Picture picture = this.pictureService.findOne(pictureId);
+			Assert.notNull(picture);
 			Assert.isTrue(section.getPictures().contains(picture));
 			section.getPictures().remove(picture);
 			this.pictureService.delete(pictureId);
 			result = new ModelAndView("redirect:/section/administrator/edit.do?tutorialId=" + tutorialId + "&sectionId=" + sectionId);
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:/section/administrator/edit.do?tutorialId=" + tutorialId + "&sectionId=" + sectionId);
+			result = new ModelAndView("redirect:/tutorial/administrator/list.do");
 		}
 		return result;
 
 	}
-
 }
