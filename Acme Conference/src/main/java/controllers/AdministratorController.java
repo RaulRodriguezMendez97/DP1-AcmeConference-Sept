@@ -10,8 +10,6 @@
 
 package controllers;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,9 +69,9 @@ public class AdministratorController extends AbstractController {
 		final Double getDesvFeesByConference = (Double) getAvgMinMaxDesvFeesByConference.get(0)[3];
 
 		final List<Object[]> getAvgMinMaxDesvDaysByConference = this.conferenceService.getAvgMinMaxDesvDaysByConference();
-		final BigDecimal getAvgDaysByConference = (BigDecimal) getAvgMinMaxDesvDaysByConference.get(0)[0];
-		final BigInteger getMinDaysByConference = (BigInteger) getAvgMinMaxDesvDaysByConference.get(0)[1];
-		final BigInteger getMaxDaysByConference = (BigInteger) getAvgMinMaxDesvDaysByConference.get(0)[2];
+		final Double getAvgDaysByConference = (Double) getAvgMinMaxDesvDaysByConference.get(0)[0];
+		final Integer getMinDaysByConference = (Integer) getAvgMinMaxDesvDaysByConference.get(0)[1];
+		final Integer getMaxDaysByConference = (Integer) getAvgMinMaxDesvDaysByConference.get(0)[2];
 		final Double getDesvDaysByConference = (Double) getAvgMinMaxDesvDaysByConference.get(0)[3];
 
 		result = new ModelAndView("administrator/dashboard");

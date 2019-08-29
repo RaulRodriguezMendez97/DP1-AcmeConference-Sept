@@ -60,9 +60,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select avg(c.fee), min(c.fee), max(c.fee), sqrt(sum(c.fee * c.fee)/count(c)-avg(c.fee)*avg(c.fee)) from Conference c")
 	public List<Object[]> getAvgMinMaxDesvFeesByConference();
 
-	@Query(
-		value = "SELECT AVG(DATEDIFF(end_date, start_date)), MIN(DATEDIFF(end_date, start_date)), MAX(DATEDIFF(end_date, start_date)), SQRT(SUM(DATEDIFF(end_date, start_date) * DATEDIFF(end_date, start_date))/ COUNT(*)- AVG(DATEDIFF(end_date, start_date))*AVG(DATEDIFF(end_date, start_date)))FROM `acme-conference`.`conference`",
-		nativeQuery = true)
+	@Query("select avg(datediff(c.endDate, c.startDate)), min(datediff(c.endDate, c.startDate)),max(datediff(c.endDate, c.startDate)), sqrt(sum(datediff(c.endDate, c.startDate)* datediff(c.endDate, c.startDate)) / count(c) - avg(datediff(c.endDate, c.startDate)) *avg(datediff(c.endDate, c.startDate))) from Conference c")
 	public List<Object[]> getAvgMinMaxDesvDaysByConference();
 
 	@Query("select c from Conference c where c.finalMode = 0")
