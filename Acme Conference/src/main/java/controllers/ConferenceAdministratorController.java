@@ -38,7 +38,7 @@ public class ConferenceAdministratorController extends AbstractController {
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
-		final Collection<Conference> conferences = this.conferenceService.getConferencesByAdmin(a.getId());
+		final Collection<Conference> conferences = this.conferenceService.findAll();
 
 		final String lang = LocaleContextHolder.getLocale().getLanguage();
 
@@ -55,11 +55,6 @@ public class ConferenceAdministratorController extends AbstractController {
 
 		try {
 			final Conference conference = this.conferenceService.findOne(idConference);
-			if (conference.getFinalMode() == 0) {
-				final UserAccount user = LoginService.getPrincipal();
-				final Actor a = this.actorService.getActorByUserAccount(user.getId());
-				Assert.isTrue(conference.getAdmin().equals(a));
-			}
 
 			final String lang = LocaleContextHolder.getLocale().getLanguage();
 			result = new ModelAndView("conference/show");
@@ -89,9 +84,6 @@ public class ConferenceAdministratorController extends AbstractController {
 		try {
 			final Conference conference = this.conferenceService.findOne(idConference);
 			Assert.isTrue(conference.getFinalMode() == 0);
-			final UserAccount user = LoginService.getPrincipal();
-			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-			Assert.isTrue(conference.getAdmin() == a);
 			result = new ModelAndView("conference/edit");
 			result.addObject("conference", conference);
 		} catch (final Exception e) {
