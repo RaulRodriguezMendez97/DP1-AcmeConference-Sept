@@ -37,13 +37,13 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select c from Conference c where (datediff(curdate(), c.submissionDeadline)<= 5 and datediff(curdate(), c.submissionDeadline)>0) and c.finalMode=1")
 	public Collection<Conference> getConferencesSubmissionLast5Days();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(notificacion_deadline, CURDATE()) < 5 AND DATEDIFF(notificacion_deadline, CURDATE()) >=0) AND final_mode = 1", nativeQuery = true)
+	@Query("select c from Conference c where (datediff(c.notificacionDeadline, curdate()) < 5 and datediff(c.notificacionDeadline, curdate()) >= 0) and c.finalMode=1")
 	public Collection<Conference> getConferencesNotificationLess5Days();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(camera_deadline, CURDATE()) < 5 AND DATEDIFF(camera_deadline, CURDATE()) >=0) AND final_mode = 1", nativeQuery = true)
+	@Query("select c from Conference c where (datediff(c.cameraDeadline, curdate()) < 5 and datediff(c.cameraDeadline, curdate()) >= 0) and c.finalMode=1")
 	public Collection<Conference> getConferencesCameraLess5Days();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(start_date, CURDATE()) < 5 AND DATEDIFF(start_date, CURDATE()) >=0) AND final_mode = 1", nativeQuery = true)
+	@Query("select c from Conference c where (datediff(c.startDate, curdate()) < 5 and datediff(c.startDate, curdate()) >= 0) and c.finalMode=1")
 	public Collection<Conference> getConferencesStartLess5Days();
 
 	//Raul
