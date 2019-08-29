@@ -101,12 +101,12 @@ public class ConferenceService {
 	public Conference save(final Conference conference) {
 
 		if (conference.getId() != 0) {
-			final UserAccount user = LoginService.getPrincipal();
-			Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-
 			final Conference old = this.conferenceRepository.findOne(conference.getId());
 			Assert.isTrue(old.getFinalMode() != 1);
 		}
+
+		final UserAccount user = LoginService.getPrincipal();
+		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
 		final Conference saved = this.conferenceRepository.save(conference);
 		return saved;
