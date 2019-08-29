@@ -17,14 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import security.UserAccount;
-import services.AdministratorService;
 import services.AuthorService;
 import services.ConferenceService;
 import services.ReportService;
 import services.ReviwedService;
 import services.ReviwerService;
 import services.SubmissionService;
-import domain.Administrator;
 import domain.Author;
 import domain.Conference;
 import domain.Reviwed;
@@ -37,19 +35,17 @@ import forms.SubmissionReviwedForm;
 public class SubmissionAuthorAdministratorReviwerController extends AbstractController {
 
 	@Autowired
-	private SubmissionService		submissionService;
+	private SubmissionService	submissionService;
 	@Autowired
-	private ConferenceService		conferenceService;
+	private ConferenceService	conferenceService;
 	@Autowired
-	private ReviwedService			reviwedService;
+	private ReviwedService		reviwedService;
 	@Autowired
-	private AuthorService			authorService;
+	private AuthorService		authorService;
 	@Autowired
-	private ReviwerService			reviwerService;
+	private ReviwerService		reviwerService;
 	@Autowired
-	private AdministratorService	administratorService;
-	@Autowired
-	private ReportService			reportService;
+	private ReportService		reportService;
 
 
 	@RequestMapping(value = "/author/list", method = RequestMethod.GET)
@@ -165,10 +161,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/administrator/submissionsUnderReviwed", method = RequestMethod.GET)
 	public ModelAndView listAdministratorUnderReviwed() {
 		final ModelAndView result;
-		final UserAccount user = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
-		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus0(admin.getId());
-
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus0();
 		final Date fechaActual = new Date();
 
 		result = new ModelAndView("submission/list");
@@ -206,9 +199,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/administrator/submissionsRejected", method = RequestMethod.GET)
 	public ModelAndView listAdministratorRejected() {
 		final ModelAndView result;
-		final UserAccount user = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
-		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus1(admin.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus1();
 
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
@@ -244,9 +235,7 @@ public class SubmissionAuthorAdministratorReviwerController extends AbstractCont
 	@RequestMapping(value = "/administrator/submissionsAccepted", method = RequestMethod.GET)
 	public ModelAndView listAdministratorAccepted() {
 		final ModelAndView result;
-		final UserAccount user = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(user.getId());
-		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus2(admin.getId());
+		final Collection<Submission> submissions = this.submissionService.getSubmissionByAdministratorStatus2();
 
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);

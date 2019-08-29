@@ -16,7 +16,6 @@ import repositories.ReportRepository;
 import repositories.ReviwerRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Administrator;
 import domain.Report;
 import domain.Reviwer;
 import domain.Submission;
@@ -26,17 +25,15 @@ import domain.Submission;
 public class ReportService {
 
 	@Autowired
-	private ReportRepository		reportRepository;
+	private ReportRepository	reportRepository;
 	@Autowired
-	private ReviwerRepository		reviwerRepository;
+	private ReviwerRepository	reviwerRepository;
 	@Autowired
-	private Validator				validator;
+	private Validator			validator;
 	@Autowired
-	private SubmissionService		submissionService;
+	private SubmissionService	submissionService;
 	@Autowired
-	private AdministratorService	administratorService;
-	@Autowired
-	private ReviwerService			reviwerService;
+	private ReviwerService		reviwerService;
 
 
 	public Report create() {
@@ -132,31 +129,31 @@ public class ReportService {
 
 	//Numero de report con decicion aceptada, dada una submission
 	public int getReportsDecicionAceptadaBySubmission(final int submissionId) {
-		final Submission submission = this.submissionService.findOne(submissionId);
+		//final Submission submission = this.submissionService.findOne(submissionId);
 		final UserAccount userAccount = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
+		//final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-		Assert.isTrue(submission.getConference().getAdmin().equals(admin));
+		//Assert.isTrue(submission.getConference().getAdmin().equals(admin));
 		return this.reportRepository.getReportsConDecisionIgualAceptadaBySubmission(submissionId);
 	}
 
 	//Numero de report con decicion rechazada, dada una submission
 	public int getReportsDecicionRechazadaBySubmission(final int submissionId) {
-		final Submission submission = this.submissionService.findOne(submissionId);
+		//final Submission submission = this.submissionService.findOne(submissionId);
 		final UserAccount userAccount = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
+		//final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-		Assert.isTrue(submission.getConference().getAdmin().equals(admin));
+		//Assert.isTrue(submission.getConference().getAdmin().equals(admin));
 		return this.reportRepository.getReportsConDecisionIgualRechazadaBySubmission(submissionId);
 	}
 
 	//Numero de report con decicion border-line, dada una submission
 	public int getReportsDecicionBorderLineBySubmission(final int submissionId) {
-		final Submission submission = this.submissionService.findOne(submissionId);
+		//final Submission submission = this.submissionService.findOne(submissionId);
 		final UserAccount userAccount = LoginService.getPrincipal();
-		final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
+		//final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-		Assert.isTrue(submission.getConference().getAdmin().equals(admin));
+		//Assert.isTrue(submission.getConference().getAdmin().equals(admin));
 		return this.reportRepository.getReportsConDecisionIgualBorderLineBySubmission(submissionId);
 	}
 
