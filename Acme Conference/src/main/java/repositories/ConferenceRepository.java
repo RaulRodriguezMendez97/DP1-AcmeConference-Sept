@@ -47,7 +47,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	public Collection<Conference> getConferencesStartLess5Days();
 
 	//Raul
-	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() <= submission_deadline AND final_mode = 1", nativeQuery = true)
+	@Query("select c from Conference c where curdate() <= c.submissionDeadline and c.finalMode=1")
 	public Collection<Conference> getConferencesSubmissionDeadLinePosteriorNow();
 
 	//Dashboard
@@ -66,7 +66,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select c from Conference c where c.finalMode = 0")
 	public Collection<Conference> getConferencesInDraftMode();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where CURDATE() < start_date AND final_mode = 1", nativeQuery = true)
+	@Query("select c from Conference c where curdate() < c.startDate and c.finalMode=1")
 	public Collection<Conference> getFutureAndFinalModeConferences();
 
 }
