@@ -34,7 +34,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select c from Conference c where curdate() > c.endDate and c.finalMode = 1")
 	public Collection<Conference> getPastConferences();
 
-	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(CURDATE(),submission_deadline) <= 5 AND DATEDIFF(CURDATE(),submission_deadline)>=0) AND final_mode = 1", nativeQuery = true)
+	@Query("select c from Conference c where (datediff(curdate(), c.submissionDeadline)<= 5 and datediff(curdate(), c.submissionDeadline)>0) and c.finalMode=1")
 	public Collection<Conference> getConferencesSubmissionLast5Days();
 
 	@Query(value = "SELECT * FROM `acme-conference`.conference where (DATEDIFF(notificacion_deadline, CURDATE()) < 5 AND DATEDIFF(notificacion_deadline, CURDATE()) >=0) AND final_mode = 1", nativeQuery = true)
