@@ -36,8 +36,6 @@
 		<property name="actor" ref="administrator1" />
 		<property name="messages">
 			<list>
-				<ref bean="message1" />
-				<ref bean="message2" />
 			</list>
 		</property>
 	</bean>
