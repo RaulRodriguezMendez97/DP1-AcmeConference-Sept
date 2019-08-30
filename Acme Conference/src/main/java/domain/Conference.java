@@ -6,8 +6,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -20,17 +22,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Conference extends DomainEntity {
 
-	private String	title;
-	private String	acronym;
-	private String	venue;
-	private Date	submissionDeadline;
-	private Date	notificacionDeadline;
-	private Date	cameraDeadline;
-	private Date	startDate;
-	private Date	endDate;
-	private String	summary;
-	private double	fee;
-	private int		finalMode;
+	private String			title;
+	private String			acronym;
+	private String			venue;
+	private Date			submissionDeadline;
+	private Date			notificacionDeadline;
+	private Date			cameraDeadline;
+	private Date			startDate;
+	private Date			endDate;
+	private String			summary;
+	private double			fee;
+	private int				finalMode;
+	private Administrator	admin;
 
 
 	@NotNull
@@ -148,6 +151,17 @@ public class Conference extends DomainEntity {
 
 	public void setFinalMode(final int finalMode) {
 		this.finalMode = finalMode;
+	}
+
+	@ManyToOne(optional = false)
+	@Valid
+	@NotNull
+	public Administrator getAdmin() {
+		return this.admin;
+	}
+
+	public void setAdmin(final Administrator admin) {
+		this.admin = admin;
 	}
 
 }

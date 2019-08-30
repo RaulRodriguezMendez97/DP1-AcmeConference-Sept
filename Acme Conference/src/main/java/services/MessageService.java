@@ -226,9 +226,7 @@ public class MessageService {
 				res.setBody("Your submission with ticker " + s.getTicker() + " to the conference " + s.getConference().getTitle() + " has been accepted");
 			res.setTopic(this.topicService.getRegistrationTopic());
 			res.setEmailReceiver(s.getAuthor().getEmail());
-			final UserAccount user = LoginService.getPrincipal();
-			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-			res.setSender(a);
+			res.setSender(s.getConference().getAdmin());
 			res.setReceiver(s.getAuthor());
 
 			final Message saved = this.messageRepository.save(res);

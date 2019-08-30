@@ -675,8 +675,8 @@
 		<property name="summary" value="summary conference 1" />
 		<property name="fee" value="6.0" />
 		<property name="finalMode" value="1" />
+		<property name="admin" ref="administrator1" />
 	</bean>
-	
 	<bean id="conference2" class="domain.Conference">
 		<property name="title" value="title conference 2" />
 		<property name="acronym" value="acronym conference 2" />
@@ -689,6 +689,7 @@
 		<property name="summary" value="summary conference 2" />
 		<property name="fee" value="4.0" />
 		<property name="finalMode" value="0" />
+		<property name="admin" ref="administrator2" />
 	</bean>
 	<bean id="conference3" class="domain.Conference">
 		<property name="title" value="title conference 3" />
@@ -702,6 +703,7 @@
 		<property name="summary" value="summary conference 3" />
 		<property name="fee" value="8.0" />
 		<property name="finalMode" value="0" />
+		<property name="admin" ref="administrator3" />
 	</bean>
 	<bean id="conference4" class="domain.Conference">
 		<property name="title" value="Title conference 4" />
@@ -715,6 +717,7 @@
 		<property name="summary" value="summary conference 4" />
 		<property name="fee" value="9.0" />
 		<property name="finalMode" value="1" />
+		<property name="admin" ref="administrator1" />
 	</bean>
 	<bean id="conference5" class="domain.Conference">
 		<property name="title" value="title conference 5" />
@@ -728,6 +731,7 @@
 		<property name="summary" value="summary conference 5" />
 		<property name="fee" value="2.0" />
 		<property name="finalMode" value="1" />
+		<property name="admin" ref="administrator1" />
 	</bean>
 	<bean id="conference6" class="domain.Conference">
 		<property name="title" value="title conference 6" />
@@ -741,6 +745,7 @@
 		<property name="summary" value="summary conference 6" />
 		<property name="fee" value="4.0" />
 		<property name="finalMode" value="1" />
+		<property name="admin" ref="administrator1" />
 	</bean>
 
 	<!-- Submission -->

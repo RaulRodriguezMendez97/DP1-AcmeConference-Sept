@@ -16,6 +16,7 @@ import org.springframework.validation.Validator;
 import repositories.ConferenceRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 import domain.Author;
 import domain.Conference;
 
@@ -26,6 +27,8 @@ public class ConferenceService {
 	@Autowired
 	private ConferenceRepository	conferenceRepository;
 
+	@Autowired
+	private ActorService			actorService;
 	@Autowired
 	private AuthorService			authorService;
 
@@ -47,6 +50,7 @@ public class ConferenceService {
 		conference.setSummary("");
 		conference.setFee(0);
 		conference.setFinalMode(0);
+		conference.setAdmin(new Administrator());
 
 		return conference;
 	}
@@ -57,6 +61,10 @@ public class ConferenceService {
 
 	public Conference findOne(final Integer id) {
 		return this.conferenceRepository.findOne(id);
+	}
+
+	public Collection<Conference> getConferencesByAdmin(final Integer idAdmin) {
+		return this.conferenceRepository.getConferencesByAdmin(idAdmin);
 	}
 
 	public Collection<Conference> getConferencesInSaveMode() {
@@ -101,12 +109,13 @@ public class ConferenceService {
 	public Conference save(final Conference conference) {
 
 		if (conference.getId() != 0) {
+			final UserAccount user = LoginService.getPrincipal();
+			final Administrator admin = (Administrator) this.actorService.getActorByUserAccount(user.getId());
+			Assert.isTrue(conference.getAdmin() == admin);
+
 			final Conference old = this.conferenceRepository.findOne(conference.getId());
 			Assert.isTrue(old.getFinalMode() != 1);
 		}
-
-		final UserAccount user = LoginService.getPrincipal();
-		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
 		final Conference saved = this.conferenceRepository.save(conference);
 		return saved;
@@ -117,6 +126,11 @@ public class ConferenceService {
 
 		if (conference.getId() == 0) {
 			res = conference;
+
+			final UserAccount user = LoginService.getPrincipal();
+			final Administrator admin = (Administrator) this.actorService.getActorByUserAccount(user.getId());
+
+			conference.setAdmin(admin);
 
 			//BEFORE
 			if (conference.getSubmissionDeadline() != null)
@@ -148,6 +162,7 @@ public class ConferenceService {
 			final Conference copy = new Conference();
 			copy.setId(res.getId());
 			copy.setVersion(res.getVersion());
+			copy.setAdmin(res.getAdmin());
 
 			copy.setTitle(conference.getTitle());
 			copy.setAcronym(conference.getAcronym());

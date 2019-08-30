@@ -19,6 +19,7 @@ import org.springframework.validation.Validator;
 import repositories.SubmissionRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 import domain.Author;
 import domain.Conference;
 import domain.Reviwed;
@@ -40,6 +41,8 @@ public class SubmissionService {
 	private ReviwerService			reviwerService;
 	@Autowired
 	private MessageService			messageService;
+	@Autowired
+	private AdministratorService	administratorService;
 	@Autowired
 	private ReviwedService			reviwedService;
 	@Autowired
@@ -80,7 +83,9 @@ public class SubmissionService {
 	public Submission findOneAdministrator(final int submissionId) {
 		final Submission submission = this.submissionRepository.findOne(submissionId);
 		final UserAccount userAccount = LoginService.getPrincipal();
+		final Administrator admin = this.administratorService.getAdministratorByUserAccount(userAccount.getId());
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Assert.isTrue(submission.getConference().getAdmin().equals(admin));
 		return submission;
 	}
 
@@ -125,16 +130,16 @@ public class SubmissionService {
 	}
 
 	//Status igual a 0 (under review)
-	public Collection<Submission> getSubmissionByAdministratorStatus0() {
-		return this.submissionRepository.getSubmissionByAdministratorStatus0();
+	public Collection<Submission> getSubmissionByAdministratorStatus0(final Integer adminId) {
+		return this.submissionRepository.getSubmissionByAdministratorStatus0(adminId);
 	}
 	//Status igual a 1 (rejected)
-	public Collection<Submission> getSubmissionByAdministratorStatus1() {
-		return this.submissionRepository.getSubmissionByAdministratorStatus1();
+	public Collection<Submission> getSubmissionByAdministratorStatus1(final Integer adminId) {
+		return this.submissionRepository.getSubmissionByAdministratorStatus1(adminId);
 	}
 	//Status igual a 2 (accepted)
-	public Collection<Submission> getSubmissionByAdministratorStatus2() {
-		return this.submissionRepository.getSubmissionByAdministratorStatus2();
+	public Collection<Submission> getSubmissionByAdministratorStatus2(final Integer adminId) {
+		return this.submissionRepository.getSubmissionByAdministratorStatus2(adminId);
 	}
 
 	public Collection<Submission> getSubmissionByReviwer(final Integer reviwerId) {
