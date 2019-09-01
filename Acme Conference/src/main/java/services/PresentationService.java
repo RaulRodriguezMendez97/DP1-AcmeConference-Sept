@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.PresentationRepository;
+import security.LoginService;
+import domain.Administrator;
 import domain.CamaraReady;
 import domain.Conference;
 import domain.Presentation;
@@ -23,6 +25,10 @@ public class PresentationService {
 
 	@Autowired
 	private PresentationRepository	presentationRepository;
+	@Autowired
+	private AdministratorService	administratorService;
+	@Autowired
+	private CamaraReadyService		cameraReadyService;
 	@Autowired
 	private Validator				validator;
 
@@ -45,6 +51,12 @@ public class PresentationService {
 		return this.presentationRepository.findAll();
 	}
 
+	public Collection<Presentation> findAllByAdmin() {
+		final int userAccountId = LoginService.getPrincipal().getId();
+		final Administrator a = this.administratorService.getAdministratorByUserAccount(userAccountId);
+		return this.presentationRepository.findAllByAdmin(a.getId());
+	}
+
 	public Presentation findOne(final Integer id) {
 		return this.presentationRepository.findOne(id);
 	}
@@ -60,6 +72,9 @@ public class PresentationService {
 		if (presentation.getId() == 0) {
 			res = presentation;
 			this.validator.validate(res, binding);
+			final Collection<CamaraReady> usedCameras = this.cameraReadyService.getUsedCamerasByAdmin();
+			if (usedCameras.contains(presentation.getCamaraReady()))
+				binding.rejectValue("camaraReady", "presentation.camaraReady.used");
 
 		} else {
 			res = this.presentationRepository.findOne(presentation.getId());
@@ -77,6 +92,9 @@ public class PresentationService {
 			copy.setCamaraReady(presentation.getCamaraReady());
 			this.validator.validate(copy, binding);
 
+			final Collection<CamaraReady> usedCameras = this.cameraReadyService.getUsedCamerasByAdmin();
+			if (usedCameras.contains(presentation.getCamaraReady()) && !res.getCamaraReady().equals(presentation.getCamaraReady()))
+				binding.rejectValue("camaraReady", "presentation.camaraReady.used");
 			res = copy;
 		}
 		return res;

@@ -31,7 +31,8 @@ public class ConferenceService {
 	private ActorService			actorService;
 	@Autowired
 	private AuthorService			authorService;
-
+	@Autowired
+	private AdministratorService	administratorService;
 	@Autowired
 	private Validator				validator;
 
@@ -210,9 +211,10 @@ public class ConferenceService {
 	}
 
 	public Collection<Conference> getFutureAndFinalModeConferences() {
-		return this.conferenceRepository.getFutureAndFinalModeConferences();
+		final int userAccountId = LoginService.getPrincipal().getId();
+		final Administrator a = this.administratorService.getAdministratorByUserAccount(userAccountId);
+		return this.conferenceRepository.getFutureAndFinalModeConferences(a.getId());
 	}
-
 	public Collection<Conference> getAllConferenceByAuthor() {
 		final UserAccount user = LoginService.getPrincipal();
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("AUTHOR"));

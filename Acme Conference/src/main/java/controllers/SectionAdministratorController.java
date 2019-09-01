@@ -43,6 +43,7 @@ public class SectionAdministratorController extends AbstractController {
 		try {
 			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
 			Assert.notNull(tutorial);
+			Assert.notNull(this.conferenceService.getFutureAndFinalModeConferences().contains(tutorial));
 			final Collection<Section> sections = this.sectionService.getSectionsByTutorial(tutorialId);
 			result = new ModelAndView("section/list");
 			result.addObject("sections", sections);
@@ -59,6 +60,7 @@ public class SectionAdministratorController extends AbstractController {
 		try {
 			final Tutorial tutorial = this.tutorialService.findOne(tutorialId);
 			Assert.notNull(tutorial);
+			Assert.notNull(this.conferenceService.getFutureAndFinalModeConferences().contains(tutorial));
 			final SectionPictureForm sectionPictureForm = new SectionPictureForm().create();
 			sectionPictureForm.setTutorial(this.tutorialService.findOne(tutorialId));
 			result = new ModelAndView("section/edit");

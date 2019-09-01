@@ -38,7 +38,7 @@ public class PresentationAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(required = false) final String error) {
 		final ModelAndView result;
-		final Collection<Presentation> presentations = this.presentationService.findAll();
+		final Collection<Presentation> presentations = this.presentationService.findAllByAdmin();
 		result = new ModelAndView("presentation/list");
 		result.addObject("presentations", presentations);
 		if (error != null)
@@ -137,6 +137,7 @@ public class PresentationAdministratorController extends AbstractController {
 	@RequestMapping(value = "/camaraReadyList", method = RequestMethod.GET)
 	public ResponseEntity<String> list(@RequestParam final int conferenceId) {
 		try {
+			Assert.isTrue(this.conferenceService.getFutureAndFinalModeConferences().contains(this.conferenceService.findOne(conferenceId)));
 			final Collection<CamaraReady> p = this.cameraReadyService.getCameraReadyByConference(conferenceId);
 			final List<CamaraReady> a = new ArrayList<CamaraReady>(p);
 			String camaras = "";

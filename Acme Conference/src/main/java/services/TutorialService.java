@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.TutorialRepository;
+import security.LoginService;
+import domain.Administrator;
 import domain.Conference;
 import domain.Tutorial;
 
@@ -21,9 +23,11 @@ import domain.Tutorial;
 public class TutorialService {
 
 	@Autowired
-	private TutorialRepository	tutorialRepository;
+	private TutorialRepository		tutorialRepository;
 	@Autowired
-	private Validator			validator;
+	private AdministratorService	administratorService;
+	@Autowired
+	private Validator				validator;
 
 
 	public Tutorial create() {
@@ -41,6 +45,12 @@ public class TutorialService {
 
 	public Collection<Tutorial> findAll() {
 		return this.tutorialRepository.findAll();
+	}
+
+	public Collection<Tutorial> findAllByAdmin() {
+		final int userAccountId = LoginService.getPrincipal().getId();
+		final Administrator a = this.administratorService.getAdministratorByUserAccount(userAccountId);
+		return this.tutorialRepository.findAllByAdmin(a.getId());
 	}
 
 	public Tutorial findOne(final Integer id) {

@@ -17,6 +17,7 @@ import repositories.CamaraReadyRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Administrator;
 import domain.Author;
 import domain.CamaraReady;
 import domain.Submission;
@@ -36,6 +37,9 @@ public class CamaraReadyService {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	public CamaraReady create() {
@@ -151,4 +155,10 @@ public class CamaraReadyService {
 	//		return res;
 	//
 	//	}
+
+	public Collection<CamaraReady> getUsedCamerasByAdmin() {
+		final int userAccountId = LoginService.getPrincipal().getId();
+		final Administrator a = this.administratorService.getAdministratorByUserAccount(userAccountId);
+		return this.camaraReadyRepository.getUsedCamerasByAdmin(a.getId());
+	}
 }

@@ -18,4 +18,7 @@ public interface CamaraReadyRepository extends JpaRepository<CamaraReady, Intege
 	@Query("select s.camaraReady from Submission s where s.conference.id = ?1 and s.status = 2")
 	public Collection<CamaraReady> getCameraReadyByConference(final Integer id);
 
+	@Query("select p.camaraReady from Presentation p where p.conference.admin.id = ?1")
+	public Collection<CamaraReady> getUsedCamerasByAdmin(int adminId);
+
 }

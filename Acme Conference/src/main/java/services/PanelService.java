@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.PanelRepository;
+import security.LoginService;
+import domain.Administrator;
 import domain.Conference;
 import domain.Panel;
 
@@ -21,9 +23,11 @@ import domain.Panel;
 public class PanelService {
 
 	@Autowired
-	private PanelRepository	panelRepository;
+	private PanelRepository			panelRepository;
 	@Autowired
-	private Validator		validator;
+	private AdministratorService	administratorService;
+	@Autowired
+	private Validator				validator;
 
 
 	public Panel create() {
@@ -41,6 +45,12 @@ public class PanelService {
 
 	public Collection<Panel> findAll() {
 		return this.panelRepository.findAll();
+	}
+
+	public Collection<Panel> findAllByAdmin() {
+		final int userAccountId = LoginService.getPrincipal().getId();
+		final Administrator a = this.administratorService.getAdministratorByUserAccount(userAccountId);
+		return this.panelRepository.findAllByAdmin(a.getId());
 	}
 
 	public Panel findOne(final Integer id) {

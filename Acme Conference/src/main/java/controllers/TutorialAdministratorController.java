@@ -33,7 +33,7 @@ public class TutorialAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Tutorial> tutorials = this.tutorialService.findAll();
+		final Collection<Tutorial> tutorials = this.tutorialService.findAllByAdmin();
 		result = new ModelAndView("tutorial/list");
 		result.addObject("tutorials", tutorials);
 		return result;

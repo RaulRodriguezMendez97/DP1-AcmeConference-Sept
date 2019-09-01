@@ -30,7 +30,7 @@ public class PanelAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Panel> panels = this.panelService.findAll();
+		final Collection<Panel> panels = this.panelService.findAllByAdmin();
 		result = new ModelAndView("panel/list");
 		result.addObject("panels", panels);
 		return result;
