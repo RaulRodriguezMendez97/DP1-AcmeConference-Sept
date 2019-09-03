@@ -1,0 +1,9 @@
+{
+	"deploy": {
+		"container": "TOMCAT7",
+		"war": [{
+			"file": "Acme-Conference.war",
+			"context": "/"
+		}]
+	}
+}
