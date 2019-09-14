@@ -33,3 +33,45 @@ public String generarTicker() {
 
 
 
+-EN LA LISTA DE REPORTS, EN VEZ DE QUE SALGA EN LA COLUMNA DECISION 0,1,2 QUE SALGA Rejected, Border line, Accepted (Tanto en listar como editar y dependiendo tambien del idioma)
+
+LIST.DO
+<jstl:if test="${row.decision eq 0 and lang eq 'en'}">
+		<jstl:out value="Rejected"></jstl:out>
+	</jstl:if>
+	<jstl:if test="${row.decision eq 1 and lang eq 'en'}">
+		<jstl:out value="Border line"></jstl:out>
+	</jstl:if>
+	<jstl:if test="${row.decision eq 2 and lang eq 'en'}">
+		<jstl:out value="Accepted"></jstl:out>
+	</jstl:if>
+	
+	<jstl:if test="${row.decision eq 0 and lang eq 'es'}">
+		<jstl:out value="Rechazada"></jstl:out>
+	</jstl:if>
+	<jstl:if test="${row.decision eq 1 and lang eq 'es'}">
+		<jstl:out value="Al limite"></jstl:out>
+	</jstl:if>
+	<jstl:if test="${row.decision eq 2 and lang eq 'es'}">
+		<jstl:out value="Aceptada"></jstl:out>
+	</jstl:if>
+</display:column>
+
+EDIT.DO
+<jstl:if test="${lang eq 'en'}">	
+	<form:option value="0" label="Rejected" />	
+	<form:option value="1" label="Border line" />	
+	<form:option value="2" label="Accept" />	
+</jstl:if>	
+<jstl:if test="${lang eq 'es'}">	
+	<form:option value="0" label="Rechazada" />	
+	<form:option value="1" label="Al limite" />	
+	<form:option value="2" label="Aceptada" />	
+</jstl:if>
+
+REPORTREVIWERCONTROLLER (EN TODOS LOS METODOS DEL CONTROLADOR)
+final String lang = LocaleContextHolder.getLocale().getLanguage();
+result.addObject("lang", lang);
+
+
+
