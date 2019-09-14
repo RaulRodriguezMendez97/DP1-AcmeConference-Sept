@@ -1,0 +1,35 @@
+-ERROR EN LA GENERACION DEL TICKER
+
+public String generarTicker() {
+		final int tam = 4;
+		String d = "";
+		final UserAccount userAccount = LoginService.getPrincipal();
+		final Author author = this.authorService.getAuthorByUserAccount(userAccount.getId());
+
+		final char primerCaracterNombre = author.getName().charAt(0);
+		final String primeraLetraNombre = primerCaracterNombre + "";
+
+		final char primerCaracterApellido = author.getSurname().charAt(0);
+		final String primeraLetraApellido = primerCaracterApellido + "";
+
+		d = d + primeraLetraNombre.toUpperCase() + primeraLetraApellido.toUpperCase();
+		if (author.getMiddleName().equals(""))
+			d = d + "X";
+		else {
+			final char primerCaracterMiddleName = author.getMiddleName().charAt(0);
+			final String primeraLetraMiddelName = primerCaracterMiddleName + "";
+			d = d + primeraLetraMiddelName.toUpperCase();
+		}
+
+		String ticker = d + "-";
+		final String a = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		for (int i = 0; i < tam; i++) {
+			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());
+			ticker = ticker + a.charAt(random);
+		}
+		return ticker;
+	}
+
+
+
