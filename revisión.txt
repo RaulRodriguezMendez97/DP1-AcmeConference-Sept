@@ -153,3 +153,13 @@ public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm,
 </display:column>
 
 
+
+
+
+
+
+
+-ERROR EN ALGUNAS CLASES DEL DOMINIO, PONER EN CADA ATRIBUTO DE TIPO STRING LO SIGUIENTE
+@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+
+
