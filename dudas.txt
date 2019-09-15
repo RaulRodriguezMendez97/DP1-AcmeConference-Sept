@@ -1,3 +1,5 @@
 - Cambiado curdate() por now() en las querys porque no diferencia las horas
 
 - No se queja al poner el en campo "Repeat password" algo diference a la password
+
+- Se puede cambiar la id del select de submission y poner una conferencia incorrecta
