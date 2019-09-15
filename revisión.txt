@@ -163,3 +163,12 @@ public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm,
 @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 
 
+
+
+-ERROR CUANDO CAMBIAMOS EL ID POR UN STRING
+CONTROLADOR DEL CONTROL CHECK PONER LO SIGUIENTE
+extends AbstractController
+
+
+
+
