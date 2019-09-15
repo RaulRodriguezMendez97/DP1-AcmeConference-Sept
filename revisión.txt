@@ -135,3 +135,21 @@ public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm,
 
 
 
+
+
+
+
+
+-ARREGLO COLORES
+.BLANK {
+	background-color: White;
+}
+.
+.
+.
+.
+<display:column class="${css}">
+	<a href="vulp/administrator/show.do?vulpId=${row.id}"><spring:message code="quolet.show" /></a>
+</display:column>
+
+
