@@ -25,13 +25,13 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select c from Conference c where ((c.title like %?1% or c.venue like %?1% or c.summary like %?1%) and (c.finalMode = 1))")
 	public Collection<Conference> getConferencesByFinder(String keyWord);
 
-	@Query("select c from Conference c where (curdate() between c.startDate and c.endDate) and c.finalMode = 1")
+	@Query("select c from Conference c where (now() between c.startDate and c.endDate) and c.finalMode = 1")
 	public Collection<Conference> getActivesConferences();
 
-	@Query("select c from Conference c where c.startDate > curdate() and c.finalMode = 1")
+	@Query("select c from Conference c where c.startDate > now() and c.finalMode = 1")
 	public Collection<Conference> getIncomingConferences();
 
-	@Query("select c from Conference c where curdate() > c.endDate and c.finalMode = 1")
+	@Query("select c from Conference c where now() > c.endDate and c.finalMode = 1")
 	public Collection<Conference> getPastConferences();
 
 	@Query("select c from Conference c where (datediff(curdate(), c.submissionDeadline)<= 5 and datediff(curdate(), c.submissionDeadline)>0) and c.finalMode=1")
