@@ -96,3 +96,42 @@ EDIT.DO
 
 
 
+
+
+
+
+
+
+
+
+-ARREGLADO CONFERENCIAS NO VALIDAS EN LA CREACION DE SUBMISSION
+SUBMISSIONSERVICE (reconstruct)
+public Submission reconstruct(final SubmissionReviwedForm submissionReviwedForm, final BindingResult binding) {
+		final Submission res = this.create();
+		final Reviwed reviwed = this.reviwedService.create();
+
+		reviwed.setCoAuthors(submissionReviwedForm.getCoAuthors());
+		reviwed.setSummary(submissionReviwedForm.getSummary());
+		reviwed.setTitle(submissionReviwedForm.getTitle());
+		reviwed.setUrlDocument(submissionReviwedForm.getUrlDocument());
+		this.validator.validate(reviwed, binding);
+		final Reviwed reviwedSave = this.reviwedService.save(reviwed);
+
+		if (submissionReviwedForm.getId() == 0) {
+			res.setConference(submissionReviwedForm.getConf());
+			res.setReviwed(reviwedSave);
+		}
+
+		final Date fehaActual = new Date();
+		if (res.getConference() != null && res.getConference().getFinalMode() == 0)
+			binding.rejectValue("conf", "NoValid");
+		else if (res.getConference() != null && res.getConference().getFinalMode() == 1 && fehaActual.after(res.getConference().getSubmissionDeadline()))
+			binding.rejectValue("conf", "NoValid");
+
+		this.validator.validate(res, binding);
+		return res;
+	}
+
+
+
+
