@@ -2,4 +2,4 @@
 
 - No se queja al poner el en campo "Repeat password" algo diference a la password
 
-- Se puede cambiar la id del select de submission y poner una conferencia incorrecta
+-Error en registration cuando creas una registration con la conference vacia, guardas y le asignas una conferencia.
