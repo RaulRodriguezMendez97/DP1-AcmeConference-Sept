@@ -1,1 +1,3 @@
 - Cambiado curdate por now en las querys porque no diferenciaba las del mismo dia
+
+- No se queja al poner el en campo "Repeat password" algo diference a la password
