@@ -33,6 +33,12 @@ public String generarTicker() {
 
 
 
+
+
+
+
+
+
 -EN LA LISTA DE REPORTS, EN VEZ DE QUE SALGA EN LA COLUMNA DECISION 0,1,2 QUE SALGA Rejected, Border line, Accepted (Tanto en listar como editar y dependiendo tambien del idioma)
 
 LIST.DO
@@ -72,6 +78,21 @@ EDIT.DO
 REPORTREVIWERCONTROLLER (EN TODOS LOS METODOS DEL CONTROLADOR)
 final String lang = LocaleContextHolder.getLocale().getLanguage();
 result.addObject("lang", lang);
+
+
+
+
+
+
+
+
+
+-ATRIBUTO MIDDLENAME CUANDO CREAS UN ADMINISTRATOR FALTA
+ADMINISTRATORSERVICE (reconstruct)
+res.setMiddleName(registrationForm.getMiddleName());
+EDIT.DO
+<acme:textbox code="administrator.middleName" path="middleName"/>
+
 
 
 
