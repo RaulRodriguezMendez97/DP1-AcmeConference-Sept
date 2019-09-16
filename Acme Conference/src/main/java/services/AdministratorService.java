@@ -201,15 +201,14 @@ public class AdministratorService {
 				user.setPassword(hash);
 				registrationForm.setUserAccount(user);
 
-				if (!registrationForm.getUserAccount().getPassword().equals(res.getUserAccount().getPassword())) {
-					final Md5PasswordEncoder encoder2;
-					encoder2 = new Md5PasswordEncoder();
-					final String hash2 = encoder2.encodePassword(registrationForm.getPassword(), null);
-					registrationForm.setPassword(hash2);
+				final Md5PasswordEncoder encoder2;
+				encoder2 = new Md5PasswordEncoder();
+				final String hash2 = encoder2.encodePassword(registrationForm.getPassword(), null);
+				registrationForm.setPassword(hash2);
 
+				if (!registrationForm.getPassword().equals("d41d8cd98f00b204e9800998ecf8427e")
+					|| (registrationForm.getPassword().equals("d41d8cd98f00b204e9800998ecf8427e") && !registrationForm.getUserAccount().getPassword().equals(res.getUserAccount().getPassword())))
 					Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
-
-				}
 
 				a.setUserAccount(res.getUserAccount());
 				a.getUserAccount().setPassword(registrationForm.getUserAccount().getPassword());
