@@ -145,6 +145,7 @@ public class AdministratorService {
 			res.setPhone(registrationForm.getPhone());
 			res.setPhoto(registrationForm.getPhoto());
 			res.setSurname(registrationForm.getSurname());
+			res.setMiddleName(registrationForm.getMiddleName());
 
 			final Authority ad = new Authority();
 			final UserAccount user = new UserAccount();
@@ -224,6 +225,7 @@ public class AdministratorService {
 			a.setName(registrationForm.getName());
 			a.setPhone(registrationForm.getPhone());
 			a.setPhoto(registrationForm.getPhoto());
+			a.setMiddleName(registrationForm.getMiddleName());
 
 			if (registrationForm.getPatternPhone() == false) {
 				final String regexTelefono = "^\\+[0-9]{0,3}\\s\\([0-9]{0,3}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}|^\\+[0-9]\\ $|^$|^\\+$";

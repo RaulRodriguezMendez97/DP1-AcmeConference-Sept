@@ -40,6 +40,8 @@
 	
 	<acme:textbox code="administrator.surname" path="surname"/>
 	
+	<acme:textbox code="administrator.middleName" path="middleName"/>
+	
 	
 		
 	<acme:textbox code="administrator.photo" path="photo"/>

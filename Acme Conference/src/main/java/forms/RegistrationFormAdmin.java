@@ -64,6 +64,7 @@ public class RegistrationFormAdmin extends Actor {
 		registrationForm.setPhoto("");
 		registrationForm.setAddress("");
 		registrationForm.setPassword("");
+		registrationForm.setMiddleName("");
 
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
