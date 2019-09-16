@@ -93,8 +93,9 @@ public class RegistrationService {
 		res.setCreditCard(registrationForm.getCreditCard());
 		res.setConference(registrationForm.getConference());
 
-		if (!conferences.contains(res.getConference()))
-			binding.rejectValue("conference", "conferenceRepetida");
+		if (res.getConference() != null)
+			if (!conferences.contains(res.getConference()))
+				binding.rejectValue("conference", "conferenceRepetida");
 
 		this.validator.validate(res, binding);
 
