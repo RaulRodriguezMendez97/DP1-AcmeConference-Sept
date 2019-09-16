@@ -24,7 +24,7 @@ import forms.RegistrationAndCreditCardForm;
 
 @Controller
 @RequestMapping("/registration/author")
-public class RegistrationAuthorController {
+public class RegistrationAuthorController extends AbstractController {
 
 	@Autowired
 	private RegistrationService			registrationService;
