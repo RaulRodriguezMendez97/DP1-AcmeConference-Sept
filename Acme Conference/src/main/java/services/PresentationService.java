@@ -75,6 +75,12 @@ public class PresentationService {
 			final Collection<CamaraReady> usedCameras = this.cameraReadyService.getUsedCamerasByAdmin();
 			if (usedCameras.contains(presentation.getCamaraReady()))
 				binding.rejectValue("camaraReady", "presentation.camaraReady.used");
+			if (usedCameras.contains(presentation.getCamaraReady()))
+				binding.rejectValue("camaraReady", "presentation.camaraReady.used");
+			if (presentation.getSchedule() != null && presentation.getSchedule().before(presentation.getConference().getStartDate()))
+				binding.rejectValue("schedule", "presentation.startDate");
+			if (presentation.getSchedule() != null && presentation.getSchedule().after(presentation.getConference().getEndDate()))
+				binding.rejectValue("schedule", "presentation.endDate");
 
 		} else {
 			res = this.presentationRepository.findOne(presentation.getId());
@@ -95,6 +101,10 @@ public class PresentationService {
 			final Collection<CamaraReady> usedCameras = this.cameraReadyService.getUsedCamerasByAdmin();
 			if (usedCameras.contains(presentation.getCamaraReady()) && !res.getCamaraReady().equals(presentation.getCamaraReady()))
 				binding.rejectValue("camaraReady", "presentation.camaraReady.used");
+			if (presentation.getSchedule() != null && presentation.getSchedule().before(presentation.getConference().getStartDate()))
+				binding.rejectValue("schedule", "presentation.startDate");
+			if (presentation.getSchedule() != null && presentation.getSchedule().after(presentation.getConference().getEndDate()))
+				binding.rejectValue("schedule", "presentation.endDate");
 			res = copy;
 		}
 		return res;

@@ -202,16 +202,25 @@ public class SubmissionService {
 
 	//TICKER
 	public String generarTicker() {
-		//final int tamLetras = 3;
 		final int tam = 4;
 		String d = "";
 		final UserAccount userAccount = LoginService.getPrincipal();
 		final Author author = this.authorService.getAuthorByUserAccount(userAccount.getId());
-		d = d + author.getName().charAt(0) + author.getSurname().charAt(0);
+
+		final char primerCaracterNombre = author.getName().charAt(0);
+		final String primeraLetraNombre = primerCaracterNombre + "";
+
+		final char primerCaracterApellido = author.getSurname().charAt(0);
+		final String primeraLetraApellido = primerCaracterApellido + "";
+
+		d = d + primeraLetraNombre.toUpperCase() + primeraLetraApellido.toUpperCase();
 		if (author.getMiddleName().equals(""))
 			d = d + "X";
-		else
-			d = d + author.getMiddleName().charAt(0);
+		else {
+			final char primerCaracterMiddleName = author.getMiddleName().charAt(0);
+			final String primeraLetraMiddelName = primerCaracterMiddleName + "";
+			d = d + primeraLetraMiddelName.toUpperCase();
+		}
 
 		String ticker = d + "-";
 		final String a = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -220,9 +229,7 @@ public class SubmissionService {
 			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());
 			ticker = ticker + a.charAt(random);
 		}
-
 		return ticker;
-
 	}
 	public List<String> trocear(final String cadena) {
 		final List<String> palabras = new ArrayList<>();

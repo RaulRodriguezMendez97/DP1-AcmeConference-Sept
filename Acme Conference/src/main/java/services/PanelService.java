@@ -67,6 +67,10 @@ public class PanelService {
 
 		if (panel.getId() == 0) {
 			res = panel;
+			if (panel.getSchedule() != null && panel.getSchedule().before(panel.getConference().getStartDate()))
+				binding.rejectValue("schedule", "presentation.startDate");
+			if (panel.getSchedule() != null && panel.getSchedule().after(panel.getConference().getEndDate()))
+				binding.rejectValue("schedule", "presentation.endDate");
 			this.validator.validate(res, binding);
 
 		} else {
@@ -82,6 +86,11 @@ public class PanelService {
 			copy.setSummary(panel.getSummary());
 			copy.setAttachments(panel.getAttachments());
 			copy.setConference(panel.getConference());
+
+			if (panel.getSchedule() != null && panel.getSchedule().before(panel.getConference().getStartDate()))
+				binding.rejectValue("schedule", "presentation.startDate");
+			if (panel.getSchedule() != null && panel.getSchedule().after(panel.getConference().getEndDate()))
+				binding.rejectValue("schedule", "presentation.endDate");
 			this.validator.validate(copy, binding);
 
 			res = copy;

@@ -66,6 +66,11 @@ public class TutorialService {
 
 		if (tutorial.getId() == 0) {
 			res = tutorial;
+
+			if (tutorial.getSchedule() != null && tutorial.getSchedule().before(tutorial.getConference().getStartDate()))
+				binding.rejectValue("schedule", "presentation.startDate");
+			if (tutorial.getSchedule() != null && tutorial.getSchedule().after(tutorial.getConference().getEndDate()))
+				binding.rejectValue("schedule", "presentation.endDate");
 			this.validator.validate(res, binding);
 
 		} else {
@@ -81,6 +86,11 @@ public class TutorialService {
 			copy.setSummary(tutorial.getSummary());
 			copy.setAttachments(tutorial.getAttachments());
 			copy.setConference(tutorial.getConference());
+
+			if (tutorial.getSchedule() != null && tutorial.getSchedule().before(tutorial.getConference().getStartDate()))
+				binding.rejectValue("schedule", "presentation.startDate");
+			if (tutorial.getSchedule() != null && tutorial.getSchedule().after(tutorial.getConference().getEndDate()))
+				binding.rejectValue("schedule", "presentation.endDate");
 			this.validator.validate(copy, binding);
 
 			res = copy;
