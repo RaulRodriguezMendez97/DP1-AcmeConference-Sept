@@ -103,7 +103,7 @@ public class CreditCardService {
 
 			final Calendar cal = Calendar.getInstance();
 			final int añoActual = cal.get(Calendar.YEAR);
-			final int mesActual = cal.get(Calendar.MONTH);
+			final int mesActual = cal.get(Calendar.MONTH) + 1;
 
 			if (res.getExpirationYear() < añoActual || (res.getExpirationMonth() <= mesActual && res.getExpirationYear() == añoActual))
 				binding.rejectValue("expirationYear", "FechaNoValida");
@@ -124,9 +124,9 @@ public class CreditCardService {
 
 			final Calendar cal = Calendar.getInstance();
 			final int añoActual = cal.get(Calendar.YEAR);
-			final int mesActual = cal.get(Calendar.MONTH);
+			final int mesActual = cal.get(Calendar.MONTH) + 1;
 			if (res.getExpirationYear() < añoActual || (res.getExpirationMonth() <= mesActual && res.getExpirationYear() == añoActual))
-				binding.rejectValue("expirationYear", "FechaNoValida");
+				binding.rejectValue("creditCard", "CreditCardCaducada");
 
 			this.validator.validate(res, binding);
 
